@@ -123,3 +123,15 @@ body{
     
     
 }
+.d-flex
+ {
+    font-size: 20px;
+    font-family: 'Times New Roman', Times, serif;
+    margin-top: 2rem;
+    text-align: center;
+    color: #ffffff;
+}
+.d-flex w-50 .form-select{
+    color: #bb233d;
+    font-size: 13px;
+}
