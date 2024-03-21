@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import './Sidebar.css'
-import ProImg from '../../src/images/profile.png';
+import ProImg from '../../images/profile.jpg';
 
 import {
        FaTh,
