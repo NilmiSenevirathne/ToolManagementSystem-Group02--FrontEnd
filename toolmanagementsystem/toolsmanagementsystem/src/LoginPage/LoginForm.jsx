@@ -12,7 +12,7 @@ function LoginForm() {
     });
 
     const [errors, setErrors] = useState({});
-
+    
     function handleChange(e) {
         setValues({ ...values, [e.target.name]: e.target.value });
     }
@@ -34,7 +34,8 @@ function LoginForm() {
                 .then(response => {
                     if (response.ok) {
                         console.log("Login Success!!");
-                        //return response.text();
+                        //return response
+                       
                     }
                 })
                 .then(data => {
@@ -54,7 +55,7 @@ function LoginForm() {
 
     useEffect(() => {
         if (Object.keys(errors).length === 0 && (values.username !== "" && values.password !== "")) {
-            console.log("Dashboard");
+            console.log("/admin");
         }
     }, [errors, values]);
 
