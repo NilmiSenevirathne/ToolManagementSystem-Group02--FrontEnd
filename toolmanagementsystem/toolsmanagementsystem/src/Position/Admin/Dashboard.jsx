@@ -1,17 +1,15 @@
 import React from 'react'
-import Sidebar from '../../Components/Sidebar/Sidebar.jsx';
-import Header from '../../Components/Header/Header.jsx';
+import './Dasboard.css'
 
-const Dashboard = () =>{
-  return(
+function Dashboard() {
+  return (
+    <div>
 
-    <div >
-        <Header/>
-        <Sidebar/>
-           <h1> 
-                Dashsknfskdjfnsdkjfnkjsdn
-           </h1>
+      <h1> Welcome to Dasboard </h1>
+      
     </div>
-  );
-};
-export default Dashboard;
+  )
+}
+
+export default Dashboard
+

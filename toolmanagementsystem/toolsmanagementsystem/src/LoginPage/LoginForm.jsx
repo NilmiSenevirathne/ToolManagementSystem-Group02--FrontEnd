@@ -4,10 +4,13 @@ import Login from '../../src/images/user1.jpg';
 import Validation from '../../src/LoginPage/Validation.js';
 import { FaUser } from "react-icons/fa";
 import { FaLock } from "react-icons/fa";
+import { useNavigate } from 'react-router-dom';
 
 function LoginForm() {
+    const navigate = useNavigate(); // Using useNavigate hook instead of Navigate component
+
     const [values, setValues] = useState({
-        username: '', // Changed 'username' to match the state keys
+        username: '',
         password: ''
     });
 
@@ -34,13 +37,15 @@ function LoginForm() {
                 .then(response => {
                     if (response.ok) {
                         console.log("Login Success!!");
-                        //return response
-                       
+                        navigate("/Dashboard"); // Using navigate function to navigate to "/Dashboard"
+                         
+                    } else {
+                        throw new Error('Login failed'); // Throw error for unsuccessful response
                     }
                 })
                 .then(data => {
                     // Handle successful login response
-                    console.log(data); // This will be the position returned from backend
+                    console.log(data); // This will be the data returned from backend
                     // Redirect to dashboard or do something else
                 })
                 .catch(error => {
@@ -52,12 +57,6 @@ function LoginForm() {
             // Handle form validation errors, maybe display them to the user
         }
     }
-
-    useEffect(() => {
-        if (Object.keys(errors).length === 0 && (values.username !== "" && values.password !== "")) {
-            console.log("/admin");
-        }
-    }, [errors, values]);
 
     return (
         <div>
@@ -78,7 +77,7 @@ function LoginForm() {
                         {errors.password && <p style={{ color: "red", fontSize: "13px" }}> {errors.password}</p>}
                         <FaLock className='icon' />
                     </div>
-                    <button className='submit'>Login</button>
+                    <button className='submit' type="submit">Login</button> 
                 </form>
             </div>
         </div>
