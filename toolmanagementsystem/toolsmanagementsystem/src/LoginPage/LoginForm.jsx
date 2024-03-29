@@ -59,7 +59,7 @@ function LoginForm() {
     }
 
     return (
-        <div>
+        <div className='login-bg'>
             <div className='wrapper'>
                 <form onSubmit={handleSubmit}>
                     <h1 className='name'> Dilum BMK Engineers (Pvt)Ltd. </h1>

@@ -10,7 +10,7 @@ import {
         FaNewspaper
 } from 'react-icons/fa';
 import { RiLogoutCircleRLine } from "react-icons/ri";
-import { useLocation } from 'react-router-dom';
+import {Link} from "react-router-dom"
 
 
 const Sidebar =({Children}) =>{
@@ -27,37 +27,24 @@ const Sidebar =({Children}) =>{
           </div>
 
         <div className='ContentContainer'>
-          <ul>
-              <li>
-                
-                <a href='/'  className='item'><FaTh className='icon'/>Dashboard</a>
-              </li>
+          
+              
+              
+                <Link to='/Dasboard'  className='item'><FaTh className='icon'/>Dashboard</Link>
 
-              <li>
-                
-                <a href='/managestock' className='item'><FaCartPlus className='icon' />ManageStock</a>
-              </li>
+              
+                <Link to='/managestock' className='item'><FaCartPlus className='icon' /><span>ManageStock</span></Link>
 
-              <li>
-                
-                 <a href='/createtoolbox' className='item'> <FaBriefcase className='icon'/>CreateToolBox</a>
-              </li>
+              
+                <Link to='/createtoolbox' className='item'><FaBriefcase className='icon'/><span>CreateToolBox </span></Link>
 
-              <li>
-                
-                 <a href='/tracktoolbox' className='item'><FaSearch className='icon'/>TrackToolBox</a>
-              </li>
+              
+                <Link to='/tracktoolbox' className='item'><FaSearch className='icon'/><span>TrackToolBox </span></Link>
 
-              <li>
-                 
-                 <a href='/reports' className='item'><FaNewspaper className='icon'/>Reports</a>
-              </li>
-
-              <li>
-                 <a href='#' className='item'><RiLogoutCircleRLine  className='icon'/> Logout</a>
-              </li>
-
-          </ul>
+              
+                <Link to='/reports' className='item'><FaNewspaper className='icon'/><span>Reports </span></Link>
+                <Link to='#' className='item'><RiLogoutCircleRLine  className='icon'/> Logout</Link>
+             
         </div>  
         </div>
        

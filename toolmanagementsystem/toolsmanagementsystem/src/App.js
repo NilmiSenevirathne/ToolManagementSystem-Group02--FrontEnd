@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import {Route, BrowserRouter as Router, Routes, Switch} from 'react-router-dom';
 import './App.css';
 import LoginForm from '../src/LoginPage/LoginForm.jsx';
-import Dashboard from '../src/Position/Admin/Dashboard.jsx';
+import Dashboard from '../src/Position/StockSupervisor/Dashboard.jsx';
 
 function App() {
   return (
