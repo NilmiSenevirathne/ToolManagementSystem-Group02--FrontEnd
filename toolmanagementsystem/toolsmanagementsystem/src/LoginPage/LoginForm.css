@@ -6,7 +6,7 @@
     box-sizing: border-box;
 }
 
-body{
+.login-bg{
     font-family: 'Poppins', sans-serif;
     -webkit-font-smoothing:antialiased;
     -moz-osx-font-smoothing:grayscale;
@@ -20,7 +20,7 @@ body{
 }
 
 .wrapper{
-    width: 80%;
+    width: 30%;
     height: 80%;
     align-items: center;
     background: transparent;
@@ -29,7 +29,7 @@ body{
     box-shadow: 0 0 50px rgba(0,0,0, .2) ;
     color: #fff;
     border-radius: 10px;
-    padding: 100px 100px;
+    padding: 100px 80px;
 }
 
 .wrapper h1{
