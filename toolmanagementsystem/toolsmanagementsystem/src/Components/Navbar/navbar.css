@@ -1,0 +1,22 @@
+.navbar{
+    height: 70px;
+    border-bottom: 0.5px solid rgb(231,228,228);
+    display: flex;
+    align-items: center;
+    color:white;
+    display: flex;
+    justify-content: space-between;
+    background-color:  white;
+    width: 100%;
+    padding: 1px;
+    color:black;
+   
+     
+        h1{
+            color: white;
+            text-align: center;
+           
+        }
+           
+
+}

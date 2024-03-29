@@ -1,0 +1,12 @@
+.dashboard{
+    display: flex;
+    
+     
+     }
+ .homeContainer{
+   
+     flex:15;
+     background-color:rgb(133, 147, 161);
+    
+ }
+ 

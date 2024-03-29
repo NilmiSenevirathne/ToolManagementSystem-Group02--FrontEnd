@@ -12,7 +12,7 @@
     scrollbar-width: thin;
     scrollbar-color: #aab7cf transparent;
    
-    background-color: #1d2237;
+   
 
 }
 
@@ -50,7 +50,9 @@
      flex-direction: column;
      justify-content: center;
 }
-
+.sidebar-back{
+    background-image: url(../images/background.jpg);
+}
 .prof .img{
     border-radius: 50%;
     width: 150px;

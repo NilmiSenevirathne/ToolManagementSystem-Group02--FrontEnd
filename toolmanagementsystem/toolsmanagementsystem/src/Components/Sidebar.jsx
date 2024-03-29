@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import './Sidebar.css'
-import ProImg from '../../src/images/profile.png';
+import ProImg from '../../src/images/background.jpg';
 
 import {
        FaTh,
@@ -10,7 +10,7 @@ import {
         FaNewspaper
 } from 'react-icons/fa';
 import { RiLogoutCircleRLine } from "react-icons/ri";
-import { useLocation } from 'react-router-dom';
+
 
 
 const Sidebar =({Children}) =>{
@@ -21,7 +21,7 @@ const Sidebar =({Children}) =>{
         <div className='menu-list'>
 
           <div className='prof'>
-            <img className='img' src={ProImg} alt=""/>
+            {/* <img className='img' src={ProImg} alt=""/> */}
             <h3 className='username'>Nilmi Ama</h3>
             <span className='role'>Stock Supervisor</span>
           </div>
@@ -35,7 +35,7 @@ const Sidebar =({Children}) =>{
 
               <li>
                 
-                <a href='/managestock' className='item'><FaCartPlus className='icon' />ManageStock</a>
+                <a href='/managastock' className='item'><FaCartPlus className='icon' />ManageStock</a>
               </li>
 
               <li>

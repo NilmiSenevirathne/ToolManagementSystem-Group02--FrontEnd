@@ -32,7 +32,8 @@ function LoginForm  () {
      )
      
   return (
-    <div >
+    <div className='Container' >
+
         <div className='wrapper'>
 
            
@@ -57,8 +58,6 @@ function LoginForm  () {
                 </div>
                 
                     <button className='submit'>Login</button>
-                
-                
             
            </form>
         </div>

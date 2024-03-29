@@ -6,9 +6,10 @@ const Dashboard = () =>{
   return(
 
     <div>
-        <Header/>
-        <Sidebar/>
-        <h1>Dashboard</h1>
+       
+
+        <h1>This is my dashboard</h1>
+        
     </div>
   );
 };
