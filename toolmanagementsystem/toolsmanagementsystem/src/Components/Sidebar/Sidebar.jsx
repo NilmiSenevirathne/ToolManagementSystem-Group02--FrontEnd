@@ -18,6 +18,10 @@ const Sidebar =({Children}) =>{
 
  return (
     <div className='menu'>
+      <div className='company'>
+        <h2 className='name'>Dilum BMK Engineers (Pvt) Ltd.</h2>
+
+      </div>
         <div className='menu-list'>
 
           <div className='prof'>
