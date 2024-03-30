@@ -1,5 +1,5 @@
 
-import './App.css';
+
 import LoginForm from '../src/LoginPage/LoginForm.jsx';
 import Dashboard from './Position/StockSupervisor/Dashboard.jsx';
 import { BrowserRouter , Route, Routes } from 'react-router-dom';

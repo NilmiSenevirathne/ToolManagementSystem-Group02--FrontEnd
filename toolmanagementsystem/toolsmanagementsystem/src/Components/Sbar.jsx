@@ -9,11 +9,15 @@ const Sbar = () => {
     <div className="sidebar">
       <div className="top">
      
+      <div className="profile">
+      
+    </div>
       <span className="logo">Site Supervisor</span>
       
       </div>
       
     <br/>
+    
 <div className="center">
 
       <ul>
