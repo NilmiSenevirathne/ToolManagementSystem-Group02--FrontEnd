@@ -1,6 +1,6 @@
 import "./sbar.css"
 
-import Profile from"../images/profilepicsite.webp"
+import Profile from"../images/logo.jpg"
 import {Link} from "react-router-dom"
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import AssessmentIcon from '@mui/icons-material/Assessment';
@@ -8,11 +8,12 @@ const Sbar = () => {
   return (
     <div className="sidebar">
       <div className="top">
-     
-      <div className="profile">
-      
-    </div>
-      <span className="logo">Site Supervisor</span>
+     <div className="logo">
+        <img src={Profile} alt=""/>
+        <span>
+          Dilum BMK Engineers
+        </span>
+      </div>
       
       </div>
       

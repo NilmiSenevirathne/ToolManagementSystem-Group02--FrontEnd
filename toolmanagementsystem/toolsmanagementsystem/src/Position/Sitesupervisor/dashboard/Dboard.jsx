@@ -12,6 +12,8 @@ const Dboard = () => {
       <div className='homeContainer'>
        <Navbr/>
       </div>
+    
+      
     </div>
   )
 }
