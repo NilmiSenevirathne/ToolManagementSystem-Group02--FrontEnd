@@ -1,21 +1,30 @@
-import React from 'react';
+// Dashboard.jsx
+import React, { useState } from 'react';
 import Sidebar from '../../Components/Sidebar/Sidebar';
+import './Dashboard.css';
 
-function Dashboard() {
-    return (
-        <div>
-            
-            <div>
-               <Sidebar/>
-            </div>
 
-            
+const Dashboard = () => {
+  const [currentPage, setCurrentPage] = useState('Dashboard');//set the default page to Dashboard.jsx
 
-            
-                
-            
-        </div>
-    );
-}
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
+  
+
+  return (
+    <div className='dashboard-container'>
+
+      <div>
+           <Sidebar currentPage={currentPage} onPageChange={handlePageChange} /> 
+      </div>
+
+       <div className='dashboard-content'>
+            <h1>Welcome to StockSupervisor Dashboard!</h1>
+       </div>       
+    </div>
+    
+  );
+};
 
 export default Dashboard;

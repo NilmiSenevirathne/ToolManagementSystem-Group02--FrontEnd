@@ -1,11 +1,23 @@
-import React from 'react'
+import React from 'react';
+import './ManageStock.css';
+import Sidebar from '../../Components/Sidebar/Sidebar';
 
-function ManageStock() {
+const ManageStock = () => {
+  const [currentPage, setCurrentPage] = useState('ManageStock');//set the default page to Dashboard.jsx
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
+
   return (
-    <div>
-      
-    </div>
-  )
-}
+    <div className='stockcontainer'>
+       <Sidebar currentPage={currentPage} onPageChange={handlePageChange} />
 
-export default ManageStock
+       <div className='stock-content'>
+            <h1>Manage Stock</h1>
+       </div>       
+    </div>
+  );
+};
+
+export default ManageStock;
