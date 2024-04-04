@@ -37,7 +37,7 @@ function LoginForm() {
                 .then(response => {
                     if (response.ok) {
                         console.log("Login Success!!");
-                        navigate("/Dashboard"); // Using navigate function to navigate to "/Dashboard"
+                        navigate("/dashboard"); // Using navigate function to navigate to "/Dashboard"
                          
                     } else {
                         throw new Error('Login failed'); // Throw error for unsuccessful response
