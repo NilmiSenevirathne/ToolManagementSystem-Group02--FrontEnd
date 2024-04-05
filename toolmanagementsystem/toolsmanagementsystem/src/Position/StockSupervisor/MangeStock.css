@@ -1,8 +1,0 @@
-.stockcontainer{
-  display: flex;
-}
-
-.stock-content{
-  flex: 1; /* Allow the content div to take up remaining space */
-  padding: 20px; 
-}
