@@ -1,9 +1,0 @@
-.dashboard-container {
-    display: flex; /* Use flexbox to align items horizontally */
-  }
-  
-.dashboard-content {
-    flex: 1; /* Allow the content div to take up remaining space */
-    padding: 20px; /* Add padding for better spacing */
-  }
-  
