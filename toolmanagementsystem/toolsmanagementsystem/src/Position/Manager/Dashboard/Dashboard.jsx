@@ -25,7 +25,7 @@ const Dashboard = () => {
     {
       name: 'Feb',
      
-      pv: 458,
+      pv: 1398,
       amt: 2210,
     },
     {
