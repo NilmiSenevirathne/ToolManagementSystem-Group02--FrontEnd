@@ -9,7 +9,7 @@ const ManageProjects = () =>{
     return(
       
          <div>
-              <h1> Manage Projects </h1>
+              <h1> Manage Project </h1>
          </div>
      
     );
