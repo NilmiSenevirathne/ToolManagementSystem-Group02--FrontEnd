@@ -19,7 +19,7 @@ const Dashboard = () => {
     {
       name: 'january ',
       
-      pv: 2400,
+      pv: 2500,
       amt: 2400,
     },
     {
