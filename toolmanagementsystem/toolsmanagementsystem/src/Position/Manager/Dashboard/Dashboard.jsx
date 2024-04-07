@@ -10,7 +10,7 @@ import { PieChart, Pie,Tooltip,Cell, LineChart,
 const Dashboard = () => {
   const data01 =[
     {name:"Allocated Stock", value:20000},
-    {name: "Instagram",value:15000},
+    {name: "Available Stock",value:15000},
    
   ];
   const COLORS = ['#0088FE', '##00C49F'];
