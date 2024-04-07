@@ -17,15 +17,15 @@ const Dashboard = () => {
 
   const data02 = [
     {
-      name: 'january ',
+      name: 'jan',
       
       pv: 2400,
       amt: 2400,
     },
     {
-      name: 'February',
+      name: 'Feb',
      
-      pv: 1398,
+      pv: 458,
       amt: 2210,
     },
     {
