@@ -2,8 +2,7 @@ import React from 'react';
 import { PieChart, Pie,Tooltip,Cell, LineChart,
   Brush,
   Line,
-  XAxis,
-  YAxis,
+
   CartesianGrid,} from 'recharts';
 
 
