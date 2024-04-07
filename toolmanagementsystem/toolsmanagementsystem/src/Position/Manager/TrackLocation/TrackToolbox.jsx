@@ -10,4 +10,4 @@ const TrackToolbox = () =>{
      
     );
 };
-export default 
+export default TrackToolbox;
