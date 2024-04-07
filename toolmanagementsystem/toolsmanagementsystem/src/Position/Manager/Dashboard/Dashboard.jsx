@@ -17,7 +17,7 @@ const Dashboard = () => {
 
   const data02 = [
     {
-      name: 'Jan ',
+      name: 'january ',
       
       pv: 2400,
       amt: 2400,
