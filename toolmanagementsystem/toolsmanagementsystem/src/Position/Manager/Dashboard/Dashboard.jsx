@@ -38,7 +38,7 @@ const Dashboard = () => {
       name: 'April',
       
       pv: 3908,
-      amt: 2000,
+      amt: ,
     },
     {
       name: 'May',
