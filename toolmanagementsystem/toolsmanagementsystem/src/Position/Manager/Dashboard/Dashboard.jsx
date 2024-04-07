@@ -13,7 +13,7 @@ const Dashboard = () => {
     {name: "Instagram",value:15000},
    
   ];
-  const COLORS = ['#0088FE', '#00C49F'];
+  const COLORS = ['#0088FE', '#7890'];
 
   const data02 = [
     {
