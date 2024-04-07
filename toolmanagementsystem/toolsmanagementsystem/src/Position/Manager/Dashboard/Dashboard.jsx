@@ -13,7 +13,7 @@ const Dashboard = () => {
     {name: "Available Stock",value:15000},
    
   ];
-  const COLORS = ['#0088FE', '##00C49F'];
+  const COLORS = ['hjjkk', '##00C49F'];
 
   const data02 = [
     {
