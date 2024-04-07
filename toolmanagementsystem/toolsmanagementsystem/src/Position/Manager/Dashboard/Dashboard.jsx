@@ -9,7 +9,7 @@ import { PieChart, Pie,Tooltip,Cell, LineChart,
 
 const Dashboard = () => {
   const data01 =[
-    {name:"Facebook", value:80000},
+    {name:"Facebook", value:20000},
     {name: "Instagram",value:15000},
    
   ];
