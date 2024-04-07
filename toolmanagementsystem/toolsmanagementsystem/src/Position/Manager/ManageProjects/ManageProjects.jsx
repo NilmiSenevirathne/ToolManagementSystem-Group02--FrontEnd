@@ -14,4 +14,4 @@ const ManageProjects = () =>{
      
     );
 };
-export default ManageProjects
+export default ManageProjects;
