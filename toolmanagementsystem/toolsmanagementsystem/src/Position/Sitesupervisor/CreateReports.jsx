@@ -18,8 +18,8 @@ const CreateReports = () => {
         <div className="cont"> <  HandymanIcon style={{ fontSize: 60 }}/>
        Tool Status Reports</div></Link>
         
-       <button  className="btn" >
-       Required Tool Reports</button>
+       <Link  className="btn" to="/RequiredToolReport" >
+       Required Tool Reports</Link>
         
         
          </div>

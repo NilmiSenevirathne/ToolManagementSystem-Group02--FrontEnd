@@ -3,12 +3,16 @@ import "./toolStatRep.css";
 
 const ToolStatosRep = () => {
   return (
+   
+
     <div className='Createp'>
-     <h1>Tool Status Report</h1>
-    <div className='container'>
-        
-      </div> 
-      </div>
+      <div className="topbarcontainer">
+<div className="topbartext">
+       Tool Status Report
+       </div>
+      
+     </div>
+     </div>
   )
 }
 
