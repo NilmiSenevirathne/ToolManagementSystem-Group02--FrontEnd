@@ -58,3 +58,19 @@ main{
 .dashboard-container{
     display: flex;
 }
+
+.msg{
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.chart-container{
+    display: flex;
+    justify-content:center;
+    
+}
+
+.chart{
+   flex: 1;
+   margin-right: 100px;
+}
