@@ -1,10 +1,10 @@
-// Dashboard.jsx
+// StockSupervisor Dashboard.jsx
 import React, { useState, useEffect } from 'react';
 import './Dashboard.css';
 import Sidebar from '../../../Components/Sidebar/Sidebar';
 import { Chart } from 'primereact/chart';
 
-const Dashboard = () => {
+const StockSupervisorDashboard = () => {
   const role = "StockSupervisor";
   const [chartData, setChartData] = useState({});
   const [lineChartData, setLineChartData] = useState({});
@@ -29,7 +29,7 @@ const Dashboard = () => {
       labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
       datasets: [
         {
-          label: 'Variation in amout of tools dusring the year ',
+          label: 'Variation in amout of tools during the year ',
           data: [65, 59, 80, 81, 56, 55, 40],
           fill: false,
           borderColor: 'rgba(255, 99, 132, 0.5)',
@@ -66,4 +66,4 @@ const Dashboard = () => {
   );
 }
 
-export default Dashboard;
+export default StockSupervisorDashboard;

@@ -3,13 +3,13 @@ import logo from './logo.svg';
 import {Route, BrowserRouter as Router, Routes} from 'react-router-dom';
 import './App.css';
 import LoginForm from '../src/LoginPage/LoginForm.jsx';
-import Dashboard from '../src/Position/StockSupervisor/Dashboard/Dashboard.jsx';
 import ManageStock  from './Position/StockSupervisor/ManageStock/ManageStock.jsx';
 import CreateToolbox from './Position/StockSupervisor/CreateToolBox/CreateToolbox.jsx';
 import TrackToolbox from './Position/StockSupervisor/TrackToolbox/TrackToolbox.jsx';
 import Reports from './Position/StockSupervisor/Reports/Reports.jsx';
 import AddTool from './Position/StockSupervisor/ManageStock/AddTool.jsx';
 import EditTool from './Position/StockSupervisor/ManageStock/EditTool.jsx';
+import StockSupervisorDashboard from './Position/StockSupervisor/Dashboard/StockSupervisorDashboard.jsx';
 
 function App() {
   return (
@@ -20,7 +20,7 @@ function App() {
           
                <Routes>
                     <Route path='/' element={<LoginForm/>}> </Route>
-                    <Route path='/dashboard' element={<Dashboard/>} />
+                    <Route path='/stocksupervisordashboard' element={<StockSupervisorDashboard/>} />
                     <Route  path = "/managestock"  element={<ManageStock/>}/>
                     <Route  path = "/addTool"  element={<AddTool/>}/>
                     <Route path='/editTool/${tool.toolId}' element={<EditTool/>}/>
