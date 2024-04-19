@@ -1,70 +1,148 @@
-import React, { useState } from 'react';
+import axios from "axios";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import Sidebar from '../../../Components/Sidebar/Sidebar';
-import { useNavigate } from 'react-router-dom';
+import './toolbox.css'
 
-const CreateToolbox = () => {
+export default function CreateToolBox() {
   let navigate = useNavigate();
 
   const [toolbox, setToolbox] = useState({
-    qrId: "",
-    projectId: "",
-    projectName: "",
-    sitesupervisor: "",
-    location: ""
+    toolboxId:"",
+    projectId:"",
+    projectName:"",
+    sitesupervisorId:"",
+    sitesupervisorName:"",
+    Location:"",
+    Tool:"",
   });
 
-  const { qrId, projectId, projectName, sitesupervisor, location } = toolbox;
+  const { toolboxId,projectId , projectName,sitesupervisorId,sitesupervisorName, Location, tool} = toolbox;
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setToolbox({ ...toolbox, [name]: value });
+  const onInputChange = (e) => {
+    setToolbox({ ...toolbox, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
-    // Add your submit logic here
+    try{
+        const response = await axios.post("http://localhost:8080/tool/create",toolbox);
+        console.log(" Response from server: ",response);
+        alert(" New Tool Successfully Added!");
+        navigate("/managestock");
+    }catch(error)
+    {
+        console.error(" Error occured while adding tool: ",error);
+        if(error.response){
+            console.error("Server respond with:",error.response.data);
+            alert(" Unsuccessfully Added NewTool!")
+        }
+    }
+
   };
 
   return (
-    <div>
-      <Sidebar>
-        <div className='stock-content'>
-          <form onSubmit={handleSubmit}>
-            <h1>New ToolBox Form</h1>
+    <div className="container">
+    <Sidebar>
+      <div className="row">
+        <div className="col-md-6 offset-md-3 border rounded p-4 mt-2 shadow">
+          <h2 className="text-center m-4">New Toolbox Details Form</h2>
 
-            <div>
-              <label>QR_id</label>
-              <input type='file' className='form-control' placeholder='Enter QR ID' name='qrId' value={qrId} onChange={handleChange} />
+          <form onSubmit={(e) => onSubmit(e)}>
+            <div className="mb-3">
+              <label htmlFor="toolboxId" className="form-label">
+                ToolBoxID
+              </label>
+              <input
+                type={"text"}
+                className="form-control"
+                placeholder="Enter new toolbox id "
+                name="toolboxId"
+                value={toolboxId}
+                onChange={(e) => onInputChange(e)}
+              />
             </div>
 
-            <div>
-              <label>Project_Id</label>
-              <input type='dropdown' className='form-control' placeholder='' name='projectId' value={projectId} onChange={handleChange} />
+            <div className="mb-3">
+              <label htmlFor="projectId" className="form-label">
+                ProjectId
+              </label>
+              <input
+                type={"text"}
+                className="form-control"
+                placeholder="Enter  projectid "
+                name="ProjectId"
+                value={projectId}
+                onChange={(e) => onInputChange(e)}
+              />
             </div>
 
-            <div>
-              <label>Project_Name</label>
-              <input type='checkbox' className='form-control' placeholder='' name='projectName' value={projectName} onChange={handleChange} />
+            <div className="mb-3">
+              <label htmlFor="projectIName" className="form-label">
+                ProjectName
+              </label>
+              <input
+                type={"text"}
+                className="form-control"
+                placeholder="Enter  projectname "
+                name="ProjectName"
+                value={projectName}
+                onChange={(e) => onInputChange(e)}
+              />
             </div>
 
-            <div>
-              <label>Site Supervisor</label>
-              <input type='checkbox' className='form-control' placeholder='' name='sitesupervisor' value={sitesupervisor} onChange={handleChange} />
+            <div className="mb-3">
+              <label htmlFor="SitesupervisorId" className="form-label">
+                Site_SupervisorId
+              </label>
+              <input
+                type={"text"}
+                className="form-control"
+                placeholder="Enter sitesupervisor Id "
+                name="SitesupervisorId"
+                value={sitesupervisorId}
+                onChange={(e) => onInputChange(e)}
+              />
             </div>
 
-            <div>
-              <label>Location</label>
-              <input type='checkbox' className='form-control' placeholder='Enter Location' name='location' value={location} onChange={handleChange} />
+            <div className="mb-3">
+              <label htmlFor="sitesupervisorName" className="form-label">
+                Site_SupervisorName
+              </label>
+              <input
+                type={"text"}
+                className="form-control"
+                placeholder="Enter sitesupervisor name "
+                name="sitesupervisorName"
+                value={sitesupervisorName}
+                onChange={(e) => onInputChange(e)}
+              />
             </div>
 
-            <div>
-              <button type='submit' className='form-control btn btn-primary'>Submit</button>
+            <div className="mb-3">
+              <label htmlFor="location" className="form-label">
+                Location
+              </label>
+              <input
+                type={"text"}
+                className="form-control"
+                placeholder="Enter location "
+                name="location"
+                value={Location}
+                onChange={(e) => onInputChange(e)}
+              />
             </div>
+
+            <button type="submit" className="btn btn-outline-primary">
+              Create
+            </button>
+            <Link className="btn btn-outline-danger mx-2" to="/managestock">
+              Cancel
+            </Link>
           </form>
         </div>
+      </div>
       </Sidebar>
     </div>
   );
-};
-
-export default CreateToolbox;
+}
