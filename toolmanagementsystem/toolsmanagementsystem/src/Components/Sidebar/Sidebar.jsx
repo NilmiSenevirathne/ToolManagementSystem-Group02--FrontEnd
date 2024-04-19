@@ -11,7 +11,7 @@ const Sidebar = ({ children }) => {
   //menuitem of the sidebar
   const menuItem = [
     {
-      path: "/dashboard",
+      path: "/stocksupervisordashboard",
       name: "Dashboard",
       icon: <FaTh />
     },
