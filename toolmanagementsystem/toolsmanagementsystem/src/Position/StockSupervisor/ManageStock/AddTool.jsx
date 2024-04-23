@@ -15,6 +15,7 @@ export default function AddTool() {
   });
 
   const { toolId, toolName, description,quantity} = tool;
+  const [errors, setErrors] = useState({});
 
   const onInputChange = (e) => {
     setTool({ ...tool, [e.target.name]: e.target.value });
@@ -22,9 +23,10 @@ export default function AddTool() {
 
   const onSubmit = async (e) => {
     e.preventDefault();
+    if(validate()){
     try{
         const response = await axios.post("http://localhost:8080/tool/create",tool);
-        console.log(" Response from server: ",response);
+        alert(" Response from server: ",response);
         alert(" New Tool Successfully Added!");
         navigate("/managestock");
     }catch(error)
@@ -34,7 +36,37 @@ export default function AddTool() {
             console.error("Server respond with:",error.response.data);
             alert(" Unsuccessfully Added NewTool!")
         }
+      }
     }
+
+  };
+
+  const validate  = () =>{
+    let errors = {};
+    let isValid =true;
+
+    if (!toolId) {
+      isValid = false;
+      errors["toolId"] = "Please enter the tool ID.";
+    }
+
+    if (!toolName) {
+      isValid = false;
+      errors["toolName"] = "Please enter the tool name.";
+    }
+
+    if (!description) {
+      isValid = false;
+      errors["description"] = "Please enter the tool description.";
+    }
+
+    if (!quantity || quantity <= 0) {
+      isValid = false;
+      errors["quantity"] = "Please enter a valid quantity.";
+    }
+
+    setErrors(errors);
+    return isValid;
 
   };
 
