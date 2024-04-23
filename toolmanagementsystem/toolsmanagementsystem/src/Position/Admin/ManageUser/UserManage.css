@@ -4,5 +4,10 @@
 
   .listContainer {
       flex: 15;
+    
+    }
+
+    table{
+      margin: bottom;
     }
   }
