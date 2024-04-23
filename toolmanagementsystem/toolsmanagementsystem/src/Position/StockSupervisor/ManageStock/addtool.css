@@ -29,6 +29,12 @@
   border-radius: 5px;
 }
 
+.container form .invalid-feedback{
+  color: #f53030;
+  padding: 5px 10px;
+  border-radius: 5px;
+  margin-top: 2px;
+}
 .container form button[type="submit"],
 .container form a.btn {
   display: block;

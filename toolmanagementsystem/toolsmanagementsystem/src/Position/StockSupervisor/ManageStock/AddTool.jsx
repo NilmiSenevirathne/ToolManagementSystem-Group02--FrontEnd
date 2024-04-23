@@ -14,21 +14,32 @@ export default function AddTool() {
     quantity:0,
   });
 
+  const [errors, setErrors] = useState({});// another validation errors 
+  const [duplicateError , setDuplicateError] = useState("");//state to hold duplicate Tool ID error message 
+  
   const { toolId, toolName, description,quantity} = tool;
-  const [errors, setErrors] = useState({});
 
   const onInputChange = (e) => {
     setTool({ ...tool, [e.target.name]: e.target.value });
+    setErrors({...errors, [e.target.name]: ""});//clear the error message when user start typing
+    setDuplicateError("");//clear the duplicate error message when user start typing
   };
 
   const onSubmit = async (e) => {
     e.preventDefault();
     if(validate()){
     try{
+       //check the tool ID already exists
+       const response = await axios.get(`http://localhost:8080/tool/check/${toolId}`);
+       if(response.data.exists) {
+         setDuplicateError("Tool Id already exists , enter new toolId!");//duplicate error message
+       }else{
+        //if the tool id doesn't exist, proceed to add the tool
         const response = await axios.post("http://localhost:8080/tool/create",tool);
-        alert(" Response from server: ",response);
+        console.log(" Response from server: ",response);
         alert(" New Tool Successfully Added!");
         navigate("/managestock");
+       }
     }catch(error)
     {
         console.error(" Error occured while adding tool: ",error);
@@ -45,17 +56,17 @@ export default function AddTool() {
     let errors = {};
     let isValid =true;
 
-    if (!toolId) {
+    if (!toolId.trim()) {
       isValid = false;
       errors["toolId"] = "Please enter the tool ID.";
     }
 
-    if (!toolName) {
+    if (!toolName.trim()) {
       isValid = false;
       errors["toolName"] = "Please enter the tool name.";
     }
 
-    if (!description) {
+    if (!description.trim()) {
       isValid = false;
       errors["description"] = "Please enter the tool description.";
     }
@@ -78,19 +89,23 @@ export default function AddTool() {
           <h2 className="text-center m-4">New Tool Details Form</h2>
 
           <form onSubmit={(e) => onSubmit(e)}>
+            
             <div className="mb-3">
               <label htmlFor="toolId" className="form-label">
-                ToolID
+               ToolID
               </label>
               <input
-                type={"text"}
-                className="form-control"
-                placeholder="Enter new toolid"
-                name="toolId"
-                value={toolId}
-                onChange={(e) => onInputChange(e)}
-              />
+                 type={"text"}
+                 className={`form-control ${errors.toolId || duplicateError ? "is-invalid" : ""}`}
+                 placeholder="Enter new toolid"
+                 name="toolId"
+                 value={toolId}
+                 onChange={(e) => onInputChange(e)}
+               />
+               {errors.toolId && <div className="invalid-feedback">{errors.toolId}</div>}
+               {duplicateError && <div className="invalid-feedback">{duplicateError}</div>}
             </div>
+
 
             <div className="mb-3">
               <label htmlFor="toolName" className="form-label">
@@ -98,12 +113,13 @@ export default function AddTool() {
               </label>
               <input
                 type={"text"}
-                className="form-control"
+                className={`form-control ${errors.toolName && "is-invalid"}`}
                 placeholder="Enter tool name"
                 name="toolName"
                 value={toolName}
                 onChange={(e) => onInputChange(e)}
               />
+              {errors.toolName && <div className="invalid-feedback">{errors.toolName}</div>}
             </div>
 
             <div className="mb-3">
@@ -112,12 +128,13 @@ export default function AddTool() {
               </label>
               <input
                 type={"text"}
-                className="form-control"
+                className={`form-control ${errors.description && "is-invalid"}`}
                 placeholder="Enter the tool description"
                 name="description"
                 value={description}
                 onChange={(e) => onInputChange(e)}
               />
+              {errors.description && <div className="invalid-feedback">{errors.description}</div>}
             </div>
 
             <div className="mb-3">
@@ -126,12 +143,13 @@ export default function AddTool() {
               </label>
               <input
                 type={'number'}
-                className="form-control"
+                className={`form-control ${errors.quantity && "is-invalid"}`}
                 placeholder="Enter the quantity"
                 name="quantity"
                 value={quantity}
                 onChange={(e) => onInputChange(e)}
               />
+               {errors.quantity && <div className="invalid-feedback">{errors.quantity}</div>}
             </div>
 
             <button type="submit" className="btn btn-outline-primary">
