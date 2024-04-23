@@ -80,7 +80,7 @@ const ManageStock = () => {
                      <td>{tool.allocatedQuantity }</td>
 
                      <td>
-                        <button className='btn-view' >View</button>
+                      
                         <Link to ={`/editTool/${tool.toolId}`}><button className='btn-edit'>Update</button></Link>
                         <button className='btn-delete' onClick={() => deleteTool(tool.toolId)}>Delete</button> {/* Call deleteTool onClick */}
                         
