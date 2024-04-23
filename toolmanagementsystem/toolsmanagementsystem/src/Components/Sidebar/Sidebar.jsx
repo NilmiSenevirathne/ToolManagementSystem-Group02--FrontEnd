@@ -3,10 +3,15 @@ import React, { useState } from 'react';
 import { FaTh, FaBars, FaCartPlus, FaBriefcase, FaSearch, FaNewspaper } from 'react-icons/fa';
 import { RiLogoutCircleRLine } from "react-icons/ri";
 import { NavLink } from 'react-router-dom';
+import userpic from '../../images/user1.jpg';
+import './sidebar.css';
+
 
 const Sidebar = ({ children }) => {
   const [isOpen,setIsOpen] = useState(false);
   const toggle = () => setIsOpen (!isOpen);
+
+  const role = "StockSupervisor"
   
   //menuitem of the sidebar
   const menuItem = [
@@ -47,6 +52,12 @@ const Sidebar = ({ children }) => {
       <div className='sidebar'>
         <div className='companylogo'>
           <h1  className='logo'>Dilum BMK Engineers (Pvt) Ltd</h1>
+
+          <div className='details'>
+              <img className="user" src={userpic}/>
+              <h3 className='name'>Mr. Nimantha Dissanayake</h3>
+              <h2 className='role'>{role}</h2>
+          </div>
            
         </div>
         
