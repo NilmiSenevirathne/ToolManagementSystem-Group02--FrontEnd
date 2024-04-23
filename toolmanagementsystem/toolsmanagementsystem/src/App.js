@@ -23,7 +23,7 @@ function App() {
                     <Route path='/stocksupervisordashboard' element={<StockSupervisorDashboard/>} />
                     <Route  path = "/managestock"  element={<ManageStock/>}/>
                     <Route  path = "/addTool"  element={<AddTool/>}/>
-                    <Route path='/editTool/${tool.toolId}' element={<EditTool/>}/>
+                    <Route path='/editTool/:toolId' element={<EditTool/>}/>
                     <Route  path = "/createtoolbox"  element={<CreateToolbox/>}/>
                     <Route  path = "/tracktoolbox"  element={<TrackToolbox/>}/>
                     <Route  path = "/reports"  element={<Reports/>}/>
