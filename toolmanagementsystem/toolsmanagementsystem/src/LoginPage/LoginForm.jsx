@@ -37,7 +37,22 @@ function LoginForm() {
                 .then(response => {
                     if (response.ok) {
                         console.log("Login Success!!");
-                        navigate("/dashboard"); // Using navigate function to navigate to "/Dashboard"
+                       if((values.username === 'isuru@gmail.com') && (values.password === 'isuru@123') )
+                       {
+                          navigate("Admin");
+                       }
+                       else if((values.username === 'gagana@gmail.com') && (values.password === 'Gagana@623'))
+                       {
+                          navigate("Manager");
+                       }
+                       else if((values.username === 'nimantha@gmail.com') && (values.password === 'Nima#456'))
+                       {
+                          navigate("/stocksupervisordashboard");
+                       }
+                       else if((values.username === 'kusal@gmail.com') && (values.password === 'kusal#@8'))
+                       {
+                          navigate("Site Supervisor");
+                       }
                          
                     } else {
                         throw new Error('Login failed'); // Throw error for unsuccessful response

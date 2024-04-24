@@ -21,6 +21,7 @@ export default function EditTool() {
         const response = await axios.get(`http://localhost:8080/tool/gettool/${toolId}`);
         const { toolName, description, quantity } = response.data;
         setTool({ ...values, toolName, description, quantity });
+        
       } catch (error) {
         console.error("Error fetching tool:", error);
       }
@@ -38,12 +39,12 @@ export default function EditTool() {
     try {
       const response = await axios.put(`http://localhost:8080/tool/update/${toolId}`, values);
       console.log("Response from server: ", response);
-      console.log("Tool Successfully Updated!");
-      navigate("/managestock");
+            navigate("/managestock");
+            alert("Tool Successfully Updated!");
     } catch (error) {
-      console.error("Error occurred while updating tool: ", error);
+      alert.error("Error occurred while updating tool: ", error);
       if (error.response) {
-        console.error("Server respond with:", error.response.data);
+        alert.error("Server respond with:", error.response.data);
       }
     }
   };

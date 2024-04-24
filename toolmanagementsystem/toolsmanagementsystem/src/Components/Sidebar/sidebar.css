@@ -1,0 +1,18 @@
+.details .user{
+    display: flex;
+    align-self: center;
+    width: 10rem;
+    border-radius: 50%;
+    margin-top: 3rem;
+    margin-left: auto;
+    margin-right: auto;
+} 
+
+.details .name {
+    text-align: center;
+    
+}
+
+.details .role{
+    text-align: center;
+}

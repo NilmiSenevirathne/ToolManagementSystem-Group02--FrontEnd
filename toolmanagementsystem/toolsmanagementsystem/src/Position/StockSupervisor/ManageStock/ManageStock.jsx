@@ -19,6 +19,13 @@ const ManageStock = () => {
     //fetch tools details from the backend
     const loadTools = async () =>{
       const result = await axios.get("http://localhost:8080/tool/gettools");
+      
+      //allocatedQuantity and availableQuantity functionalities
+      const updatedTools = result.data.map(tool =>({
+        ...tool,
+        allocatedQuantity: tool.quantity - tool.availableQuantity,
+        availableQuantity: tool.quantity - tool.allocatedQuantity
+      }));
       setTools(result.data)
     };
      
@@ -54,7 +61,7 @@ const ManageStock = () => {
                   <th scope='col'>ToolName</th>
                   <th scope='col'>Description</th>
                   <th scope='col'>Quantity</th>
-                  <th scope='col'>SavedQunatity</th>
+                  <th scope='col'>AvailableQunatity</th>
                   <th scope='col'>AllocatedQuantity</th>
                   <th scope='col'>Action</th>
 
@@ -69,11 +76,11 @@ const ManageStock = () => {
                      <td>{tool.toolName}</td>
                      <td>{tool.description}</td>
                      <td>{tool.quantity}</td>
-                     <td>{tool.savedQuantity}</td>
+                     <td>{tool.availableQuantity}</td>
                      <td>{tool.allocatedQuantity }</td>
 
                      <td>
-                        <button className='btn-view' >View</button>
+                      
                         <Link to ={`/editTool/${tool.toolId}`}><button className='btn-edit'>Update</button></Link>
                         <button className='btn-delete' onClick={() => deleteTool(tool.toolId)}>Delete</button> {/* Call deleteTool onClick */}
                         
