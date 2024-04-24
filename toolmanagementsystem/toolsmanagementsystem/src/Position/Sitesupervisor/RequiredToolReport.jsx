@@ -1,9 +1,9 @@
 import jsPDF from 'jspdf';
 import "./requiredToolReports.css"
 import SearchIcon from '@mui/icons-material/Search';
-import GenerateReportReTools from "./GenerateReportReTools";
+
 import axios from "axios";
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom"
 import { useEffect, useState } from "react";
 
 
@@ -11,15 +11,17 @@ const RequiredToolReport = () => {
   const [Tool, setTools] = useState([]);
   const [selectedTools, setSelectedTools] = useState([]);
   const [reportGenerated, setReportGenerated] = useState(false);
-   
-  useEffect(()=>{
-
-  loadTools();
+  const [reportData, setReportData] = useState([]);
+  const [projectName, setProjectName] = useState('');
+   const [searchQuery, setSearchQuery] = useState('');
+  useEffect(() => {
+    loadTools();
   }, []);
-  const loadTools=async()=>{
-   const result=await axios.get("http://localhost:8080/gettools")//get tools 
-   setTools(result.data);
-  };
+
+  const loadTools = async () => {
+    const result = await axios.get('http://localhost:8080/gettools')
+    setTools(result.data);
+  }
 
 
   const handleToolSelect = (tools) => {
@@ -32,128 +34,186 @@ const RequiredToolReport = () => {
 
 
   const generateReport = () => {
-    // Call your function to generate the report
-    // You can use selectedTools here to generate the report
-    setReportGenerated(true);
-  };
-  const generatePDF=(selectedTools)=> {
-    if (selectedTools.length === 0) {
-      alert("Please select at least one tool.");
+    if (!projectName) {
+      window.alert("Please enter the project name!");
       return;
     }
-    const doc = new jsPDF();
-    doc.text('Selected Tools Report', 10, 10);
-  
-    // Add selected tools to the PDF
-    selectedTools.forEach((tools, index) => {
-      doc.text(`${index + 1}. ${tools.tool_name}`, 10, 20 + index * 10);
-    });
-  
-    // Save the PDF
-    doc.save('selected_tools_report.pdf');
-  }
-  const generateAndSendReport = () => {
-    generatePDF(selectedTools);
-  
-    // Convert the generated PDF to a blob
-    const pdfBlob = new Blob([/* PDF data */], { type: 'application/pdf' });
-  
-    // Create FormData and append the blob
-    const formData = new FormData();
-    formData.append('file', pdfBlob, 'selected_tools_report.pdf');
-  
-    // Send the PDF to the backend
-    axios.post('/reports', formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data'
-      }
-    })
-    .then(response => {
-      console.log(response.data);
-    })
-    .catch(error => {
-      console.error(error);
-    });
+
+    if (selectedTools.length === 0) {
+      window.alert("Please select relevent tools to the project!");
+      return;
+    }
+    const report = generatePDF(selectedTools);
+    setReportData([...reportData, report]);
+    setReportGenerated(true);
+    setProjectName(''); // Clear project name
+    setSelectedTools([]); // Clear selected tools
+    window.alert("Report generated successfully!");
   };
+
+
+  function generatePDF(selectedTools) {
+    const doc = new jsPDF();
+    const currentTime = new Date().toLocaleString();
+
+    // Set font styles
+    doc.setFont('helvetica');
+    doc.setFontSize(14);
+
+    // Add report title
+    doc.setTextColor(44, 62, 80); // Dark blue
+    doc.text('Selected Tools Report', 105, 20, null, null, 'center');
+
+    // Add project name
+    doc.setTextColor(44, 62, 80); // Dark blue
+    doc.setFontSize(12);
+    doc.text(`Project Name: ${projectName}`, 105, 30, null, null, 'center');
+
+    // Add date and time
+    doc.setTextColor(44, 62, 80); // Dark blue
+    doc.text(`Date and Time: ${currentTime}`, 105, 40, null, null, 'center');
+
+    // Add selected tools
+    doc.setTextColor(20, 62, 80); // Dark blue
+    doc.setFontSize(12);
+
+    // Add selected tools to the PDF
+    doc.text('Required Tools:', 10, 60);
+
+    // Calculate the total height required for the selected tools
+    const totalHeight = selectedTools.length * 20;
+    const maxSectionHeight = 230; // Maximum height for the section
+    let currentHeight = 0;
+
+    selectedTools.forEach((tool, index) => {
+      if (currentHeight < maxSectionHeight) {
+        doc.text(`${index + 1}.Tool Id: ${tool.tool_id}`, 20, 70 + index * 20);
+        doc.text(`   Tool Name: ${tool.tool_name}`, 20, 75 + index * 20);
+        currentHeight += 20;
+      }
+    });
+
+
+    // If the selected tools exceed the maximum height, add a scroll bar
+    if (totalHeight > maxSectionHeight) {
+      doc.setDrawColor(0); // Sets the color of the lines to black
+      doc.setLineWidth(0.5); // Sets the line width to 0.5mm
+      doc.rect(10, 70, 185, maxSectionHeight); // Draw a rectangle for the scrollable area
+    }
+
+
+    // Save the PDF
+    const pdfData = doc.output();
+    const pdfBlob = new Blob([pdfData], { type: 'application/pdf' });
+    const pdfUrl = URL.createObjectURL(pdfBlob);
+
+    // window.open(pdfUrl);
+    return { data: pdfUrl, date: currentTime, projectName: projectName };
+  }
+
+   
+  const filteredTools = Tool.filter(tool =>
+    tool.tool_id.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    tool.tool_name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
     <div className="rep">
-    <div className='Createp'>
-      <div className="topbarcontainer">
-<div className="topbartext">
-      Required Tool Reports
-       </div>
-     
-     </div>
-     
-     
-      </div>
-      
-     <div className="searchbar">
-        <SearchIcon className="searchIcon" />
-        <input 
-          placeholder="Search tools using tool id"
-          className="searchInput"
-        />
+      <div className='Createp'>
+        <div className="topbarcontainer">
+          <div className="topbartext">
+            Required Tool Reports
+          </div>
         </div>
-       
-     <div className="table">
-     <table class="table caption-top">
-  
-  <thead>
-    <tr>
-      <th scope="col">Tool Id</th>
-      
-      <th scope="col">Allocated_quantity</th>
-      <th scope="col">Description</th>
-      <th scope="col">Saved Quantity</th>
-      <th scope="col">Tool Name</th>
-      <th scope="col">Tool Image</th>
-      <th scope="col">Select</th>
-    </tr>
-  </thead>
-  <tbody>
-    {
-      Tool.map((tools) =>(
-       
-     <tr > 
-        <td>{tools.tool_id}</td>
-        <td>{tools.allocated_quantity}</td>
-        <td>{tools.description}</td>
-        <td>{tools.saved_quantity}</td>
-        <td>{tools.tool_name}</td>
-        <td>{tools.image && (
-          <img src={'data:image/jpeg;base64,${tools.image}'}
-          alt=""
-          style={{ width: "100px", height: "auto"}} />
-        )}
-        </td>
-        <td>
-                  <input 
+      </div>
+
+      <div className="searchbar">
+        <SearchIcon className="searchIcon" />
+        <input
+          placeholder="Search tools using tool id or tool name"
+          className="searchInput"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
+      </div>
+
+      <div className="table">
+        <table className="table caption-top">
+          <thead>
+            <tr>
+              <th scope="col">Tool Id</th>
+              <th scope="col">Allocated_quantity</th>
+              <th scope="col">Description</th>
+              <th scope="col">Saved Quantity</th>
+              <th scope="col">Tool Name</th>
+              <th scope="col">Tool Image</th>
+              <th scope="col">Select</th>
+            </tr>
+          </thead>
+          <tbody style={{ maxHeight: "230px", overflowY: "auto" }}>
+           {filteredTools.map((tools) => (
+              <tr key={tools.tool_id}>
+                <td>{tools.tool_id}</td>
+                <td>{tools.allocated_quantity}</td>
+                <td>{tools.description}</td>
+                <td>{tools.saved_quantity}</td>
+                <td>{tools.tool_name}</td>
+                <td>{tools.image && (
+                  <img src={'data:image/jpeg;base64,${tools.image}'}
+                    alt=""
+                    style={{ width: "100px", height: "auto" }} />
+                )}
+                </td>
+                <td>
+                  <input
                     type="checkbox"
                     onChange={() => handleToolSelect(tools)}
                     checked={selectedTools.includes(tools)}
                   />
                 </td>
-        
-    </tr>
-      ))
-      }
-
-  </tbody>
-</table>
-</div>
-<div className="generateReportButton">
-<Link  className="button" to="/GenerateReportReTools" > 
-Generate Report 
-       </Link>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
 
-      {reportGenerated && (
-        <div className="reportGeneratedMessage">
-          Report generated successfully!
-        </div>
-      )}
-     </div>
+      <div className="projectNameInput">
+        <input
+          type="text"
+          placeholder="Enter Project Name"
+          value={projectName}
+          onChange={(e) => setProjectName(e.target.value)}
+        />
+      </div>
+
+      <div className="generateReportButton">
+        <button onClick={generateReport}>Generate Report</button>
+      </div>
+
+      <div className="reportTable">
+        <h2>Report Table</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Date and Time</th>
+              <th>Project Name</th>
+              <th>Report</th>
+            </tr>
+          </thead>
+          <tbody>
+            {reportData.map((report, index) => (
+              <tr key={index}>
+                <td>{report.date}</td>
+                <td>{report.projectName}</td>
+                <td>
+                  <a href={report.data} download={'report_${index}.pdf'}>Download Report</a>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
   )
 }
 

@@ -12,13 +12,13 @@ const CreateReports = () => {
     <div className='container'>
         <Navbr/>
        
-        <div className="button">
+        <div className="btton">
        
         <Link className="btn" to="/ToolStatosRep">
         <div className="cont"> <  HandymanIcon style={{ fontSize: 60 }}/>
        Tool Status Reports</div></Link>
         
-       <Link  className="btn" to="/RequiredToolReport" >
+        <Link  className="btn" to="/RequiredToolReport" >
        Required Tool Reports</Link>
         
         

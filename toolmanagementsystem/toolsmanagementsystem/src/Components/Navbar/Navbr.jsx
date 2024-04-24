@@ -10,15 +10,9 @@ const Navbr = () => {
     <div className="topbarLeft">
      
     </div>
-    <div className="topbarCenter">
-      <div className="searchbar">
-        <SearchIcon className="searchIcon" />
-        <input
-          placeholder="Search"
-          className="searchInput"
-        />
-      </div>
-    </div>
+    
+      
+    
     <div className="topbarRight">
     
       <div className="topbarIcons">

@@ -8,12 +8,13 @@
      flex: 15;
      background-image: url("../../images/new.webp");
      background-size: cover;
+     height: 450px;
 
      }
 
     
 }
-.button{
+.btton{
     padding: 50px;
     display: flex;
     margin-right: 100px;
