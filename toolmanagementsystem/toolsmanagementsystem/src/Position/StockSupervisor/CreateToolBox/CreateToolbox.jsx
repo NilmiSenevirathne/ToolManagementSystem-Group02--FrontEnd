@@ -43,8 +43,7 @@ export default function CreateToolBox() {
 
   return (
     <div className="container">
-    <Sidebar>
-      <div className="row">
+  
         <div className="col-md-6 offset-md-3 border rounded p-4 mt-2 shadow">
           <h2 className="text-center m-4">New Toolbox Details Form</h2>
 
@@ -142,7 +141,5 @@ export default function CreateToolBox() {
           </form>
         </div>
       </div>
-      </Sidebar>
-    </div>
-  );
+      );
 }
