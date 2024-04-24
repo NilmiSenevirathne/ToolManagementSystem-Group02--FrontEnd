@@ -50,8 +50,7 @@ export default function EditTool() {
   };
 
   return (
-    <div className="container">
-      <Sidebar>
+   
         <div className="row">
           <div className="col-md-6 offset-md-3 border rounded p-4 mt-2 shadow">
             <h2 className="text-center m-4">Update Tool Details</h2>
@@ -118,7 +117,6 @@ export default function EditTool() {
             </form>
           </div>
         </div>
-      </Sidebar>
-    </div>
+     
   );
 }
