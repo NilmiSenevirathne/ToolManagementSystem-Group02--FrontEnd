@@ -15,7 +15,7 @@ Container{
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    /* background: url('../../src/images/bg1.avif') no-repeat; */
+    background: url('../../src/images/BMKLogo.jpg') no-repeat; 
     background-size: cover;
     background-position: center;
 }

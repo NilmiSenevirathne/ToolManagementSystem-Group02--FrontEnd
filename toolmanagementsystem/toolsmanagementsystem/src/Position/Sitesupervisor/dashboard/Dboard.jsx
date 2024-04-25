@@ -10,7 +10,7 @@ const Dboard = () => {
      
      <Sbar/>
    <div className='homeContainer'>
-    <Navbr/>
+   
        <div className="bttn">
        
        <Link className="btn1" to="/ToolStatosRep">

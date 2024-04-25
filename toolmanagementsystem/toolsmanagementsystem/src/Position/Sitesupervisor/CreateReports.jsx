@@ -10,7 +10,7 @@ const CreateReports = () => {
     <div className='Createrep'>
         <Sbar/>
     <div className='container'>
-        <Navbr/>
+      
        
         <div className="btton">
        

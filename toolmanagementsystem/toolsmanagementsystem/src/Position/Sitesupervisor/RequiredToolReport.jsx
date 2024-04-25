@@ -8,12 +8,13 @@ import { useEffect, useState } from "react";
 
 
 const RequiredToolReport = () => {
-  const [Tool, setTools] = useState([]);
+  const [tools, setTools] = useState([]);
   const [selectedTools, setSelectedTools] = useState([]);
   const [reportGenerated, setReportGenerated] = useState(false);
   const [reportData, setReportData] = useState([]);
   const [projectName, setProjectName] = useState('');
-   const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState('');
+
   useEffect(() => {
     loadTools();
   }, []);
@@ -23,15 +24,13 @@ const RequiredToolReport = () => {
     setTools(result.data);
   }
 
-
-  const handleToolSelect = (tools) => {
+  const handleToolSelect = (tool) => {
     setSelectedTools((prevSelectedTools) =>
-      prevSelectedTools.includes(tools)
-        ? prevSelectedTools.filter((selectedTools) => selectedTools !== tools)
-        : [...prevSelectedTools, tools]
+      prevSelectedTools.includes(tool)
+        ? prevSelectedTools.filter((selectedTool) => selectedTool !== tool)
+        : [...prevSelectedTools, tool]
     );
   };
-
 
   const generateReport = () => {
     if (!projectName) {
@@ -40,7 +39,7 @@ const RequiredToolReport = () => {
     }
 
     if (selectedTools.length === 0) {
-      window.alert("Please select relevent tools to the project!");
+      window.alert("Please select relevant tools for the project!");
       return;
     }
     const report = generatePDF(selectedTools);
@@ -50,7 +49,6 @@ const RequiredToolReport = () => {
     setSelectedTools([]); // Clear selected tools
     window.alert("Report generated successfully!");
   };
-
 
   function generatePDF(selectedTools) {
     const doc = new jsPDF();
@@ -87,12 +85,11 @@ const RequiredToolReport = () => {
 
     selectedTools.forEach((tool, index) => {
       if (currentHeight < maxSectionHeight) {
-        doc.text(`${index + 1}.Tool Id: ${tool.tool_id}`, 20, 70 + index * 20);
-        doc.text(`   Tool Name: ${tool.tool_name}`, 20, 75 + index * 20);
+        doc.text(`${index + 1}. Tool Id: ${tool.toolId}`, 20, 70 + index * 20);
+        doc.text(`   Tool Name: ${tool.toolName}`, 20, 75 + index * 20);
         currentHeight += 20;
       }
     });
-
 
     // If the selected tools exceed the maximum height, add a scroll bar
     if (totalHeight > maxSectionHeight) {
@@ -100,7 +97,6 @@ const RequiredToolReport = () => {
       doc.setLineWidth(0.5); // Sets the line width to 0.5mm
       doc.rect(10, 70, 185, maxSectionHeight); // Draw a rectangle for the scrollable area
     }
-
 
     // Save the PDF
     const pdfData = doc.output();
@@ -111,10 +107,9 @@ const RequiredToolReport = () => {
     return { data: pdfUrl, date: currentTime, projectName: projectName };
   }
 
-   
-  const filteredTools = Tool.filter(tool =>
-    tool.tool_id.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    tool.tool_name.toLowerCase().includes(searchQuery.toLowerCase())
+  const filteredTools = tools.filter(tool =>
+    tool.toolId.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    tool.toolName.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   return (
@@ -142,33 +137,28 @@ const RequiredToolReport = () => {
           <thead>
             <tr>
               <th scope="col">Tool Id</th>
-              <th scope="col">Allocated_quantity</th>
-              <th scope="col">Description</th>
-              <th scope="col">Saved Quantity</th>
               <th scope="col">Tool Name</th>
-              <th scope="col">Tool Image</th>
+              <th scope="col">Description</th>
+              <th scope="col">Quantity</th>
+              <th scope="col">Allocate Tool</th>
+              <th scope="col">Available Tool</th>
               <th scope="col">Select</th>
             </tr>
           </thead>
           <tbody style={{ maxHeight: "230px", overflowY: "auto" }}>
-           {filteredTools.map((tools) => (
-              <tr key={tools.tool_id}>
-                <td>{tools.tool_id}</td>
-                <td>{tools.allocated_quantity}</td>
-                <td>{tools.description}</td>
-                <td>{tools.saved_quantity}</td>
-                <td>{tools.tool_name}</td>
-                <td>{tools.image && (
-                  <img src={'data:image/jpeg;base64,${tools.image}'}
-                    alt=""
-                    style={{ width: "100px", height: "auto" }} />
-                )}
-                </td>
+            {filteredTools.map((tool) => (
+              <tr key={tool.toolId}>
+                <td>{tool.toolId}</td>
+                <td>{tool.toolName}</td>
+                <td>{tool.description}</td>
+                <td>{tool.quantity}</td>
+                <td>{tool.allocatedTool}</td>
+                <td>{tool.availableTool}</td>
                 <td>
                   <input
                     type="checkbox"
-                    onChange={() => handleToolSelect(tools)}
-                    checked={selectedTools.includes(tools)}
+                    onChange={() => handleToolSelect(tool)}
+                    checked={selectedTools.includes(tool)}
                   />
                 </td>
               </tr>
@@ -185,10 +175,12 @@ const RequiredToolReport = () => {
           onChange={(e) => setProjectName(e.target.value)}
         />
       </div>
-
-      <div className="generateReportButton">
-        <button onClick={generateReport}>Generate Report</button>
+<div className="btn">
+      <div className="btns">
+      <div className="cont"> <button onClick={generateReport}>Generate Report</button>
       </div>
+      </div>
+  </div>
 
       <div className="reportTable">
         <h2>Report Table</h2>
@@ -206,15 +198,18 @@ const RequiredToolReport = () => {
                 <td>{report.date}</td>
                 <td>{report.projectName}</td>
                 <td>
-                  <a href={report.data} download={'report_${index}.pdf'}>Download Report</a>
+                  <a href={report.data} download={`report_${index}.pdf`}>Download Report</a>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
+      <div className="btns">
+        <button onClick={() => window.location.href = '/AddReportDetails'}>Add Required Report Details</button>
+      </div>
     </div>
-  )
+  );
 }
 
-export default RequiredToolReport
+export default RequiredToolReport;
