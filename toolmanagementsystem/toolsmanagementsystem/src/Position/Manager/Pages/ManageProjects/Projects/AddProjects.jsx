@@ -1,10 +1,25 @@
 
 import axios from 'axios'
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import { Link,useNavigate } from 'react-router-dom'
 
 export default function AddProjects() {
+  const [locations, setLocations] = useState([]);
 
+  useEffect(() => {
+    fetchLocations();
+  }, []);
+
+  const fetchLocations = async () => {
+    try {
+      const response = await axios.get("http://localhost:8080/locations"); // Assuming this endpoint returns location data
+      setLocations(response.data); // Assuming the response is an array of location objects
+    } catch (error) {
+      console.error('Error fetching locations:', error);
+    }
+  };
+
+  
   let navigate=useNavigate()
 
   const[projects,setprojects]=useState({
@@ -87,12 +102,17 @@ export default function AddProjects() {
 
                     <div className='mb-3'>
                       <lable htmlFor="Name" className="form-lable">Location ID</lable>
-                      <input type={"text"} className='form-control' 
-                      placeholder='Enter Location ID'
-                      name="locationId"
-                      value={locationId}
-                      onChange={(e)=>onInputChange(e)}
-                      /><br/>
+
+                     
+                    <select className='form-control' name="locationId" value={locationId} onChange={(e) => onInputChange(e)}>
+                    <option value="">Select Location ID</option>
+                    {locations.map(location => (
+                      <option key={location.id} value={location.id}>{location.name}</option>
+                    ))}
+                    </select>
+                    
+
+                      <br/>
                       <Link className="btn btn-outline-primary" to="/AddLocation">Add a New Location</Link>
                       </div>
 

@@ -1,5 +1,5 @@
-//manager
 
+//manager sidebar
 import React, { useState } from 'react';
 import './Sidebar.css'
 

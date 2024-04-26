@@ -1,3 +1,4 @@
+//stock supervisor sidebar
 import "./sbar.css"
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import AssignmentIcon from '@mui/icons-material/Assignment';
