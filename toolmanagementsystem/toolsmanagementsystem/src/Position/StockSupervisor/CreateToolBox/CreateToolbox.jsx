@@ -14,13 +14,24 @@ export default function CreateToolBox() {
     sitesupervisorId:"",
     sitesupervisorName:"",
     Location:"",
-    Tool:"",
+    tool: []
   });
 
   const { toolboxId,projectId , projectName,sitesupervisorId,sitesupervisorName, Location, tool} = toolbox;
 
   const onInputChange = (e) => {
     setToolbox({ ...toolbox, [e.target.name]: e.target.value });
+  };
+
+  //tool selection
+  const onToolSelect = (e) =>{
+    const selectedTool = e.target.value;
+    if(!toolbox.tool.includes(selectedTool)){
+       setToolbox({...toolbox, tool: [...toolbox.tool,selectedTool]});
+    }else{
+      const updatedTools = toolbox.tool.filter(tool => tool !== selectedTool);
+      setToolbox({...toolbox, tool:updatedTools});
+    }
   };
 
   const onSubmit = async (e) => {
@@ -45,8 +56,9 @@ export default function CreateToolBox() {
     <div>
       <Sidebar>
       <div className="toolbox-container">
-          <form onSubmit={(e) => onSubmit(e)}>
-          <h2 className="text-center m-4">New Toolbox Details Form</h2>
+            <form onSubmit={(e) => onSubmit(e)}>
+              <h2>ToolBox Creation Form</h2>
+
             <div className="mb-3">
               <label htmlFor="toolboxId" className="form-label">
                 ToolBoxID
@@ -129,6 +141,25 @@ export default function CreateToolBox() {
                 value={Location}
                 onChange={(e) => onInputChange(e)}
               />
+            </div>
+
+            {/* Select multiple tools */}
+            <div className="mb-3">
+              <label htmlFor="tools" className="form-label">
+                Select Tools
+              </label>
+              <select
+                multiple
+                className="form-control"
+                name="tool"
+                value={tool}
+                onChange={(e) => onToolSelect(e)}
+              >
+                {/* Populate options with available tools */}
+                <option value="hammer">Hammer</option>
+                <option value="screwdriver">Screwdriver</option>
+                {/* Add other tools as options */}
+              </select>
             </div>
 
             <button type="submit" className="btn btn-outline-primary">

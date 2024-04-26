@@ -7,7 +7,6 @@ import axios from 'axios';
 
 const StockSupervisorDashboard = () => {
   const role = "StockSupervisor";
-  const [tools, setTools] = useState({});
   const [lineChartData, setLineChartData] = useState({});
   const [pieChartData, setPieChartData]= useState({});
   const [chartOptions, setChartOptions] = useState({});
@@ -18,12 +17,23 @@ const StockSupervisorDashboard = () => {
       // Fetch data from API
       try {
         const response  = await axios.get("http://localhost:8080/tool/gettools");
-        //Assuming the response structure is similar to this:
-        const result = {
-          allocatedTool: 44,
-          availableTool: 100,
+        const tools  = response.data;
+
+        //map real data from the database to the piechart
+        const totalAvailableTools = tools.reduce((total, tool) => total + tool.availableTool, 0);
+        const totalAllocatedTools = tools.reduce((total, tool) => total + (tool.quantity - tool.availableTool), 0);
+    
+         // Set pie chart data
+         const pieData = {
+          labels: ['Allocated Tools', 'Available Tools'],
+          datasets: [{
+            data: [totalAllocatedTools, totalAvailableTools],
+            backgroundColor: ['#FF6384', '#36A2EB'],
+            hoverBackgroundColor: ['#FF6384', '#36A2EB'],
+          }],
         };
-        setTools(result);
+        setPieChartData(pieData);
+
   
         // Set line chart data
         const lineData = {
@@ -40,19 +50,7 @@ const StockSupervisorDashboard = () => {
         };
         setLineChartData(lineData);
 
-        //pie chart data
-        const pieData = {
-          labels:['Allocated Tools' , 'Available Tools'],
-          datasets:[
-           {
-          
-            data:[result.allocatedTool, result.availableTool],
-            backgroundColor:['#FF6384', '#36A2EB'],
-            hoverBackgroundColor: ['#FF6384', '#36A2EB'],
-           },
-          ],
-        };
-        setPieChartData(pieData);
+        
   
         // Set chart options
         const options = {

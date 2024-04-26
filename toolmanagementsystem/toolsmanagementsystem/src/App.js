@@ -9,7 +9,7 @@ import Reports from './Position/StockSupervisor/Reports/Reports.jsx';
 import AddTool from './Position/StockSupervisor/ManageStock/AddTool.jsx';
 import EditTool from './Position/StockSupervisor/ManageStock/EditTool.jsx';
 import StockSupervisorDashboard from './Position/StockSupervisor/Dashboard/StockSupervisorDashboard.jsx';
-import Sidebar from './Components/Sidebar/Sidebar.jsx';
+
 
 
 function App() {
@@ -27,6 +27,7 @@ function App() {
                     <Route  path = "/createtoolbox"  element={<CreateToolbox/>}/>
                     <Route  path = "/tracktoolbox"  element={<TrackToolbox/>}/>
                     <Route  path = "/reports"  element={<Reports/>}/>
+                    
                    
           </Routes>
           
