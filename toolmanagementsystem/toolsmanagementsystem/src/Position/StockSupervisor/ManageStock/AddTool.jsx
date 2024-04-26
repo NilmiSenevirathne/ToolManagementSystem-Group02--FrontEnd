@@ -78,8 +78,6 @@ export default function AddTool() {
 
   return (
     
-  <div>
-    <Sidebar>
       <div className="form-container">
         <form onSubmit={(e) => onSubmit(e)} className="form-content">
           <h2 className="text-center my-4">New Tool Details Form</h2>
@@ -153,8 +151,6 @@ export default function AddTool() {
           </Link>
         </form>
       </div>
-      </Sidebar>
-  </div>
   
   );
 }

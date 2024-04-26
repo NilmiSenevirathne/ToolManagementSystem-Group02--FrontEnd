@@ -50,8 +50,6 @@ const ManageStock = () => {
 
   return (
    
-    <div>
-      <Sidebar>
         <div className='stock-content'>
           <h1>List of Tools</h1>
           <div className='table-container'>
@@ -98,8 +96,6 @@ const ManageStock = () => {
            
           </div>
           <Link to ='/addtool'><button className='btn-add'>AddTool</button></Link>
-        </div>
-        </Sidebar>
         </div>
     );
 };
