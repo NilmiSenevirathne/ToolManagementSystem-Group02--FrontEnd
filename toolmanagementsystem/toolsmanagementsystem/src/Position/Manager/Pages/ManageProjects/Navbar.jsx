@@ -1,9 +1,10 @@
 import React from 'react'
-
+import {Link} from "react-router-dom"
 export default function Navbar() {
 
   return (
     <div>
+     
       
       <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
   <div className="container-fluid">
@@ -18,10 +19,10 @@ export default function Navbar() {
      aria-label="Toggle navigation">
       <span className="navbar-toggler-icon"></span>
     </button>
-    <button className="btn btn-outline-light">Add Projects</button>
+    <Link className="btn btn-outline-light" to="/addprojects" >Add Projects</Link>
     
   </div>
-</nav>
+   </nav>
     </div>
   )
 }

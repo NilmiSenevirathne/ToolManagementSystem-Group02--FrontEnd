@@ -1,3 +1,5 @@
+//manager
+
 import React, { useState } from 'react';
 import './Sidebar.css'
 
@@ -17,7 +19,7 @@ const Sidebar = ({children}) =>{
      const toggle = () => setIsOpen(!isOpen);
      const menuItm = [ 
           {
-               path:"/",
+               path:"/dashboard",
                name:"Dashboard",
                icon:<FaTh/>
           },
@@ -40,8 +42,7 @@ const Sidebar = ({children}) =>{
      ]
 
     return(
-      
-         <div className='container'>
+ <div className='container'> 
           <div style={{width:isOpen ? "300px" :"50px"}} className='sidebar'></div>
           <div className="sidebar">
 

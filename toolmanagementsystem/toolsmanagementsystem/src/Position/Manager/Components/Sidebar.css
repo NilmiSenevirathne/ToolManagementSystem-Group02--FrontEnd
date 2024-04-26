@@ -1,5 +1,9 @@
-.sidebar{
+.container{
+    display: flex;
     
+}
+.sidebar{
+
     background: #000137;
     color: #fff;
     height: 800px;

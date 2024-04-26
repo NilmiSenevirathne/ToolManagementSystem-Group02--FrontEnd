@@ -1,63 +1,58 @@
 import React, { useEffect,useState } from 'react'
 import axios from 'axios';
-import AddProjects from './Projects/AddProjects';
-export default function Home() {
+import {Link} from 'react-router-dom'
 
-const [users,setUsers]=useState([])
+
+export default function Home() {
+const [projects,setprojects]=useState([])
 useEffect (()=>{
-  loadUsers();
+  loadProjects();
 },[])
 
-const loadUsers=async()=>{
+const loadProjects=async()=>{
   const result=await axios.get("http://localhost:8080/Projects")
-  setUsers(result.data)
+  setprojects(result.data)
 }
 
-  return (
-    
-    <div className='container'> 
-    
-      <div className='py-4'>
-      <table className="table border shadow ">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Project id</th>
-      <th scope="col">Description</th>
-      <th scope="col">projectName</th>
-      <th scope="col">supervisor</th>
-      <th scope="col">SiteSupervisor</th>
-      <th scope="col">locationId</th>
-      <th scope="col">Action</th>
-    </tr>
-  </thead>
-  <tbody>
-    {
-      users.map((user,index)=>(
-      <tr>
-      <th scope="row"key={index}>{index+1}</th>
-      <td>{user.id}</td>
-      <td>{user.description}</td>
-      <td>{user.projectName}</td>
-      <td>{user.SiteSupervisorID}</td>
-      <td>{user.SiteSupervisor}</td>
-      <td>{user.locationId}</td>
-        <td>
-          <button className='btn btn-primary mx-2'>View</button>
-          <button className='btn btn-outline-primary mx-2'>Edit</button>
-          <button className='btn btn-danger mx-2'>Delete</button>
-        </td>
-      </tr>
+        return ( 
+        <div className='container'>     
+            <div className='py-4'>
+              <table className="table border shadow ">
+                 <thead>
+                     <tr>
+                          <th scope="col">#</th>
+                          <th scope="col">Project id</th>
+                          <th scope="col">Description</th>
+                          <th scope="col">projectName</th>
+                          <th scope="col">supervisor</th>
+                          <th scope="col">SiteSupervisor</th>
+                          <th scope="col">locationId</th>
+                          <th scope="col">Action</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                        {
+                          projects.map((project,index)=>(
+                          <tr>
+                          <th scope="row"key={index}>{index+1}</th>
+                          <td>{project.projectId}</td>
+                          <td>{project.description}</td>
+                          <td>{project.projectName}</td>
+                          <td>{project.siteSupervisorID}</td>
+                          <td>{project.siteSupervisorName}</td>
+                          <td>{project.locationId} </td>
 
-      ))
-    }
-    
-    
-  </tbody>
-</table>
-      </div>
-
-    </div>
-  )
+                          <td>
+                              <Link className='btn btn-outline-primary mx-2' to={`/UpdateProjects/${project.projectId}`}>Edit</Link>
+                              <button className='btn btn-danger mx-2'>Delete</button>
+                          </td>
+                          </tr>
+                          ))
+                        } 
+                  </tbody>
+               </table>
+           </div>
+        </div>
+        )
 }
 
