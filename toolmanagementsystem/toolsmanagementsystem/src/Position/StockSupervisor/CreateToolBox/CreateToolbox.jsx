@@ -42,12 +42,11 @@ export default function CreateToolBox() {
   };
 
   return (
-    <div className="container">
-  
-        <div className="col-md-6 offset-md-3 border rounded p-4 mt-2 shadow">
-          <h2 className="text-center m-4">New Toolbox Details Form</h2>
-
+    <div>
+      <Sidebar>
+      <div className="toolbox-container">
           <form onSubmit={(e) => onSubmit(e)}>
+          <h2 className="text-center m-4">New Toolbox Details Form</h2>
             <div className="mb-3">
               <label htmlFor="toolboxId" className="form-label">
                 ToolBoxID
@@ -140,6 +139,8 @@ export default function CreateToolBox() {
             </Link>
           </form>
         </div>
+      
+      </Sidebar>  
       </div>
       );
 }

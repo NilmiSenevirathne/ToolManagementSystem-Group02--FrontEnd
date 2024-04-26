@@ -1,6 +1,5 @@
 import React from 'react';
-import logo from './logo.svg';
-import {Route, BrowserRouter as Router, Routes} from 'react-router-dom';
+import { Route, BrowserRouter as Router, Routes} from 'react-router-dom';
 import './App.css';
 import LoginForm from '../src/LoginPage/LoginForm.jsx';
 import ManageStock  from './Position/StockSupervisor/ManageStock/ManageStock.jsx';
@@ -12,16 +11,15 @@ import EditTool from './Position/StockSupervisor/ManageStock/EditTool.jsx';
 import StockSupervisorDashboard from './Position/StockSupervisor/Dashboard/StockSupervisorDashboard.jsx';
 import Sidebar from './Components/Sidebar/Sidebar.jsx';
 
+
 function App() {
   return (
-      
-       
-       <>
-          <div>
-          <Sidebar>
-               <Routes>
-                    <Route path='/' element={<LoginForm/>}> </Route>
-                    
+      <>
+        
+           <Routes>
+            
+                    <Route path='/' element={<LoginForm/>}/> 
+    
                     <Route path='/stocksupervisordashboard' element={<StockSupervisorDashboard/>} />
                     <Route  path = "/managestock"  element={<ManageStock/>}/>
                     <Route  path = "/addTool"  element={<AddTool/>}/>
@@ -29,15 +27,14 @@ function App() {
                     <Route  path = "/createtoolbox"  element={<CreateToolbox/>}/>
                     <Route  path = "/tracktoolbox"  element={<TrackToolbox/>}/>
                     <Route  path = "/reports"  element={<Reports/>}/>
-                           
-               </Routes>
-          </Sidebar>  
-          </div>
+                   
+          </Routes>
+          
+        
+  
        </>
-
-      
-
-  );
+     );
 }
+
 
 export default App;

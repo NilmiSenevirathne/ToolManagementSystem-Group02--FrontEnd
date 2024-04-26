@@ -73,8 +73,12 @@ const StockSupervisorDashboard = () => {
   
 
   return (
-      
+    
+    
+    <div >
+        <Sidebar>
         <div className='dashboard-content'>
+        
           <h1 className='msg'>Welcome to {role} Dashboard!</h1>
           <div className='chart'>
              <Chart type="doughnut" data={pieChartData} options={chartOptions} />
@@ -82,9 +86,11 @@ const StockSupervisorDashboard = () => {
 
           <div className='chart'>
               <Chart type="line" data={lineChartData} options={lineChartOptions} />
-            </div>
-        </div>
+          </div>
 
+        </div>
+        </Sidebar>
+        </div>
   );
 }
 
