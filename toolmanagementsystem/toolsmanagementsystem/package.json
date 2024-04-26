@@ -1,14 +1,20 @@
 {
   "name": "loginpage",
+  "type": "App.js",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.15.14",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "antd": "^5.16.0",
     "axios": "^1.6.8",
     "bootstrap": "^5.3.3",
+    "example-module": "^1.0.0",
+    "jspdf": "^2.5.1",
     "bootstrap-icons": "^1.11.3",
     "chart.js": "^4.4.2",
     "primereact": "^10.6.3",
@@ -44,5 +50,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
   }
 }
