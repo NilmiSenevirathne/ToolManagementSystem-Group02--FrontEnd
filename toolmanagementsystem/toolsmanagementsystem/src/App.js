@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Route, BrowserRouter as Router, Routes} from 'react-router-dom';
+import {Route, BrowserRouter as Router, Routes} from 'react-router-dom';
 import './App.css';
 import LoginForm from '../src/LoginPage/LoginForm.jsx';
 import ManageStock  from './Position/StockSupervisor/ManageStock/ManageStock.jsx';
@@ -24,21 +24,28 @@ import RequiredToolReport from "./Position/Sitesupervisor/RequiredToolReport.jsx
 import Dboard from './Position/Sitesupervisor/dashboard/Dboard.jsx';
 import CreateReports from './Position/Sitesupervisor/CreateReports.jsx';
 import ToolStatosRep from "./Position/Sitesupervisor/ToolStatosRep.jsx";
+
 import AddReportDetails from "./Position/Sitesupervisor/AddReportDetails.jsx";
-
-
 function App() {
- return (
+  
+  return (
 
-      <>
     
+  
+      
+      
       // <Route path='/' element={<Dboard/>}> </Route>
       // <Route path="/CreateReports" element={<CreateReports/>}/>
       // <Route path="/ToolStatosRep" element={<ToolStatosRep/>}/>
       // <Route path="/RequiredToolReport" element={<RequiredToolReport/>}/>
      
       // <Route path="/AddReportDetails" element={<AddReportDetails/>}/>
-    
+      
+  
+  
+      
+       <>
+          
           
                <Routes>
                     <Route path='/' element={<LoginForm/>}> </Route>
@@ -63,31 +70,19 @@ function App() {
                     <Route  path = "/createtoolbox"  element={<CreateToolbox/>}/>
                     <Route  path = "/tracktoolbox"  element={<TrackToolbox/>}/>
                     <Route  path = "/reports"  element={<Reports/>}/>
-                      
-                     {/* SiteSupervisor pages */}
+
+                    {/* SiteSupervisor pages */}
                    <Route path='/supervisordashboard' element={<Dboard/>}> </Route>
                     
                </Routes>
-                    
-                   
-          </Routes>
           
-        
-  
        </>
-     );
-
-                   
-          
-      
 
       
 
 
   );
-
 }
-
 
 export default App;
 
