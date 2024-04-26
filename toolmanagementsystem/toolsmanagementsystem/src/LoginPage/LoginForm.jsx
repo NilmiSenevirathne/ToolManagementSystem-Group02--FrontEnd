@@ -41,9 +41,9 @@ function LoginForm() {
                        {
                           navigate("Admin");
                        }
-                       else if((values.username === 'gagana@gmail.com') && (values.password === 'Gagana@623'))
+                       else if((values.username === 'gagana@gmail.com') && (values.password === 'Gagana&623'))
                        {
-                          navigate("Manager");
+                          navigate("/managerdashboard");
                        }
                        else if((values.username === 'nimantha@gmail.com') && (values.password === 'Nima#456'))
                        {
