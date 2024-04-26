@@ -46,6 +46,7 @@ const AddReportDetails = () => {
     };
   
     return (
+      
         <div className="background-container">
           <img src={backgroundImage} alt="Background" className="background-image" />
           <div className="form-container">

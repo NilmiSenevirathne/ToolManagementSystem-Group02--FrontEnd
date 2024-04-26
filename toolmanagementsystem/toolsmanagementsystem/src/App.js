@@ -14,7 +14,7 @@ function App() {
     <div className='App'>
   <BrowserRouter>
       <Routes>
-     
+      
       <Route path='/' element={<Dboard/>}> </Route>
       <Route path="/CreateReports" element={<CreateReports/>}/>
       <Route path="/ToolStatosRep" element={<ToolStatosRep/>}/>
