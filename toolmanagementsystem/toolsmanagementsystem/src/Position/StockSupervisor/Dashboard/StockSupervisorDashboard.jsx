@@ -7,6 +7,7 @@ import axios from 'axios';
 
 const StockSupervisorDashboard = () => {
   const role = "StockSupervisor";
+  const [tools, setTools] = useState({});
   const [lineChartData, setLineChartData] = useState({});
   const [pieChartData, setPieChartData]= useState({});
   const [chartOptions, setChartOptions] = useState({});
@@ -17,23 +18,12 @@ const StockSupervisorDashboard = () => {
       // Fetch data from API
       try {
         const response  = await axios.get("http://localhost:8080/tool/gettools");
-        const tools  = response.data;
-
-        //map real data from the database to the piechart
-        const totalAvailableTools = tools.reduce((total, tool) => total + tool.availableTool, 0);
-        const totalAllocatedTools = tools.reduce((total, tool) => total + (tool.quantity - tool.availableTool), 0);
-    
-         // Set pie chart data
-         const pieData = {
-          labels: ['Allocated Tools', 'Available Tools'],
-          datasets: [{
-            data: [totalAllocatedTools, totalAvailableTools],
-            backgroundColor: ['#FF6384', '#36A2EB'],
-            hoverBackgroundColor: ['#FF6384', '#36A2EB'],
-          }],
+        //Assuming the response structure is similar to this:
+        const result = {
+          allocatedTool: 44,
+          availableTool: 100,
         };
-        setPieChartData(pieData);
-
+        setTools(result);
   
         // Set line chart data
         const lineData = {
@@ -50,7 +40,19 @@ const StockSupervisorDashboard = () => {
         };
         setLineChartData(lineData);
 
-        
+        //pie chart data
+        const pieData = {
+          labels:['Allocated Tools' , 'Available Tools'],
+          datasets:[
+           {
+          
+            data:[result.allocatedTool, result.availableTool],
+            backgroundColor:['#FF6384', '#36A2EB'],
+            hoverBackgroundColor: ['#FF6384', '#36A2EB'],
+           },
+          ],
+        };
+        setPieChartData(pieData);
   
         // Set chart options
         const options = {
@@ -71,12 +73,8 @@ const StockSupervisorDashboard = () => {
   
 
   return (
-    
-    
-    <div >
-        <Sidebar>
+      
         <div className='dashboard-content'>
-        
           <h1 className='msg'>Welcome to {role} Dashboard!</h1>
           <div className='chart'>
              <Chart type="doughnut" data={pieChartData} options={chartOptions} />
@@ -84,11 +82,9 @@ const StockSupervisorDashboard = () => {
 
           <div className='chart'>
               <Chart type="line" data={lineChartData} options={lineChartOptions} />
-          </div>
+            </div>
+        </div>
 
-        </div>
-        </Sidebar>
-        </div>
   );
 }
 
