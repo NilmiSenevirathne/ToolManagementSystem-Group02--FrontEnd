@@ -19,12 +19,8 @@ import UpdateProjects from './Position/Manager/Pages/ManageProjects/Projects/Upd
 import LocationHome from './Position/Manager/Pages/ManageProjects/Projects/Location/LocationHome.jsx';
 import AddLocation from './Position/Manager/Pages/ManageProjects/Projects/Location/AddLocation.jsx';
 import Home from './Position/Manager/Pages/ManageProjects/Home.jsx'
-import { BrowserRouter , Route, Routes } from 'react-router-dom';
-import RequiredToolReport from "./Position/Sitesupervisor/RequiredToolReport.jsx";
 import Dboard from './Position/Sitesupervisor/dashboard/Dboard.jsx';
-import CreateReports from './Position/Sitesupervisor/CreateReports.jsx';
-import ToolStatosRep from "./Position/Sitesupervisor/ToolStatosRep.jsx";
-import AddReportDetails from "./Position/Sitesupervisor/AddReportDetails.jsx";
+
 
 
 function App() {
@@ -32,15 +28,7 @@ function App() {
 
       <>
     
-      // <Route path='/' element={<Dboard/>}> </Route>
-      // <Route path="/CreateReports" element={<CreateReports/>}/>
-      // <Route path="/ToolStatosRep" element={<ToolStatosRep/>}/>
-      // <Route path="/RequiredToolReport" element={<RequiredToolReport/>}/>
-     
-      // <Route path="/AddReportDetails" element={<AddReportDetails/>}/>
-    
-          
-               <Routes>
+            <Routes>
                     <Route path='/' element={<LoginForm/>}> </Route>
 
                     {/* Manager pages  */}
@@ -69,22 +57,13 @@ function App() {
                     
                </Routes>
                     
-                   
-          </Routes>
+
           
         
   
        </>
      );
 
-                   
-          
-      
-
-      
-
-
-  );
 
 }
 
