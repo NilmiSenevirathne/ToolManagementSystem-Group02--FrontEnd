@@ -3,10 +3,18 @@ import Sidebar from '../../../Components/Sidebar/Sidebar';
 
 const Reports = () => {
   return (
-    
-              <div className='stock-content'>
-                 <h1>Reports</h1>
-              </div>
+        <div>
+            <Sidebar>
+                <div className='report-content'>
+                     <h2>Welcome to report section! </h2>
+                     
+                     <div>
+                          <button>View Report</button>
+                     </div>
+                </div>
+            </Sidebar>
+        </div>
+             
        
     
   )

@@ -1,6 +1,6 @@
 // Sidebar.jsx
 import React, { useState } from 'react';
-import { FaTh, FaBars, FaCartPlus, FaBriefcase, FaSearch, FaNewspaper } from 'react-icons/fa';
+import { FaTh, FaBars, FaCartPlus, FaBriefcase, FaSearch, FaNewspaper, FaUser } from 'react-icons/fa';
 import { RiLogoutCircleRLine } from "react-icons/ri";
 import { NavLink } from 'react-router-dom';
 import userpic from '../../images/user1.jpg';
