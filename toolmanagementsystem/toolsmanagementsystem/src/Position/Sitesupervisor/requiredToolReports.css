@@ -1,0 +1,145 @@
+/* requiredToolReports.css */
+
+.topbarcontainer{
+    height: 75px;
+    width: 100%;
+    background-color: #002244;
+    display: flex;
+    align-items: center;
+    position: sticky;
+    top: 0;
+  
+}
+.rep {
+    
+    margin: auto;
+    padding: 20px;
+    overflow-x: auto;
+   max-height: 700px;
+  
+  }
+  
+  .Createp {
+    background: #f0f0f0;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+  }
+  
+  .topbarcontainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .topbartext {
+    font-size: 24px;
+    color: #333;
+  }
+  
+  .searchbar {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .searchIcon {
+    color: #666;
+  }
+  
+  .searchInput {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-left: 10px;
+  }
+  
+  
+  
+  .table table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .table th
+  .table td {
+    padding: 8px;
+    
+    text-align: left;
+  }
+  
+  
+  
+  .projectNameInput {
+    margin-bottom: 10px;
+  }
+  
+  .projectNameInput input {
+    width: 50%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  
+
+  .btn{
+    padding: 50px;
+    display: flex;
+    margin-right: 100px;
+    justify-content: space-between;
+    gap: 50px;
+    
+    .cont{
+      display:flex;
+      gap:20px;
+      align-items: center;
+      
+  }
+}
+  
+ .btns button{
+  background-color:#002244;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 8px;
+   
+ }
+ .btns button:hover{
+  background-color: rgb(48, 137, 210);
+ }
+  
+  
+  
+  .reportTable {
+    margin-top: 20px;
+  }
+  
+  .reportTable h2 {
+    margin-bottom: 10px;
+  }
+  
+  .reportTable table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .reportTable th,
+  .reportTable td {
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+  }
+  
+  .reportTable th {
+    background-color: #f2f2f2;
+  }
+ 
