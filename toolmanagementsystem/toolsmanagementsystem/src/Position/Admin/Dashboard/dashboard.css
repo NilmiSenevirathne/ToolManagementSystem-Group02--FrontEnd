@@ -1,0 +1,15 @@
+.dashboard{
+   display: flex;
+ 
+    
+    }
+.homeContainer{
+  
+    flex:15;
+
+    .widgets{
+        display: flex; 
+        padding: 20px;
+        gap:20px;
+    }
+}

@@ -21,7 +21,7 @@ Container{
 }
 
 .wrapper{
-    width: 80%;
+    width: 30%;
     height: 80%;
     align-items: center;
     background: transparent;
@@ -30,7 +30,7 @@ Container{
     box-shadow: 0 0 50px rgba(0,0,0, .2) ;
     color: #fff;
     border-radius: 10px;
-    padding: 100px 100px;
+    padding: 100px 80px;
 }
 
 .wrapper h1{
@@ -123,4 +123,16 @@ Container{
     margin-right: auto;
     
     
+}
+.d-flex
+ {
+    font-size: 20px;
+    font-family: 'Times New Roman', Times, serif;
+    margin-top: 2rem;
+    text-align: center;
+    color: #ffffff;
+}
+.d-flex w-50 .form-select{
+    color: #bb233d;
+    font-size: 13px;
 }

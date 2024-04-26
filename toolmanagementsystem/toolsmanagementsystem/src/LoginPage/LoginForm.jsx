@@ -1,39 +1,29 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import './LoginForm.css';
-import Login from '../../src/images/user1.jpg'
-import Validation from '../../src/LoginPage/Validation.js'
+import Login from '../../src/images/user1.jpg';
+import Validation from '../../src/LoginPage/Validation.js';
 import { FaUser } from "react-icons/fa";
 import { FaLock } from "react-icons/fa";
+import { useNavigate } from 'react-router-dom';
 
-function LoginForm  () {
-       
-     const[values, setValues] = useState({
-          username: '',
-          password:''
-     })
+function LoginForm() {
+    const navigate = useNavigate(); // Using useNavigate hook instead of Navigate component
 
-     const [errors, setError]  = useState({})
+    const [values, setValues] = useState({
+        username: '',
+        password: ''
+    });
 
-     function handleChange(e){
-          setValues({...values, [e.target.name]: e.target.value})
-     }
+    const [errors, setErrors] = useState({});
+    
+    function handleChange(e) {
+        setValues({ ...values, [e.target.name]: e.target.value });
+    }
 
-     function handleSubmit(e){
-          e.preventDefault();
-          setError(Validation(values));
-     }
-
-     useEffect(() => {
-      if(Object.keys(errors.length === 0 && (values.username !=="" && values.password)))
-      {
-         //dshboard wlata ynnnoni
-      }
-     }
-     )
+     
      
   return (
-    <div className='Container' >
-
+    <div >
         <div className='wrapper'>
 
            
@@ -58,6 +48,8 @@ function LoginForm  () {
                 </div>
                 
                     <button className='submit'>Login</button>
+                
+                
             
            </form>
         </div>

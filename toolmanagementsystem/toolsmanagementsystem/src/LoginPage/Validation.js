@@ -1,12 +1,12 @@
 const Validation = (values) => {
     let errors = {};
 
-    if (!values.name) {
-        errors.name = "Username Required";
+    if (!values.username) {
+        errors.username = "Email Required";
     } else {
         const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailPattern.test(values.name)) {
-            errors.name = "Invalid email format";
+        if (!emailPattern.test(values.username)) {
+            errors.username = "Invalid email format";
         }
     }
 
