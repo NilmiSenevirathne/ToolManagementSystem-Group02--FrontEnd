@@ -51,7 +51,7 @@ function LoginForm() {
                      }
                      else if((values.username === 'kusal@gmail.com') && (values.password === 'kusal#@8'))
                      {
-                        navigate("Site Supervisor");
+                        navigate("/supervisordashboard");
                      }
                        
                   } else {

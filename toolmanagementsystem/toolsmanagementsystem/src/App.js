@@ -1,7 +1,7 @@
 
 import React from 'react';
 import {Route, BrowserRouter as Router, Routes} from 'react-router-dom';
-import './App.css';
+import './app.css';
 import LoginForm from '../src/LoginPage/LoginForm.jsx';
 import ManageStock  from './Position/StockSupervisor/ManageStock/ManageStock.jsx';
 import CreateToolbox from './Position/StockSupervisor/CreateToolBox/CreateToolbox.jsx';
@@ -23,13 +23,14 @@ import Dboard from './Position/Sitesupervisor/dashboard/Dboard.jsx';
 import CreateReports from './Position/Sitesupervisor/CreateReports.jsx';
 import ToolStatosRep from "./Position/Sitesupervisor/ToolStatosRep.jsx";
 import AddReportDetails from "./Position/Sitesupervisor/AddReportDetails.jsx";
+import RequiredToolReport from "./Position/Sitesupervisor/RequiredToolReport.jsx";
 function App() {
    return (
 
       <>
                     <Routes>
 
-                    <Route path='/' element={<LoginForm/>}> </Route>
+                    {/* <Route path='/' element={<LoginForm/>}> </Route> */}
 
                     {/* Manager pages  */}
                     <Route path="/managerdashboard" element={<ManagerDashboard/>} />
@@ -53,7 +54,7 @@ function App() {
                     <Route  path = "/reports"  element={<Reports/>}/>
 
                     {/* SiteSupervisor pages */}
-                   <Route path='/supervisordashboard' element={<Dboard/>}> </Route>
+                   <Route path='/' element={<Dboard/>}> </Route>
                      
                    <Route path="/CreateReports" element={<CreateReports/>}/>
                    <Route path="/ToolStatosRep" element={<ToolStatosRep/>}/>

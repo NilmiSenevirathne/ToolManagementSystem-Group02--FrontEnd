@@ -18,7 +18,7 @@
    
     .logo{
         display: flex;
-        height: 5rem;
+        height: 2rem;
         font-weight: bold;
         font-size: 22px;
         gap:1rem;
@@ -49,7 +49,7 @@
         ul{
             list-style: none;
             
-            padding: 20px;
+            padding: 30px;
             color: black;
     
         }
