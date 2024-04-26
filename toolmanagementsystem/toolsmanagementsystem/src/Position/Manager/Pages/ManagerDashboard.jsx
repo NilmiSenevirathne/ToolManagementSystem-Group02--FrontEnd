@@ -7,7 +7,7 @@ import { PieChart, Pie,Tooltip,Cell, LineChart,
   CartesianGrid,} from 'recharts';
 
 
-const Dashboard = () => {
+const ManagerDashboard = () => {
   const data01 =[
     {name:"Facebook", value:20000},
     {name: "Instagram",value:15000},
@@ -111,4 +111,4 @@ const Dashboard = () => {
 
 };
 
-export default Dashboard;
+export default ManagerDashboard;
