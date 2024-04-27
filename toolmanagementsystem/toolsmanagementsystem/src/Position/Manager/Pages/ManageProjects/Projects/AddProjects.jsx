@@ -1,8 +1,8 @@
 import axios from 'axios'
 import React, { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-
-
+import Sidebar from '../../../../../Components/ManagerSidebar.jsx';
+import AddProjectsNavbar from './AddProjectNavbar.jsx';
 export default function AddProjects() {
   //grt location ids to the dropdown box
   const [locations, setLocations] = useState([]);
@@ -47,9 +47,16 @@ export default function AddProjects() {
   };
 
   return (
+  
     <div className='container'>
-      <div className='row'>
-        <div className='col-md offset-md-3 border rounded p-4 mt-2 shadow'>
+       
+      <div className='row'> 
+      <div className="col-lg-6">
+          <Sidebar/>
+        </div>
+        
+        <div className='col-md-10 offset-md-8 border rounded p-4 mt-2 shadow'style={{ maxHeight: '80vh', overflowY: 'auto', maxWidth: '600px' }}> 
+
           <h2 className='text-center m-4'>Create a Project for assign to site supervisor</h2>
 
           <form onSubmit={(e) => onSubmit(e)}>

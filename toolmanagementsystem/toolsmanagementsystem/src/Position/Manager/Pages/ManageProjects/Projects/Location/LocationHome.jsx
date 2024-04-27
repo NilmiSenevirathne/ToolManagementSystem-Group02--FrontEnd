@@ -1,6 +1,7 @@
 import React, { useEffect,useState } from 'react'
 import axios from 'axios';
 import {Link} from 'react-router-dom'
+import Sidebar from '../../../../../../Components/ManagerSidebar.jsx';
 
 export default function LocationHome() {
 
@@ -17,7 +18,11 @@ export default function LocationHome() {
   return (
     <div>
       <div className='py-4'>
-              <table className="table border shadow ">
+      <div className="col-lg-3">
+          <Sidebar/>
+        </div>
+        
+              <table className="table border shadow " >
                  <thead>
                      <tr>
                           <th scope="col">#</th>
@@ -44,7 +49,8 @@ export default function LocationHome() {
                   </tbody>
                </table>
            </div>
-
-    </div>
+      </div>
+      
+    
   )
 }

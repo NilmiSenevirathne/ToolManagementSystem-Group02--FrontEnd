@@ -1,6 +1,7 @@
 import { Link,useNavigate } from 'react-router-dom'
 import React, { useState } from 'react'
 import axios from 'axios'
+import Sidebar from '../../../../../../Components/ManagerSidebar.jsx';
 
 
 
@@ -29,7 +30,10 @@ export default function AddLocation() {
   return (
     <div className='container'>
         <div className='row'>
-            <div className='col-md offset-md-3 border rounded p-4 mt-2 shadow'>
+        <div className="col-lg-6">
+          <Sidebar/>
+        </div>
+            <div className='col-md-10 offset-md-8 border rounded p-4 mt-2 shadow'>
                 <h2 className='text-center m-4'>Add a New Location</h2>
                 <form onSubmit={(e) =>onSubmit(e)}>
 
