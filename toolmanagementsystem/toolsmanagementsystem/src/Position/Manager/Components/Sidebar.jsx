@@ -1,78 +1,49 @@
+//Admin dashboard
+import "./sbar.css"
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import AssignmentIcon from '@mui/icons-material/Assignment';
+import AssessmentIcon from '@mui/icons-material/Assessment';
+import ScannerIcon from '@mui/icons-material/Scanner';
+import { NavLink } from "react-router-dom";
+import { useState } from "react";
+import DashBoard from "../../pages/Dashboard/DashBoard";
+import {Link} from "react-router-dom"
+import Profile from "../images/profile.avif"
 
-//manager sidebar
-import React, { useState } from 'react';
-import './Sidebar.css'
 
-import {
-     FaTh,
-     FaCartPlus,
-     FaBriefcase,
-     FaMapMarkerAlt,
-     FaNewspaper,
-     FaSearch
-
-}from "react-icons/fa";
-import { NavLink } from 'react-router-dom';
-
-const Sidebar = ({children}) =>{
-     const[isOpen, setIsOpen] = useState(false);
-     const toggle = () => setIsOpen(!isOpen);
-     const menuItm = [ 
-          {
-               path:"/dashboard",
-               name:"Dashboard",
-               icon:<FaTh/>
-          },
-          {
-               path:"/ManageProjects",
-               name:"Manage Projects",
-               icon:<FaCartPlus/>
-          },
-          {
-               path:"/ViewInventory",
-               name:"View Inventory",
-               icon:<FaBriefcase/>
-          },
-          {
-               path:"/tracktoolbox",
-               name:"Track Location",
-               icon:<FaSearch/>
-          },
+const Sbar = () => {
+  
+  return (
+    
+    <div className="sidebar">
+      <div className="top">
        
-     ]
-
-    return(
- <div className='container'> 
-          <div style={{width:isOpen ? "300px" :"50px"}} className='sidebar'></div>
-          <div className="sidebar">
-
-          <br></br>
-               <div className="top_section">
-                
-                    <h1 style={{display: isOpen ? "block" : "50px"}} className="Role">Manager</h1>   
-                    
-               </div>
-                    <br></br>
-             
-                  
-                  <h3 className='name'>Manuji Anusari</h3>
-                  <div className='button'>
-                        <button type='button'>EditProfile</button>
-                  </div>
-                  <br/> <br/>
-               {
-                menuItm.map((item, index )=>(
-
-                    <NavLink to ={item.path} key={index} className="link" activeclassname="active">
-                         <div className="icon">{item.icon}</div>
-                         <div className="link_text">{item.name}</div>
-                    </NavLink>
-                ))
-              }
-          </div>
-          <main>{children}</main>
-          </div>
+      <span className="logo">ADMIN</span>
      
-    );
-};
-export default Sidebar;
+      </div>
+      <hr />
+     
+      <div className="center">
+      <img 
+          src={Profile} 
+          alt="" 
+          className="profile"/>
+       <ul>
+       <Link to="/" style={{textDecoration:"none"}}>
+        <li>
+        <DashboardIcon/><span>Dashboard</span> </li></Link>
+        <Link to="/UserReg" style={{textDecoration:"none"}}>
+        <li><AssignmentIcon/><span>User Registration</span></li></Link>
+        <Link to="/UserManage" style={{textDecoration:"none"}}>
+        <li><AssessmentIcon/><span>User Manage</span></li></Link>
+       
+       </ul>
+      </div>
+      <div className="bottom">
+       
+      </div>
+    </div>
+  )
+}
+
+export default Sbar

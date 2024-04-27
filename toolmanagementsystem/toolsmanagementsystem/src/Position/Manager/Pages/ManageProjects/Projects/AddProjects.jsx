@@ -2,7 +2,9 @@ import axios from 'axios'
 import React, { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
+
 export default function AddProjects() {
+  //grt location ids to the dropdown box
   const [locations, setLocations] = useState([]);
   const navigate = useNavigate();
 
@@ -113,7 +115,7 @@ export default function AddProjects() {
                       }}>Add Locations</Link>
                     </div>
                     <button type="submit" className='btn btn-outline-primary'>Submit</button>
-                    <Link className='btn btn-outline-danger mx-2' to="/manageprojects">Cancel</Link>
+                    <Link className='btn btn-outline-danger mx-2' to="/manageprojects">Back</Link>
           </form>
         </div>
       </div>

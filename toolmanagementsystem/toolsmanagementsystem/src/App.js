@@ -16,6 +16,7 @@ import ViewInventory from './Position/Manager/Pages/ViewInventory.jsx';
 import MTrackToolbox from './Position/Manager/Pages/TrackToolbox.jsx';
 import AddProjects from './Position/Manager/Pages/ManageProjects/Projects/AddProjects.jsx';
 import UpdateProjects from './Position/Manager/Pages/ManageProjects/Projects/UpdateProjects.jsx'
+import DeleteProjects from './Position/Manager/Pages/ManageProjects/Projects/DeleteProjects.jsx'
 import LocationHome from './Position/Manager/Pages/ManageProjects/Projects/Location/LocationHome.jsx';
 import AddLocation from './Position/Manager/Pages/ManageProjects/Projects/Location/AddLocation.jsx';
 import Home from './Position/Manager/Pages/ManageProjects/Home.jsx';
@@ -39,6 +40,7 @@ function App() {
                     <Route path="/addprojects" element={<AddProjects />} />
                     <Route path="/UpdateProjects/:project_id" element={<UpdateProjects />} />
                     <Route path="/AddLocation" element={<AddLocation />} />
+                    <Route path="/DeletePojects/:project_id" element={<DeleteProjects />} />
                     <Route path="/locationHome" element={<LocationHome />} />
                     <Route path="/home" element={<Home/>}/>
                    
