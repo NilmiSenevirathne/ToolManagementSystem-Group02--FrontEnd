@@ -4,7 +4,7 @@ import './App.css';
 import LoginForm from '../src/LoginPage/LoginForm.jsx';
 import ManageStock from './Position/StockSupervisor/ManageStock/ManageStock.jsx';
 import CreateToolbox from './Position/StockSupervisor/CreateToolBox/CreateToolbox.jsx';
-import TrackToolbox from './Position/StockSupervisor/TrackToolbox/TrackToolbox.jsx';
+import STrackToolbox from './Position/StockSupervisor/TrackToolbox/STrackToolbox.jsx';
 import Reports from './Position/StockSupervisor/Reports/Reports.jsx';
 import AddTool from './Position/StockSupervisor/ManageStock/AddTool.jsx';
 import EditTool from './Position/StockSupervisor/ManageStock/EditTool.jsx';
@@ -50,7 +50,7 @@ function App() {
                     <Route  path = "/addTool"  element={<AddTool/>}/>
                     <Route path='/editTool/:toolId' element={<EditTool/>}/>
                     <Route  path = "/createtoolbox"  element={<CreateToolbox/>}/>
-                    <Route  path = "/tracktoolbox"  element={<TrackToolbox/>}/>
+                    <Route  path = "/Stracktoolbox"  element={<STrackToolbox/>}/>
                     <Route  path = "/reports"  element={<Reports/>}/>
 
                     {/* SiteSupervisor pages */}

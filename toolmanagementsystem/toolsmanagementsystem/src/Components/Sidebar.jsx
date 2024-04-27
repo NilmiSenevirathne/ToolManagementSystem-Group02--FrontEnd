@@ -45,7 +45,7 @@ const Sidebar =({children}) =>{
 
               <li>
                 
-                 <a href='/tracktoolbox' className='item'><FaSearch className='icon'/>TrackToolBox</a>
+                 <a href='/Stracktoolbox' className='item'><FaSearch className='icon'/>TrackToolBox</a>
               </li>
 
               <li>
