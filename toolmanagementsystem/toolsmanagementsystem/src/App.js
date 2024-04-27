@@ -1,11 +1,10 @@
-
 import React from 'react';
-import {Route, BrowserRouter as Router, Routes} from 'react-router-dom';
-import './app.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import './App.css';
 import LoginForm from '../src/LoginPage/LoginForm.jsx';
-import ManageStock  from './Position/StockSupervisor/ManageStock/ManageStock.jsx';
+import ManageStock from './Position/StockSupervisor/ManageStock/ManageStock.jsx';
 import CreateToolbox from './Position/StockSupervisor/CreateToolBox/CreateToolbox.jsx';
-import TrackToolbox from './Position/StockSupervisor/TrackToolbox/TrackToolbox.jsx';
+import STrackToolbox from './Position/StockSupervisor/TrackToolbox/STrackToolbox.jsx';
 import Reports from './Position/StockSupervisor/Reports/Reports.jsx';
 import AddTool from './Position/StockSupervisor/ManageStock/AddTool.jsx';
 import EditTool from './Position/StockSupervisor/ManageStock/EditTool.jsx';
@@ -24,6 +23,9 @@ import CreateReports from './Position/Sitesupervisor/CreateReports.jsx';
 import ToolStatosRep from "./Position/Sitesupervisor/ToolStatosRep.jsx";
 import AddReportDetails from "./Position/Sitesupervisor/AddReportDetails.jsx";
 import RequiredToolReport from "./Position/Sitesupervisor/RequiredToolReport.jsx";
+import RequiredToolReport from './Position/Sitesupervisor/RequiredToolReport.jsx';
+
+
 function App() {
    return (
 
@@ -31,6 +33,9 @@ function App() {
                     <Routes>
 
                     {/* <Route path='/' element={<LoginForm/>}> </Route> */}
+
+                  
+                    
 
                     {/* Manager pages  */}
                     <Route path="/managerdashboard" element={<ManagerDashboard/>} />
@@ -50,27 +55,26 @@ function App() {
                     <Route  path = "/addTool"  element={<AddTool/>}/>
                     <Route path='/editTool/:toolId' element={<EditTool/>}/>
                     <Route  path = "/createtoolbox"  element={<CreateToolbox/>}/>
-                    <Route  path = "/tracktoolbox"  element={<TrackToolbox/>}/>
+                    <Route  path = "/Stracktoolbox"  element={<STrackToolbox/>}/>
                     <Route  path = "/reports"  element={<Reports/>}/>
 
                     {/* SiteSupervisor pages */}
+
                    <Route path='/' element={<Dboard/>}> </Route>
                      
+
+                   <Route path='/supervisordashboard' element={<Dboard/>}> </Route>
+
                    <Route path="/CreateReports" element={<CreateReports/>}/>
                    <Route path="/ToolStatosRep" element={<ToolStatosRep/>}/>
                    <Route path="/RequiredToolReport" element={<RequiredToolReport/>}/>
-     
                    <Route path="/AddReportDetails" element={<AddReportDetails/>}/>
                </Routes>
 
-                      </>
+       </>
 
      );
+
 }
 
 export default App;
-
-
-
-
-

@@ -1,9 +1,9 @@
-import "./sbar.css"
-
+import "./sbar.css";
 import Profile from"../images/logo.jpg"
 import {Link} from "react-router-dom"
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import AssessmentIcon from '@mui/icons-material/Assessment';
+
 const Sbar = () => {
   return (
     <div className="sidebar">
@@ -22,7 +22,7 @@ const Sbar = () => {
 <div className="center">
 
       <ul>
-      <Link to="/" style={{textDecoration:"none"}}>
+      <Link to="/admindashboard" style={{textDecoration:"none"}}>
       <li><DashboardIcon/><span>Dashboard</span></li>
         </Link>
         <Link to="/CreateReports" style={{textDecoration:"none"}}>
@@ -35,4 +35,4 @@ const Sbar = () => {
   )
 }
 
-export default Sbar
+export default Sbar;
