@@ -40,8 +40,10 @@ function LoginForm() {
 
                     if (values.username === 'isuru@gmail.com' && values.password === 'isuru@123') {
                         navigate("Admin");
+                        
                     } else if (values.username === 'gagana@gmail.com' && values.password === 'Gagana&623') {
                         navigate("/managerdashboard");
+
                     } else if (values.username === 'nimantha@gmail.com' && values.password === 'Nima#456') {
                         navigate("/stocksupervisordashboard");
 
@@ -72,27 +74,8 @@ function LoginForm() {
      
      
   return (
-    <div >
-        <div className='wrapper'>
-
-                    } else if (values.username === 'kusal@gmail.com' && values.password === 'kusal#@8') {
-                        navigate("/supervisordashboard");
-                    }
-                } else {
-                    throw new Error('Login failed');
-                }
-            })
-            .then(data => {
-                console.log(data);
-            })
-            .catch(error => {
-                console.error('Error during login:', error);
-            });
-        }
-    }
-
-    return (
-        <div>
+    
+        
             <div className='wrapper'>
                 <form onSubmit={handleSubmit}>
                     <h1 className='name'> Dilum BMK Engineers (Pvt)Ltd. </h1>
@@ -117,7 +100,7 @@ function LoginForm() {
                     <button className='submit' type="submit">Login</button>
                 </form>
             </div>
-        </div>
+    
     );
 }
 

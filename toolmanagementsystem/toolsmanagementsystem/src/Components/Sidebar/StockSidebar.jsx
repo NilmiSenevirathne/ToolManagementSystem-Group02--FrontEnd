@@ -7,7 +7,7 @@ import userpic from '../../images/user1.jpg';
 import './sidebar.css';
 
 
-const Sidebar = ({ children }) => {
+const StockSidebar = ({ children }) => {
   const [isOpen,setIsOpen] = useState(false);
   const toggle = () => setIsOpen (!isOpen);
 
@@ -71,4 +71,4 @@ const Sidebar = ({ children }) => {
   );
 }
 
-export default Sidebar;
+export default StockSidebar;

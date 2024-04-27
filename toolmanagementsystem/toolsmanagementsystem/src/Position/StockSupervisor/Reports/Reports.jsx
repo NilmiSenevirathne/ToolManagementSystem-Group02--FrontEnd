@@ -1,13 +1,13 @@
 import React from 'react'
-import Sidebar from '../../../Components/Sidebar/Sidebar';
+import StockSidebar from '../../../Components/Sidebar/StockSidebar.jsx';
 
 const Reports = () => {
   return (
-          <Sidebar>
+          <StockSidebar>
               <div className='stock-content'>
                  <h1>Reports</h1>
               </div>
-              </Sidebar>
+              </StockSidebar>
        
     
   )

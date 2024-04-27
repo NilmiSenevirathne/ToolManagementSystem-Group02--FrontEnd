@@ -1,8 +1,8 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
-import Sidebar from '../../../Components/Sidebar/Sidebar';
 import './edittool.css';
+import StockSidebar from "../../../Components/Sidebar/StockSidebar";
 
 export default function EditTool() {
   const navigate = useNavigate();
@@ -50,7 +50,7 @@ export default function EditTool() {
   };
 
   return (
-      <Sidebar>
+      <StockSidebar>
         
           <div className="updateform">
             
@@ -118,6 +118,6 @@ export default function EditTool() {
             </form>
           </div>
         
-    </Sidebar>
+    </StockSidebar>
   );
 }
