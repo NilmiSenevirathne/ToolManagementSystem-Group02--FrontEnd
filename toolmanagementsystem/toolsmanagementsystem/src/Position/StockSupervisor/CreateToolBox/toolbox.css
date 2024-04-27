@@ -1,92 +1,62 @@
+/* toolbox.css */
 
-.toolbox-container {
+/* Form container */
+.form-container {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
   padding: 20px;
-  max-width: 800;
 }
 
-.toolbox-container form {
-  background-color: #f8f9fa;
+/* Form content */
+.form-content {
+  background-color: #f9f9f9;
   padding: 20px;
   border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.toolbox-container h2 {
-  margin-bottom: 20px;
+/* Form input fields */
+.form-control {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
-/* Style for form labels */
+/* Form labels */
 .form-label {
   font-weight: bold;
 }
 
-/* Style for form inputs */
-.form-control {
-  margin-bottom: 15px;
+/* Submit button */
+.submit {
+  background-color: #0066ff;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-/* Style for buttons */
-.btn {
-  margin-right: 10px;
+.submit:hover {
+  background-color: #0056b3;
 }
 
-.container form {
-    width: 100%;
-    max-width: 400px;
-    border: 1px solid #dfdfdf;
-    padding: 20px;
-    border-radius: 5px;
-    background: #fff;
-    align-items: center;
-    
-  }
-  
-  .container form h2 {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .container form label {
-    font-weight: bold;
-  }
-  
-  .container form input[type="text"],
-  .container form input[type="number"] {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  .container form button[type="submit"],
-  .container form a.btn {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    text-align: center;
-    margin-top: 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    text-decoration: none;
-  }
-  
-  .container form button[type="submit"] {
-    background: #0563b4;
-    color: #fff;
-  }
-  
-  .container form a.btn {
-    background: #dc3545;
-    color: #fff;
-  }
-  
-  .container form button[type="submit"]:hover,
-  .container form a.btn:hover {
-    opacity: 0.8;
-  }
-  
-  .container form .error {
-    color: red;
-    margin-bottom: 10px;
-  }
+/* Cancel button */
+.cancel:hover {
+  background-color: #dc3545;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-left: 10px;
+}
+
+.cancel:hover {
+  background-color: #c82333;
+}

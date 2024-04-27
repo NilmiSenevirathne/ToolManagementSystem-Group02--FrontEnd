@@ -151,6 +151,6 @@ export default function AddTool() {
           </Link>
         </form>
       </div>
-      </Sidebar>
+  </Sidebar>
   );
 }

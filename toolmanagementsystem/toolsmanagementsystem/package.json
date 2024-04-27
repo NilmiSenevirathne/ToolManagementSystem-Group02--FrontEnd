@@ -7,6 +7,7 @@
     "@coreui/react": "^5.0.0",
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.0",
+    "@hilla/react-components": "^2.3.11",
     "@mui/icons-material": "^5.15.14",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
