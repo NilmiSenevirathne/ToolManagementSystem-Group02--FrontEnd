@@ -55,7 +55,6 @@ function App() {
 
                     {/* SiteSupervisor pages */}
                    <Route path='/supervisordashboard' element={<Dboard/>}> </Route>
-                     
                    <Route path="/CreateReports" element={<CreateReports/>}/>
                    <Route path="/ToolStatosRep" element={<ToolStatosRep/>}/>
                    <Route path="/RequiredToolReport" element={<RequiredToolReport/>}/>
