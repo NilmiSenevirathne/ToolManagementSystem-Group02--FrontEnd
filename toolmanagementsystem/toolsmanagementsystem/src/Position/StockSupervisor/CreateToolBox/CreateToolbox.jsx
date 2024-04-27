@@ -2,9 +2,9 @@ import axios from "axios";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Sidebar from '../../../Components/Sidebar/Sidebar';
-import './toolbox.css'
+import './toolbox.css';
 
-export default function CreateToolBox() {
+export default function AddToolbox() {
   let navigate = useNavigate();
 
   const [toolbox, setToolbox] = useState({
@@ -17,7 +17,7 @@ export default function CreateToolBox() {
     Tool:"",
   });
 
-  const { toolboxId,projectId , projectName,sitesupervisorId,sitesupervisorName, Location, tool} = toolbox;
+  const { toolboxId, projectId, projectName, sitesupervisorId, sitesupervisorName, Location, Tool } = toolbox;
 
   const onInputChange = (e) => {
     setToolbox({ ...toolbox, [e.target.name]: e.target.value });
@@ -26,123 +26,118 @@ export default function CreateToolBox() {
   const onSubmit = async (e) => {
     e.preventDefault();
     try{
-        const response = await axios.post("http://localhost:8080/tool/create",toolbox);
-        console.log(" Response from server: ",response);
-        alert(" New Tool Successfully Added!");
+        const response = await axios.post("http://localhost:8080/toolbox/create", toolbox);
+        console.log("Response from server:", response);
+        alert("New Toolbox Successfully Added!");
         navigate("/managestock");
-    }catch(error)
-    {
-        console.error(" Error occured while adding tool: ",error);
+    } catch(error) {
+        console.error("Error occurred while adding toolbox:", error);
         if(error.response){
-            console.error("Server respond with:",error.response.data);
-            alert(" Unsuccessfully Added NewTool!")
+            console.error("Server responded with:", error.response.data);
+            alert("Unsuccessfully Added New Toolbox!");
         }
     }
-
   };
 
   return (
-
     <Sidebar>
-    <div className="container">
-  
-        <div className="col-md-6 offset-md-3 border rounded p-4 mt-2 shadow">
-          <h2 className="text-center m-4">New Toolbox Details Form</h2>
+      <div className="form-container">
+        <form onSubmit={(e) => onSubmit(e)} className="form-content">
+          <h2 className="text-center my-4">New Toolbox Details Form</h2>
 
-          <form onSubmit={(e) => onSubmit(e)}>
-            <div className="mb-3">
-              <label htmlFor="toolboxId" className="form-label">
-                ToolBoxID
-              </label>
-              <input type={"text"}
-                className="form-control"
-                placeholder="Enter new toolbox id "
-                name="toolboxId"
-                value={toolboxId}
-                onChange={(e) => onInputChange(e)}
-              />
-            </div>
+          <div className="mb-3">
+            <label htmlFor="toolboxId" className="form-label">
+              Toolbox ID
+            </label>
+            <input
+              type={"text"}
+              className="form-control"
+              placeholder="Enter new toolbox id"
+              name="toolboxId"
+              value={toolboxId}
+              onChange={(e) => onInputChange(e)}
+            />
+          </div>
 
-            <div className="mb-3">
-              <label htmlFor="projectId" className="form-label">
-                ProjectId
-              </label>
-              <input
-                type={"text"}
-                className="form-control"
-                placeholder="Enter  projectid "
-                name="ProjectId"
-                value={projectId}
-                onChange={(e) => onInputChange(e)}
-              />
-            </div>
+          <div className="mb-3">
+            <label htmlFor="projectId" className="form-label">
+              Project ID
+            </label>
+            <input
+              type={"text"}
+              className="form-control"
+              placeholder="Enter project id"
+              name="projectId"
+              value={projectId}
+              onChange={(e) => onInputChange(e)}
+            />
+          </div>
 
-            <div className="mb-3">
-              <label htmlFor="projectIName" className="form-label">
-                ProjectName
-              </label>
-              <input
-                type={"text"}
-                className="form-control"
-                placeholder="Enter  projectname "
-                name="ProjectName"
-                value={projectName}
-                onChange={(e) => onInputChange(e)}
-              />
-            </div>
+          <div className="mb-3">
+            <label htmlFor="projectName" className="form-label">
+              Project Name
+            </label>
+            <input
+              type={"text"}
+              className="form-control"
+              placeholder="Enter project name"
+              name="projectName"
+              value={projectName}
+              onChange={(e) => onInputChange(e)}
+            />
+          </div>
 
-            <div className="mb-3">
-              <label htmlFor="SitesupervisorId" className="form-label">
-                Site_SupervisorId
-              </label>
-              <input
-                type={"text"}
-                className="form-control"
-                placeholder="Enter sitesupervisor Id "
-                name="SitesupervisorId"
-                value={sitesupervisorId}
-                onChange={(e) => onInputChange(e)}
-              />
-            </div>
+          <div className="mb-3">
+            <label htmlFor="sitesupervisorId" className="form-label">
+              Site Supervisor ID
+            </label>
+            <input
+              type={"text"}
+              className="form-control"
+              placeholder="Enter site supervisor id"
+              name="sitesupervisorId"
+              value={sitesupervisorId}
+              onChange={(e) => onInputChange(e)}
+            />
+          </div>
 
-            <div className="mb-3">
-              <label htmlFor="sitesupervisorName" className="form-label">
-                Site_SupervisorName
-              </label>
-              <input
-                type={"text"}
-                className="form-control"
-                placeholder="Enter sitesupervisor name "
-                name="sitesupervisorName"
-                value={sitesupervisorName}
-                onChange={(e) => onInputChange(e)}
-              />
-            </div>
+          <div className="mb-3">
+            <label htmlFor="sitesupervisorName" className="form-label">
+              Site Supervisor Name
+            </label>
+            <input
+              type={"text"}
+              className="form-control"
+              placeholder="Enter site supervisor name"
+              name="sitesupervisorName"
+              value={sitesupervisorName}
+              onChange={(e) => onInputChange(e)}
+            />
+          </div>
 
-            <div className="mb-3">
-              <label htmlFor="location" className="form-label">
-                Location
-              </label>
-              <input
-                type={"text"}
-                className="form-control"
-                placeholder="Enter location "
-                name="location"
-                value={Location}
-                onChange={(e) => onInputChange(e)}
-              />
-            </div>
+          <div className="mb-3">
+            <label htmlFor="Location" className="form-label">
+              Location
+            </label>
+            <input
+              type={"text"}
+              className="form-control"
+              placeholder="Enter location"
+              name="Location"
+              value={Location}
+              onChange={(e) => onInputChange(e)}
+            />
+          </div>
 
-            <button type="submit" className="btn btn-outline-primary">
-              Create
-            </button>
-            <Link className="btn btn-outline-danger mx-2" to="/managestock">
-              Cancel
-            </Link>
-          </form>
-        </div>
+          <button type="submit" className="submit">
+            Submit
+          </button>
+          <button type="submit" className="cancel">
+            Cancel
+          </button>
+            
+        </form>
       </div>
-
-      </Sidebar>
-      );
+  </Sidebar>
+  );
 }

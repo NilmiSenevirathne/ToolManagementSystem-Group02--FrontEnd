@@ -6,6 +6,8 @@
   "dependencies": {
     "@coreui/react": "^5.0.0",
     "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.0",
+    "@hilla/react-components": "^2.3.11",
     "@emotion/styled": "^11.11.5",
     "@mui/icons-material": "^5.15.14",
     "@mui/material": "^5.15.15",
