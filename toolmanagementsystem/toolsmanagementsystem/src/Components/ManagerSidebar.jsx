@@ -1,46 +1,41 @@
-// Sidebar.jsx
-//StockSupervisor
+//Manager Sidebar.jsx
 import React, { useState } from 'react';
 import { FaTh, FaBars, FaCartPlus, FaBriefcase, FaSearch, FaNewspaper } from 'react-icons/fa';
 import { RiLogoutCircleRLine } from "react-icons/ri";
 import { NavLink } from 'react-router-dom';
-import userpic from '../../images/user1.jpg';
-import './sidebar.css';
+// import userpic from '../../images/user1.jpg';
+import './ManagerSidebar.css';
 
 
 const Sidebar = ({ children }) => {
   const [isOpen,setIsOpen] = useState(false);
   const toggle = () => setIsOpen (!isOpen);
 
-  const role = "StockSupervisor"
+  const role = "Manager"
   
   //menuitem of the sidebar
   const menuItem = [
     {
-      path: "/stocksupervisordashboard",
-      name: "Dashboard",
+      path: "/managerdashboard",
+      name: "managerdashboard",
       icon: <FaTh />
     },
     {
-      path: "/managestock",
-      name: "ManageStock",
+      path: "/manageprojects",
+      name: "manageprojects",
       icon: <FaCartPlus />
     },
     {
-      path: "/createtoolbox",
-      name: "CreateToolBox",
+      path: "/ViewInventory",
+      name: "ViewInventory",
       icon: <FaBriefcase />
     },
     {
       path: "/tracktoolbox",
-      name: "TrackToolBox",
+      name: "tracktoolbox",
       icon: <FaSearch />
     },
-    {
-      path: "/reports",
-      name: "Reports",
-      icon: <FaNewspaper />
-    },
+   
     {
       path: "/",
       name: "Logout",
@@ -55,8 +50,8 @@ const Sidebar = ({ children }) => {
           <h1  className='logo'>Dilum BMK Engineers (Pvt) Ltd</h1>
 
           <div className='details'>
-              <img className="user" src={userpic}/>
-              <h3 className='name'>Mr. Nimantha Dissanayake</h3>
+              {/* <img className="user" src={userpic}/> */}
+              <h3 className='name'>Mr.Dilum Samaranayake</h3>
               <h2 className='role'>{role}</h2>
           </div>
            

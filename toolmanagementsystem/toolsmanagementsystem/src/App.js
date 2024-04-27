@@ -43,7 +43,8 @@ function App() {
                     <Route path="/DeletePojects/:project_id" element={<DeleteProjects />} />
                     <Route path="/locationHome" element={<LocationHome />} />
                     <Route path="/home" element={<Home/>}/>
-                   
+
+
 
                      {/* StockSupervisor pages  */}
                     <Route path='/stocksupervisordashboard' element={<StockSupervisorDashboard/>} />

@@ -1,0 +1,49 @@
+.details .user{
+    display: flex;
+    align-self: left;
+    width: 20rem;
+    border-radius: 50%;
+    margin-top: 3rem;
+    margin-left: auto;
+    margin-right: auto;
+} 
+
+.details .name {
+    text-align: center;
+    
+}
+
+.details .role{
+    text-align: center;
+}
+.menu{
+
+    position:fixed;
+    top: 60px;
+    left: 0;
+    bottom: 0;
+    width: 300px;
+    z-index: 996;
+    transition: all 0.3s;
+    padding: 20px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #aab7cf transparent;
+
+
+}
+.sidebar {
+    position: fixed; /* Fixed position */
+    top: 0; /* Align to the top */
+    left: 0; /* Align to the left */
+    bottom: 0;
+    width: 300px;
+    z-index: 996;
+    transition: all 0.3s;
+    padding: 20px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #aab7cf transparent;
+  }
+  
+
