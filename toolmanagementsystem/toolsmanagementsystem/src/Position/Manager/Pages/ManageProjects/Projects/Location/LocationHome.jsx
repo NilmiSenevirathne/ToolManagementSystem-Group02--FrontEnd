@@ -16,13 +16,14 @@ export default function LocationHome() {
     }
 
   return (
-    <div>
+    <div className="container-fluid">
       <div className='py-4'>
       <div className="col-lg-3">
           <Sidebar/>
         </div>
-        
-              <table className="table border shadow " >
+        <div className="col-lg-9">
+          <div className="py-4">
+              <table className="table border shadow" style={{ maxHeight: '80vh', overflowY: 'auto', maxWidth: '1000px' }} >
                  <thead>
                      <tr>
                           <th scope="col">#</th>
@@ -50,7 +51,8 @@ export default function LocationHome() {
                </table>
            </div>
       </div>
-      
+      </div>
+      </div>
     
   )
 }
