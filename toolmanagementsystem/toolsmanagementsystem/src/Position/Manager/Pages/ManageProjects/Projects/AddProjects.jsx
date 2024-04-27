@@ -99,19 +99,21 @@ export default function AddProjects() {
                       onChange={(e)=>onInputChange(e)}
                       />
                     </div>
-
-            {/* Remaining input fields... */}
-            <div className='mb-3'>
-              <label htmlFor="locationId" className="form-label">Location ID</label>
-              <select className='form-control' name="locationId" value={locationId} onChange={onInputChange}>
-                <option value="">Select Location ID</option>
-                {locations.map(location => (
-                  <option key={location.id} value={location.locationId}>{location.locationId}</option>
-                ))}
-              </select>
-            </div>
-            <button type="submit" className='btn btn-outline-primary'>Submit</button>
-            <Link className='btn btn-outline-danger mx-2' to="/manageprojects">Cancel</Link>
+                    <div className='mb-3'>
+                      <label htmlFor="locationId" className="form-label">Location ID</label>
+                      <select className='form-control' name="locationId" value={locationId} onChange={onInputChange}>
+                        <option value="">Select Location ID</option>
+                        {locations.map(location => (
+                          <option key={location.id} value={location.locationId}>{location.locationId}</option>
+                        ))}
+                      </select>
+                      <Link className="btn btn-outline-primary" to="/AddLocation" style={{ 
+                      color: "#ffc107", /* Yellow color */
+                      borderColor: "#ffc107" /* Yellow color */
+                      }}>Add Locations</Link>
+                    </div>
+                    <button type="submit" className='btn btn-outline-primary'>Submit</button>
+                    <Link className='btn btn-outline-danger mx-2' to="/manageprojects">Cancel</Link>
           </form>
         </div>
       </div>

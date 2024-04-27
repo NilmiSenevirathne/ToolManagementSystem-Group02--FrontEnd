@@ -18,7 +18,7 @@ import AddProjects from './Position/Manager/Pages/ManageProjects/Projects/AddPro
 import UpdateProjects from './Position/Manager/Pages/ManageProjects/Projects/UpdateProjects.jsx'
 import LocationHome from './Position/Manager/Pages/ManageProjects/Projects/Location/LocationHome.jsx';
 import AddLocation from './Position/Manager/Pages/ManageProjects/Projects/Location/AddLocation.jsx';
-import Home from './Position/Manager/Pages/ManageProjects/Home.jsx'
+import Home from './Position/Manager/Pages/ManageProjects/Home.jsx';
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import './App.css';
 
