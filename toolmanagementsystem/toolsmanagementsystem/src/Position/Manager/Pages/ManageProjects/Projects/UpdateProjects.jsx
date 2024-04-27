@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Link,useNavigate, useParams } from 'react-router-dom'
+import Sidebar from '../../../../../Components/ManagerSidebar.jsx';
 
 export default function Updateprojects() {
 
@@ -43,7 +44,10 @@ const Id =useParams()
   return (
     <div className='container'>
         <div className='row'>
-              <div className='col-md offset-md-3 border rounded p-4 mt-2 shadow'>
+        <div className="col-lg-6">
+          <Sidebar/>
+        </div>
+              <div className='col-md-10 offset-md-8 border rounded p-4 mt-2 shadow' style={{ maxHeight: '80vh', overflowY: 'auto', maxWidth: '600px' }}>
                 <h2 className='text-center m-4'>Edit a Project for assign to site supervisor</h2>
 
                 <form onSubmit={(e) =>onSubmit(e)}>
