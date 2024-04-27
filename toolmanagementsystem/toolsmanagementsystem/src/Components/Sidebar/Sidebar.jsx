@@ -26,15 +26,11 @@ const Sidebar = ({ children }) => {
       icon: <FaCartPlus />
     },
     {
-      path: "/createtoolbox",
-      name: "CreateToolBox",
+      path: "/maintoolbox",
+      name: "ToolBox",
       icon: <FaBriefcase />
     },
-    {
-      path: "/tracktoolbox",
-      name: "TrackToolBox",
-      icon: <FaSearch />
-    },
+    
     {
       path: "/reports",
       name: "Reports",

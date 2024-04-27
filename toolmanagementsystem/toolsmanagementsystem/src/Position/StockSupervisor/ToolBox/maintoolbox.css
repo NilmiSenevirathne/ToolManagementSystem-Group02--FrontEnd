@@ -1,0 +1,48 @@
+.toolboxsection {
+    padding: 20px;
+    text-align: center;
+    justify-content: center;
+  }
+  
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  .table th,
+  .table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .table th {
+    background-color: #f2f2f2;
+  }
+  
+  .btn-create,
+  .btn-track {
+    
+    padding: 30px 50px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    display: inline-block;
+  }
+  
+  .btn-create {
+    background-color: #4caf50;
+    color: white;
+  }
+  
+  .btn-track {
+    background-color: #2196f3;
+    color: white;
+  }
+  
+  .create:hover,
+  .track:hover {
+    opacity: 0.8;
+  }
+  
