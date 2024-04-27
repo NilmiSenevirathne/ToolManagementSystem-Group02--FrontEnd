@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import Sidebar from '../../../Components/Sidebar/Sidebar';
-import './addtool.css';
+import './edittool.css';
 
 export default function EditTool() {
   const navigate = useNavigate();
@@ -51,10 +51,11 @@ export default function EditTool() {
 
   return (
       <Sidebar>
-        <div className="row">
-          <div className="col-md-6 offset-md-3 border rounded p-4 mt-2 shadow">
-            <h2 className="text-center m-4">Update Tool Details</h2>
+        
+          <div className="updateform">
+            
             <form onSubmit={(e) => onSubmit(e)}>
+            <h2 className="text-center m-4">Update Tool Details</h2>
               <div className="mb-3">
                 <label htmlFor="toolId" className="form-label">
                   ToolID
@@ -116,7 +117,7 @@ export default function EditTool() {
               </Link>
             </form>
           </div>
-        </div>
+        
     </Sidebar>
   );
 }
