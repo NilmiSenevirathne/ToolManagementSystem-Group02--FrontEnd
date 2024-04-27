@@ -32,6 +32,9 @@ function App() {
 
                     <Route path='/' element={<LoginForm/>}> </Route>
 
+                  
+                    
+
                     {/* Manager pages  */}
                     <Route path="/managerdashboard" element={<ManagerDashboard/>} />
                     <Route path="/manageprojects" element={<ManageProjects />} />
