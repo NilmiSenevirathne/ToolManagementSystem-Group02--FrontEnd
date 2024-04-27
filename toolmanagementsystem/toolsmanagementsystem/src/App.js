@@ -1,3 +1,4 @@
+//Main
 import React from 'react';
 import {Route, BrowserRouter as Router, Routes} from 'react-router-dom';
 import './App.css';
@@ -18,16 +19,15 @@ import UpdateProjects from './Position/Manager/Pages/ManageProjects/Projects/Upd
 import LocationHome from './Position/Manager/Pages/ManageProjects/Projects/Location/LocationHome.jsx';
 import AddLocation from './Position/Manager/Pages/ManageProjects/Projects/Location/AddLocation.jsx';
 import Home from './Position/Manager/Pages/ManageProjects/Home.jsx'
+import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+import './App.css';
 
 
 
 function App() {
   return (
-      
-       
+          
        <>
-          
-          
                <Routes>
                     <Route path='/' element={<LoginForm/>}> </Route>
 
@@ -41,7 +41,7 @@ function App() {
                     <Route path="/AddLocation" element={<AddLocation />} />
                     <Route path="/locationHome" element={<LocationHome />} />
                     <Route path="/home" element={<Home/>}/>
-
+                   
 
                      {/* StockSupervisor pages  */}
                     <Route path='/stocksupervisordashboard' element={<StockSupervisorDashboard/>} />
@@ -55,8 +55,6 @@ function App() {
                </Routes>
           
        </>
-
-      
 
   );
 }
