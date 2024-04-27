@@ -63,8 +63,7 @@ export default function CreateToolBox() {
               <label htmlFor="toolboxId" className="form-label">
                 ToolBoxID
               </label>
-              <input
-                type={"text"}
+              <input type={"text"}
                 className="form-control"
                 placeholder="Enter new toolbox id "
                 name="toolboxId"
