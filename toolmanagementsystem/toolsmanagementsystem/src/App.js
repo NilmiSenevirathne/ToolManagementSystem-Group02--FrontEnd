@@ -23,7 +23,9 @@ import Dboard from './Position/Sitesupervisor/dashboard/Dboard.jsx';
 import CreateReports from './Position/Sitesupervisor/CreateReports.jsx';
 import ToolStatosRep from "./Position/Sitesupervisor/ToolStatosRep.jsx";
 import AddReportDetails from "./Position/Sitesupervisor/AddReportDetails.jsx";
+import RequiredToolReport from "./Position/Sitesupervisor/RequiredToolReport.jsx";
 import RequiredToolReport from './Position/Sitesupervisor/RequiredToolReport.jsx';
+
 
 function App() {
    return (
@@ -31,7 +33,7 @@ function App() {
       <>
                     <Routes>
 
-                    <Route path='/' element={<LoginForm/>}> </Route>
+                    {/* <Route path='/' element={<LoginForm/>}> </Route> */}
 
                   
                     
@@ -59,7 +61,12 @@ function App() {
                     <Route  path = "/reports"  element={<Reports/>}/>
 
                     {/* SiteSupervisor pages */}
+
+                   <Route path='/' element={<Dboard/>}> </Route>
+                     
+
                    <Route path='/supervisordashboard' element={<Dboard/>}> </Route>
+
                    <Route path="/CreateReports" element={<CreateReports/>}/>
                    <Route path="/ToolStatosRep" element={<ToolStatosRep/>}/>
                    <Route path="/RequiredToolReport" element={<RequiredToolReport/>}/>
