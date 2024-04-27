@@ -1,79 +1,42 @@
-.container {
-  display: flex;
-}
-
-.form-container {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.form-content {
-  width: 100%;
-  max-width: 100%; /* Adjust as needed */
-  border: 1px solid #dfdfdf;
+.updateform {
+  margin: 0 auto; /* Center horizontally */
+  max-width: 500px; /* Adjust width as needed */
   padding: 20px;
-  border-radius: 5px;
-  background: #fff;
 }
 
-.form-container form h2 {
+/* Style for the form header */
+h2 {
   text-align: center;
   margin-bottom: 20px;
 }
 
-.form-container form label {
+/* Style for form inputs */
+.form-label {
   font-weight: bold;
 }
 
-.form-container form input[type="text"],
-.form-container form input[type="number"],
-.form-container form textarea,
-.form-container form select {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+.form-control {
+  margin-bottom: 15px;
 }
 
-.form-container form .invalid-feedback {
-  color: #f53030;
-  padding: 5px 10px;
-  border-radius: 5px;
-  margin-top: 2px;
+/* Style for buttons */
+.btn {
+  width: 100px;
+  margin-top: 20px;
 }
 
-.form-container form button[type="submit"],
-.form-container form button[type="button"] {
-  display: block;
-  width: 100%;
-  padding: 10px;
-  text-align: center;
-  margin-top: 10px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  text-decoration: none;
+.btn-outline-primary {
+  color: #007bff;
+  border-color: #007bff;
 }
 
-.form-container form button[type="submit"] {
-  background: #0563b4;
+.btn-outline-danger {
+  color: #dc3545;
+  border-color: #dc3545;
+}
+
+.btn-outline-primary:hover,
+.btn-outline-danger:hover {
   color: #fff;
-}
-
-.form-container form button[type="button"] {
-  background: #dc3545; 
-  color: #fff;
-}
-
-.form-container form button[type="submit"]:hover,
-.form-container form button[type="button"]:hover {
-  opacity: 0.8;
-}
-
-.form-container form .error {
-  color: red;
-  margin-bottom: 10px;
+  background-color: transparent;
 }
