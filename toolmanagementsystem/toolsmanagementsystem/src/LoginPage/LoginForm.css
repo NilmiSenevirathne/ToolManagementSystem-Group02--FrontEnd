@@ -6,7 +6,8 @@
     box-sizing: border-box;
 }
 
-.login-bg{
+
+Container{
     font-family: 'Poppins', sans-serif;
     -webkit-font-smoothing:antialiased;
     -moz-osx-font-smoothing:grayscale;
@@ -14,7 +15,7 @@
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: url('../../src/images/back2.jpg') no-repeat;
+    background: url('../../src/images/BMKLogo.jpg') no-repeat; 
     background-size: cover;
     background-position: center;
 }

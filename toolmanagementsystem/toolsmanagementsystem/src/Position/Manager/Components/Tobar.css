@@ -1,0 +1,29 @@
+.topbar{
+    margin-right: 30%;
+    width: 1300px;
+    height: 13vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #000137;
+    padding : 15px 7%;
+}
+.Logo{
+    display: flex;
+    width: 7rem;
+    align-items: center;
+    margin-left: 1rem;
+    margin-top: 4rem;
+
+}
+.companyname{
+
+    font-size: 50px;
+    font-family: 'Times New Roman', Times, serif;
+    align-content: flex-end;
+    color: aliceblue;
+    margin-bottom: 1rem;
+    text-align: center;
+    
+
+}
