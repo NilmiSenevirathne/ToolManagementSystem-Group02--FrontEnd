@@ -36,3 +36,37 @@
     transform: rotate(360deg);
   }
 }
+*{
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+}
+.container{
+  display: flex;
+  
+}
+
+main{
+  width:100%;
+  padding: 20px
+}
+.bars{
+  display: flex;
+  font-size: 25px;
+  margin-left: 30px;
+}
+.link:hover{
+  background: lightskyblue;
+  color: #000;
+  transition: all 0.5s;
+}
+
+.active{
+  background: lightskyblue;
+  color: #000;
+}
+
+.icon, .link_text{
+  font-size: 20px;
+
+}
