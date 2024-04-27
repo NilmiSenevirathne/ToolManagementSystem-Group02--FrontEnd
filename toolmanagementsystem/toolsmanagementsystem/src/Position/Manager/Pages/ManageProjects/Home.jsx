@@ -32,8 +32,8 @@ export default function Home() {
           <Sidebar />
         </div>
         <div className="col-lg-9">
-          <div className="py-4">
-            <table className="table border shadow">
+          <div className="py-4" style={{ maxHeight: '80vh', overflowY: 'auto', maxWidth: '1100px' }}>
+            <table className="table border shadow" >
               <thead>
                 <tr>
                   <th scope="col">#</th>
