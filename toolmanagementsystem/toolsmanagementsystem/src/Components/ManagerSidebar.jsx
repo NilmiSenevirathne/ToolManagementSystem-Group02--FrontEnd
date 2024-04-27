@@ -26,7 +26,7 @@ const Sidebar = ({ children }) => {
       icon: <FaCartPlus />
     },
     {
-      path: "/ViewInventory",
+      path: "/managestock",
       name: "ViewInventory",
       icon: <FaBriefcase />
     },
