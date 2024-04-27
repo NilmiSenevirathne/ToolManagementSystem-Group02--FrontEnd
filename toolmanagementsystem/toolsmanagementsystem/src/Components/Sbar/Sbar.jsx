@@ -5,9 +5,10 @@ import AssessmentIcon from '@mui/icons-material/Assessment';
 import ScannerIcon from '@mui/icons-material/Scanner';
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
-import DashBoard from "../../pages/Dashboard/DashBoard";
+import UserManage from "../../Position/Admin/ManageUser/UserManage";
+import UserEdit from '../../Position/Admin/ManageUser/UserEdit';
 import {Link} from "react-router-dom"
-import Profile from "../images/profile.avif"
+import Profile from "../../images/profile.avif"
 
 
 const Sbar = () => {
@@ -32,7 +33,7 @@ const Sbar = () => {
        <Link to="/" style={{textDecoration:"none"}}>
         <li>
         <DashboardIcon/><span>Dashboard</span> </li></Link>
-        <Link to="/UserReg" style={{textDecoration:"none"}}>
+        <Link to="/UserEdit" style={{textDecoration:"none"}}>
         <li><AssignmentIcon/><span>User Registration</span></li></Link>
         <Link to="/UserManage" style={{textDecoration:"none"}}>
         <li><AssessmentIcon/><span>User Manage</span></li></Link>

@@ -1,6 +1,6 @@
 import "./userReg.css"
-import Sbar from "../../components/Sbar/Sbar"
-import Navbar from "../../components/navbar/Navbar"
+import Sbar from "../../../Components/Sbar/Sbar"
+import Navbar from "../../../Components/Navbar/Navbar"
 import React, { useState } from 'react';
 import axios from "axios";
 import { useNavigate } from "react-router-dom";

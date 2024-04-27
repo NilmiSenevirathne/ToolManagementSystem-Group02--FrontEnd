@@ -10,6 +10,9 @@ import TrackToolbox from './Position/StockSupervisor/TrackToolbox/TrackToolbox.j
 import Reports from './Position/StockSupervisor/Reports/Reports.jsx';
 import AddTool from './Position/StockSupervisor/ManageStock/AddTool.jsx';
 import EditTool from './Position/StockSupervisor/ManageStock/EditTool.jsx';
+import AdminDashboard from './Position/Admin/Dashboard/AdminDashboard.jsx';
+import UserManage from './Position/Admin/ManageUser/UserManage.jsx';
+import UserEdit from './Position/Admin/ManageUser/UserEdit.jsx';
 
 function App() {
   return (
@@ -19,8 +22,10 @@ function App() {
           <div>
           
                <Routes>
-                    <Route path='/' element={<LoginForm/>}> </Route>
-                    <Route path='/dashboard' element={<Dashboard/>} />
+                    {/* <Route path='/' element={<LoginForm/>}> </Route> */}
+                    <Route path='/' element={<AdminDashboard/>} />
+                    <Route path='/useredit' element={<UserEdit/>}/>
+                    <Route path='/UserManage' element={<UserManage/>}/>
                     <Route  path = "/managestock"  element={<ManageStock/>}/>
                     <Route  path = "/addTool"  element={<AddTool/>}/>
                     <Route path='/editTool/${tool.toolId}' element={<EditTool/>}/>

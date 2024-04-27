@@ -1,4 +1,4 @@
-import "./navbar.css"
+
 import EmailIcon from '@mui/icons-material/Email';
 import Person2Icon from '@mui/icons-material/Person2';
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';

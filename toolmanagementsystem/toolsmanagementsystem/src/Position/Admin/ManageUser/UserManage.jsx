@@ -1,6 +1,6 @@
-import "./userManage.css"
-import Sbar from "../../components/Sbar/Sbar"
-import Navbar from "../../components/navbar/Navbar"
+import "./UserManage.css"
+import Sbar from "../../../Components/Sbar/Sbar"
+import Navbar from "../../../Components/Navbar/Navbar"
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
