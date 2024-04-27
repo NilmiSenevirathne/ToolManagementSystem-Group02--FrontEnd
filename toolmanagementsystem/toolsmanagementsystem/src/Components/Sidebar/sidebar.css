@@ -9,6 +9,8 @@
     color: #fff;
     padding-top: 20px;
     position: fixed; /* Fix the position of the sidebar */
+    left: 0;
+    top:0;
   }
   
   .companylogo {

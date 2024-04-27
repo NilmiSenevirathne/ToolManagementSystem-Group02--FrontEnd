@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Sidebar from '../../../../Components/Sidebar/Sidebar';
+import StockSidebar from '../../../../Components/Sidebar/StockSidebar.jsx';
 import './toolbox.css';
 
 export default function AddToolbox() {
@@ -40,7 +40,7 @@ export default function AddToolbox() {
   };
 
   return (
-    <Sidebar>
+    <StockSidebar>
       <div className="form-container">
         <form onSubmit={(e) => onSubmit(e)} className="form-content">
           <h2 className="text-center my-4">New Toolbox Details Form</h2>
@@ -138,6 +138,6 @@ export default function AddToolbox() {
             
         </form>
       </div>
-  </Sidebar>
+  </StockSidebar>
   );
 }

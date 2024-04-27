@@ -1,9 +1,9 @@
 // StockSupervisor Dashboard.jsx
 import React, { useState, useEffect } from 'react';
 import './Dashboard.css';
-import Sidebar from '../../../Components/Sidebar/Sidebar';
 import { Chart } from 'primereact/chart';
 import axios from 'axios';
+import StockSidebar from '../../../Components/Sidebar/StockSidebar';
 
 const StockSupervisorDashboard = () => {
   const role = "StockSupervisor";
@@ -73,7 +73,7 @@ const StockSupervisorDashboard = () => {
   
 
   return (
-      <Sidebar>
+      <StockSidebar>
         <div className='dashboard-content'>
           <h1 className='msg'>Welcome to {role} Dashboard!</h1>
           <div className='chart'>
@@ -84,7 +84,7 @@ const StockSupervisorDashboard = () => {
               <Chart type="line" data={lineChartData} options={lineChartOptions} />
             </div>
         </div>
-        </Sidebar>
+        </StockSidebar>
 
   );
 }

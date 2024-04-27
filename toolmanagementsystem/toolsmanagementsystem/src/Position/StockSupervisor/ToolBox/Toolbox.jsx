@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import Sidebar from '../../../Components/Sidebar/Sidebar'
+import StockSidebar from '../../../Components/Sidebar/StockSidebar.jsx'
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 import './maintoolbox.css'
@@ -23,7 +23,7 @@ const Toolbox = () => {
   };
 
   return (
-    <Sidebar>
+    <StockSidebar>
         <div className='toolbox'>
 
             <h1>Welcome to ToolBox Details Section!</h1>
@@ -62,7 +62,7 @@ const Toolbox = () => {
             <Link to ='/Stracktoolbox'><button className='btn-track'>TrackToolBox</button></Link></div>
         </div>
         </div>
-    </Sidebar>
+    </StockSidebar>
   )
 }
 

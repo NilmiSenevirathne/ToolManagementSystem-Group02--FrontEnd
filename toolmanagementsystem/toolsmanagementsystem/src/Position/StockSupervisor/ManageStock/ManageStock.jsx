@@ -1,10 +1,10 @@
 // ManageStock.js
 
 import React, { useEffect, useState } from 'react';
-import Sidebar from '../../../Components/Sidebar/Sidebar';
 import './managestock.css'; 
 import axios from "axios";
 import { Link , useParams } from 'react-router-dom';
+import StockSidebar from '../../../Components/Sidebar/StockSidebar';
 
 
 const ManageStock = () => {
@@ -49,7 +49,7 @@ const ManageStock = () => {
   
 
   return (
-      <Sidebar>
+      <StockSidebar>
         <div className='stock-content'>
           <h1>List of Tools</h1>
           <div className='table-container'>
@@ -97,7 +97,7 @@ const ManageStock = () => {
           </div>
           <Link to ='/addtool'><button className='btn-add'>AddTool</button></Link>
         </div>
-        </Sidebar>
+        </StockSidebar>
     );
 };
 
