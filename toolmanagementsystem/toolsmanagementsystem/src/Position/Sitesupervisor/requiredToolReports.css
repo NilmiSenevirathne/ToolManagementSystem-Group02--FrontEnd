@@ -14,7 +14,7 @@
     
     margin: auto;
     padding: 20px;
-    overflow-x: auto;
+    
    max-height: 700px;
   
   }
@@ -34,7 +34,7 @@
   
   .topbartext {
     font-size: 24px;
-    color: #333;
+    color: white;
   }
   
   .searchbar {
