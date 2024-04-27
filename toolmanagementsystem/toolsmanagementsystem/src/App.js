@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Route, BrowserRouter as Router, Routes} from 'react-router-dom';
+import {Route, BrowserRouter as Router, Routes} from 'react-router-dom';
 import './App.css';
 import LoginForm from '../src/LoginPage/LoginForm.jsx';
 import ManageStock  from './Position/StockSupervisor/ManageStock/ManageStock.jsx';
@@ -20,15 +20,15 @@ import LocationHome from './Position/Manager/Pages/ManageProjects/Projects/Locat
 import AddLocation from './Position/Manager/Pages/ManageProjects/Projects/Location/AddLocation.jsx';
 import Home from './Position/Manager/Pages/ManageProjects/Home.jsx'
 import Dboard from './Position/Sitesupervisor/dashboard/Dboard.jsx';
-
-
-
+import CreateReports from './Position/Sitesupervisor/CreateReports.jsx';
+import ToolStatosRep from "./Position/Sitesupervisor/ToolStatosRep.jsx";
+import AddReportDetails from "./Position/Sitesupervisor/AddReportDetails.jsx";
 function App() {
- return (
+   return (
 
       <>
-    
-            <Routes>
+                    <Routes>
+
                     <Route path='/' element={<LoginForm/>}> </Route>
 
                     {/* Manager pages  */}
@@ -51,22 +51,21 @@ function App() {
                     <Route  path = "/createtoolbox"  element={<CreateToolbox/>}/>
                     <Route  path = "/tracktoolbox"  element={<TrackToolbox/>}/>
                     <Route  path = "/reports"  element={<Reports/>}/>
-                      
-                     {/* SiteSupervisor pages */}
+
+                    {/* SiteSupervisor pages */}
                    <Route path='/supervisordashboard' element={<Dboard/>}> </Route>
-                    
+                     
+                   <Route path="/CreateReports" element={<CreateReports/>}/>
+                   <Route path="/ToolStatosRep" element={<ToolStatosRep/>}/>
+                   <Route path="/RequiredToolReport" element={<RequiredToolReport/>}/>
+     
+                   <Route path="/AddReportDetails" element={<AddReportDetails/>}/>
                </Routes>
-                    
 
-          
-        
-  
-       </>
+                      </>
+
      );
-
-
 }
-
 
 export default App;
 

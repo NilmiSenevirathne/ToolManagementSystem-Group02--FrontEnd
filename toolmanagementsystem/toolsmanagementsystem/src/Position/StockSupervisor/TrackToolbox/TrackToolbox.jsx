@@ -4,13 +4,10 @@ import Sidebar from '../../../Components/Sidebar/Sidebar';
 const TrackToolbox = () => {
   return (
     
-        <div>
-           <Sidebar>
-               <div>
-                  <h2>Tracktoolbox</h2>
-               </div>
-           </Sidebar>
-        </div>
+       
+             <div className='stock-content'>
+                 <h1>TrackToolbox</h1>
+             </div>
         
     
   )
