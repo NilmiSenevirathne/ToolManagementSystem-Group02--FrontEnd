@@ -44,6 +44,37 @@ function LoginForm() {
                         navigate("/managerdashboard");
                     } else if (values.username === 'nimantha@gmail.com' && values.password === 'Nima#456') {
                         navigate("/stocksupervisordashboard");
+
+                     }
+                     else if((values.username === 'kusal@gmail.com') && (values.password === 'kusal#@8'))
+                     {
+                        navigate("/supervisordashboard");
+                     }
+                       
+                  } else {
+                      throw new Error('Login failed'); // Throw error for unsuccessful response
+                  }
+              })
+              .then(data => {
+                  // Handle successful login response
+                  console.log(data); // This will be the data returned from backend
+                  // Redirect to dashboard or do something else
+              })
+              .catch(error => {
+                  console.error('Error during login:', error);
+                  // Handle login error, maybe show a message to the user
+              });
+      } else {
+          console.error('Form validation errors:', validationErrors);
+          // Handle form validation errors, maybe display them to the user
+      }
+  }
+     
+     
+  return (
+    <div >
+        <div className='wrapper'>
+
                     } else if (values.username === 'kusal@gmail.com' && values.password === 'kusal#@8') {
                         navigate("/supervisordashboard");
                     }
@@ -67,6 +98,7 @@ function LoginForm() {
                     <h1 className='name'> Dilum BMK Engineers (Pvt)Ltd. </h1>
                     <img className="englogo" src={Login} alt=''/>
                     <h1>Login</h1>
+
 
                     <div className='input-box'>
                         <label htmlFor='username'>Username</label>
