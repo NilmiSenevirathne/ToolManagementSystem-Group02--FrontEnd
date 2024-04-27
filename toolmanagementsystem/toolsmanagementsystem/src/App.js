@@ -19,40 +19,53 @@ import LocationHome from './Position/Manager/Pages/ManageProjects/Projects/Locat
 import AddLocation from './Position/Manager/Pages/ManageProjects/Projects/Location/AddLocation.jsx';
 import Home from './Position/Manager/Pages/ManageProjects/Home.jsx'
 import Dboard from './Position/Sitesupervisor/dashboard/Dboard.jsx';
+import CreateReports from './Position/Sitesupervisor/CreateReports.jsx';
+import ToolStatosRep from "./Position/Sitesupervisor/ToolStatosRep.jsx";
+import AddReportDetails from "./Position/Sitesupervisor/AddReportDetails.jsx";
+import RequiredToolReport from './Position/Sitesupervisor/RequiredToolReport.jsx';
 
 function App() {
-  return (
-  
-        <Routes>
-        <Route path='/' element={<LoginForm/>} />
+   return (
 
-        {/* Manager pages */}
-        <Route path="/managerdashboard" element={<ManagerDashboard/>} />
-        <Route path="/manageprojects" element={<ManageProjects />} />
-        <Route path="/ViewInventory" element={<ViewInventory />} />
-        <Route path="/tracktoolbox" element={<MTrackToolbox />} />
-        <Route path="/addprojects" element={<AddProjects />} />
-        <Route path="/UpdateProjects/:project_id" element={<UpdateProjects />} />
-        <Route path="/AddLocation" element={<AddLocation />} />
-        <Route path="/locationHome" element={<LocationHome />} />
-        <Route path="/home" element={<Home/>}/>
+      <>
+                    <Routes>
 
-        {/* StockSupervisor pages */}
-        <Route path='/stocksupervisordashboard' element={<StockSupervisorDashboard/>} />
-        <Route path="/managestock" element={<ManageStock/>} />
-        <Route path="/addTool" element={<AddTool/>} />
-        <Route path='/editTool/:toolId' element={<EditTool/>} />
-        <Route path="/createtoolbox" element={<CreateToolbox/>} />
-        <Route path="/tracktoolbox" element={<TrackToolbox/>} />
-        <Route path="/reports" element={<Reports/>} />
+                    <Route path='/' element={<LoginForm/>}> </Route>
 
-        {/* SiteSupervisor pages */}
-        <Route path='/supervisordashboard' element={<Dboard/>} />
+                    {/* Manager pages  */}
+                    <Route path="/managerdashboard" element={<ManagerDashboard/>} />
+                    <Route path="/manageprojects" element={<ManageProjects />} />
+                    <Route path="/ViewInventory" element={<ViewInventory />} />
+                    <Route path="/tracktoolbox" element={<MTrackToolbox />} />
+                    <Route path="/addprojects" element={<AddProjects />} />
+                    <Route path="/UpdateProjects/:project_id" element={<UpdateProjects />} />
+                    <Route path="/AddLocation" element={<AddLocation />} />
+                    <Route path="/locationHome" element={<LocationHome />} />
+                    <Route path="/home" element={<Home/>}/>
 
-        </Routes> 
-      
-  
-  );
+
+                     {/* StockSupervisor pages  */}
+                    <Route path='/stocksupervisordashboard' element={<StockSupervisorDashboard/>} />
+                    <Route  path = "/managestock"  element={<ManageStock/>}/>
+                    <Route  path = "/addTool"  element={<AddTool/>}/>
+                    <Route path='/editTool/:toolId' element={<EditTool/>}/>
+                    <Route  path = "/createtoolbox"  element={<CreateToolbox/>}/>
+                    <Route  path = "/tracktoolbox"  element={<TrackToolbox/>}/>
+                    <Route  path = "/reports"  element={<Reports/>}/>
+
+                    {/* SiteSupervisor pages */}
+                   <Route path='/supervisordashboard' element={<Dboard/>}> </Route>
+                     
+                   <Route path="/CreateReports" element={<CreateReports/>}/>
+                   <Route path="/ToolStatosRep" element={<ToolStatosRep/>}/>
+                   <Route path="/RequiredToolReport" element={<RequiredToolReport/>}/>
+                   <Route path="/AddReportDetails" element={<AddReportDetails/>}/>
+               </Routes>
+
+       </>
+
+     );
+
 }
 
 export default App;
