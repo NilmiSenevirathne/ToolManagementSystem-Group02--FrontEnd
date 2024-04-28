@@ -19,19 +19,20 @@ const Id =useParams()
         })
 
         const{projectId,projectName,description,siteSupervisorID,siteSupervisorName,locationId}=projects
-
+          //get projects 
+          
         const onInputChange=(e)=>{
           setprojects({...projects,[e.target.name]:e.target.value})
         }
-
-        useEffect (()=>{
-          loadProjects();
-        },[])
 
         const loadProjects =async ()=>{
           const result=await axios.get(`http://localhost:8080/Projects/${Id.project_id}`)
           setprojects(result.data)
         }
+
+        useEffect (()=>{
+          loadProjects();
+        },[])
 
         const onSubmit =async(e)=>{
             e.preventDefault();
@@ -39,17 +40,16 @@ const Id =useParams()
             navigate("/manageprojects")
         }
             
-     
-
+    
   return (
-    <div className='container'>
+    <div className='container-fluid'>
         <div className='row'>
-        <div className="col-lg-6">
+        <div className="col-lg-4">
           <Sidebar/>
         </div>
-              <div className='col-md-10 offset-md-8 border rounded p-4 mt-2 shadow' style={{ maxHeight: '80vh', overflowY: 'auto', maxWidth: '600px' }}>
-                <h2 className='text-center m-4'>Edit a Project for assign to site supervisor</h2>
-
+        <div className="col-lg-6">
+        <h2 className='text-center m-4'>Edit Projects Details </h2>
+              <div className='col-md-11 offset-md-1 border rounded p-4 mt-4 shadow' style={{ maxHeight: '80vh', overflowY: 'auto', maxWidth: '800px' }}>
                 <form onSubmit={(e) =>onSubmit(e)}>
                     <div className='mb-3'>
                       <lable htmlFor="Name" className="form-lable">Project Id</lable>
@@ -111,9 +111,10 @@ const Id =useParams()
                     </div>
 
                     <button type="submit" className='btn btn-outline-primary'>Submit</button>
-                    <Link className='btn btn-outline-danger mx-2'to="/manageprojects">Cancel</Link>
+                    <Link className='btn btn-outline-danger mx-2'to="/manageprojects">Back</Link>
 
                 </form>
+                </div>
                 </div>
         </div>
     </div>
