@@ -19,6 +19,7 @@ import UpdateProjects from './Position/Manager/Pages/ManageProjects/Projects/Upd
 import DeleteProjects from './Position/Manager/Pages/ManageProjects/Projects/DeleteProjects.jsx'
 import LocationHome from './Position/Manager/Pages/ManageProjects/Projects/Location/LocationHome.jsx';
 import AddLocation from './Position/Manager/Pages/ManageProjects/Projects/Location/AddLocation.jsx';
+import UpdateLocation from './Position/Manager/Pages/ManageProjects/Projects/Location/UpdateLocation.jsx';
 import Home from './Position/Manager/Pages/ManageProjects/Home.jsx';
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import './App.css';
@@ -39,6 +40,7 @@ function App() {
                     <Route path="/addprojects" element={<AddProjects />} />
                     <Route path="/UpdateProjects/:project_id" element={<UpdateProjects />} />
                     <Route path="/AddLocation" element={<AddLocation />} />
+                    <Route path="/UpdateLocation/:location_id" element={<UpdateLocation />} />
                     <Route path="/DeletePojects/:project_id" element={<DeleteProjects />} />
                     <Route path="/locationHome" element={<LocationHome />} />
                     <Route path="/home" element={<Home/>}/>
