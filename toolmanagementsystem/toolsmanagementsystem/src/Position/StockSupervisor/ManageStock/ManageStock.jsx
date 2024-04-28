@@ -96,7 +96,7 @@ const ManageStock = () => {
 
            
           </div>
-          <Link to ='/addtool'><button className='btn-add'>AddTool</button></Link>
+          <div><Link to ='/addtool'><button className='btn-add'>AddTool</button></Link></div>
         </div>
         </StockSidebar>
     );

@@ -74,8 +74,8 @@ function LoginForm() {
      
      
   return (
-    
-        
+    <div className='background'>
+        <div className='loginconatin'>
             <div className='wrapper'>
                 <form onSubmit={handleSubmit}>
                     <h1 className='name'> Dilum BMK Engineers (Pvt)Ltd. </h1>
@@ -100,7 +100,8 @@ function LoginForm() {
                     <button className='submit' type="submit">Login</button>
                 </form>
             </div>
-    
+            </div>
+        </div>
     );
 }
 
