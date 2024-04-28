@@ -24,6 +24,9 @@ import CreateReports from './Position/Sitesupervisor/CreateReports.jsx';
 import ToolStatosRep from "./Position/Sitesupervisor/ToolStatosRep.jsx";
 import AddReportDetails from "./Position/Sitesupervisor/AddReportDetails.jsx";
 import RequiredToolReport from "./Position/Sitesupervisor/RequiredToolReport.jsx";
+import Tool from './Position/StockSupervisor/ToolBox/CreateToolBox/Tools/Tool.jsx';
+
+
 
 
 
@@ -57,6 +60,7 @@ function App() {
                     <Route path='/editTool/:toolId' element={<EditTool/>}/>
                     <Route  path = "/maintoolbox"  element={<Toolbox/>}/>
                     <Route  path = "/createtoolbox"  element={<CreateToolbox/>}/>
+                    <Route  path = "/tool"  element={<Tool/>}/>
                     <Route  path = "/Stracktoolbox"  element={<STrackToolbox/>}/>
                     <Route  path = "/reports"  element={<Reports/>}/>
 

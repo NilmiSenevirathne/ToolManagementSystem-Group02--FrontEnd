@@ -45,6 +45,15 @@
   background-color: #0056b3;
 }
 
+.selecttool{
+  background-color: rgb(61, 143, 36);
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  
+}
+
+
 /* Cancel button */
 .cancel:hover {
   background-color: #dc3545;
