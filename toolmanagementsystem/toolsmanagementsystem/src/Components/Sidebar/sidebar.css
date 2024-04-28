@@ -1,5 +1,8 @@
 .container {
     display: flex;
+    margin: 0;
+    padding: 0;
+
   }
   
   .sidebar {
@@ -7,10 +10,8 @@
     height: 100vh; /* Adjust the height of the sidebar to fit the viewport */
     background: #333;
     color: #fff;
-    padding-top: 20px;
     position: fixed; /* Fix the position of the sidebar */
-    left: 0;
-    top:0;
+    margin-left: -110px;
   }
   
   .companylogo {

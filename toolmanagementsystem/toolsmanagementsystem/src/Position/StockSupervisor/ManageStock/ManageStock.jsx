@@ -19,6 +19,7 @@ const ManageStock = () => {
     //fetch tools details from the backend
     const loadTools = async () =>{
       const result = await axios.get("http://localhost:8080/tool/gettools");
+      console.log(result.data);
       
       //allocatedQuantity and availableQuantity functionalities
       const updatedTools = result.data.map(tool =>({

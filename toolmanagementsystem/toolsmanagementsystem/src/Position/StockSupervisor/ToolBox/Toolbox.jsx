@@ -6,6 +6,7 @@ import './maintoolbox.css'
 
 const Toolbox = () => {
   const [toolbox , setToolbox] = useState([]);
+  const [tools ,setTools] = useState([]);
   
 
   useEffect(() =>{
@@ -16,7 +17,17 @@ const Toolbox = () => {
   const loadToolbox = async () =>{
     try {
       const result = await axios.get("http://localhost:8080/toolbox/gettoolbox");
-      setToolbox(result.data);
+      
+      
+
+      //allocatedQuantity and availableQuantity functionalities
+      const updatedTools = result.data.map(tool =>({
+        ...tool,
+        allocatedQuantity: tool.quantity - tool.availableQuantity,
+        availableQuantity: tool.quantity - tool.allocatedQuantity
+      }));
+      setTools(result.data)
+      console.log(result.data);
     } catch (error) {
       console.error("Error fetching toolbox:", error);
     }
@@ -42,12 +53,12 @@ const Toolbox = () => {
               <tbody>
                 
                 {/*Map over the tools array to render tool details*/}
-                {toolbox.map ((toolboxItem,index) =>(
-                  <tr key={toolboxItem.toolboxId}> {/* Add key attribute */}
+                {tools.map ((tool,index) =>(
+                  <tr key={tool.toolbox_id}> {/* Add key attribute */}
                      
-                     <td>{toolboxItem.toolboxId}</td>
-                     <td>{toolboxItem.projectId}</td>
-                     <td>{toolboxItem.locationId}</td>
+                     <td>{tool.toolbox_id}</td>
+                     <td>{tool.project_id}</td>
+                     <td>{tool.location_id}</td>
 
                   </tr>
 
