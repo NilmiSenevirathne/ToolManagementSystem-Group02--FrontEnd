@@ -33,7 +33,7 @@ function App() {
       <>
          <Routes>
 
-                    {<Route path='/' element={<LoginForm/>}> </Route> }
+                    {<Route  path='/' element={<LoginForm/>}> </Route> }
 
                   
                     

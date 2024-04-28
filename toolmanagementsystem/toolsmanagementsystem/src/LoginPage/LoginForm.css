@@ -12,18 +12,20 @@ Container{
     -webkit-font-smoothing:antialiased;
     -moz-osx-font-smoothing:grayscale;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     background: url('../../src/images/back1.jpg') no-repeat; 
     background-size: cover;
     background-position: center;
+
 }
 
 .wrapper{
     width: 30%;
-    height: 80%;
-    align-items: center;
+    height: 90%;
+    
     background: rgba(0, 0, 0, 0.5);
     border: 2px solid rgba(255,255,255, .2);
     backdrop-filter: blur(50px);
@@ -31,7 +33,18 @@ Container{
     color: #fff;
     border-radius: 10px;
     padding: 100px 80px;
+    
+    
+    
+    position: fixed;
+    left: 35%;
+    top: 05%;
+
+    
+
 }
+
+
 
 .wrapper h1{
     font-size: 30px;
