@@ -42,7 +42,7 @@ export default function AddProjects() {
   // Function to handle form submission
   const onSubmit = async (e) => {
     e.preventDefault();
-    // Basic form validation
+    //Projects form validation
     if (!projectId || !projectName || !description || !siteSupervisorID || !siteSupervisorName || !locationId) {
       alert("Please fill in all fields.");
       return;
@@ -55,13 +55,14 @@ export default function AddProjects() {
   };
 
   return (
-    <div className='container'>
+    <div className='container-fluid'>
       <div className='row'> 
-        <div className="col-lg-6">
+        <div className="col-lg-4">
           <Sidebar/>
         </div>
-        <div className='col-md-10 offset-md-8 border rounded p-4 mt-2 shadow' style={{ maxHeight: '80vh', overflowY: 'auto', maxWidth: '600px' }}>
-          <h2 className='text-center m-4'>Create a Project for assign to site supervisor</h2>
+        <div className="col-lg-6">
+        <h2 className='text-center m-4'>Create a New Project</h2>
+        <div className='col-md-11 offset-md-1 border rounded p-4 mt-4 shadow' style={{ maxHeight: '80vh', overflowY: 'auto', maxWidth: '800px' }}>
           <form onSubmit={(e) => onSubmit(e)}>
             <div className='mb-3'>
               <label htmlFor="projectId" className="form-label">Project Id</label>
@@ -116,14 +117,19 @@ export default function AddProjects() {
                   <option key={location.id} value={location.locationId}>{location.locationId}</option>
                 ))}
               </select>
+              <br/>
               <Link className="btn btn-outline-primary" to="/AddLocation" style={{ 
-                color: "#ffc107", borderColor: "#ffc107" }}>Add Locations</Link>
+                color: "#ffc107", borderColor: "#ffc107" }}>Add New Locations</Link>
+                <pre/>
+                <button type="submit" className='btn btn-outline-primary'>Submit</button>
             </div>
-            <button type="submit" className='btn btn-outline-primary'>Submit</button>
-            <Link className='btn btn-outline-danger mx-2' to="/manageprojects">Back</Link>
           </form>
         </div>
+        <div className='mt-3' style={{ marginLeft: '70px' }}>
+        <Link className='btn btn-outline-danger mx-2' to="/manageprojects">Back</Link>
+        </div>
       </div>
+    </div>
     </div>
   )
 }
