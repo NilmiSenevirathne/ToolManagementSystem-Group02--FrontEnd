@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { FaTh, FaBars, FaCartPlus, FaBriefcase, FaSearch, FaNewspaper } from 'react-icons/fa';
 import { RiLogoutCircleRLine } from "react-icons/ri";
 import { NavLink } from 'react-router-dom';
-// import userpic from '../../images/user1.jpg';
+import userpic from '../images/user1.jpg';
 import './ManagerSidebar.css';
 
 
@@ -50,7 +50,7 @@ const Sidebar = ({ children }) => {
           <h1  className='logo'>Dilum BMK Engineers (Pvt) Ltd</h1>
 
           <div className='details'>
-              {/* <img className="user" src={userpic}/> */}
+              <img className="user" src={userpic}/>
               <h3 className='name'>Mr.Dilum Samaranayake</h3>
               <h2 className='role'>{role}</h2>
           </div>
