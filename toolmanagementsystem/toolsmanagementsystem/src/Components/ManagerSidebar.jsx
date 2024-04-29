@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { FaTh, FaBars, FaCartPlus, FaBriefcase, FaSearch, FaNewspaper } from 'react-icons/fa';
 import { RiLogoutCircleRLine } from "react-icons/ri";
@@ -61,7 +60,7 @@ const Sidebar = ({ children }) => {
           menuItem.map((item, index) => (
             <NavLink to={item.path} key={index} className="link" activeClassName="active">
               <div className="icon">{item.icon}</div>
-              <div className="link_text">{item.name}</div>
+              <div className="text">{item.name}</div>
             </NavLink>
           ))
         }
