@@ -1,5 +1,4 @@
-// Sidebar.jsx
-//StockSupervisor
+
 import React, { useState } from 'react';
 import { FaTh, FaBars, FaCartPlus, FaBriefcase, FaSearch, FaNewspaper } from 'react-icons/fa';
 import { RiLogoutCircleRLine } from "react-icons/ri";
