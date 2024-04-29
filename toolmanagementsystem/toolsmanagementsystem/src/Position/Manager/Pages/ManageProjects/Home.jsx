@@ -58,6 +58,8 @@ export default function Home() {
                     <td>{project.locationId}</td>
                     <td>
                       <Link className='btn btn-outline-primary mx-2' to={`/UpdateProjects/${project.projectId}`}>Edit</Link>
+                      </td> 
+                      <td>
                       <button className='btn btn-danger mx-2' onClick={() => deleteProject(project.projectId)}>Delete</button>
                     </td>
                   </tr>
