@@ -42,7 +42,7 @@ export default function AddProjects() {
   // Function to handle form submission
   const onSubmit = async (e) => {
     e.preventDefault();
-    //Projects form validation
+    //Projects form validation- all fields should filled
     if (!projectId || !projectName || !description || !siteSupervisorID || !siteSupervisorName || !locationId) {
       alert("Please fill in all fields.");
       return;

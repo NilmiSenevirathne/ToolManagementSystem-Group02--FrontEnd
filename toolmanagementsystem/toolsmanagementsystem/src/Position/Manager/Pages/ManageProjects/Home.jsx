@@ -28,11 +28,16 @@ export default function Home() {
   return (
     <div className="container-fluid">
       <div className="row">
+
+     
         <div className="col-lg-3">
+
           <Sidebar />
         </div>
-        <div className="col-lg-9">
+        <div className="col-lg-8">
+
           <div className="py-4" style={{ maxHeight: '80vh', overflowY: 'auto', maxWidth: '1100px' }}>
+
             <table className="table border shadow" >
               <thead>
                 <tr>

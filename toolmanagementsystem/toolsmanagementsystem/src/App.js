@@ -1,11 +1,18 @@
 
 import React from 'react';
+
 import {Route, BrowserRouter as Router, Routes} from 'react-router-dom';
 import './App.css';
-import LoginForm from './LoginPage/LoginForm.jsx';
-import ManageStock  from './Position/StockSupervisor/ManageStock/ManageStock.jsx';
-import CreateToolbox from './Position/StockSupervisor/CreateToolBox/CreateToolbox.jsx';
-import TrackToolbox from './Position/StockSupervisor/TrackToolbox/TrackToolbox.jsx';
+
+
+import LoginForm from '../src/LoginPage/LoginForm.jsx';
+
+import ManageStock from './Position/StockSupervisor/ManageStock/ManageStock.jsx';
+
+// import Toolbox from './Position/StockSupervisor/ToolBox/Toolbox.jsx';
+// import CreateToolbox from './Position/StockSupervisor/ToolBox/CreateToolBox/CreateToolbox.jsx';
+// import STrackToolbox from './Position/StockSupervisor/ToolBox/TrackToolbox/STrackToolbox.jsx';
+
 import Reports from './Position/StockSupervisor/Reports/Reports.jsx';
 import AddTool from './Position/StockSupervisor/ManageStock/AddTool.jsx';
 import EditTool from './Position/StockSupervisor/ManageStock/EditTool.jsx';
@@ -22,7 +29,6 @@ import AddLocation from './Position/Manager/Pages/ManageProjects/Projects/Locati
 import UpdateLocation from './Position/Manager/Pages/ManageProjects/Projects/Location/UpdateLocation.jsx';
 import Home from './Position/Manager/Pages/ManageProjects/Home.jsx';
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
-import './App.css';
 
 
 function App() {
@@ -52,8 +58,8 @@ function App() {
                     <Route  path = "/managestock"  element={<ManageStock/>}/>
                     <Route  path = "/addTool"  element={<AddTool/>}/>
                     <Route path='/editTool/:toolId' element={<EditTool/>}/>
-                    <Route  path = "/createtoolbox"  element={<CreateToolbox/>}/>
-                    <Route  path = "/tracktoolbox"  element={<TrackToolbox/>}/>
+                    {/* <Route  path = "/createtoolbox"  element={<CreateToolbox/>}/> */}
+                    {/* <Route  path = "/tracktoolbox"  element={<TrackToolbox/>}/> */}
                     <Route  path = "/reports"  element={<Reports/>}/>
                     
                </Routes>
