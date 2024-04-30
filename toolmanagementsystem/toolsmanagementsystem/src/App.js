@@ -1,6 +1,6 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import './App.css'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import './App.css;
 import LoginForm from '../src/LoginPage/LoginForm.jsx';
 import ManageStock from './Position/StockSupervisor/ManageStock/ManageStock.jsx';
 import Toolbox from './Position/StockSupervisor/ToolBox/Toolbox.jsx';
@@ -25,6 +25,7 @@ import ToolStatosRep from "./Position/Sitesupervisor/ToolStatosRep.jsx";
 import AddReportDetails from "./Position/Sitesupervisor/AddReportDetails.jsx";
 import RequiredToolReport from "./Position/Sitesupervisor/RequiredToolReport.jsx";
 import Tool from './Position/StockSupervisor/ToolBox/CreateToolBox/Tools/Tool.jsx';
+import DashBoard from './Position/Admin/Dashboard/DashBoard.jsx';
 
 
 function App() {
@@ -35,6 +36,9 @@ function App() {
 
                     {<Route  path='/' element={<LoginForm/>}> </Route> }
 
+                    {/* Manager pages  */}
+                    <Route path="/admindashboard" element={<DashBoard/>} />
+                    
                     {/* Manager pages  */}
                     <Route path="/managerdashboard" element={<ManagerDashboard/>} />
                     <Route path="/manageprojects" element={<ManageProjects />} />
