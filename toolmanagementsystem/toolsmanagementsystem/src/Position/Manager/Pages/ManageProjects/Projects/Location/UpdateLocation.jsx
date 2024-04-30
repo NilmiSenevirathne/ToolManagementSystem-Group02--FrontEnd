@@ -1,12 +1,15 @@
-import { Link,useNavigate } from 'react-router-dom'
-import React, { useState } from 'react'
+import { Link,useNavigate ,useParams} from 'react-router-dom'
+import React, { useEffect,useState } from 'react'
 import axios from 'axios'
 import Sidebar from '../../../../../../Components/ManagerSidebar.jsx';
 
 
-export default function AddLocation() {
+export default function UpdateLocation() {
 
-    let navigate=useNavigate()
+let navigate=useNavigate()
+
+//pass parameters in to variable
+const LocId  = useParams()
 
     const[locations,setlocation]=useState({
         locationId:"",
@@ -16,23 +19,32 @@ export default function AddLocation() {
 
     const {locationId,locationName}=locations
 
+  
     const onInputChange=(e)=>{
         setlocation({...locations,[e.target.name]:e.target.value})
     }
 
+    const loadLocations =async ()=>{
+        const result=await axios.get(`http://localhost:8080/locations/${LocId.location_id}`)
+        setlocation(result.data)
+      }
+      useEffect (()=>{
+        loadLocations();
+      },[])
+
+
     const onSubmit=async(e)=>{
         e.preventDefault();
         //Location Form validation
-
         if ( !locationId|| !locationName) {
           alert("Please fill in all fields.");
           return;
         }
-
-        await axios.post("http://localhost:8080/location",locations)
+        await axios.put(`http://localhost:8080/locations/${LocId.location_id}`,locations)
         navigate("/locationHome")
     }
 
+    
   return (
     <div className='container-fluid'>
         <div className='row'>
@@ -40,8 +52,8 @@ export default function AddLocation() {
           <Sidebar/>
         </div>
         <div className="col-lg-6">
-            <div className='col-md-12 offset-md-1 border rounded p-4 mt-5 shadow' >
-                <h2 className='text-center m-4'>Add a New Location</h2>
+            <div className='col-md-12 offset-md-1 border rounded p-4 mt-5 shadow'style={{ maxHeight: '100vh', overflowY: 'auto', maxWidth: '800px' }}>
+                <h2 className='text-center m-4'>Edit Location</h2>
                 <form onSubmit={(e) =>onSubmit(e)}>
 
                     <div className='mb-3'>
@@ -63,15 +75,15 @@ export default function AddLocation() {
                       />
                     </div>
                     <button type="submit" className='btn btn-outline-primary'>Submit</button>
-                    <br/>
                 </form>
             </div>
             <div className='mt-3' style={{ marginLeft: '60px' }}>
-            <Link className='btn btn-outline-danger mx-2'to="/addprojects">Back</Link>
-            <Link className='btn btn-outline-primary text-decoration-none' to='/locationHome'>View Existing Locations</Link>
+            <Link className='btn btn-outline-danger mx-2'to="/addprojects">Cancel</Link>
+            <Link className='btn btn-outline-primary text-decoration-none' to='/locationHome'>View Location Details</Link>
+            </div>
             </div>
         </div>
-        </div>
+     
     </div>
   )
 }
