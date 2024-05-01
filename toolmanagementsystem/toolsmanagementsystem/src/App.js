@@ -1,6 +1,7 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
 // import '../src/App.css';
+
 import LoginForm from '../src/LoginPage/LoginForm.jsx';
 import ManageStock from './Position/StockSupervisor/ManageStock/ManageStock.jsx';
 import Toolbox from './Position/StockSupervisor/ToolBox/Toolbox.jsx';
@@ -25,7 +26,8 @@ import ToolStatosRep from "./Position/Sitesupervisor/ToolStatosRep.jsx";
 import AddReportDetails from "./Position/Sitesupervisor/AddReportDetails.jsx";
 import RequiredToolReport from "./Position/Sitesupervisor/RequiredToolReport.jsx";
 import Tool from './Position/StockSupervisor/ToolBox/CreateToolBox/Tools/Tool.jsx';
-import DashBoard from './Position/Admin/Dashboard/DashBoard.jsx';
+
+
 
 function App() {
    return (
@@ -35,7 +37,8 @@ function App() {
 
                     {<Route  path='/' element={<LoginForm/>}> </Route> }
 
-                    {/* Admin Pages */}
+                    
+                  
                     <Route path="/admindashboard" element={<DashBoard/>} />
                     
                     {/* Manager pages  */}
