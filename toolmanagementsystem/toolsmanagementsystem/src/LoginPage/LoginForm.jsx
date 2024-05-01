@@ -39,7 +39,7 @@ function LoginForm() {
                     console.log("Login Success!!");
 
                     if (values.username === 'isuru@gmail.com' && values.password === 'isuru@123') {
-                        navigate("Admin");
+                        navigate("/admindashboard");
                         
                     } else if (values.username === 'gagana@gmail.com' && values.password === 'Gagana&623') {
                         navigate("/managerdashboard");
