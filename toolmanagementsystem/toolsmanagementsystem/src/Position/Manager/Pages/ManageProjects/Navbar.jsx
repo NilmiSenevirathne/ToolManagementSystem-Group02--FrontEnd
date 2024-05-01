@@ -1,28 +1,18 @@
-import React from 'react'
-import {Link} from "react-router-dom"
-export default function Navbar() {
+import React from 'react';
+import { Link } from "react-router-dom";
 
+export default function Navbar() {
   return (
     <div>
-     
-      
-      <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
-  <div className="container-fluid">
-    <a className="navbar-brand" href="#">Manage Projects
-    </a>
-    <button 
-    className="navbar-toggler" type="button" 
-    data-bs-toggle="collapse"
-     data-bs-target="#navbarSupportedContent" 
-     aria-controls="navbarSupportedContent" 
-     aria-expanded="false" 
-     aria-label="Toggle navigation">
-      <span className="navbar-toggler-icon"></span>
-    </button>
-    <Link className="btn btn-outline-light" to="/addprojects" >Add Projects</Link>
+      <nav className="navbar navbar-expand-lg justify-content-center"  style={{ backgroundColor: 'lightskyblue' }}>
     
-  </div>
-   </nav>
+          <a className="navbar-brand" style={{textAlign:'center'}} >Manage Projects</a>
+          <div >
+          <Link className="btn" style={{ backgroundColor: 'navy',color: 'white'}} to="/addprojects">Add Projects</Link>
+
+          </div>
+
+      </nav>
     </div>
-  )
+  );
 }
