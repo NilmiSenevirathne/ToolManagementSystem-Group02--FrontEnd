@@ -1,71 +1,67 @@
-/* toolbox.css */
-
-/* Form container */
 .form-container {
   width: 100%;
-  max-width: 500px;
   margin: 0 auto;
-  padding: 20px;
+  max-width: 800px;
 }
 
-/* Form content */
 .form-content {
   background-color: #f9f9f9;
-  padding: 20px;
-  border-radius: 8px;
+  padding: 50px;
+  border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 70%;
 }
 
-/* Form input fields */
-.form-control {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 15px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+.form-content h2 {
+  text-align: center;
+  margin-bottom: 20px;
 }
 
-/* Form labels */
 .form-label {
   font-weight: bold;
 }
 
-/* Submit button */
-.submit {
-  background-color: #0066ff;
+.form-control {
+
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.selecttool {
+  background-color: #28972a;
+  color: #fff;
+  padding: 10px 30px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 10px;
+  margin-left: 200px;
+  margin-right: 200px;
+}
+
+.submit,
+.cancel {
+  background-color: #3d5cf4;
   color: #fff;
   padding: 10px 20px;
   border: none;
-  border-radius: 4px;
+  border-radius: 6px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  margin-top: 10px;
+  width: 100%;
 }
 
-.submit:hover {
-  background-color: #0056b3;
-}
-
-.selecttool{
-  background-color: rgb(61, 143, 36);
-  color: #fff;
-  padding: 10px 20px;
-  border-radius: 5px;
+.cancel {
+  background-color: #dc3545;
   
 }
 
-
-/* Cancel button */
-.cancel:hover {
-  background-color: #dc3545;
-  color: #fff;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  margin-left: 10px;
-}
-
-.cancel:hover {
-  background-color: #c82333;
+.submit:hover,
+.cancel:hover,
+.selecttool:hover {
+  opacity: 1;
 }
