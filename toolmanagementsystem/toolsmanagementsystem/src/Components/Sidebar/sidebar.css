@@ -11,7 +11,7 @@
     background: #333;
     color: #fff;
     position: fixed; /* Fix the position of the sidebar */
-    margin-left: -110px;
+    margin-left: -120px;
   }
   
   .companylogo {
@@ -22,6 +22,7 @@
   .logo {
     text-align: center;
     margin-bottom: 10px;
+    
   }
   
   .details {
@@ -33,7 +34,8 @@
     align-self: center;
     width: 10rem;
     border-radius: 50%;
-    margin-top: 3rem;
+    margin-top :auto;
+    margin-bottom: auto;
     margin-left: auto;
     margin-right: auto;
   }

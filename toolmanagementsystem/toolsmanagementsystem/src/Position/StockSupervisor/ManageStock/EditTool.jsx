@@ -109,12 +109,12 @@ export default function EditTool() {
                   onChange={(e) => onInputChange(e)}
                 />
               </div>
-              <button type="submit" className="btn btn-outline-primary">
+              <button type="submit" className="update-btn">
                 Update
               </button>
-              <Link className="btn btn-outline-danger mx-2" to="/managestock">
-                Cancel
-              </Link>
+
+              <br/>
+              <Link  to="/managestock"><button className="btn-cancel">Cancel</button></Link>
             </form>
           </div>
         

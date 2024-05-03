@@ -1,42 +1,57 @@
 .updateform {
-  margin: 0 auto; /* Center horizontally */
-  max-width: 500px; /* Adjust width as needed */
+  max-width: 500px;
+  margin: 0 auto;
   padding: 20px;
+  background: #f4f7f6;
+  border-radius: 8px;
+  margin-top: 5rem;
 }
 
-/* Style for the form header */
-h2 {
+.updateform h2 {
   text-align: center;
   margin-bottom: 20px;
 }
 
-/* Style for form inputs */
-.form-label {
+.updateform .form-label {
   font-weight: bold;
 }
 
-.form-control {
-  margin-bottom: 15px;
+.updateform .form-control {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #b4b2b2;
+  border-radius: 5px;
 }
 
-/* Style for buttons */
-.btn {
-  width: 100px;
-  margin-top: 20px;
-}
-
-.btn-outline-primary {
-  color: #007bff;
-  border-color: #007bff;
-}
-
-.btn-outline-danger {
-  color: #dc3545;
-  border-color: #dc3545;
-}
-
-.btn-outline-primary:hover,
-.btn-outline-danger:hover {
+.updateform .update-btn {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background: #007bff;
   color: #fff;
-  background-color: transparent;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.updateform .update-btn:hover {
+  background: #0056b3;
+}
+
+.updateform .btn-cancel {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background: #dc3545;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+}
+
+.updateform .btn-cancel:hover {
+  background: #c82333;
 }

@@ -78,9 +78,9 @@ export default function AddTool() {
 
   return (
     <StockSidebar>
-      <div className="form-container">
+      <div className="addform">
         <form onSubmit={(e) => onSubmit(e)} className="form-content">
-          <h2 className="text-center my-4">New Tool Details Form</h2>
+          <h2 className="text-center m-4">New Tool Details Form</h2>
 
           <div className="mb-3">
             <label htmlFor="toolId" className="form-label">
@@ -143,12 +143,11 @@ export default function AddTool() {
             {errors.quantity && <div className="invalid-feedback">{errors.quantity}</div>}
           </div>
 
-          <button type="submit" className="btn btn-outline-primary">
+          <button type="submit" className="submit-btn">
             Submit
           </button>
-          <Link className="btn btn-outline-danger mx-2" to="/managestock">
-            Cancel
-          </Link>
+          <br/>
+          <Link to="/managestock"><button className="cancel-btn">Cancel</button></Link>
         </form>
       </div>
   </StockSidebar>

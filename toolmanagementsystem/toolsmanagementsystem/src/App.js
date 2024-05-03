@@ -1,6 +1,11 @@
 import React from 'react';
+
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import './App.css'
+
+import { BrowserRouter  as Router , Route,Routes } from 'react-router-dom';
+
+
 import LoginForm from '../src/LoginPage/LoginForm.jsx';
 import ManageStock from './Position/StockSupervisor/ManageStock/ManageStock.jsx';
 import Toolbox from './Position/StockSupervisor/ToolBox/Toolbox.jsx';
@@ -29,6 +34,7 @@ import DashBoard from './Position/Admin/Dashboard/DashBoard.jsx';
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css"
 
 
+
 function App() {
    return (
 
@@ -36,8 +42,9 @@ function App() {
          <Routes>
 
                     {<Route  path='/' element={<LoginForm/>}> </Route> }
-
-                    {/* Manager pages  */}
+    
+                                     
+                    {/* Admin pages  */}
                     <Route path="/admindashboard" element={<DashBoard/>} />
                     
                     {/* Manager pages  */}
@@ -56,7 +63,7 @@ function App() {
                     <Route path='/stocksupervisordashboard' element={<StockSupervisorDashboard/>} />
                     <Route  path = "/managestock"  element={<ManageStock/>}/>
                     <Route  path = "/addTool"  element={<AddTool/>}/>
-                    <Route path='/editTool/:toolId' element={<EditTool/>}/>
+                    <Route  path='/editTool/:toolId' element={<EditTool/>}/>
                     <Route  path = "/maintoolbox"  element={<Toolbox/>}/>
                     <Route  path = "/createtoolbox"  element={<CreateToolbox/>}/>
                     <Route  path = "/tool"  element={<Tool/>}/>

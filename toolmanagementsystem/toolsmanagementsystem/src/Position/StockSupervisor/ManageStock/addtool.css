@@ -1,79 +1,66 @@
-.container {
-  display: flex;
-}
+/* addtool.css */
 
-.form-container {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.addform {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  margin-top: 5rem;
 }
 
 .form-content {
-  width: 100%;
-  max-width: 100%; /* Adjust as needed */
-  border: 1px solid #dfdfdf;
+  background-color: #f9f9f9;
   padding: 20px;
-  border-radius: 5px;
-  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.form-container form h2 {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.form-container form label {
+.form-label {
   font-weight: bold;
 }
 
-.form-container form input[type="text"],
-.form-container form input[type="number"],
-.form-container form textarea,
-.form-container form select {
+.form-control {
   width: 100%;
   padding: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 4px;
 }
 
-.form-container form .invalid-feedback {
-  color: #f53030;
-  padding: 5px 10px;
-  border-radius: 5px;
-  margin-top: 2px;
+.form-control:focus {
+  outline: none;
+  border-color: #4a90e2;
+  box-shadow: 0 0 5px rgba(74, 144, 226, 0.5);
 }
 
-.form-container form button[type="submit"],
-.form-container form button[type="button"] {
-  display: block;
+.submit-btn {
   width: 100%;
-  padding: 10px;
-  text-align: center;
-  margin-top: 10px;
+  background-color: #5082df;
+  color: white;
+  padding: 10px 20px;
   border: none;
-  border-radius: 5px;
+  border-radius: 4px;
   cursor: pointer;
-  text-decoration: none;
+  font-size: 10px;
+  margin-top: 10px;
 }
 
-.form-container form button[type="submit"] {
-  background: #0563b4;
-  color: #fff;
+.submit-btn:hover {
+  background-color: #498ef6;
 }
 
-.form-container form button[type="button"] {
-  background: #dc3545; 
-  color: #fff;
+.cancel-btn {
+  width:100%;
+  background-color: #f44336;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 10px;
+  margin-top: 10px;
 }
 
-.form-container form button[type="submit"]:hover,
-.form-container form button[type="button"]:hover {
-  opacity: 0.8;
-}
-
-.form-container form .error {
-  color: red;
-  margin-bottom: 10px;
+.cancel-btn:hover {
+  background-color: #db4436;
 }
