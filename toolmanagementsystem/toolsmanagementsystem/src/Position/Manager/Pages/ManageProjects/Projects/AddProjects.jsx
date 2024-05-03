@@ -56,10 +56,17 @@ export default function AddProjects() {
 
   return (
     <div className='container-fluid'>
+
       <div className="col-lg-3">
       <Sidebar/> 
       </div>
          
+
+      <div className='row'> 
+        <div className="col-lg-3">
+          <Sidebar/>
+        </div>
+
         <div className="col-lg-9">
         <h2 className='text-center m-4'>Create a New Project</h2>
         <div className='col-md-11 offset-md-1 border rounded p-4 mt-4 shadow' style={{ maxHeight: '80vh', overflowY: 'auto', maxWidth: '800px' }}>
