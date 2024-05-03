@@ -27,7 +27,7 @@ function LoginForm() {
         setErrors(validationErrors);
 
         if (Object.keys(validationErrors).length === 0) {
-            fetch('http://localhost:8080/authentication/login', {
+            fetch('http://localhost:8080/authentication/login' , {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -39,7 +39,7 @@ function LoginForm() {
                     console.log("Login Success!!");
 
                     if (values.username === 'isuru@gmail.com' && values.password === 'isuru@123') {
-                        navigate("Admin");
+                        navigate("/admindashboard");
                         
                     } else if (values.username === 'gagana@gmail.com' && values.password === 'Gagana&623') {
                         navigate("/managerdashboard");

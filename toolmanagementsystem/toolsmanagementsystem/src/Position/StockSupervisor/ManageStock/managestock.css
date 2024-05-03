@@ -1,19 +1,23 @@
 /* managestock.css */
 
+
 /* Style for stock-content */
 .stock-content {
   padding: 20px;
+  
 }
 
 .table-container{
   max-height: 400px;
   overflow: auto;
+  
 }
 /* Style for table */
 .table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
+  
   
 }
 
@@ -30,20 +34,13 @@
   border-bottom: 1px solid #ddd;
 }
 
-/* Style for view button*/
-.btn-view{
-  background-color: #1e94e9;
-  padding: 8px 16px;
-  border: none;
-  cursor: pointer;
-}
-
 /* style for edit button*/
 .btn-edit{
   background-color: #e9d81e;
   padding: 8px 16px;
   border: none;
   cursor: pointer;
+  border-radius: 15px;
 }
 
 /* style for delete button*/
@@ -52,13 +49,19 @@
   padding: 8px 16px;
   border: none;
   cursor: pointer;
+  border-radius: 15px;
 }
 
 /* Style for add button */
 .btn-add{
-  background-color: #0dc60d;
-  padding: 8px 16px;
+  background-color: #159415;
+  padding: 20px 40px;
   border: none;
+  border-radius: 15px;
   cursor: pointer;
+  display: flex;
+  margin: 0 auto;
+  text-align: center;
+  color: aliceblue;
 }
 
