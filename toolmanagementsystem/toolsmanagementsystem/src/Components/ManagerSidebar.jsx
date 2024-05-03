@@ -16,12 +16,12 @@ const Sidebar = ({ children }) => {
   const menuItem = [
     {
       path: "/managerdashboard",
-      name: "Managerdashboard",
+      name: "managerdashboard",
       icon: <FaTh />
     },
     {
       path: "/manageprojects",
-      name: "Manageprojects",
+      name: "manageprojects",
       icon: <FaCartPlus />
     },
     {
@@ -31,7 +31,7 @@ const Sidebar = ({ children }) => {
     },
     {
       path: "/tracktoolbox",
-      name: "Tracktoolbox",
+      name: "tracktoolbox",
       icon: <FaSearch />
     },
    

@@ -57,7 +57,7 @@ export default function AddProjects() {
   return (
     <div className='container-fluid'>
       <div className='row'> 
-        <div className="col-lg-3">
+        <div className="col-lg-4">
           <Sidebar/>
         </div>
         <div className="col-lg-6">

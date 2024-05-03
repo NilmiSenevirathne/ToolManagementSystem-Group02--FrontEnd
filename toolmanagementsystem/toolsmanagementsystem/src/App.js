@@ -13,7 +13,7 @@ import StockSupervisorDashboard from './Position/StockSupervisor/Dashboard/Stock
 import ManagerDashboard from './Position/Manager/Pages/ManagerDashboard.jsx';
 import ManageProjects from './Position/Manager/Pages/ManageProjects/ManageProjects.jsx';
 import ViewInventory from './Position/Manager/Pages/ViewInventory.jsx';
-import MTrackToolbox from './Position/Manager/Pages/TrackToolbox.jsx';
+import MTrackToolbox from './Position/Manager/Pages/MTrackToolbox.jsx';
 import AddProjects from './Position/Manager/Pages/ManageProjects/Projects/AddProjects.jsx';
 import UpdateProjects from './Position/Manager/Pages/ManageProjects/Projects/UpdateProjects.jsx'
 import LocationHome from './Position/Manager/Pages/ManageProjects/Projects/Location/LocationHome.jsx';
@@ -26,6 +26,7 @@ import AddReportDetails from "./Position/Sitesupervisor/AddReportDetails.jsx";
 import RequiredToolReport from "./Position/Sitesupervisor/RequiredToolReport.jsx";
 import Tool from './Position/StockSupervisor/ToolBox/CreateToolBox/Tools/Tool.jsx';
 import DashBoard from './Position/Admin/Dashboard/DashBoard.jsx';
+import "../node_modules/bootstrap/dist/css/bootstrap.min.css"
 
 
 function App() {
