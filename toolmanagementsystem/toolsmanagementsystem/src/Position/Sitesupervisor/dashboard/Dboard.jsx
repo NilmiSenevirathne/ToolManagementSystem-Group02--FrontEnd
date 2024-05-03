@@ -19,6 +19,9 @@ const Dboard = () => {
        
        <Link  className="btn1" to="/RequiredToolReport" >
       View All Required Tool Reports</Link>
+
+      <Link  className="btn1" to="/ViewProjects" >
+      View All Project Details</Link>
        
        
         </div>

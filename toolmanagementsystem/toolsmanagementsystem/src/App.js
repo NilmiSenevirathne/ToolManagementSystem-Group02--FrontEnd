@@ -24,6 +24,7 @@ import CreateReports from './Position/Sitesupervisor/CreateReports.jsx';
 import ToolStatosRep from "./Position/Sitesupervisor/ToolStatosRep.jsx";
 import AddReportDetails from "./Position/Sitesupervisor/AddReportDetails.jsx";
 import RequiredToolReport from "./Position/Sitesupervisor/RequiredToolReport.jsx";
+import ViewProjects from './Position/Sitesupervisor/ViewProjects.jsx';
 function App() {
    return (
 
@@ -59,7 +60,7 @@ function App() {
                    <Route path="/CreateReports" element={<CreateReports/>}/>
                    <Route path="/ToolStatosRep" element={<ToolStatosRep/>}/>
                    <Route path="/RequiredToolReport" element={<RequiredToolReport/>}/>
-     
+                  <Route path='/ViewProjects' element={<ViewProjects/>}/>
                    <Route path="/AddReportDetails" element={<AddReportDetails/>}/>
                </Routes>
 

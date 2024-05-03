@@ -20,8 +20,12 @@ const RequiredToolReport = () => {
   }, []);
 
   const loadTools = async () => {
-    const result = await axios.get('http://localhost:8080/gettools')
-    setTools(result.data);
+    try {
+      const response = await axios.get('http://localhost:8080/gettools');
+      setTools(response.data);
+    } catch (error) {
+      console.error("Error loading tools:", error);
+    }
   }
 
   const handleToolSelect = (tool) => {

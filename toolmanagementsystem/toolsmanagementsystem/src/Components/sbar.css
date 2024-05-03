@@ -1,78 +1,90 @@
-.sidebar{
-    position: relative;
-    width:250px;
+.sidebar {
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    
-    min-height: 100vh;  
-    background-color: #002244;
+    background-color: white;
+    position: relative;
+    width:250px; 
+    box-shadow: 0px 6px 15px rgb(39, 39, 159);
     padding: 20px;
-    box-shadow: 0px 6px 15px rgb(0,0,0,0);
+    min-height: 100vh; 
+
+
+  }
   
-    /* background-color:  #142050; */
-   
- 
-
-   
-
-
-   
-    .logo{
-        display: flex;
-        height: 2rem;
-        font-weight: bold;
-        font-size: 22px;
-        gap:1rem;
-        align-items: center;
-        justify-self: center;
-    }
-    .logo>img{
-        width: 3rem;
-        
-    }
-
-    .logo>span{
-        color: white;
-    }
-    .top{
-        color: aliceblue;
-        
-        height: 50px;
-        display: flex;
-        justify-content: center;
-        
-       
-    }
-    
-     .center{
-       
-        align-items: center;
-        ul{
-            list-style: none;
-            
-            padding: 30px;
-            color: black;
-    
-        }
-        li{
-            color: white;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            height: 4rem;
-            border-radius: 0.7rem;
-            width: 190px;
-            transition: all 300ms ease;
-           
-            font-size: 15px;
-    
-            &:hover{
-               
-                background-color: rgb(39, 39, 159);
-                cursor: pointer;
-
-            }
-    
-        }
-    }
+  .top {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: black; /* Horizontally center items */
     
 }
+  
+  .logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    font-weight: bold;
+    font-size: 22px;
+ 
+
+
+
+    
+  }
+  
+  .logo img {
+    width: 50px; /* Adjust the width as needed */
+    height: 50px; /* Adjust the height as needed */
+ 
+    object-fit: cover; /* Maintain aspect ratio */
+     /* Adjust margin as needed */
+  }
+  
+
+  .profimg {
+    width: 100px; /* Adjust the width as needed */
+    height: 100px; /* Adjust the height as needed */
+    border-radius: 50%; /* Make it round */
+    object-fit: cover; /* Maintain aspect ratio */
+    margin-top: 10px; /* Adjust margin as needed */
+  }
+  
+  .center {
+    margin-top: 20px; /* Adjust margin as needed */
+  }
+  
+  .center ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+ 
+
+  }
+  
+  .center li {
+    display: flex;
+   
+    margin-bottom: 10px;
+     /* Adjust margin as needed */
+     color: black;
+     display: flex;
+     align-items: center;
+     gap: 1rem;
+     height: 4rem;
+     border-radius: 0.7rem;
+     width: 190px;
+     transition: all 300ms ease;
+     font-size: 15px;
+     &:hover{
+               
+        background-color: rgb(38, 196, 244);
+        cursor: pointer;
+
+    }
+  }
+  
+  .center li span {
+    margin-left: 10px; /* Adjust margin as needed */
+  }
+  
