@@ -72,21 +72,23 @@ const ManagerDashboard = () => {
 
   return (
   
-      <div>
-      
-        <div className='dashboard-content'>
-          
+<div className='container-fluid'>
+    <div className='row'> 
+        <div className="col-lg-3">
         <Sidebar/>
-          <h1 className='msg'>Welcome to {role} Dashboard!</h1>
-          <div className='chart'>
-             <Chart type="doughnut" data={pieChartData} options={chartOptions} />
-          </div>
+        </div>
+          <div className="col-lg-8">
+            <h1 className='msg'>Welcome to {role} Dashboard!</h1>
+              <div className='chart'>
+                <Chart type="doughnut" data={pieChartData} options={chartOptions} />
+              </div>
+              <div className='chart'>
+                <Chart type="line" data={lineChartData} options={lineChartOptions} />
+              </div>
+          </div>  
+    </div>
+</div>
 
-          <div className='chart'>
-              <Chart type="line" data={lineChartData} options={lineChartOptions} />
-            </div>
-        </div>
-        </div>
          
   );
 }
