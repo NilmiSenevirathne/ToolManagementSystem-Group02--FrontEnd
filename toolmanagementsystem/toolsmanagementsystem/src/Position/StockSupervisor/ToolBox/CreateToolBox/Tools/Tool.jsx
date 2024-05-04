@@ -41,19 +41,39 @@ const Tool = () => {
   const addToCart = (toolId) => {
     const selectedTool = tools.find(tool => tool.toolId === toolId);
     if (selectedTool) {
-      setSelectedItems([...selectedItems, selectedTool]);
-      // Decrease the quantity of the selected tool
-      const updatedTools = tools.map(tool => {
-        if (tool.toolId === toolId) {
-          return { ...tool, quantity: tool.quantity - 1 };
-          
-        }
-        return tool;
-      });
-      setTools(updatedTools);
+      axios.post('http://localhost:8080/addTooltoToolbox', selectedTool)
+      .then(response => {
+        console.log(response.data); //log success msg
+
+      // Check if quantity is greater than 0 before adding to cart
+      if (selectedTool.quantity > 0) {
+        setSelectedItems([...selectedItems, selectedTool]);
+        // Decrease the quantity of the selected tool
+        const updatedTools = tools.map(tool => {
+          if (tool.toolId === toolId) {
+            return { ...tool, quantity: tool.quantity - 1 };
+          }
+          return tool;
+        });
+        setTools(updatedTools);
+      } else {
+        
+        // Update the quantity to "No available tools" directly in the table
+        const updatedTools = tools.map(tool => {
+          if (tool.toolId === toolId) {
+            return { ...tool, quantity:  <span style={{ color: 'red' }}>No available tools</span> };
+          }
+          return tool;
+        });
+        setTools(updatedTools);
+        // Display "No available tools" message directly in the table
+        alert("No available tools");
+      }
+      })
+      
     }
   };
-
+  
   
 
   return (
