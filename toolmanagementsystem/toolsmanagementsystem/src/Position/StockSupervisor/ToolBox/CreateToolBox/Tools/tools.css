@@ -1,51 +1,71 @@
-.tablesection{
-  padding: 20px;
-  max-height: 400px;
-  overflow: auto;
-}
-.table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 20px;
-  
-}
-
-.table th,
-.table td {
-  padding: 8px;
-  text-align: left;
-  border-bottom: 1px solid #ddd;
-}
-
-.btnAdd {
-  padding: 8px 16px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  background-color: #4caf50;
-  color: white;
-}
-
-.btnRemove {
-  padding: 8px 16px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  background-color: #f44336;
-  color: white;
-}
-
-.btnAdd:hover,
-.btnRemove:hover {
-  opacity: 0.8;
-}
-
-/* Style for the tool section */
+/* Tool section container */
 .toolsection {
-  padding: 20px;
-}
+    padding: 20px;
+  }
+  
+  /* Search input field */
+  .search-container {
+    margin-bottom: 20px;
+  }
+  
+  /* Table section */
+  .tablesection {
+    max-height: 400px;
+    overflow-x: auto;
+  }
+  
+  /* Table styling */
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .table th,
+  .table td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #eaeaea;
+    
+  }
+  
+  /* Button styling */
+  .btnAdd,
+  .btnRemove {
+    margin-right: 8px;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+  }
+  
+  
+  /* Cart icon */
+  .cart-icon {
+    font-size: 24px;
+    margin-top: 35px;
 
-.toolsection h1 {
-  font-size: 24px;
-  margin-bottom: 20px;
-}
+  }
+  
+  /* Responsiveness */
+  @media (max-width: 768px) {
+    .search-container {
+      flex-direction: column;
+    }
+  
+    .btnAdd,
+    .btnRemove {
+      margin-top: 8px;
+    }
+  
+    .cart-icon {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+  
+

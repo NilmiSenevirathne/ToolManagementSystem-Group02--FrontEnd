@@ -6,6 +6,7 @@ import { TextField } from '@mui/material'; // Import TextField from Material UI
 import {  FaShoppingCart} from 'react-icons/fa';
 import './tools.css'; // Import CSS file for styling
 
+
 const Tool = () => {
   // State variables for tools data and search query
   const [tools, setTools] = useState([]);
@@ -83,8 +84,6 @@ const Tool = () => {
               ))}
             </tbody>
           </table>
-            {/* Cart icon */}
-          
         </div>
         <div className="cart-icon">
             <FaShoppingCart />
