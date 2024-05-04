@@ -13,7 +13,7 @@ import { RiLogoutCircleRLine } from "react-icons/ri";
 
 
 
-const Sidebar =({Children}) =>{
+const Sidebar =({children}) =>{
       
 
  return (
@@ -21,7 +21,7 @@ const Sidebar =({Children}) =>{
         <div className='menu-list'>
 
           <div className='prof'>
-            {/* <img className='img' src={ProImg} alt=""/> */}
+            <img className='img' src={ProImg} alt=""/>
             <h3 className='username'>Nilmi Ama</h3>
             <span className='role'>Stock Supervisor</span>
           </div>
@@ -45,7 +45,7 @@ const Sidebar =({Children}) =>{
 
               <li>
                 
-                 <a href='/tracktoolbox' className='item'><FaSearch className='icon'/>TrackToolBox</a>
+                 <a href='/Stracktoolbox' className='item'><FaSearch className='icon'/>TrackToolBox</a>
               </li>
 
               <li>
@@ -60,7 +60,7 @@ const Sidebar =({Children}) =>{
           </ul>
         </div>  
         </div>
-       
+       <main>{children}</main>
          
     </div>
   )

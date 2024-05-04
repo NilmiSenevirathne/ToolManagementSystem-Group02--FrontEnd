@@ -5,7 +5,7 @@ import './app.css';
 import LoginForm from '../src/LoginPage/LoginForm.jsx';
 import ManageStock  from './Position/StockSupervisor/ManageStock/ManageStock.jsx';
 import CreateToolbox from './Position/StockSupervisor/CreateToolBox/CreateToolbox.jsx';
-import TrackToolbox from './Position/StockSupervisor/TrackToolbox/TrackToolbox.jsx';
+import TrackToolbox from './Position/StockSupervisor/TrackToolbox/STrackToolbox.jsx';
 import Reports from './Position/StockSupervisor/Reports/Reports.jsx';
 import AddTool from './Position/StockSupervisor/ManageStock/AddTool.jsx';
 import EditTool from './Position/StockSupervisor/ManageStock/EditTool.jsx';
@@ -19,12 +19,13 @@ import UpdateProjects from './Position/Manager/Pages/ManageProjects/Projects/Upd
 import LocationHome from './Position/Manager/Pages/ManageProjects/Projects/Location/LocationHome.jsx';
 import AddLocation from './Position/Manager/Pages/ManageProjects/Projects/Location/AddLocation.jsx';
 import Home from './Position/Manager/Pages/ManageProjects/Home.jsx'
-import Dboard from './Position/Sitesupervisor/dashboard/Dboard.jsx';
+import Dboard from './Position/Sitesupervisor/dashboard/Dboard.jsx'
 import CreateReports from './Position/Sitesupervisor/CreateReports.jsx';
 import ToolStatosRep from "./Position/Sitesupervisor/ToolStatosRep.jsx";
 import AddReportDetails from "./Position/Sitesupervisor/AddReportDetails.jsx";
 import RequiredToolReport from "./Position/Sitesupervisor/RequiredToolReport.jsx";
 import ViewProjects from './Position/Sitesupervisor/ViewProjects.jsx';
+import STrackToolbox from './Position/StockSupervisor/TrackToolbox/STrackToolbox.jsx';
 function App() {
    return (
 
@@ -51,7 +52,7 @@ function App() {
                     <Route  path = "/addTool"  element={<AddTool/>}/>
                     <Route path='/editTool/:toolId' element={<EditTool/>}/>
                     <Route  path = "/createtoolbox"  element={<CreateToolbox/>}/>
-                    <Route  path = "/tracktoolbox"  element={<TrackToolbox/>}/>
+                    <Route  path = "/Stracktoolbox"  element={<STrackToolbox/>}/>
                     <Route  path = "/reports"  element={<Reports/>}/>
 
                     {/* SiteSupervisor pages */}
@@ -62,7 +63,7 @@ function App() {
                    <Route path="/RequiredToolReport" element={<RequiredToolReport/>}/>
                   <Route path='/ViewProjects' element={<ViewProjects/>}/>
                    <Route path="/AddReportDetails" element={<AddReportDetails/>}/>
-               </Routes>
+                   </Routes>
 
                       </>
 

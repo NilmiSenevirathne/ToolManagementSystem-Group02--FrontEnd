@@ -11,7 +11,7 @@
 
 .form-content {
   width: 100%;
-  max-width: 400px;
+  max-width: 100%; /* Adjust as needed */
   border: 1px solid #dfdfdf;
   padding: 20px;
   border-radius: 5px;
@@ -28,7 +28,9 @@
 }
 
 .form-container form input[type="text"],
-.form-container form input[type="number"] {
+.form-container form input[type="number"],
+.form-container form textarea,
+.form-container form select {
   width: 100%;
   padding: 10px;
   margin-bottom: 20px;
@@ -44,7 +46,7 @@
 }
 
 .form-container form button[type="submit"],
-.form-container form a.btn {
+.form-container form button[type="button"] {
   display: block;
   width: 100%;
   padding: 10px;
@@ -61,13 +63,13 @@
   color: #fff;
 }
 
-.form-container form a.btn {
-  background: #dc3545;
+.form-container form button[type="button"] {
+  background: #dc3545; 
   color: #fff;
 }
 
 .form-container form button[type="submit"]:hover,
-.form-container form a.btn:hover {
+.form-container form button[type="button"]:hover {
   opacity: 0.8;
 }
 

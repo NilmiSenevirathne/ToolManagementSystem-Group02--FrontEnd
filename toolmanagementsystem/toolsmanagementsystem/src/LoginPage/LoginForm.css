@@ -24,7 +24,7 @@ Container{
     width: 30%;
     height: 80%;
     align-items: center;
-    background: transparent;
+    background: rgba(0, 0, 0, 0.5);
     border: 2px solid rgba(255,255,255, .2);
     backdrop-filter: blur(50px);
     box-shadow: 0 0 50px rgba(0,0,0, .2) ;

@@ -8,7 +8,7 @@ import { NavLink } from "react-router-dom";
 import { useState } from "react";
 import DashBoard from "../../pages/Dashboard/DashBoard";
 import {Link} from "react-router-dom"
-import Profile from "../images/profile.avif"
+import Profile from "../../images/profile.avif";
 
 
 const Sbar = () => {
