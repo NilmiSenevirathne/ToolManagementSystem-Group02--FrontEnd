@@ -25,6 +25,7 @@ import ToolStatosRep from "./Position/Sitesupervisor/ToolStatosRep.jsx";
 import AddReportDetails from "./Position/Sitesupervisor/AddReportDetails.jsx";
 import RequiredToolReport from "./Position/Sitesupervisor/RequiredToolReport.jsx";
 import Tool from './Position/StockSupervisor/ToolBox/CreateToolBox/Tools/Tool.jsx';
+import Cart from './Position/StockSupervisor/ToolBox/CreateToolBox/Tools/Cart.jsx';
 import DashBoard from './Position/Admin/Dashboard/DashBoard.jsx';
 
 
@@ -61,6 +62,7 @@ function App() {
                     <Route  path = "/maintoolbox"  element={<Toolbox/>}/>
                     <Route  path = "/createtoolbox"  element={<CreateToolbox/>}/>
                     <Route  path = "/tool"  element={<Tool/>}/>
+                    <Route  path='/cart' element={<Cart/>}/>
                     <Route  path = "/Stracktoolbox"  element={<STrackToolbox/>}/>
                     <Route  path = "/reports"  element={<Reports/>}/>
 

@@ -2,16 +2,17 @@ import React, { useEffect, useState } from 'react';
 import StockSidebar from '../../../../../Components/Sidebar/StockSidebar';
 import axios from "axios";
 import { Link, useParams } from 'react-router-dom';
-import { TextField } from '@mui/material'; // Import TextField from Material UI
-import {  FaShoppingCart} from 'react-icons/fa';
-import './tools.css'; // Import CSS file for styling
+import { TextField , Badge} from '@mui/material'; 
+import { FaCartArrowDown } from "react-icons/fa6";
+import './tools.css';
 
 
 const Tool = () => {
   // State variables for tools data and search query
   const [tools, setTools] = useState([]);
   const [searchTools, setSearchTools] = useState('');
-  const { toolId } = useParams(); // Get the tool ID from URL params
+  const { toolId } = useParams(); 
+  const [selectedItems, setSelectedItems] = useState([]); 
 
   // Fetch tools data from API when component mounts
   useEffect(() => {
@@ -35,6 +36,25 @@ const Tool = () => {
     tool.toolId.toLowerCase().includes(searchTools.toLowerCase()) ||
     tool.toolName.toLowerCase().includes(searchTools.toLowerCase())
   );
+
+  // Function to add a tool to the cart
+  const addToCart = (toolId) => {
+    const selectedTool = tools.find(tool => tool.toolId === toolId);
+    if (selectedTool) {
+      setSelectedItems([...selectedItems, selectedTool]);
+      // Decrease the quantity of the selected tool
+      const updatedTools = tools.map(tool => {
+        if (tool.toolId === toolId) {
+          return { ...tool, quantity: tool.quantity - 1 };
+          
+        }
+        return tool;
+      });
+      setTools(updatedTools);
+    }
+  };
+
+  
 
   return (
     <StockSidebar>
@@ -76,18 +96,21 @@ const Tool = () => {
                   <td>{tool.description}</td>
                   <td>{tool.quantity}</td>
                   <td>
+
                     {/* Links for adding and removing tools */}
-                    <Link to=""><button className='btnAdd'>Add Tool</button></Link>
-                    <Link to=""><button className='btnRemove'>Remove Tool</button></Link>
+                    <Link to=""><button className='btnAdd' onClick={()=> addToCart(tool.toolId)}>Add Tool</button></Link>
+                    
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
-        <div className="cart-icon">
-            <FaShoppingCart />
-          </div>
+       
+          <Link to="/cart" className='cart-icon'>
+            <FaCartArrowDown /><Badge badgeContent={selectedItems.length} color="secondary"></Badge>
+          </Link>  
+          
 
       </div>
     </StockSidebar>
