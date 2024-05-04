@@ -1,45 +1,51 @@
-/* Tool section container */
-.toolsection {
+.tablesection{
   padding: 20px;
+  max-height: 400px;
+  overflow: auto;
 }
-
-/* Table styles */
 .table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
+  
 }
 
 .table th,
 .table td {
-  border: 1px solid #ddd;
   padding: 8px;
-}
-
-.table th {
-  background-color: #f2f2f2;
   text-align: left;
-}
-.bodysection{
-  overflow: auto;
+  border-bottom: 1px solid #ddd;
 }
 
-/* Button styles */
-.button-container {
-  display: flex;
-  justify-content: space-between;
-}
-
-.button-container button {
+.btnAdd {
   padding: 8px 16px;
-  background-color: #007bff;
-  color: #fff;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  background-color: #4caf50;
+  color: white;
 }
 
-.button-container button:hover {
-  background-color: #0056b3;
+.btnRemove {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #f44336;
+  color: white;
+}
+
+.btnAdd:hover,
+.btnRemove:hover {
+  opacity: 0.8;
+}
+
+/* Style for the tool section */
+.toolsection {
+  padding: 20px;
+}
+
+.toolsection h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
 }
