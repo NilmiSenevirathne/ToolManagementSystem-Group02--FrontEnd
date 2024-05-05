@@ -22,15 +22,14 @@ export default function LocationHome() {
   };
 
   return (
-    <div className="container-fluid">
-      <div className="row">
-        <div className="col-lg-3">
-          <Sidebar />
-        </div>
-        <div className="col-lg-9">
-          <br />
-          <h2>Location Details</h2>
-          <div className="py-4" style={{ maxHeight: '80vh', overflowY: 'auto', maxWidth: '1100px' }}>
+    <Sidebar> 
+               <div className='container-fluid'>
+               <h2>Location Details</h2>
+
+               <div className='col-md-10 offset-md-2 border rounded p-4 mt-3 shadow' >
+
+               <div className="py-4" style={{ maxHeight: '70vh', overflowY: 'auto', maxWidth: '1100px' }}>
+
             <table className="table border shadow">
               <thead>
                 <tr>
@@ -58,7 +57,8 @@ export default function LocationHome() {
           <Link className='btn btn-outline-danger mx-2' to="/AddLocation">Back</Link>
 
         </div>
-      </div>
-    </div>
+        </div>
+
+    </Sidebar> 
   );
 }
