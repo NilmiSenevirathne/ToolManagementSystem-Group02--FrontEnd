@@ -55,11 +55,11 @@ export default function AddProjects() {
   return (
     <Sidebar> 
       <div className='container-fluid'>
-        <div className='row justify-content-center'>
+        <div className=' justify-content-center'>
           <div className='col-md-12 border rounded p-4 mt-2 shadow' style={{ maxHeight: '80vh', overflowY: 'auto', maxWidth: '1000px' }}>
             <h2 className='text-center m-4'>Create a Project for assign to site supervisor</h2>
             <form onSubmit={(e) => onSubmit(e)}>
-              <div className='row mb-3'>
+              {/* <div className='row mb-3'> */}
                 <div className='col'>
                   <label htmlFor="projectId" className="form-label">Project Id</label>
                   <input type="text" className='form-control'
@@ -78,8 +78,8 @@ export default function AddProjects() {
                     onChange={(e)=>onInputChange(e)}
                   />
                 </div>
-              </div>
-              <div className='row mb-3'>
+              {/* </div> */}
+              {/* <div className='row mb-3'> */}
                 <div className='col'>
                   <label htmlFor="description" className="form-label">Description</label>
                   <input type={"text"} className='form-control' 
@@ -98,8 +98,8 @@ export default function AddProjects() {
                     onChange={(e)=>onInputChange(e)}
                   />
                 </div>
-              </div>
-              <div className='row mb-3'>
+              {/* </div> */}
+              {/* <div className='row mb-3'> */}
                 <div className='col'>
                   <label htmlFor="siteSupervisorName" className="form-label">Site Supervisor name</label>
                   <input type={"text"} className='form-control' 
@@ -117,20 +117,25 @@ export default function AddProjects() {
                       <option key={location.id} value={location.locationId}>{location.locationId}</option>
                     ))}
                   </select>
+
+
+
                   <Link className="btn btn-outline-primary mt-2" to="/AddLocation" style={{ 
                     color: "#ffc107", /* Yellow color */
-                    borderColor: "#ffc107" /* Yellow color */
-                  }}>Add Locations</Link>
+                    borderColor: "#ffc107" /* Yellow color */}}>Add Locations</Link>
+                    <button type="submit" className='btn btn-outline-primary'>Submit</button>
+
                 </div>
-              </div>
-              <div className='row'>
-                <div className='col'>
-                  <button type="submit" className='btn btn-outline-primary'>Submit</button>
-                  <Link className='btn btn-outline-danger mx-2' to="/manageprojects">Back</Link>
-                </div>
-              </div>
+              {/* </div> */}
+              {/* <div className='row'> */}
+               
+                
+              {/* </div> */}
             </form>
+
           </div>
+          <br/>
+          <Link className='btn btn-outline-danger mx-2' to="/manageprojects">Back</Link>
 
         </div>
 
