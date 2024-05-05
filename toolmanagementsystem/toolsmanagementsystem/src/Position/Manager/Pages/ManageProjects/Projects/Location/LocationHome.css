@@ -1,11 +1,5 @@
-.container {
-    display: flex;
-    justify-content: center; /* Horizontal centering */
-    align-items: center; /* Vertical centering */
-    height: 100vh; /* Set the height of the container for vertical centering */
+h2 {
+    text-align: center;
   }
   
-  h2 {
-    /* Optionally, you can style your h2 here */
-  }
   
