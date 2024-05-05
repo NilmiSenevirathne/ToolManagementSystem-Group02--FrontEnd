@@ -26,7 +26,7 @@ export default function LocationHome() {
                <div className='container-fluid'>
                <h2>Location Details</h2>
 
-               <div className='col-md-10 offset-md-2 border rounded p-4 mt-3 shadow' >
+               <div className='col-md-10 offset-md-1 border rounded p-4 mt-3 shadow' >
 
                <div className="py-4" style={{ maxHeight: '70vh', overflowY: 'auto', maxWidth: '1100px' }}>
 
