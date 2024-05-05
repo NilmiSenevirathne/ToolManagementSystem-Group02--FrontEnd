@@ -38,7 +38,7 @@ export default function AddLocation() {
       <div className='container-fluid'>
       <div className="py-2" style={{ maxHeight: '70vh', maxWidth: '800px' }}>
 
-            <div className='col-md-12 offset-md-4 border rounded p-4 mt-3 shadow' >
+            <div className='col-md-12 offset-md-3 border rounded p-4 mt-3 shadow' >
                 <h2 className='text-center m-4'>Add a New Location</h2>
                 <form onSubmit={(e) =>onSubmit(e)}>
 
