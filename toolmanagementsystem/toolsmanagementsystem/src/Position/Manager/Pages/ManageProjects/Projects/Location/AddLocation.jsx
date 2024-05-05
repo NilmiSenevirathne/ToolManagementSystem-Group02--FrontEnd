@@ -34,13 +34,11 @@ export default function AddLocation() {
     }
 
   return (
-    <div className='container-fluid'>
-        <div className='row'>
-        <div className="col-lg-3">
-          <Sidebar/>
-        </div>
-        <div className="col-lg-6">
-            <div className='col-md-12 offset-md-1 border rounded p-4 mt-5 shadow' >
+    <Sidebar>
+      <div className='container-fluid'>
+      <div className="py-2" style={{ maxHeight: '70vh', maxWidth: '800px' }}>
+
+            <div className='col-md-12 offset-md-4 border rounded p-4 mt-3 shadow' >
                 <h2 className='text-center m-4'>Add a New Location</h2>
                 <form onSubmit={(e) =>onSubmit(e)}>
 
@@ -65,13 +63,16 @@ export default function AddLocation() {
                     <button type="submit" className='btn btn-outline-primary'>Submit</button>
                     <br/>
                 </form>
-            </div>
-            <div className='mt-3' style={{ marginLeft: '60px' }}>
+                <div className='mt-3' style={{ marginLeft: '60px' }}>
             <Link className='btn btn-outline-danger mx-2'to="/addprojects">Back</Link>
             <Link className='btn btn-outline-primary text-decoration-none' to='/locationHome'>View Existing Locations</Link>
             </div>
+            </div>
+            </div>
+
         </div>
-        </div>
-    </div>
+        </Sidebar>
+
+
   )
 }
