@@ -1,10 +1,13 @@
+// StockSupervisor Dashboard.jsx
 import React, { useState, useEffect } from 'react';
-import Sidebar from '../../../Components/ManagerSidebar.jsx';
+import './MCSSDashboard.css';
 import { Chart } from 'primereact/chart';
 import axios from 'axios';
+// import Sidebar from '../../../Components/ManagerSidebar.jsx';
+import Sidebar from '../../../Components/ManagerSidebar.jsx';
 
-const ManagerDashboard = () => {
-  const role = "Manager";
+const StockSupervisorDashboard = () => {
+  const role = "StockSupervisor";
   const [tools, setTools] = useState({});
   const [lineChartData, setLineChartData] = useState({});
   const [pieChartData, setPieChartData]= useState({});
@@ -71,12 +74,8 @@ const ManagerDashboard = () => {
   
 
   return (
-  
-      <div>
-      
+      <Sidebar>
         <div className='dashboard-content'>
-          
-        <Sidebar/>
           <h1 className='msg'>Welcome to {role} Dashboard!</h1>
           <div className='chart'>
              <Chart type="doughnut" data={pieChartData} options={chartOptions} />
@@ -86,9 +85,9 @@ const ManagerDashboard = () => {
               <Chart type="line" data={lineChartData} options={lineChartOptions} />
             </div>
         </div>
-        </div>
-         
+        </Sidebar>
+
   );
 }
 
-export default ManagerDashboard;
+export default StockSupervisorDashboard;
