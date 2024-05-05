@@ -63,7 +63,7 @@ export default function AddLocation() {
                     <button type="submit" className='btn btn-outline-primary'>Submit</button>
                     <br/>
                 </form>
-                <div className='mt-3' style={{ marginLeft: '60px' }}>
+                <div className='mt-3' >
             <Link className='btn btn-outline-danger mx-2'to="/addprojects">Back</Link>
             <Link className='btn btn-outline-primary text-decoration-none' to='/locationHome'>View Existing Locations</Link>
             </div>
