@@ -21,7 +21,6 @@
     font-size:24px;
 }
 .menu{
-
     position:fixed;
     top: 60px;
     left: 0;
@@ -44,7 +43,8 @@
     z-index: 996;
     transition: all 0.3s;
     padding: 20px;
-  
+    width: 100px;
+
   }
  
   .link {
