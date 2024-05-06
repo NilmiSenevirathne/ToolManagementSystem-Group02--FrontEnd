@@ -1,50 +1,42 @@
 import React, { useEffect, useState } from 'react';
-import StockSidebar from '../../../../../Components/Sidebar/StockSidebar';
-import axios from "axios";
-import { Link, useParams } from 'react-router-dom';
-import { TextField, Badge } from '@mui/material';
-import { FaCartArrowDown } from "react-icons/fa";
-import Cart from './Cart'; // Import the Cart component with the correct path
+import { TextField, Badge, Dialog, DialogTitle, DialogContent, DialogActions, Button } from '@mui/material';
+import axios from 'axios';
+import StockSidebar from '../../../../../Components/Sidebar/StockSidebar.jsx';
+import { FaCartArrowDown } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 import './tools.css';
 
 const Tool = () => {
-  // State variables for tools data, search query, and selected items
   const [tools, setTools] = useState([]);
   const [searchTools, setSearchTools] = useState('');
-  const [cartItems, setCartItems] = useState([]); // State variable to store selected items for cart badge
+  const [cartItems, setCartItems] = useState([]);
+  const [showCartDetails, setShowCartDetails] = useState(false);
+  const navigate = useNavigate();
 
-  // Fetch tools data from API when component mounts
   useEffect(() => {
     fetchTools();
   }, []);
 
-  // Function to fetch tools data from API
   const fetchTools = async () => {
     try {
-      // Fetch tools data from API endpoint
       const response = await axios.get('http://localhost:8080/tool/gettools');
-      // Set the tools state with the fetched data
       setTools(response.data);
     } catch (error) {
       console.error('Error fetching tools: ', error);
     }
   };
 
-  // Filter tools based on search query
-  const filteredTools = tools.filter(tool =>
+  const filteredTools = tools.filter((tool) =>
     tool.toolId.toLowerCase().includes(searchTools.toLowerCase()) ||
     tool.toolName.toLowerCase().includes(searchTools.toLowerCase())
   );
 
-  // Function to add a tool to the cart
   const addToCart = (toolId) => {
-    const selectedTool = tools.find(tool => tool.toolId === toolId);
+    const selectedTool = tools.find((tool) => tool.toolId === toolId);
     if (selectedTool) {
-      // Check if quantity is greater than 0 before adding to cart
       if (selectedTool.quantity > 0) {
-        setCartItems([...cartItems, selectedTool]); // Update cartItems state
-        // Decrease the quantity of the selected tool
-        const updatedTools = tools.map(tool => {
+        setCartItems([...cartItems, selectedTool]);
+        const updatedTools = tools.map((tool) => {
           if (tool.toolId === toolId) {
             return { ...tool, quantity: tool.quantity - 1 };
           }
@@ -52,26 +44,37 @@ const Tool = () => {
         });
         setTools(updatedTools);
       } else {
-        // Update the quantity to "No available tools" directly in the table
-        const updatedTools = tools.map(tool => {
+        const updatedTools = tools.map((tool) => {
           if (tool.toolId === toolId) {
             return { ...tool, quantity: <span style={{ color: 'red' }}>No available tools</span> };
           }
           return tool;
         });
         setTools(updatedTools);
-        // Display "No available tools" message directly in the table
-        alert("No available tools");
+        alert('No available tools');
       }
     }
   };
+
+  const removeFromCart = (toolId) => {
+    const updatedCartItems = cartItems.filter((item) => item.toolId !== toolId);
+    setCartItems(updatedCartItems);
+  };
+
+  const handleSubmit = () => {
+    if (cartItems.length > 0) {
+        navigate('/createtoolbox', { state: { selectedTools: cartItems, initialValues: { ...searchTools } } });
+        setShowCartDetails(false);
+    } else {
+        alert("Please select at least one tool.");
+    }
+};
+
 
   return (
     <StockSidebar>
       <div className='toolsection'>
         <h1>Tools Section!</h1>
-
-        {/* Search input field with search button */}
         <div style={{ display: 'flex', alignItems: 'center', marginBottom: '20px' }}>
           <TextField
             label="Search Tools"
@@ -82,8 +85,6 @@ const Tool = () => {
             style={{ flex: 1 }}
           />
         </div>
-
-        {/* Table to display tools data */}
         <div className='tablesection'>
           <table className='table'>
             <thead>
@@ -96,7 +97,6 @@ const Tool = () => {
               </tr>
             </thead>
             <tbody className='bodysection'>
-              {/* Map over the filtered tools array to render tool details */}
               {filteredTools.map((tool, index) => (
                 <tr key={tool.toolId}>
                   <td>{tool.toolId}</td>
@@ -104,7 +104,6 @@ const Tool = () => {
                   <td>{tool.description}</td>
                   <td>{tool.quantity}</td>
                   <td>
-                    {/* Button for adding tools to the cart */}
                     <button className='btnAdd' onClick={() => addToCart(tool.toolId)}>Add Tool</button>
                   </td>
                 </tr>
@@ -112,12 +111,40 @@ const Tool = () => {
             </tbody>
           </table>
         </div>
-
-        {/* Link to the cart page with the number of selected items */}
-        <Link to="/cart" className='cart-icon' >
-          <FaCartArrowDown /><Badge badgeContent={cartItems.length} color="secondary"></Badge>
-        </Link>
+        <button className='cart-icon' onClick={() => setShowCartDetails(true)}>
+          <FaCartArrowDown />
+          <Badge badgeContent={cartItems.length} color="secondary"></Badge>
+        </button>
       </div>
+      <Dialog open={showCartDetails} onClose={() => setShowCartDetails(false)}>
+        <DialogTitle>Cart Details</DialogTitle>
+        <DialogContent>
+          <table className='table'>
+            <thead>
+              <tr>
+                <th>Tool_ID</th>
+                <th>ToolName</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {cartItems.map((item) => (
+                <tr key={item.toolId}>
+                  <td>{item.toolId}</td>
+                  <td>{item.toolName}</td>
+                  <td>
+                    <button onClick={() => removeFromCart(item.toolId)}>Remove</button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleSubmit}>Submit</Button>
+          <Button onClick={() => setShowCartDetails(false)}>Close</Button>
+        </DialogActions>
+      </Dialog>
     </StockSidebar>
   );
 };

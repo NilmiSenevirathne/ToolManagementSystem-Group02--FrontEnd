@@ -1,20 +1,30 @@
 import React from 'react';
-import StockSidebar from '../../../../../Components/Sidebar/StockSidebar';
 
 const Cart = ({ cartItems }) => {
   return (
-    <StockSidebar>
     <div>
-      <h2>Cart</h2>
-      <ul>
-        {cartItems.map((item, index) => (
-          <li key={index}>
-            <strong>Tool ID:</strong> {item.toolId}, <strong>Tool Name:</strong> {item.toolName}, <strong>Description:</strong> {item.description}, <strong>Quantity:</strong> {item.quantity}
-          </li>
-        ))}
-      </ul>
+      <h1>Cart</h1>
+      <table className='table'>
+        <thead>
+          <tr>
+            <th scope='col'>Tool_ID</th>
+            <th scope='col'>ToolName</th>
+            <th scope='col'>Description</th>
+            <th scope='col'>Quantity</th>
+          </tr>
+        </thead>
+        <tbody>
+          {cartItems.map((tool) => (
+            <tr key={tool.toolId}>
+              <td>{tool.toolId}</td>
+              <td>{tool.toolName}</td>
+              <td>{tool.description}</td>
+              <td>{tool.quantity}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
-    </StockSidebar>
   );
 };
 
