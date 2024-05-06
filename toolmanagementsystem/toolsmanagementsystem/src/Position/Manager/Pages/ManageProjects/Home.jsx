@@ -4,6 +4,7 @@ import { Link, useParams } from 'react-router-dom';
 import Sidebar from '../../../../Components/ManagerSidebar.jsx';
 import { saveAs } from 'file-saver';
 import { PDFDocument, Text, Page, Document, StyleSheet } from '@react-pdf/renderer';
+import { textAlign } from '@mui/system';
 
 
 
@@ -76,7 +77,7 @@ export default function Home() {
   return (
     <Sidebar>
       <div className='container-fluid'>
-        <h3>Manage Projects</h3>
+        <h3 style={{textAlign:'center'}}>Manage Projects</h3>
         <Link className="btn" style={{ backgroundColor: 'navy', color: 'white' }} to="/addprojects">Add Projects</Link>
         <div className="py-4" style={{ maxHeight: '70vh', overflowY: 'auto', maxWidth: '1100px' }}>
           <table className="table border shadow">
