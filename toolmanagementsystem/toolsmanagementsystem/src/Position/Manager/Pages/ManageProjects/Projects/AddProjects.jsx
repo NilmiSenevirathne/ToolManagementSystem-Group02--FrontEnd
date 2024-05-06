@@ -48,88 +48,94 @@ export default function AddProjects() {
       return;
     }
     
-    
-      await axios.post("http://localhost:8080/project", projects);
-      navigate("/manageprojects");
-    
+    await axios.post("http://localhost:8080/project", projects);
+    navigate("/manageprojects");
   };
 
   return (
-    <div className='container-fluid'>
-      <div className='row'> 
-        <div className="col-lg-4">
-          <Sidebar/>
+    <Sidebar> 
+      <div className='container-fluid'>
+        <div className='row justify-content-center'>
+          <div className='col-md-12 border rounded p-4 mt-2 shadow' style={{ maxHeight: '80vh', overflowY: 'auto', maxWidth: '1000px' }}>
+            <h2 className='text-center m-4'>Create a Project for assign to site supervisor</h2>
+            <form onSubmit={(e) => onSubmit(e)}>
+              <div className='row mb-3'>
+                <div className='col'>
+                  <label htmlFor="projectId" className="form-label">Project Id</label>
+                  <input type="text" className='form-control'
+                    placeholder='Enter Project id'
+                    name="projectId"
+                    value={projectId}
+                    onChange={(e) => onInputChange(e)}
+                  />
+                </div>
+                <div className='col'>
+                  <label htmlFor="projectName" className="form-label">Project name</label>
+                  <input type={"text"} className='form-control' 
+                    placeholder='Enter Project Name' 
+                    name="projectName"
+                    value={projectName}
+                    onChange={(e)=>onInputChange(e)}
+                  />
+                </div>
+              </div>
+              <div className='row mb-3'>
+                <div className='col'>
+                  <label htmlFor="description" className="form-label">Description</label>
+                  <input type={"text"} className='form-control' 
+                    placeholder='Enter Description' 
+                    name="description"
+                    value={description}
+                    onChange={(e)=>onInputChange(e)}
+                  />
+                </div>
+                <div className='col'>
+                  <label htmlFor="siteSupervisorID" className="form-label">Site Supervisor ID</label>
+                  <input type={"text"} className='form-control' 
+                    placeholder='Enter Site Supervisor ID' 
+                    name="siteSupervisorID"
+                    value={siteSupervisorID}
+                    onChange={(e)=>onInputChange(e)}
+                  />
+                </div>
+              </div>
+              <div className='row mb-3'>
+                <div className='col'>
+                  <label htmlFor="siteSupervisorName" className="form-label">Site Supervisor name</label>
+                  <input type={"text"} className='form-control' 
+                    placeholder='Enter Supervisor name' 
+                    name="siteSupervisorName"
+                    value={siteSupervisorName}
+                    onChange={(e)=>onInputChange(e)}
+                  />
+                </div>
+                <div className='col'>
+                  <label htmlFor="locationId" className="form-label">Location ID</label>
+                  <select className='form-control' name="locationId" value={locationId} onChange={onInputChange}>
+                    <option value="">Select Location ID</option>
+                    {locations.map(location => (
+                      <option key={location.id} value={location.locationId}>{location.locationId}</option>
+                    ))}
+                  </select>
+                  <Link className="btn btn-outline-primary mt-2" to="/AddLocation" style={{ 
+                    color: "#ffc107", /* Yellow color */
+                    borderColor: "#ffc107" /* Yellow color */
+                  }}>Add Locations</Link>
+                </div>
+              </div>
+              <div className='row'>
+                <div className='col'>
+                  <button type="submit" className='btn btn-outline-primary'>Submit</button>
+                  <Link className='btn btn-outline-danger mx-2' to="/manageprojects">Back</Link>
+                </div>
+              </div>
+            </form>
+          </div>
+
         </div>
-        <div className="col-lg-6">
-        <h2 className='text-center m-4'>Create a New Project</h2>
-        <div className='col-md-11 offset-md-1 border rounded p-4 mt-4 shadow' style={{ maxHeight: '80vh', overflowY: 'auto', maxWidth: '800px' }}>
-          <form onSubmit={(e) => onSubmit(e)}>
-            <div className='mb-3'>
-              <label htmlFor="projectId" className="form-label">Project Id</label>
-              <input type="text" className='form-control'
-                placeholder='Enter Project id'
-                name="projectId"
-                value={projectId}
-                onChange={(e) => onInputChange(e)}
-              />
-            </div>
-            <div className='mb-3'>
-              <label htmlFor="Name" className="form-label">Project name</label>
-              <input type="text" className='form-control' 
-                placeholder='Enter Project Name' 
-                name="projectName"
-                value={projectName}
-                onChange={(e)=>onInputChange(e)}
-              />
-            </div>
-            <div className='mb-3'>
-              <label htmlFor="Name" className="form-label">Description</label>
-              <input type="text" className='form-control' 
-                placeholder='Enter Description' 
-                name="description"
-                value={description}
-                onChange={(e)=>onInputChange(e)}
-              />
-            </div>
-            <div className='mb-3'>
-              <label htmlFor="Name" className="form-label">Site Supervisor ID</label>
-              <input type="text" className='form-control' 
-                placeholder='Enter Site Supervisor ID' 
-                name="siteSupervisorID"
-                value={siteSupervisorID}
-                onChange={(e)=>onInputChange(e)}
-              />
-            </div>
-            <div className='mb-3'>
-              <label htmlFor="Name" className="form-label">Site Supervisor name</label>
-              <input type="text" className='form-control' 
-                placeholder='Enter Supervisor name' 
-                name="siteSupervisorName"
-                value={siteSupervisorName}
-                onChange={(e)=>onInputChange(e)}
-              />
-            </div>
-            <div className='mb-3'>
-              <label htmlFor="locationId" className="form-label">Location ID</label>
-              <select className='form-control' name="locationId" value={locationId} onChange={onInputChange}>
-                <option value="">Select Location ID</option>
-                {locations.map(location => (
-                  <option key={location.id} value={location.locationId}>{location.locationId}</option>
-                ))}
-              </select>
-              <br/>
-              <Link className="btn btn-outline-primary" to="/AddLocation" style={{ 
-                color: "#ffc107", borderColor: "#ffc107" }}>Add New Locations</Link>
-                <pre/>
-                <button type="submit" className='btn btn-outline-primary'>Submit</button>
-            </div>
-          </form>
-        </div>
-        <div className='mt-3' style={{ marginLeft: '70px' }}>
-        <Link className='btn btn-outline-danger mx-2' to="/manageprojects">Back</Link>
-        </div>
+
       </div>
-    </div>
-    </div>
+
+    </Sidebar> 
   )
 }

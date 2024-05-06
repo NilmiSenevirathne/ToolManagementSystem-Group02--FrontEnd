@@ -1,0 +1,76 @@
+/* *{
+    margin:0;
+    padding: 0;
+    text-decoration: none;
+
+}
+
+.container{
+    display:flex ;
+
+}
+
+main{
+    width:100%;
+    padding: 20px;
+}
+
+.sidebar{
+    background: #130640;
+    color: #fff;
+    height: 100vh;
+    width: 330px;
+    transition: all 0.s;
+
+}
+
+.logo{
+    font-size: 18px;
+    text-align: center;
+    margin-top: 2rem;
+}
+
+
+.link{
+    margin-top: 0.8rem;
+    display: flex;
+    color: #fff;
+    padding: 10px 15px;
+    gap :15px;
+    transition: all 0.5s;
+}
+
+.link:hover{
+    background: lightskyblue;
+    color: #000;
+    transition: all 0.5s;
+}
+
+.active{
+    background: lightskyblue;
+    color: #000;
+}
+
+.icon , .link_text{
+    font-size: 15px;
+}
+
+.dashboard-container{
+    display: flex;
+}
+
+.msg{
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.chart-container{
+    display: flex;
+    justify-content:center;
+    
+}
+
+.chart{
+   flex: 1;
+   margin-right: 100px;
+} */

@@ -21,7 +21,6 @@
     font-size:24px;
 }
 .menu{
-
     position:fixed;
     top: 60px;
     left: 0;
@@ -37,13 +36,15 @@
     position: fixed; /* Fixed position */
     top: 0; /* Align to the top */
     left: 0; /* Align to the left */
+    margin-right: auto;
     bottom: 0;
     width: 250px;
     height: 100vh; /* Adjust the height of the sidebar to fit the viewport */
     z-index: 996;
     transition: all 0.3s;
     padding: 20px;
-  
+    width: 100px;
+
   }
  
   .link {
