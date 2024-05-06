@@ -42,14 +42,12 @@ const Id =useParams()
             
     
   return (
+    <Sidebar>
     <div className='container-fluid'>
-        <div className='row'>
-        <div className="col-lg-4">
-          <Sidebar/>
-        </div>
-        <div className="col-lg-6">
+        <div className=' justify-content-center'>
+        <div className='col-md-12 border rounded p-4 mt-2 shadow' style={{ maxHeight: '80vh', overflowY: 'auto', maxWidth: '1000px' }}>
+         
         <h2 className='text-center m-4'>Edit Projects Details </h2>
-              <div className='col-md-11 offset-md-1 border rounded p-4 mt-4 shadow' style={{ maxHeight: '80vh', overflowY: 'auto', maxWidth: '800px' }}>
                 <form onSubmit={(e) =>onSubmit(e)}>
                     <div className='mb-3'>
                       <lable htmlFor="Name" className="form-lable">Project Id</lable>
@@ -117,6 +115,6 @@ const Id =useParams()
                 </div>
                 </div>
         </div>
-    </div>
+        </Sidebar> 
   )
 }
