@@ -26,6 +26,7 @@ import AddReportDetails from "./Position/Sitesupervisor/AddReportDetails.jsx";
 import RequiredToolReport from "./Position/Sitesupervisor/RequiredToolReport.jsx";
 import Tool from './Position/StockSupervisor/ToolBox/CreateToolBox/Tools/Tool.jsx';
 import DashBoard from './Position/Admin/Dashboard/DashBoard.jsx';
+import UpdateLocation from './Position/Manager/Pages/ManageProjects/Projects/Location/UpdateLocation.jsx';
 
 
 
@@ -51,6 +52,8 @@ function App() {
                     <Route path="/AddLocation" element={<AddLocation />} />
                     <Route path="/locationHome" element={<LocationHome />} />
                     <Route path="/home" element={<Home/>}/>
+                    <Route path="/UpdateLocation/:locationId" element={<UpdateLocation />} />
+
 
 
                      {/* StockSupervisor pages  */}
