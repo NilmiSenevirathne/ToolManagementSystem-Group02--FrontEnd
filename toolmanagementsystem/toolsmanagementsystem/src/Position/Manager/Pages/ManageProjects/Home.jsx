@@ -102,6 +102,7 @@ export default function Home() {
                   <td>{project.siteSupervisorID}</td>
                   <td>{project.siteSupervisorName}</td>
                   <td>{project.locationId}</td>
+                  <td>{project.date}</td>
                   <td>
                     <Link className='btn btn-outline-primary mx-2' to={`/UpdateProjects/${project.projectId}`}>Edit</Link>
                   </td>
