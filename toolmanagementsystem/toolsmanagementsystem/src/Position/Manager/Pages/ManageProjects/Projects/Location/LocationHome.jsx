@@ -10,6 +10,7 @@ export default function LocationHome() {
   useEffect (()=>{
     loadLocations();
   },[]);
+  
   const { locationId } = useParams();  
 
   const loadLocations = async () => {
@@ -20,6 +21,17 @@ export default function LocationHome() {
       console.error('Error fetching data:', error);
     }
   };
+
+  const deleteLocations = async (locationId) => {
+    const confirmDelete = window.confirm("Are you sure you want to delete this location?");
+    if (confirmDelete) {
+      await axios.delete(`http://localhost:8080/location/${locationId}`);
+      loadLocations();
+    }
+  };
+
+
+
 
   return (
     <Sidebar> 
@@ -47,7 +59,7 @@ export default function LocationHome() {
                     <td>{location.locationId}</td>
                     <td>
                       <Link className='btn btn-outline-primary mx-2' to={`/UpdateLocation/${location.locationId}`}>Edit</Link>
-                      <button className='btn btn-danger mx-2'>Delete</button>
+                      <button className='btn btn-danger mx-2' onClick={()=>deleteLocations(location.locationId)}>Delete</button>
                     </td>
                   </tr>
                 ))}
