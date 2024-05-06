@@ -45,16 +45,16 @@ function CreateToolbox({ location }) {
   };
 
   // Initialize the state with initial values from location state
-  const initialValues = location?.state || {};
+  const initialValues = location.state || {};
   const [toolbox, setToolbox] = useState({
-    toolbox_id: initialValues.toolboxId || "",
-    project_id: initialValues.projectId || "",
-    site_supervisor_id: initialValues.sitesupervisorId || "",
-    Location_id: initialValues.locationId || "",
-    tools: "",
-  });
+  toolbox_id: initialValues.toolbox_id || "",
+  project_id: initialValues.project_id || "",
+  site_supervisor_id: initialValues.site_supervisor_id || "",
+  Location_id: initialValues.Location_id || "",
+  tool: "",
+});
   
-  const { toolboxId, projectId, sitesupervisorId } = toolbox;
+  const { toolboxId, projectId, sitesupervisorId, tool } = toolbox;
 
   const onInputChange = (e) => {
     setToolbox({ ...toolbox, [e.target.name]: e.target.value });
@@ -97,7 +97,7 @@ function CreateToolbox({ location }) {
               type="text"
               className="form-control"
               placeholder="Enter new toolbox id"
-              name="toolboxId"
+              name="toolbox_id"
               value={toolboxId}
               onChange={onInputChange}
             />
@@ -109,7 +109,7 @@ function CreateToolbox({ location }) {
             </label>
             <select
               className="form-control"
-              name="projectId"
+              name="project_id"
               value={projectId}
               onChange={onInputChange}
             >
@@ -128,7 +128,7 @@ function CreateToolbox({ location }) {
             </label>
             <select
               className="form-control"
-              name="sitesupervisorId"
+              name="site_supervisor_id"
               value={sitesupervisorId}
               onChange={onInputChange}
             >
@@ -147,7 +147,7 @@ function CreateToolbox({ location }) {
             </label>
             <select
               className="form-control"
-              name="locationId"
+              name=" Location_id"
               value={toolbox.locationId}
               onChange={onInputChange}
             >
@@ -161,9 +161,13 @@ function CreateToolbox({ location }) {
           </div>
 
           <div>
-            <Link to='/tool'>
+          <Link
+                to={{
+                pathname: '/tool',
+                state: toolbox // Pass the current toolbox state
+                }}>
               <button type="button" className='selecttool'>Select Tools</button>
-            </Link>
+          </Link>
           </div>
 
           <button type="submit" className="submit">
