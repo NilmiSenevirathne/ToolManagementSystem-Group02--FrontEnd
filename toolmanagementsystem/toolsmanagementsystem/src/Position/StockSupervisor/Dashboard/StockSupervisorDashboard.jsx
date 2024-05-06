@@ -74,6 +74,7 @@ const StockSupervisorDashboard = () => {
 
   return (
       <StockSidebar>
+        
         <div className='dashboard-content'>
           <h1 className='msg'>Welcome to {role} Dashboard!</h1>
           <div className='chart'>
@@ -84,6 +85,7 @@ const StockSupervisorDashboard = () => {
               <Chart type="line" data={lineChartData} options={lineChartOptions} />
             </div>
         </div>
+        
         </StockSidebar>
 
   );
