@@ -25,7 +25,7 @@ const LocId  = useParams()
     }
 
     const loadLocations =async ()=>{
-        const result=await axios.get(`http://localhost:8080/locations/${LocId.location_id}`)
+        const result=await axios.get(`http://localhost:8080/locations/${LocId.locationId}`)
         setlocation(result.data)
       }
       useEffect (()=>{
@@ -40,7 +40,7 @@ const LocId  = useParams()
           alert("Please fill in all fields.");
           return;
         }
-        await axios.put(`http://localhost:8080/locations/${LocId.location_id}`,locations)
+        await axios.put(`http://localhost:8080/locations/${LocId.locationId}`,locations)
         navigate("/locationHome")
     }
 
