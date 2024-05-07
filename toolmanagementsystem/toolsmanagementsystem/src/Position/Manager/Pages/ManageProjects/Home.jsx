@@ -7,7 +7,6 @@ import { PDFDocument, Text, Page, Document, StyleSheet } from '@react-pdf/render
 import { textAlign } from '@mui/system';
 
 
-
 const styles = StyleSheet.create({
   page: {
     flexDirection: 'column',
