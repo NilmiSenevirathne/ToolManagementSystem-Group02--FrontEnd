@@ -1,0 +1,90 @@
+/* Container style for the sidebar and main content */
+.container {
+    display: flex;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Sidebar styling */
+  .sidebar {
+    width: 250px; /* Sidebar width */
+    height: 100vh; /* Full viewport height */
+    background: #333; /* Dark background color */
+    color: #fff; /* White text */
+    position: fixed; /* Fix the position to the viewport */
+    top: 0; /* Align to the top of the viewport */
+    left: 0; /* Align to the left of the viewport */
+    transition: margin-left 0.3s; /* Smooth transition for open/close */
+  }
+  
+  /* Sidebar when open */
+  .sidebar.open {
+    margin-left: 0; /* Move to the correct position when open */
+  }
+  
+  /* Company logo and user details */
+  .company-logo {
+    padding: 20px; /* Padding inside the sidebar */
+    border-bottom: 1px solid #444; /* Separator line */
+  }
+  
+  .logo {
+    text-align: center; /* Center-align the logo */
+    font-size: 1.5rem; /* Font size for the logo */
+    color: #fff; /* White text */
+  }
+  
+  /* User profile section */
+  .details {
+    text-align: center; /* Center-align user details */
+    padding-top: 20px; /* Padding at the top */
+  }
+  
+  .details .user {
+    display: flex;
+    align-self: center; /* Center-align within the flex container */
+    width: 8rem; /* Width for the profile picture */
+    height: 8rem; /* Ensures a square image */
+    border-radius: 50%; /* Round the profile picture */
+    margin: auto; /* Center the image */
+  }
+  
+  .details .name {
+    margin-top: 10px; /* Margin above the name */
+  }
+  
+  .details .role {
+    font-size: 1rem; /* Font size for the role */
+    color: #ccc; /* Lighter color for the role text */
+  }
+  
+  /* Navigation link styling */
+  .link {
+    display: flex;
+    align-items: center; /* Align icon and text */
+    padding: 10px 20px; /* Padding inside the link */
+    color: #ccc; /* Light color for text */
+    text-decoration: none; /* No underline */
+    transition: all 0.3s ease; /* Smooth transition for hover effects */
+  }
+  
+  .link:hover {
+    background: #555; /* Darker background on hover */
+  }
+  
+  .active {
+    background: #444; /* Active link background */
+  }
+  
+  /* Icon within the link */
+  .icon {
+    margin-right: 10px; /* Space between icon and text */
+  }
+  
+  /* Main content area */
+  .main {
+    flex: 1; /* Occupy remaining space */
+    padding: 20px; /* Padding for main content */
+    margin-left: 250px; /* Account for sidebar width */
+  }
+  

@@ -1,0 +1,80 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+  }
+  
+  .container {
+    display: flex; /* Use flex layout */
+  }
+  
+  main {
+    width: 100%; /* Full width */
+    padding: 20px; /* Padding around the content */
+    background: #f5f5f5; /* Light background for the main area */
+  }
+  
+  .sidebar {
+    background: #130640; /* Dark sidebar background */
+    color: #fff; /* White text */
+    height: 100vh; /* Full viewport height */
+    width: 330px; /* Sidebar width */
+    transition: all 0.3s; /* Smooth transition for opening/closing */
+  }
+  
+  .logo {
+    font-size: 18px; /* Font size for the logo */
+    text-align: center; /* Center-align the logo */
+    margin-top: 2rem; /* Space at the top */
+  }
+  
+  /* Link styles for the sidebar */
+  .link {
+    display: flex; /* Use flex layout */
+    align-items: center; /* Align items vertically */
+    gap: 15px; /* Gap between icon and text */
+    color: #fff; /* White text */
+    padding: 10px 15px; /* Padding inside the link */
+    transition: all 0.5s; /* Smooth transition on hover */
+  }
+  
+  .link:hover {
+    background: lightskyblue; /* Highlighted background on hover */
+    color: #000; /* Black text on hover */
+    transition: all 0.5s; /* Smooth transition */
+  }
+  
+  .active {
+    background: lightskyblue; /* Active background color */
+    color: #000; /* Black text */
+  }
+  
+  /* Styles for the icons and link text */
+  .icon,
+  .link_text {
+    font-size: 15px; /* Font size for icons and text */
+  }
+  
+  /* Admin dashboard specific styles */
+  .dashboard-content {
+    display: flex; /* Use flex layout */
+    flex-direction: column; /* Arrange items vertically */
+  }
+  
+  .msg {
+    font-size: 24px; /* Font size for the welcome message */
+    margin-bottom: 20px; /* Space below the message */
+  }
+  
+  /* Chart container styles */
+  .chart-container {
+    display: flex; /* Use flex layout */
+    justify-content: center; /* Center the charts */
+  }
+  
+  .chart {
+    flex: 1; /* Allow charts to grow and fill space */
+    margin-right: 100px; /* Space on the right side */
+  }
+  
