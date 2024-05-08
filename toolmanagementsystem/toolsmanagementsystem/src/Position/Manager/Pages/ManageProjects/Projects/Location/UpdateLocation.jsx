@@ -46,13 +46,10 @@ const LocId  = useParams()
 
     
   return (
+    <Sidebar>
     <div className='container-fluid'>
-        <div className='row'>
-        <div className="col-lg-3">
-          <Sidebar/>
-        </div>
-        <div className="col-lg-6">
-            <div className='col-md-12 offset-md-1 border rounded p-4 mt-5 shadow'style={{ maxHeight: '100vh', overflowY: 'auto', maxWidth: '800px' }}>
+        <div className=' justify-content-center'>
+        <div className='col-md-12 border rounded p-4 mt-2 shadow' style={{ maxHeight: '80vh', overflowY: 'auto', maxWidth: '1000px' }}>
                 <h2 className='text-center m-4'>Edit Location</h2>
                 <form onSubmit={(e) =>onSubmit(e)}>
 
@@ -84,6 +81,7 @@ const LocId  = useParams()
             </div>
         </div>
      
-    </div>
+    </Sidebar>
+  
   )
 }
