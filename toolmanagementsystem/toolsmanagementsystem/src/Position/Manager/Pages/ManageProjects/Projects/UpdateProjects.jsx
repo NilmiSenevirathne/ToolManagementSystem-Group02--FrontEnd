@@ -15,10 +15,12 @@ const Id =useParams()
           descriptions:"",
           siteSupervisorID:"",
           siteSupervisorName:"",
-          locationId:""
+          locationId:"",
+          date:""
+
         })
 
-        const{projectId,projectName,description,siteSupervisorID,siteSupervisorName,locationId}=projects
+        const{projectId,projectName,description,siteSupervisorID,siteSupervisorName,locationId,date}=projects
           //get projects 
           
         const onInputChange=(e)=>{
@@ -108,8 +110,18 @@ const Id =useParams()
                       />
                     </div>
 
+                  <div className='col'>
+                  <label htmlFor="date" className="form-label">Date </label>
+                  <input type={"date"} className='form-control' 
+                    placeholder='Enter project date' 
+                    name="date"
+                    value={date}
+                    onChange={(e)=>onInputChange(e)}
+                  />
+                  </div>
+
                     <button type="submit" className='btn btn-outline-primary'>Submit</button>
-                    <Link className='btn btn-outline-danger mx-2'to="/manageprojects">Back</Link>
+                    <Link className='btn btn-success mx-2'to="/manageprojects">Back</Link>
 
                 </form>
                 </div>
