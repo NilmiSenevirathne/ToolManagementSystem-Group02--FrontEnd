@@ -29,10 +29,6 @@ const styles = StyleSheet.create({
   }
 });
 
-// const generatePdfBlob = async (pdfDoc, project) => {
-//   const asPdf = PDFDocument.create(pdfDoc);
-//   return await asPdf.toBlob();
-// };
 
 export default function Home() {
   const [projects, setProjects] = useState([]);
@@ -56,22 +52,18 @@ export default function Home() {
     }
   };
 
-  // const generateReport = async (project) => {
-  //   const pdfDoc = (
-  //     <Document>
-  //       <Page size="A4" style={styles.page}>
-  //         <Text style={styles.header}>Project Report</Text>
-  //         <Text style={styles.content}>Project ID: {project.projectId}</Text>
-  //         <Text style={styles.content}>Project Name: {project.projectName}</Text>
-  //         <Text style={styles.content}>Description: {project.description}</Text>
-  //         {/* Add more project details as needed */}
-  //       </Page>
-  //     </Document>
-  //   );
 
-  //   const pdfBlob = await generatePdfBlob(pdfDoc, project);
-  //   saveAs(pdfBlob, `${project.projectName}_Report.pdf`);
-  // };
+    const [isSuccess, setIsSuccess] = useState(false);
+  
+    const handleClick = () => {
+      setProjects(prevProjects => prevProjects.map(project => {
+        if (project.projectId === projectId) {
+          return { ...project, isSuccess: true };
+        }
+        return project;
+      }));
+    };
+
 
   return (
     <Sidebar>
@@ -80,7 +72,7 @@ export default function Home() {
         <Link className="btn" style={{ backgroundColor: 'navy', color: 'white' }} to="/addprojects">Add Projects</Link>
         <div className="py-4" style={{ maxHeight: '70vh', overflowY: 'auto', maxWidth: '1100px' }}>
           <table className="table border shadow">
-            <thead>
+          <thead style={{position: 'sticky', top: 0, zIndex: 1, background: '#fff'}}>
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">Project id</th>
@@ -89,7 +81,10 @@ export default function Home() {
                 <th scope="col">supervisor</th>
                 <th scope="col">SiteSupervisor</th>
                 <th scope="col">locationId</th>
+                <th scope="col">Date</th>
                 <th scope="col">Action</th>
+                <th scope="col">Action</th>
+                <th Scope='col'>Status</th>
               </tr>
             </thead>
             <tbody>
@@ -104,11 +99,22 @@ export default function Home() {
                   <td>{project.locationId}</td>
                   <td>{project.date}</td>
                   <td>
-                    <Link className='btn btn-outline-primary mx-2' to={`/UpdateProjects/${project.projectId}`}>Edit</Link>
+                    <Link className='btn btn-success mx-2' to={`/UpdateProjects/${project.projectId}`}>Edit</Link>
                   </td>
                   <td>
                   <button className='btn btn-danger mx-2' onClick={() => deleteProject(project.projectId)}>Delete</button>
                     {/* <button className='btn btn-danger mx-2' onClick={() => generateReport(project)}>Generate Report</button> */}
+                  </td>
+                  <td>
+                  <div>
+                    <button
+                      className={`btn ${isSuccess ? 'btn-success' : ''}`}
+                      onClick={() =>handleClick(project.projectId)}
+                    >
+                      Click Me
+                    </button>
+                    {isSuccess && <span className="text-success">finished</span>}
+                  </div>
                   </td>
                 </tr>
               ))}
