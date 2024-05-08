@@ -2,17 +2,22 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Sidebar from '../../../../../Components/ManagerSidebar.jsx';
-import AddProjectsNavbar from './AddProjectNavbar.jsx';
 
 export default function AddProjects() {
   // Get location ids to the dropdown box
-  const [locations, setLocations] = useState([]);
   const navigate = useNavigate();
+
+  const [locations, setLocations] = useState([]);
+  const [existingProjectIds, setExistingProjectIds] = useState([]); // State to store existing project IDs
+
 
   useEffect(() => {
     fetchLocations();
+    fetchExistingProjectIds(); // Fetch existing project IDs when component mounts
+
   }, []);
 
+  //get location method
   const fetchLocations = async () => {
     try {
       const response = await axios.get("http://localhost:8080/locations");
@@ -22,6 +27,17 @@ export default function AddProjects() {
     }
   };
 
+    // Function to fetch existing project IDs
+    const fetchExistingProjectIds = async () => {
+      try {
+        const response = await axios.get("http://localhost:8080/projects"); // Assuming this endpoint returns existing projects
+        setExistingProjectIds(response.data.map(project => project.projectId));
+      } catch (error) {
+        console.error('Error fetching existing project IDs:', error);
+      }
+    };
+  
+
   // State to store project details
   const [projects, setProjects] = useState({
     projectId: "",
@@ -29,10 +45,12 @@ export default function AddProjects() {
     description: "",
     siteSupervisorID: "",
     siteSupervisorName: "",
-    locationId: ""
+    locationId: "",
+    date:""
+
   });
 
-  const { projectId, projectName, description, siteSupervisorID, siteSupervisorName, locationId } = projects;
+  const { projectId, projectName, description, siteSupervisorID, siteSupervisorName, locationId,date } = projects;
 
   // Function to handle input changes
   const onInputChange = (e) => {
@@ -42,16 +60,27 @@ export default function AddProjects() {
   // Function to handle form submission
   const onSubmit = async (e) => {
     e.preventDefault();
-    //Projects form validation- all fields should filled
-    if (!projectId || !projectName || !description || !siteSupervisorID || !siteSupervisorName || !locationId) {
+
+    // Check if the entered project ID already exists
+    if (existingProjectIds.includes(projectId)) {
+      alert("Project ID already exists. Please enter a different ID.");
+      return;
+    }
+
+    if (!projectId || !projectName || !description || !siteSupervisorID || !siteSupervisorName || !locationId || !date) {
       alert("Please fill in all fields.");
       return;
     }
-    
-    await axios.post("http://localhost:8080/project", projects);
-    navigate("/manageprojects");
+
+    try {
+      await axios.post("http://localhost:8080/project", projects);
+      navigate("/manageprojects");
+    } catch (error) {
+      console.error('Error adding project:', error);
+    }
   };
 
+  
   return (
     <Sidebar> 
       <div className='container-fluid'>
@@ -110,6 +139,7 @@ export default function AddProjects() {
                     onChange={(e)=>onInputChange(e)}
                   />
                 </div>
+                {/* location drop down */}
                 <div className='col'>
                   <label htmlFor="locationId" className="form-label">Location ID</label>
                   <select className='form-control' name="locationId" value={locationId} onChange={onInputChange}>
@@ -119,6 +149,15 @@ export default function AddProjects() {
                     ))}
                   </select>
 
+                  <div className='col'>
+                  <label htmlFor="siteSupervisorName" className="form-label">Date </label>
+                  <input type={"date"} className='form-control' 
+                    placeholder='Enter project date' 
+                    name="date"
+                    value={date}
+                    onChange={(e)=>onInputChange(e)}
+                  />
+                </div>
 
 
                   <Link className="btn btn-outline-primary mt-2" to="/AddLocation" style={{ 
