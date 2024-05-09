@@ -1,9 +1,11 @@
+/* Style for form container */
 .form-container {
-  width: 100%;
+  width: 60%;
   margin: 0 auto;
   max-width: 800px;
 }
 
+/* Style for form content */
 .form-content {
   background-color: #f9f9f9;
   padding: 50px;
@@ -12,23 +14,27 @@
   width: 70%;
 }
 
+/* Style for form heading */
 .form-content h2 {
   text-align: center;
   margin-bottom: 20px;
 }
 
+/* Style for form labels */
 .form-label {
   font-weight: bold;
 }
 
+/* Style for form inputs */
 .form-control {
-
   padding: 10px;
   margin-bottom: 15px;
   border: 1px solid #ccc;
   border-radius: 5px;
+  width: 100%; /* Ensure input fields take up full width */
 }
 
+/* Style for select tool button */
 .selecttool {
   background-color: #28972a;
   color: #fff;
@@ -39,12 +45,12 @@
   text-decoration: none;
   display: inline-block;
   margin-top: 10px;
-  margin-left: 200px;
-  margin-right: 200px;
+  margin-left: 21rem;
+  margin-right: auto;
 }
 
-.submit,
-.cancel {
+/* Style for submit and cancel buttons */
+.submit, .cancel {
   background-color: #3d5cf4;
   color: #fff;
   padding: 10px 20px;
@@ -57,11 +63,22 @@
 
 .cancel {
   background-color: #dc3545;
-  
 }
 
-.submit:hover,
-.cancel:hover,
-.selecttool:hover {
+/* Hover effect */
+.submit:hover, .cancel:hover, .selecttool:hover {
   opacity: 1;
+}
+
+/* Responsive layout */
+@media screen and (max-width: 768px) {
+  .form-content {
+    width: 90%; /* Adjusted width for smaller screens */
+    padding: 30px; /* Adjusted padding for smaller screens */
+  }
+
+  .selecttool {
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
