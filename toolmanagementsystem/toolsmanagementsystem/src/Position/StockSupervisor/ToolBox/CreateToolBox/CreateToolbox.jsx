@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate , useLocation} from "react-router-dom";
 import StockSidebar from '../../../../Components/Sidebar/StockSidebar.jsx';
 import axios from "axios";
 import './toolbox.css';
 
-function CreateToolbox({ location }) {
+function CreateToolbox() {
   const navigate = useNavigate();
+  const location = useLocation();
   const [locations , setLocations] = useState([]);
   const [users, setUsers] = useState([]);
   const [projects, setProjects] = useState([]);
@@ -148,7 +149,7 @@ function CreateToolbox({ location }) {
             <select
               className="form-control"
               name=" Location_id"
-              value={toolbox.locationId}
+              value={toolbox.Location_id}
               onChange={onInputChange}
             >
               <option value="">Select Location</option>
