@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import StockSidebar from '../../../Components/Sidebar/StockSidebar.jsx';
 import axios from 'axios';
+import './reports.css'
 
 const Reports = () => {
   const [reports, setReports] = useState([]);

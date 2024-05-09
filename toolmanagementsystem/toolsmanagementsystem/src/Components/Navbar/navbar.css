@@ -1,22 +1,31 @@
-.navbar{
-    height: 50px;
-    border-bottom: 0.5px solid rgb(231,228,228);
+/* navbar.css */
+
+.navbar {
     display: flex;
     align-items: center;
-    color:white;
-    display: flex;
     justify-content: space-between;
-    background-color:  #142050;
-    width: 100%;
-    padding: 1px;
-    color:black;
-   
-     
-        h1{
-            color: white;
-            text-align: center;
-           
-        }
-           
-
-}
+    padding: 10px 20px; /* Adjust padding as needed */
+    background-color: #09063f; /* Background color of the navbar */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
+  }
+  
+  .logo {
+    width: 100px; /* Adjust the width of the logo as needed */
+    height: auto; /* Maintain aspect ratio */
+  }
+  
+  .navbar a {
+    text-decoration: none;
+    color: #fffefe; /* Default color of the icons */
+    margin-left: 10px; /* Adjust margin between icons */
+  }
+  
+  .navbar a:hover {
+    color: #000; /* Change color on hover */
+  }
+  
+  /* Optional: Style the active link differently */
+  .navbar a.active {
+    color: #007bff; /* Example color for active link */
+  }
+  
