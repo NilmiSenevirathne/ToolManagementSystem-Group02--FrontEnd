@@ -1,71 +1,77 @@
 .container {
-    display: flex;
-    margin: 0;
-    padding: 0;
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
 
-  }
-  
+.sidebar {
+  width: 250px;
+  height: 100vh;
+  background: #333;
+  color: #fff;
+  position: fixed;
+  margin-left: -120px;
+}
+
+.companylogo {
+  padding-bottom: 20px;
+  border-bottom: 1px solid #444;
+}
+
+.logo {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.details {
+  text-align: center;
+}
+
+.details .user {
+  display: flex;
+  align-self: center;
+  width: 10rem;
+  border-radius: 50%;
+  margin: auto;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  color: #ccc;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.link:hover {
+  background: #555;
+}
+
+.active {
+  background: #444;
+}
+
+.icon {
+  margin-right: 10px;
+}
+
+.main {
+  flex: 1;
+  padding: 20px;
+  margin-left: 250px;
+}
+
+/* Responsive layout */
+@media screen and (max-width: 768px) {
   .sidebar {
-    width: 250px;
-    height: 100vh; /* Adjust the height of the sidebar to fit the viewport */
-    background: #333;
-    color: #fff;
-    position: fixed; /* Fix the position of the sidebar */
-    margin-left: -120px;
+    width: 100%;
+    height: auto;
+    position: relative;
+    margin-left: 0;
   }
-  
-  .companylogo {
-    padding-bottom: 20px;
-    border-bottom: 1px solid #444;
-  }
-  
-  .logo {
-    text-align: center;
-    margin-bottom: 10px;
-    
-  }
-  
-  .details {
-    text-align: center;
-  }
-  
-  .details .user {
-    display: flex;
-    align-self: center;
-    width: 10rem;
-    border-radius: 50%;
-    margin-top :auto;
-    margin-bottom: auto;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  
 
-  
-  .link {
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    color: #ccc;
-    text-decoration: none;
-    transition: all 0.3s ease;
-  }
-  
-  .link:hover {
-    background: #555;
-  }
-  
-  .active {
-    background: #444;
-  }
-  
-  .icon {
-    margin-right: 10px;
-  }
-  
   .main {
-    flex: 1;
-    padding: 20px;
-    margin-left: 250px; /* Add margin to the main content to accommodate the fixed sidebar */
+    margin-left: 0;
   }
-  
+}
