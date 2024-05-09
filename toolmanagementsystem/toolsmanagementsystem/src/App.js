@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter  as Router , Route,Routes } from 'react-router-dom';
 // import '../src/App.css';
+import HomePage from '../src/Components/HomePage/Home.jsx';
 import LoginForm from '../src/LoginPage/LoginForm.jsx';
 import ManageStock from './Position/StockSupervisor/ManageStock/ManageStock.jsx';
 import Toolbox from './Position/StockSupervisor/ToolBox/Toolbox.jsx';
@@ -35,8 +36,8 @@ function App() {
 
       <>
          <Routes>
-
-                    {<Route  path='/' element={<LoginForm/>}> </Route> }
+                    <Route  path='/' element={<HomePage/>}> </Route> 
+                    <Route  path='/login' element={<LoginForm/>}> </Route> 
     
                                      
                     {/* Admin pages  */}
