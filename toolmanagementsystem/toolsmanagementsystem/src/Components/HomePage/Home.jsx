@@ -10,7 +10,7 @@ import Img3 from '../../images/home5.webp';
 const Home = () => {
   return (
     <div className='home'>
-      <Navbar />
+      <Navbar/>
       <div className='slides'>
         <CCarousel controls transition="crossfade">
           <CCarouselItem>
