@@ -1,21 +1,36 @@
-import "./navbar.css";
-import EmailIcon from '@mui/icons-material/Email';
-import Person2Icon from '@mui/icons-material/Person2';
-import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
-import DarkModeIcon from '@mui/icons-material/DarkMode';
-import SearchIcon from '@mui/icons-material/Search';
-import DilumBMKLogo from '../../images/BMKLogo.jpg'; // Import the logo image file
+import React from 'react';
+import { NavLink } from 'react-router-dom';
+import Brand from '../../images/BMKLogo.jpg'; // Adjust the path if necessary
+import './navbar.css';
 
 const Navbar = () => {
   return (
-    <div className='navbar'>
-        <img src={DilumBMKLogo} alt="Dilum BMK Logo" className="logo" />
-        <a href="home">Home</a>
-        <a href="aboutus">About Us</a>
-        <a href="projecs">Projects</a>
-        <a href="contact us">Contact Us</a>
-        
-    </div>
+    <nav className="navbar">
+      <div className="container">
+        <div className="logo">
+          <img src={Brand} alt="Logo" />
+        </div>
+        <div className="nav-elements">
+          <ul>
+            <li>
+              <NavLink to="/">Home</NavLink>
+            </li>
+            <li>
+              <NavLink to="/blog">Blog</NavLink>
+            </li>
+            <li>
+              <NavLink to="/projects">Projects</NavLink>
+            </li>
+            <li>
+              <NavLink to="/about">About</NavLink>
+            </li>
+            <li>
+              <NavLink to="/contact">Contact</NavLink>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
   );
 };
 

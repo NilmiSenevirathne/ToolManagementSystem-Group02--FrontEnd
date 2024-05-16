@@ -45,7 +45,7 @@ const Reports = () => {
                   <td>{report.report_id}</td>
                   <td>{report.created_at}</td>
                   <td>{report.project_name}</td>
-                  <td><button>Download</button></td>
+                  <td><button className='downloadbtn'>Download</button></td>
                 </tr>
               ))}
             </tbody>
