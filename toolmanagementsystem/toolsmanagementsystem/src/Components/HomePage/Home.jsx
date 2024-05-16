@@ -12,6 +12,7 @@ const Home = () => {
     <div className='home'>
       <Navbar/>
       <div className='slides'>
+      
         <CCarousel controls transition="crossfade">
           <CCarouselItem>
             <CImage className="d-block w-100" src={Img1} alt="slide 1" />
@@ -23,6 +24,7 @@ const Home = () => {
             <CImage className="d-block w-100" src={Img3} alt="slide 3" />
           </CCarouselItem>
         </CCarousel>
+
       </div>
 
       <footer>
