@@ -2,6 +2,8 @@ import React from 'react';
 import Navbar from '../Navbar/Navbar.jsx';
 import vision from '../../../src/images/vision_1.png';
 import mission from '../../../src/images/mission.jpeg';
+import about from '../../../src/images/aboutUS.jpeg';
+import './about.css';
 
 const AboutUs = () => {
   return (
@@ -26,14 +28,14 @@ const AboutUs = () => {
             <p className="card-text">To provide an excellent qualitative level of professional and project management services with the high sense of responsibility to our clients and business associates.</p>
           </div>
         </div>
+        
 
-
-
-       
-
-        <div className='brief-company'>
-          <h2>Dilum BMK in Brief</h2>
-          <p>Dilum BMK Engineers (Pvt) Ltd are experts in supplying better & sustainable engineering services to the nation. 
+        {/* about us */}
+        <div className="card-aboutus" style={{ width: "80rem", marginTop:"20px" }}>
+          <img className="card-img-top" src={about}/>
+          <div className="card-body">
+            <h5 className="card-title">Dilum BMK in Brief</h5>
+            <p className="card-text">Dilum BMK Engineers (Pvt) Ltd are experts in supplying better & sustainable engineering services to the nation. 
             It was established as a partnership business in June 2000 and incorporated as a Limited Liability Company in October 2002.
             Throughout its history, BMK cranes have been an industry Leader in both technological and product advancements, 
             Contributing to its long-standing reputation as a manufacturer of high-quality Material Handling Equipment. During these years of operations, 
@@ -43,19 +45,28 @@ const AboutUs = () => {
             Load Testing and General Engineering Industries Throughout Sri Lanka.
             During past period BMK Engineers (Pvt) Ltd has completed the successful
             installation of several water treatment plants for National Water Supply & Drainage Board (NWSDB), 
-            Sri Lanka and in the process, BMK had joint working experience with companies overseas.</p>
+            Sri Lanka and in the process, BMK had joint working experience with companies overseas</p>
+          </div>
         </div>
+       
 
-        <div className='information'>
-          <h2>Corporate Information</h2>
-          <p>Name : Dilum BMK Engineers(Pvt)Ltd<br/>
+        {/* Corporate information */}
+        <div className="card-information" style={{ width: "18rem" }}>
+          <div className="card-body">
+            <h5 className="card-title">Corporate Information</h5>
+            <p className="card-text">
+             Name : Dilum BMK Engineers(Pvt)Ltd<br/>
              Business Register No: PV80685 <br/>
-             Date of Incorporation: 16<sup>th</sup> August 2011</p>
+             Date of Incorporation: 16<sup>th</sup> August 2011
+            </p>
+          </div>
         </div>
-
-        <div className='manage'>
-          <h2>Managing Director</h2>
-          <p>
+          
+        {/* manager details */}
+        <div className="card-manager" style={{ width: "18rem" }}>
+          <div className="card-body">
+            <h5 className="card-title">Managing Director</h5>
+            <p className="card-text">
             Mr. Dilum Samaranayake<br/>
             Dilum is the Managing Director of Dilum BMK Engineers (Pvt) Ltd. 
             with well over 25 years’ experience in the industry. 
@@ -67,12 +78,16 @@ const AboutUs = () => {
             he becomes a Managing director in Dilum BMK Engineers (Pvt) Ltd. 
             Presently it has become the leading overhead 
             travelling Cranes Manufacturing company  & Mechanical Contractors in Sri Lanka.
-          </p>
+            </p>
+          </div>
         </div>
+       
 
-        <div className='manage'>
-          <h2>Director Operation</h2>
-          <p>
+        {/* director details */}
+        <div className="card-director" style={{ width: "18rem" }}>
+          <div className="card-body">
+            <h5 className="card-title">Director Operation</h5>
+            <p className="card-text">
             Mr. Nimal Dharmasiri <br/>
             Dharmasiri is one of the founding members of the
             Dilum BMK Engineers (Pvt) Ltd and is an Executive Director
@@ -83,10 +98,17 @@ const AboutUs = () => {
             As of today, he counts more than 25 years of experience 
             in the Mechanical services industry and is an expert 
             in overhead crane manufacturing.
-          </p>
+            </p>
+          </div>
+        </div>
+        
+          
+        
+
+       
         </div>
       </div>
-    </div>
+    
   );
 }
 
