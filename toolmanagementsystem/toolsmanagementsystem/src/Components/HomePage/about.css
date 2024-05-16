@@ -1,0 +1,83 @@
+/* Navbar Styles */
+.navbar {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+  }
+  
+  /* Main Content Styles */
+  .about-us-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-top: 20px;
+  }
+  
+  /* Card Styles */
+  .card {
+    width: 18rem;
+    margin-bottom: 20px;
+  }
+  
+  .card-img-top {
+    width: 100%;
+    height: 200px; /* Adjust the height as needed */
+    object-fit: cover;
+  }
+  
+  .card-body {
+    text-align: center;
+  }
+  
+  .card-title {
+    font-size: 1.5rem;
+    color: #333;
+  }
+  
+  .card-text {
+    color: #666;
+  }
+  
+  /* Brief Company Styles */
+  .brief-company {
+    margin-top: 20px;
+  }
+  
+  .brief-company h2 {
+    font-size: 1.5rem;
+    color: #333;
+  }
+  
+  .brief-company p {
+    color: #666;
+  }
+  
+  /* Corporate Information Styles */
+  .information {
+    margin-top: 20px;
+  }
+  
+  .information h2 {
+    font-size: 1.5rem;
+    color: #333;
+  }
+  
+  .information p {
+    color: #666;
+  }
+  
+  /* Management Styles */
+  .manage {
+    margin-top: 20px;
+  }
+  
+  .manage h2 {
+    font-size: 1.5rem;
+    color: #333;
+  }
+  
+  .manage p {
+    color: #666;
+  }
+  

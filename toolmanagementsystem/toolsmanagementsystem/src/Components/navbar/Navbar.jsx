@@ -9,7 +9,9 @@ const Navbar = () => {
       <div className="container">
         <div className="logo">
           <img src={Brand} alt="Logo" />
+         
         </div>
+
         <div className="nav-elements">
           <ul>
             <li>
@@ -22,7 +24,7 @@ const Navbar = () => {
               <NavLink to="/projects">Projects</NavLink>
             </li>
             <li>
-              <NavLink to="/about">About</NavLink>
+              <NavLink to="/about">About Us</NavLink>
             </li>
             <li>
               <NavLink to="/contact">Contact</NavLink>
