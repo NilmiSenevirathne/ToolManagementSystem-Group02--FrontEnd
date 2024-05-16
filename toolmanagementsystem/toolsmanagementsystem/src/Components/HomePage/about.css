@@ -1,83 +1,59 @@
-/* Navbar Styles */
+/* Navbar */
 .navbar {
-    background-color: #333;
-    color: #fff;
-    padding: 10px 0;
-    text-align: center;
+    /* Add your styles here */
   }
   
-  /* Main Content Styles */
+  /* About Us Content */
   .about-us-content {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
+    align-items: flex-start;
     margin-top: 20px;
   }
   
-  /* Card Styles */
+  /* Cards */
   .card {
     width: 18rem;
     margin-bottom: 20px;
+    /* Add your styles here */
   }
   
+  .card-aboutus {
+    width: 80rem;
+    margin-top: 20px;
+    /* Add your styles here */
+  }
+  
+  .card-information {
+    width: 18rem;
+    /* Add your styles here */
+  }
+  
+  .card-manager {
+    width: 18rem;
+    /* Add your styles here */
+  }
+  
+  .card-director {
+    width: 18rem;
+    /* Add your styles here */
+  }
+  
+  /* Card Images */
   .card-img-top {
     width: 100%;
-    height: 200px; /* Adjust the height as needed */
-    object-fit: cover;
+    height: auto;
+    /* Add your styles here */
   }
   
-  .card-body {
-    text-align: center;
-  }
-  
+  /* Card Titles */
   .card-title {
-    font-size: 1.5rem;
-    color: #333;
+    /* Add your styles here */
   }
   
+  /* Card Text */
   .card-text {
-    color: #666;
-  }
-  
-  /* Brief Company Styles */
-  .brief-company {
-    margin-top: 20px;
-  }
-  
-  .brief-company h2 {
-    font-size: 1.5rem;
-    color: #333;
-  }
-  
-  .brief-company p {
-    color: #666;
-  }
-  
-  /* Corporate Information Styles */
-  .information {
-    margin-top: 20px;
-  }
-  
-  .information h2 {
-    font-size: 1.5rem;
-    color: #333;
-  }
-  
-  .information p {
-    color: #666;
-  }
-  
-  /* Management Styles */
-  .manage {
-    margin-top: 20px;
-  }
-  
-  .manage h2 {
-    font-size: 1.5rem;
-    color: #333;
-  }
-  
-  .manage p {
-    color: #666;
+    /* Add your styles here */
   }
   
