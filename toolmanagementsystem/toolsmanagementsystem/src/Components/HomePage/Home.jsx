@@ -11,22 +11,28 @@ const Home = () => {
   return (
     <div className='home'>
       <Navbar/>
-      <div className='slides'>
-      
-        <CCarousel controls transition="crossfade">
-          <CCarouselItem>
+      <CCarousel controls transition="crossfade">
+        <CCarouselItem>
+          <div className='slide'>
             <CImage className="d-block w-100" src={Img1} alt="slide 1" />
-          </CCarouselItem>
-          <CCarouselItem>
+          </div>
+        </CCarouselItem>
+        <CCarouselItem>
+          <div className='slide'>
             <CImage className="d-block w-100" src={Img2} alt="slide 2" />
-          </CCarouselItem>
-          <CCarouselItem>
+            
+          </div>
+        </CCarouselItem>
+        <CCarouselItem>
+          <div className='slide'>
             <CImage className="d-block w-100" src={Img3} alt="slide 3" />
-          </CCarouselItem>
-        </CCarousel>
-
-      </div>
-
+            <div className='cta-buttons'>
+              <button className='get-started-button'>Get Started</button>
+              <button className='login-button'>Login</button>
+            </div>
+          </div>
+        </CCarouselItem>
+      </CCarousel>
       <footer>
         {/* Add content for your footer here */}
         <p>&copy; 2024 Your Company Name. All rights reserved.</p>
