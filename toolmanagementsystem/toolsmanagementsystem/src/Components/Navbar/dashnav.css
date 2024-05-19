@@ -1,0 +1,17 @@
+.navbar-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px; /* Adjust padding as needed */
+    background-color: #09063f; /* Background color of the navbar */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
+    height: 50px;
+    width: 1330px;
+    margin-top: -2rem;
+    margin-left: -20px;
+}
+
+.icon{
+    color: aliceblue;
+    
+}

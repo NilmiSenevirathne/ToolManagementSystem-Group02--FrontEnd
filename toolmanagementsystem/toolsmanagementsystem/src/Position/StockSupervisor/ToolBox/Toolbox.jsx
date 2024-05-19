@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import StockSidebar from '../../../Components/Sidebar/StockSidebar.jsx'
+import DashNavbar from '../../../Components/Navbar/DashNavbar.jsx';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 import './maintoolbox.css'
@@ -35,6 +36,7 @@ const Toolbox = () => {
 
   return (
     <StockSidebar>
+    <DashNavbar/>
         <div className='toolbox'>
 
             <h1>Welcome to ToolBox Details Section!</h1>

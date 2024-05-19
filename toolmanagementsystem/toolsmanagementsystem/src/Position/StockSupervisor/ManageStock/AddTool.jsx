@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import StockSidebar from "../../../Components/Sidebar/StockSidebar";
+import DashNavbar from '../../../Components/Navbar/DashNavbar.jsx';
 import './addtool.css';
 
 export default function AddTool() {
@@ -78,6 +79,7 @@ export default function AddTool() {
 
   return (
     <StockSidebar>
+    <DashNavbar/>
       <div className="addform">
         <form onSubmit={(e) => onSubmit(e)} className="form-content">
           <h2 className="text-center m-4">New Tool Details Form</h2>

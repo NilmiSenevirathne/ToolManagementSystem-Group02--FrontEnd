@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import StockSidebar from '../../../Components/Sidebar/StockSidebar.jsx';
+import DashNavbar from '../../../Components/Navbar/DashNavbar.jsx';
 import axios from 'axios';
 import './reports.css'
 
@@ -25,6 +26,7 @@ const Reports = () => {
 
   return (
     <StockSidebar>
+    <DashNavbar/>
       <div className='report-content'>
         <h2>Welcome to Report Section!</h2>
 

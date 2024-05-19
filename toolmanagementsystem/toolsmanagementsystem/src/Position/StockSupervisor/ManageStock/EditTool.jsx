@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import './edittool.css';
 import StockSidebar from "../../../Components/Sidebar/StockSidebar";
+import DashNavbar from "../../../Components/Navbar/DashNavbar";
 
 export default function EditTool() {
   const navigate = useNavigate();
@@ -51,7 +52,7 @@ export default function EditTool() {
 
   return (
       <StockSidebar>
-        
+      <DashNavbar/>
           <div className="updateform">
             
             <form onSubmit={(e) => onSubmit(e)}>
