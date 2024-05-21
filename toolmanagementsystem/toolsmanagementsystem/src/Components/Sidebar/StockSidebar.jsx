@@ -50,7 +50,11 @@ const StockSidebar = ({ children }) => {
           <h1  className='logo'>Dilum BMK Engineers (Pvt) Ltd</h1>
 
           <div className='details'>
-              <img className="user" src={userpic}/>
+             {/* Wrap userpic with NavLink */}
+             <NavLink to="/profile" className="userpic-link">
+            <img className="user" src={userpic} alt="User Profile" />
+             </NavLink>
+            
               <h3 className='name'>Mr. Nimantha Dissanayake</h3>
               <h2 className='role'>{role}</h2>
           </div>
