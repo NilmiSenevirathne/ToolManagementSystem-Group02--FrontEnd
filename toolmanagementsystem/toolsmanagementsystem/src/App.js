@@ -28,7 +28,8 @@ import RequiredToolReport from "./Position/Sitesupervisor/RequiredToolReport.jsx
 import Tool from './Position/StockSupervisor/ToolBox/CreateToolBox/Tools/Tool.jsx';
 import Cart from './Position/StockSupervisor/ToolBox/CreateToolBox/Tools/Cart.jsx';
 import DashBoard from './Position/Admin/Dashboard/DashBoard.jsx';
-import AboutUs from './Components/HomePage/AboutUs.jsx';
+import StockProfile from './Components/Profile/StockProfile.jsx';
+
 
 
 
@@ -37,11 +38,10 @@ function App() {
 
       <>
          <Routes>
-                    <Route  path='/' element={<HomePage/>}> </Route> 
-                    <Route  path='/about' element={<AboutUs/>}> </Route> 
+                   
 
-                    <Route  path='/login' element={<LoginForm/>}> </Route> 
-    
+                    <Route  path='/' element={<LoginForm/>}> </Route> 
+                    <Route  path='/profile' element={<StockProfile/>}></Route>
                                      
                     {/* Admin pages  */}
                     <Route path="/admindashboard" element={<DashBoard/>} />
