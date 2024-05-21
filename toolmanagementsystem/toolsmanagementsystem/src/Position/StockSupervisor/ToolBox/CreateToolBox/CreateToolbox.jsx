@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate , useLocation} from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import StockSidebar from '../../../../Components/Sidebar/StockSidebar.jsx';
 import DashNavbar from '../../../../Components/Navbar/DashNavbar.jsx';
 import axios from "axios";
@@ -8,11 +8,21 @@ import './toolbox.css';
 function CreateToolbox() {
   const navigate = useNavigate();
   const location = useLocation();
-  const [locations , setLocations] = useState([]);
+  const initialState = location.state || {};
+
+  const [locations, setLocations] = useState([]);
   const [users, setUsers] = useState([]);
   const [projects, setProjects] = useState([]);
-  const [selectedTools, setSelectedTools] = useState([]);
-  
+  const [selectedTools, setSelectedTools] = useState(initialState.selectedTools || []);
+
+  const [toolbox, setToolbox] = useState({
+    toolbox_id: initialState.toolbox_id || "",
+    project_id: initialState.project_id || "",
+    site_supervisor_id: initialState.site_supervisor_id || "",
+    Location_id: initialState.Location_id || "",
+    selectedTools: initialState.selectedTools || [],
+  });
+
   useEffect(() => {
     fetchLocations();
     fetchUsers();
@@ -23,7 +33,7 @@ function CreateToolbox() {
     try {
       const response = await axios.get("http://localhost:8080/Projects");
       setProjects(response.data);
-    } catch(error) {
+    } catch (error) {
       console.error("Error fetching projects: ", error);
     }
   };
@@ -32,12 +42,12 @@ function CreateToolbox() {
     try {
       const response = await axios.get("http://localhost:8080/locations");
       setLocations(response.data);
-    } catch(error) {
+    } catch (error) {
       console.error("Error fetching locations: ", error);
     }
   };
 
-  const fetchUsers = async () => { 
+  const fetchUsers = async () => {
     try {
       const response = await axios.get("http://localhost:8080/authentication/getUsertoolbox");
       setUsers(response.data);
@@ -46,18 +56,6 @@ function CreateToolbox() {
     }
   };
 
-  // Initialize the state with initial values from location state
-  const initialValues = location.state || {};
-  const [toolbox, setToolbox] = useState({
-  toolbox_id: initialValues.toolbox_id || "",
-  project_id: initialValues.project_id || "",
-  site_supervisor_id: initialValues.site_supervisor_id || "",
-  Location_id: initialValues.Location_id || "",
-  tool: "",
-});
-  
-  const { toolboxId, projectId, sitesupervisorId, tool } = toolbox;
-
   const onInputChange = (e) => {
     setToolbox({ ...toolbox, [e.target.name]: e.target.value });
   };
@@ -65,31 +63,29 @@ function CreateToolbox() {
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:8080/toolbox//createtoolbox", {
+      const requestData = {
         ...toolbox,
-        selectedTools: selectedTools
-      });
+        selectedTools: selectedTools,
+      };
+      console.log("Submitting data:", requestData);
+      const response = await axios.post("http://localhost:8080/toolbox/createtoolbox", requestData);
       console.log("Response from server:", response);
       alert("New Toolbox Successfully Added!");
       navigate("/maintoolbox");
-    } catch(error) {
+    } catch (error) {
       console.error("Error occurred while adding toolbox:", error);
-      if(error.response){
+      if (error.response) {
         console.error("Server responded with:", error.response.data);
         alert("Unsuccessfully Added New Toolbox!");
       }
     }
   };
 
-  const handleToolSelection = (selectedTool) => {
-    setSelectedTools(prevSelectedTools => [...prevSelectedTools, selectedTool]);
-  };
-
   return (
     <StockSidebar>
-    <DashNavbar/>
+      <DashNavbar />
       <div className="form-container">
-        <form onSubmit={(e) => onSubmit(e)} className="form-content">
+        <form onSubmit={onSubmit} className="form-content">
           <h2 className="text-center my-4">New Toolbox Details Form</h2>
 
           <div className="mb-3">
@@ -101,7 +97,7 @@ function CreateToolbox() {
               className="form-control"
               placeholder="Enter new toolbox id"
               name="toolbox_id"
-              value={toolboxId}
+              value={toolbox.toolbox_id}
               onChange={onInputChange}
             />
           </div>
@@ -113,7 +109,7 @@ function CreateToolbox() {
             <select
               className="form-control"
               name="project_id"
-              value={projectId}
+              value={toolbox.project_id}
               onChange={onInputChange}
             >
               <option value="">Select project</option>
@@ -132,7 +128,7 @@ function CreateToolbox() {
             <select
               className="form-control"
               name="site_supervisor_id"
-              value={sitesupervisorId}
+              value={toolbox.site_supervisor_id}
               onChange={onInputChange}
             >
               <option value="">Select Name</option>
@@ -150,7 +146,7 @@ function CreateToolbox() {
             </label>
             <select
               className="form-control"
-              name=" Location_id"
+              name="Location_id"
               value={toolbox.Location_id}
               onChange={onInputChange}
             >
@@ -163,22 +159,25 @@ function CreateToolbox() {
             </select>
           </div>
 
-          <div>
-          <Link
-                to={{
-                pathname: '/tool',
-                state: toolbox // Pass the current toolbox state
-                }}>
-              <button type="button" className='selecttool'>Select Tools</button>
-          </Link>
+          <div className="mb-3">
+            <label htmlFor="selectedTools" className="form-label">
+              Selected Tools
+            </label>
+            <ul>
+              {selectedTools.map((tool) => (
+                <li key={tool.toolId}>{tool.toolName}</li>
+              ))}
+            </ul>
           </div>
 
-          <button type="submit" className="submit">
-            Submit
-          </button>
-          <button type="button" className="cancel" onClick={() => navigate("/managestock")}>
-            Cancel
-          </button>
+          <div>
+            <Link to="/tool" state={{ toolbox }}> {/* Pass the current form state */}
+              <button type="button" className="selecttool">Select Tools</button>
+            </Link>
+          </div>
+
+          <button type="submit" className="submit">Submit</button>
+          <button type="button" className="cancel" onClick={() => navigate("/managestock")}>Cancel</button>
         </form>
       </div>
     </StockSidebar>

@@ -4,7 +4,7 @@ import axios from 'axios';
 import StockSidebar from '../../../../../Components/Sidebar/StockSidebar.jsx';
 import DashNavbar from '../../../../../Components/Navbar/DashNavbar.jsx';
 import { FaCartArrowDown } from 'react-icons/fa';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import './tools.css';
 
 const Tool = () => {
@@ -13,6 +13,8 @@ const Tool = () => {
   const [cartItems, setCartItems] = useState([]);
   const [showCartDetails, setShowCartDetails] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
+  const { toolbox } = location.state || {}; // Retrieve the passed toolbox state
 
   useEffect(() => {
     fetchTools();
@@ -64,17 +66,20 @@ const Tool = () => {
 
   const handleSubmit = () => {
     if (cartItems.length > 0) {
-        navigate('/createtoolbox', { state: { selectedTools: cartItems, initialValues: { ...searchTools } } });
-        setShowCartDetails(false);
+      const formData = { 
+        ...toolbox,
+        selectedTools: cartItems
+      };
+      navigate('/createtoolbox', { state: formData });
+      setShowCartDetails(false);
     } else {
-        alert("Please select at least one tool.");
+      alert("Please select at least one tool.");
     }
-};
-
+  };
 
   return (
     <StockSidebar>
-    <DashNavbar/>
+      <DashNavbar/>
       <div className='toolsection'>
         <h1>Tools Section!</h1>
         <div style={{ display: 'flex', alignItems: 'center', marginBottom: '20px' }}>
@@ -99,7 +104,7 @@ const Tool = () => {
               </tr>
             </thead>
             <tbody className='bodysection'>
-              {filteredTools.map((tool, index) => (
+              {filteredTools.map((tool) => (
                 <tr key={tool.toolId}>
                   <td>{tool.toolId}</td>
                   <td>{tool.toolName}</td>
@@ -119,7 +124,7 @@ const Tool = () => {
         </button>
       </div>
       <Dialog open={showCartDetails} onClose={() => setShowCartDetails(false)}>
-        <DialogTitle>Cart Details</DialogTitle>
+        <DialogTitle>Selected Tools</DialogTitle>
         <DialogContent>
           <table className='table'>
             <thead>
