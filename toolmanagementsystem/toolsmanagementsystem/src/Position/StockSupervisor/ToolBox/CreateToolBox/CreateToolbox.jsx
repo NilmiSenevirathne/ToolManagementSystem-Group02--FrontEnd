@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate , useLocation} from "react-router-dom";
 import StockSidebar from '../../../../Components/Sidebar/StockSidebar.jsx';
+import DashNavbar from '../../../../Components/Navbar/DashNavbar.jsx';
 import axios from "axios";
 import './toolbox.css';
 
@@ -86,6 +87,7 @@ function CreateToolbox() {
 
   return (
     <StockSidebar>
+    <DashNavbar/>
       <div className="form-container">
         <form onSubmit={(e) => onSubmit(e)} className="form-content">
           <h2 className="text-center my-4">New Toolbox Details Form</h2>

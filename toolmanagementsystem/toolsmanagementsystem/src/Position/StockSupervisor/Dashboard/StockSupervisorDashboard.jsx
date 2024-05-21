@@ -4,6 +4,7 @@ import './Dashboard.css';
 import { Chart } from 'primereact/chart';
 import axios from 'axios';
 import StockSidebar from '../../../Components/Sidebar/StockSidebar';
+import DashNavbar from '../../../Components/Navbar/DashNavbar.jsx';
 
 const StockSupervisorDashboard = () => {
   const role = "StockSupervisor";
@@ -74,8 +75,9 @@ const StockSupervisorDashboard = () => {
 
   return (
       <StockSidebar>
-        
+      <DashNavbar/>
         <div className='dashboard-content'>
+          
           <h1 className='msg'>Welcome to {role} Dashboard!</h1>
           <div className='chart'>
              <Chart type="doughnut" data={pieChartData} options={chartOptions} />

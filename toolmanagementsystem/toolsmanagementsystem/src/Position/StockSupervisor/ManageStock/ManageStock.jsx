@@ -3,8 +3,9 @@ import './managestock.css';
 import axios from "axios";
 import { Link , useParams } from 'react-router-dom';
 import StockSidebar from '../../../Components/Sidebar/StockSidebar';
+import DashNavbar from '../../../Components/Navbar/DashNavbar.jsx';
 import { TextField } from '@mui/material'; // Import TextField from Material UI
-import { FaSearch } from 'react-icons/fa';
+
 
 const ManageStock = () => {
   const [tools ,setTools] = useState([]);
@@ -44,6 +45,7 @@ const ManageStock = () => {
 
   return (
     <StockSidebar>
+    <DashNavbar/>
       <div className='stock-content'>
         <h1>Welcome to Tool Details Section !</h1>
         

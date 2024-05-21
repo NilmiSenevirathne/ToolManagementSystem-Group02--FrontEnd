@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import StockSidebar from '../../../Components/Sidebar/StockSidebar.jsx';
+import DashNavbar from '../../../Components/Navbar/DashNavbar.jsx';
 import axios from 'axios';
 import './reports.css'
 
 const Reports = () => {
+  const [requiredtoolreports, setRequiredtoolreports] = useState([]);
   const [reports, setReports] = useState([]);
   const [error, setError] = useState(null);
 
@@ -14,7 +16,7 @@ const Reports = () => {
   // Fetch reports details from the database
   const loadReports = async () => {
     try {
-      const result = await axios.get("http://localhost:8080/reports/getreports");
+      const result = await axios.get("http://localhost:8080/api/reports/getreports");
       setReports(result.data);
     } catch (error) {
       console.error("Error fetching reports:", error);
@@ -24,7 +26,8 @@ const Reports = () => {
 
   return (
     <StockSidebar>
-      <div className='stock-content'>
+    <DashNavbar/>
+      <div className='report-content'>
         <h2>Welcome to Report Section!</h2>
 
         {error && <p>{error}</p>}
