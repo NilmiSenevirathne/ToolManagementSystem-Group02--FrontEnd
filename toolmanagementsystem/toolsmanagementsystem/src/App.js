@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter  as Router , Route,Routes } from 'react-router-dom';
 // import '../src/App.css';
+import HomePage from '../src/Components/HomePage/Home.jsx';
 import LoginForm from '../src/LoginPage/LoginForm.jsx';
 import ManageStock from './Position/StockSupervisor/ManageStock/ManageStock.jsx';
 import Toolbox from './Position/StockSupervisor/ToolBox/Toolbox.jsx';
@@ -26,58 +27,70 @@ import AddReportDetails from "./Position/Sitesupervisor/AddReportDetails.jsx";
 import RequiredToolReport from "./Position/Sitesupervisor/RequiredToolReport.jsx";
 import Tool from './Position/StockSupervisor/ToolBox/CreateToolBox/Tools/Tool.jsx';
 import Cart from './Position/StockSupervisor/ToolBox/CreateToolBox/Tools/Cart.jsx';
-import DashBoard from './Position/Admin/Dashboard/DashBoard.jsx';
+import StockProfile from './Components/Profile/StockProfile.jsx';
+import AdminDashboard from './Components/Admin/AdminDashboard.jsx';
+import { Toaster } from "react-hot-toast";
 
 
 
 function App() {
    return (
+     <>
+       <Toaster
+         position="top-center"
+         toastOptions={{ duration: 3000 }}
+         reverseOrder={false}
+       />
+       <Routes>
+         <Route path="/" element={<LoginForm />}>
+           {" "}
+         </Route>
+         <Route path="/profile" element={<StockProfile />}></Route>
 
-      <>
-         <Routes>
+         {/* Admin pages  */}
+         <Route path="/admindashboard" element={<AdminDashboard />} />
 
-                    {<Route  path='/' element={<LoginForm/>}> </Route> }
-    
-                                     
-                    {/* Admin pages  */}
-                    <Route path="/admindashboard" element={<DashBoard/>} />
-                    
-                    {/* Manager pages  */}
-                    <Route path="/managerdashboard" element={<ManagerDashboard/>} />
-                    <Route path="/manageprojects" element={<ManageProjects />} />
-                    <Route path="/ViewInventory" element={<ViewInventory />} />
-                    <Route path="/tracktoolbox" element={<MTrackToolbox />} />
-                    <Route path="/addprojects" element={<AddProjects />} />
-                    <Route path="/UpdateProjects/:project_id" element={<UpdateProjects />} />
-                    <Route path="/AddLocation" element={<AddLocation />} />
-                    <Route path="/locationHome" element={<LocationHome />} />
-                    <Route path="/home" element={<Home/>}/>
+         {/* Manager pages  */}
+         <Route path="/managerdashboard" element={<ManagerDashboard />} />
+         <Route path="/manageprojects" element={<ManageProjects />} />
+         <Route path="/ViewInventory" element={<ViewInventory />} />
+         <Route path="/tracktoolbox" element={<MTrackToolbox />} />
+         <Route path="/addprojects" element={<AddProjects />} />
+         <Route
+           path="/UpdateProjects/:project_id"
+           element={<UpdateProjects />}
+         />
+         <Route path="/AddLocation" element={<AddLocation />} />
+         <Route path="/locationHome" element={<LocationHome />} />
+         <Route path="/home" element={<Home />} />
 
+         {/* StockSupervisor pages  */}
+         <Route
+           path="/stocksupervisordashboard"
+           element={<StockSupervisorDashboard />}
+         />
+         <Route path="/managestock" element={<ManageStock />} />
+         <Route path="/addTool" element={<AddTool />} />
+         <Route path="/editTool/:toolId" element={<EditTool />} />
+         <Route path="/maintoolbox" element={<Toolbox />} />
+         <Route path="/createtoolbox" element={<CreateToolbox />} />
+         <Route path="/tool" element={<Tool />} />
+         <Route path="/cart" element={<Cart />} />
+         <Route path="/Stracktoolbox" element={<STrackToolbox />} />
+         <Route path="/reports" element={<Reports />} />
 
-                     {/* StockSupervisor pages  */}
-                    <Route path='/stocksupervisordashboard' element={<StockSupervisorDashboard/>} />
-                    <Route  path = "/managestock"  element={<ManageStock/>}/>
-                    <Route  path = "/addTool"  element={<AddTool/>}/>
-                    <Route  path='/editTool/:toolId' element={<EditTool/>}/>
-                    <Route  path = "/maintoolbox"  element={<Toolbox/>}/>
-                    <Route  path = "/createtoolbox"  element={<CreateToolbox/>}/>
-                    <Route  path = "/tool"  element={<Tool/>}/>
-                    <Route  path='/cart' element={<Cart/>}/>
-                    <Route  path = "/Stracktoolbox"  element={<STrackToolbox/>}/>
-                    <Route  path = "/reports"  element={<Reports/>}/>
+         {/* SiteSupervisor pages */}
 
-                    {/* SiteSupervisor pages */}
-
-                   <Route path='/supervisordashboard' element={<Dboard/>}> </Route>
-                   <Route path="/CreateReports" element={<CreateReports/>}/>
-                   <Route path="/ToolStatosRep" element={<ToolStatosRep/>}/>
-                   <Route path="/RequiredToolReport" element={<RequiredToolReport/>}/>
-                   <Route path="/AddReportDetails" element={<AddReportDetails/>}/>
-               </Routes>
-
-       </>
-
-     );
+         <Route path="/supervisordashboard" element={<Dboard />}>
+           {" "}
+         </Route>
+         <Route path="/CreateReports" element={<CreateReports />} />
+         <Route path="/ToolStatosRep" element={<ToolStatosRep />} />
+         <Route path="/RequiredToolReport" element={<RequiredToolReport />} />
+         <Route path="/AddReportDetails" element={<AddReportDetails />} />
+       </Routes>
+     </>
+   );
 
 }
 

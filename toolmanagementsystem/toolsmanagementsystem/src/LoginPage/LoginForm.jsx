@@ -38,20 +38,27 @@ function LoginForm() {
                 if (response.ok) {
                     console.log("Login Success!!");
 
-                    if (values.username === 'isuru@gmail.com' && values.password === 'isuru@123') {
-                        navigate("/admindashboard");
-                        
-                    } else if (values.username === 'gagana@gmail.com' && values.password === 'Gagana&623') {
-                        navigate("/managerdashboard");
-
-                    } else if (values.username === 'nimantha@gmail.com' && values.password === 'Nima#456') {
-                        navigate("/stocksupervisordashboard");
-
-                     }
-                     else if((values.username === 'kusal@gmail.com') && (values.password === 'kusal#@8'))
-                     {
-                        navigate("/supervisordashboard");
-                     }
+                    if (
+                      values.username === "chamathgoonetilleke@gmail.com" &&
+                      values.password === "12345678"
+                    ) {
+                      navigate("/admindashboard");
+                    } else if (
+                      values.username === "gagana@gmail.com" &&
+                      values.password === "Gagana&623"
+                    ) {
+                      navigate("/managerdashboard");
+                    } else if (
+                      values.username === "nimantha@gmail.com" &&
+                      values.password === "Nima#456"
+                    ) {
+                      navigate("/stocksupervisordashboard");
+                    } else if (
+                      values.username === "kusal@gmail.com" &&
+                      values.password === "kusal#@8"
+                    ) {
+                      navigate("/supervisordashboard");
+                    }
                        
                   } else {
                       throw new Error('Login failed'); // Throw error for unsuccessful response
