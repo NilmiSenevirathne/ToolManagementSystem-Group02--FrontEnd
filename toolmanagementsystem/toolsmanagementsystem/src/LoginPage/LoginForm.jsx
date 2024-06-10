@@ -36,32 +36,33 @@ function LoginForm() {
             })
             .then(response => {
                 if (response.ok) {
-                    console.log("Login Success!!");
-
-                    if (values.username === 'isuru@gmail.com' && values.password === 'isuru@123') {
-                        navigate("/admindashboard");
-                        
-                    } else if (values.username === 'gagana@gmail.com' && values.password === 'Gagana&623') {
-                        navigate("/managerdashboard");
-
-                    } else if (values.username === 'nimantha@gmail.com' && values.password === 'Nima#456') {
-                        navigate("/stocksupervisordashboard");
-
-                     }
-                     else if((values.username === 'kusal@gmail.com') && (values.password === 'kusal#@8'))
-                     {
-                        navigate("/supervisordashboard");
-                     }
-                       
+                    return response.text();      
                   } else {
-                      throw new Error('Login failed'); // Throw error for unsuccessful response
+                    return response.text().then(errorMessage => {
+                        throw new Error(errorMessage);
+                    }); // Throw error for unsuccessful response
                   }
               })
-              .then(data => {
-                  // Handle successful login response
-                  console.log(data); // This will be the data returned from backend
-                  // Redirect to dashboard or do something else
-              })
+              .then(role => {
+                console.log("Login Success!!");
+               
+                switch (role.toLowerCase()) {
+                    case 'admin':
+                        navigate("/admindashboard");
+                        break;
+                        case 'manager':
+                            navigate("/managerdashboard");
+                            break;
+                        case 'stocksupervisor':
+                            navigate("/stocksupervisordashboard");
+                            break;
+                        case 'supervisor':
+                        navigate("/supervisordashboard");
+                        break;
+                    default:
+                        throw new Error('Unknown role'); // Handle unexpected role
+                }
+            })
               .catch(error => {
                   console.error('Error during login:', error);
                   // Handle login error, maybe show a message to the user
