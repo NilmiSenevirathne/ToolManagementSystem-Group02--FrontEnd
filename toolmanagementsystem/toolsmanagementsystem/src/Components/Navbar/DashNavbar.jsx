@@ -7,8 +7,7 @@ const DashNavbar = () => {
   return (
     <div className='navbar-content'>
         <div className='icon'>
-        <MailOutlineIcon />
-        <ImageOutlinedIcon/>
+        
         </div>
           
     </div>
