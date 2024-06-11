@@ -1,19 +1,22 @@
-import axios from 'axios';
-import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import Sidebar from '../../../../../Components/ManagerSidebar.jsx';
+import axios from 'axios'; // Import axios for making HTTP requests
+import React, { useState, useEffect } from 'react'; // Import React and hooks
+import { Link, useNavigate } from 'react-router-dom';// Import React Router components
+import Sidebar from '../../../../../Components/ManagerSidebar.jsx';// Import Sidebar component
 
 export default function AddProjects() {
-  const navigate = useNavigate();
+  const navigate = useNavigate();// Initialize navigation
 
+  // State for storing locations and existing project IDs
   const [locations, setLocations] = useState([]);
   const [existingProjectIds, setExistingProjectIds] = useState([]); 
 
+  // Fetch locations and existing project IDs when the component mounts
   useEffect(() => {
     fetchLocations();
     fetchExistingProjectIds();
   }, []);
 
+  // Function to fetch locations from the backend
   const fetchLocations = async () => {
     try {
       const response = await axios.get("http://localhost:8080/locations");
@@ -23,6 +26,7 @@ export default function AddProjects() {
     }
   };
 
+  // Function to fetch existing project IDs from the backend
   const fetchExistingProjectIds = async () => {
     try {
       const response = await axios.get("http://localhost:8080/projects");
@@ -32,6 +36,7 @@ export default function AddProjects() {
     }
   };
 
+  // State for storing form data
   const [projects, setProjects] = useState({
     projectId: "",
     projectName: "",
@@ -43,6 +48,7 @@ export default function AddProjects() {
     date: ""
   });
 
+  // Function to reset the form
   const resetForm = () => {
     setProjects({
       projectId: "",
@@ -56,11 +62,14 @@ export default function AddProjects() {
     });
   };
 
+  // Destructure form data from projects state
   const { projectId, projectName, description, siteSupervisorID, siteSupervisorName, locationId, locationName, date } = projects;
 
+  // Handle input changes
   const onInputChange = (e) => {
     const { name, value } = e.target;
 
+// If the location ID is changed, update the location name
     if (name === "locationId") {
       const selectedLocation = locations.find(location => location.locationId === value);
       setProjects({ ...projects, locationId: value, locationName: selectedLocation ? selectedLocation.locationName : "" });
@@ -69,22 +78,26 @@ export default function AddProjects() {
     }
   };
 
+  // Handle form submission
   const onSubmit = async (e) => {
     e.preventDefault();
 
+    // Check if project ID already exists
     if (existingProjectIds.includes(projectId)) {
       alert("Project ID already exists. Please enter a different ID.");
       return;
     }
 
+    // Check if all fields are filled
     if (!projectId || !projectName || !description || !siteSupervisorID || !siteSupervisorName || !locationId || !date) {
       alert("Please fill in all fields.");
       return;
     }
 
+    // Try to add the new project to the backend
     try {
       await axios.post("http://localhost:8080/project", projects);
-      navigate("/manageprojects");
+      navigate("/manageprojects");// Navigate to manage projects page
     } catch (error) {
       console.error('Error adding project:', error);
     }
@@ -189,7 +202,7 @@ export default function AddProjects() {
             </form>
           </div>
           <br/>
-          <Link className='btn btn-outline-danger mx-2' to="/manageprojects">Back</Link>
+          <Link className='btn btn-outline-dark mx-2' to="/manageprojects">Back</Link>
         </div>
       </div>
     </Sidebar> 

@@ -7,24 +7,30 @@ import ReactPaginate from 'react-paginate'; // Import React Paginate
 import  './Home.css';
 
 export default function Home() {
-  const [projects, setProjects] = useState([]);
-  const [clickedProjects, setClickedProjects] = useState({});
+  // State variables
+  const [projects, setProjects] = useState([]); // To store the list of projects
+  const [clickedProjects, setClickedProjects] = useState({});// To store the state of clicked projects
   const [pageNumber, setPageNumber] = useState(0); // State to track current page number
 
+  // Constants for pagination
   const projectsPerPage = 4; // Number of projects to show per page
   const pagesVisited = pageNumber * projectsPerPage;
 
+  // useEffect hook to load projects when the component mounts
   useEffect(() => {
     loadProjects();
   }, []);
 
+  // Extract projectId from URL parameters (if needed)
   const { projectId } = useParams();
 
+  // Function to fetch projects from the backend
   const loadProjects = async () => {
     const result = await axios.get("http://localhost:8080/Projects");
     setProjects(result.data);
   };
 
+  // Function to delete a project
   const deleteProject = async (projectId) => {
     const confirmDelete = window.confirm("Are you sure you want to delete this project?");
     if (confirmDelete) {
@@ -33,12 +39,14 @@ export default function Home() {
     }
   };
 
+  // Function to handle the click event for a project
   const handleClick = (projectId) => {
     setClickedProjects(prevState => ({ ...prevState, [projectId]: true }));
   };
 
+  // Function to display the projects for the current page
   const displayProjects = projects
-    .slice(pagesVisited, pagesVisited + projectsPerPage)
+    .slice(pagesVisited, pagesVisited + projectsPerPage)// Get the projects for the current page
     .map((project, index) => (
       <tr key={index}>
         <th scope="row">{pagesVisited + index + 1}</th>
@@ -74,9 +82,10 @@ export default function Home() {
         </td>
       </tr>
     ));
-
+    // Calculate the total number of pages
   const pageCount = Math.ceil(projects.length / projectsPerPage);
 
+  // Function to handle page change
   const changePage = ({ selected }) => {
     setPageNumber(selected);
   };

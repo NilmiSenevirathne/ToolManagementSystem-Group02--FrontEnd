@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { Link, useParams } from 'react-router-dom';
-import Sidebar from '../../../Components/ManagerSidebar.jsx';
+import React, { useEffect, useState } from 'react';// Import React Router components for navigation and parameter handling
+import axios from 'axios';// Import React and hooks
+import { Link, useParams } from 'react-router-dom';// Import axios for making HTTP requests
+import Sidebar from '../../../Components/ManagerSidebar.jsx';// Import Sidebar component
 // import './LocationHome.css';
 export default function ViewLocations() {
 
@@ -66,7 +66,6 @@ export default function ViewLocations() {
               </tbody>
             </table>
           </div>
-          <Link className='btn btn-outline-danger mx-2' to="/AddLocation">Back</Link>
 
         </div>
         </div>

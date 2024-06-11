@@ -1,14 +1,15 @@
-import axios from 'axios'
-import React, { useEffect, useState } from 'react'
-import { Link,useNavigate, useParams } from 'react-router-dom'
-import Sidebar from '../../../../../Components/ManagerSidebar.jsx';
+import axios from 'axios'// Import axios for making HTTP requests
+import React, { useEffect, useState } from 'react'// Import React and hooks
+import { Link,useNavigate, useParams } from 'react-router-dom'// Import React Router components
+import Sidebar from '../../../../../Components/ManagerSidebar.jsx';// Import Sidebar component
 
 export default function Updateprojects() {
 
-  let navigate=useNavigate()
+  let navigate=useNavigate()// Initialize navigation
 
-const Id =useParams()
+const Id =useParams() // Get the project ID from the URL parameters
 
+// State for storing project details
         const[projects,setprojects]=useState({
           projectId:"", 
           projectName:"",
@@ -20,22 +21,27 @@ const Id =useParams()
 
         })
 
+        // Destructure project details from the state
         const{projectId,projectName,description,siteSupervisorID,siteSupervisorName,locationId,date}=projects
-          //get projects 
+           
           
+        // Handle input changes
         const onInputChange=(e)=>{
           setprojects({...projects,[e.target.name]:e.target.value})
         }
 
+        // Function to load project details from the backend
         const loadProjects =async ()=>{
           const result=await axios.get(`http://localhost:8080/Projects/${Id.project_id}`)
           setprojects(result.data)
         }
 
+        // Load project details when the component mounts
         useEffect (()=>{
           loadProjects();
         },[])
 
+        // Handle form submission
         const onSubmit =async(e)=>{
             e.preventDefault();
             await axios.put(`http://localhost:8080/Projects/${Id.project_id}`,projects)
@@ -121,10 +127,12 @@ const Id =useParams()
                   </div>
 
                     <button type="submit" className='btn btn-outline-primary'>Submit</button>
-                    <Link className='btn btn-success mx-2'to="/manageprojects">Back</Link>
 
                 </form>
                 </div>
+                <br/>
+                <Link className='btn btn-dark mx-2'to="/manageprojects">Back</Link>
+
                 </div>
         </div>
         </Sidebar> 
