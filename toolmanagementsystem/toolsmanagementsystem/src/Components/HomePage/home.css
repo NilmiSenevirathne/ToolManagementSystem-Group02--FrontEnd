@@ -1,0 +1,49 @@
+*{
+    overflow: hidden;
+}
+
+.slides {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center; /* Vertically center the content */
+  }
+  
+  .slides .carousel-item {
+    width: 100%;
+  }
+  
+  .slides .carousel-item img {
+    width: 100%;
+    height: auto;
+    object-fit: cover; /* Ensure the image covers the entire slide */
+  }
+  
+  /* Adjust carousel controls for responsiveness */
+  .slides .carousel-control-prev,
+  .slides .carousel-control-next {
+    width: 5%;
+  }
+  
+  /* Hide carousel controls on small screens */
+  @media (max-width: 768px) {
+    .slides .carousel-control-prev,
+    .slides .carousel-control-next {
+      display: none;
+    }
+  }
+  
+  /* Style footer */
+  footer {
+    text-align: center;
+    padding: 20px 0;
+    background-color: #f8f9fa;
+  }
+  
+  footer p {
+    margin: 0;
+    font-size: 14px;
+    color: #333;
+  }
+  

@@ -1,71 +1,84 @@
-/* toolbox.css */
-
-/* Form container */
+/* Style for form container */
 .form-container {
-  width: 100%;
-  max-width: 500px;
+  width: 60%;
   margin: 0 auto;
-  padding: 20px;
+  max-width: 800px;
 }
 
-/* Form content */
+/* Style for form content */
 .form-content {
   background-color: #f9f9f9;
-  padding: 20px;
-  border-radius: 8px;
+  padding: 50px;
+  border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 70%;
 }
 
-/* Form input fields */
-.form-control {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 15px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+/* Style for form heading */
+.form-content h2 {
+  text-align: center;
+  margin-bottom: 20px;
 }
 
-/* Form labels */
+/* Style for form labels */
 .form-label {
   font-weight: bold;
 }
 
-/* Submit button */
-.submit {
-  background-color: #0066ff;
-  color: #fff;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.submit:hover {
-  background-color: #0056b3;
-}
-
-.selecttool{
-  background-color: rgb(61, 143, 36);
-  color: #fff;
-  padding: 10px 20px;
+/* Style for form inputs */
+.form-control {
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
   border-radius: 5px;
-  
+  width: 100%; /* Ensure input fields take up full width */
 }
 
+/* Style for select tool button */
+.selecttool {
+  background-color: #28972a;
+  color: #fff;
+  padding: 10px 30px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 10px;
+  margin-left: 21rem;
+  margin-right: auto;
+}
 
-/* Cancel button */
-.cancel:hover {
-  background-color: #dc3545;
+/* Style for submit and cancel buttons */
+.submit, .cancel {
+  background-color: #3d5cf4;
   color: #fff;
   padding: 10px 20px;
   border: none;
-  border-radius: 4px;
+  border-radius: 6px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
-  margin-left: 10px;
+  margin-top: 10px;
+  width: 100%;
 }
 
-.cancel:hover {
-  background-color: #c82333;
+.cancel {
+  background-color: #dc3545;
+}
+
+/* Hover effect */
+.submit:hover, .cancel:hover, .selecttool:hover {
+  opacity: 1;
+}
+
+/* Responsive layout */
+@media screen and (max-width: 768px) {
+  .form-content {
+    width: 90%; /* Adjusted width for smaller screens */
+    padding: 30px; /* Adjusted padding for smaller screens */
+  }
+
+  .selecttool {
+    margin-left: auto;
+    margin-right: auto;
+  }
 }

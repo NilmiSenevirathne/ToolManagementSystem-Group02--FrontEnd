@@ -1,3 +1,6 @@
+/* updateform.css */
+
+/* Container for the form */
 .updateform {
   max-width: 500px;
   margin: 0 auto;
@@ -7,15 +10,18 @@
   margin-top: 5rem;
 }
 
+/* Heading */
 .updateform h2 {
   text-align: center;
   margin-bottom: 20px;
 }
 
+/* Form label */
 .updateform .form-label {
   font-weight: bold;
 }
 
+/* Form input fields */
 .updateform .form-control {
   width: 100%;
   padding: 10px;
@@ -24,6 +30,7 @@
   border-radius: 5px;
 }
 
+/* Update button */
 .updateform .update-btn {
   display: block;
   width: 100%;
@@ -39,6 +46,7 @@
   background: #0056b3;
 }
 
+/* Cancel button */
 .updateform .btn-cancel {
   display: block;
   width: 100%;
@@ -54,4 +62,20 @@
 
 .updateform .btn-cancel:hover {
   background: #c82333;
+}
+
+/* Responsive layout */
+@media screen and (max-width: 768px) {
+  .updateform {
+    padding: 10px;
+    margin-top: 3rem;
+  }
+
+  .updateform .form-control {
+    font-size: 14px;
+  }
+
+  .updateform .update-btn, .updateform .btn-cancel {
+    font-size: 12px;
+  }
 }

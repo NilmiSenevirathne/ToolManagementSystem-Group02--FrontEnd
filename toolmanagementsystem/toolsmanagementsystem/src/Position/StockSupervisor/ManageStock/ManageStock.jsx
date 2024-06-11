@@ -3,8 +3,9 @@ import './managestock.css';
 import axios from "axios";
 import { Link , useParams } from 'react-router-dom';
 import StockSidebar from '../../../Components/Sidebar/StockSidebar';
+import DashNavbar from '../../../Components/Navbar/DashNavbar.jsx';
 import { TextField } from '@mui/material'; // Import TextField from Material UI
-import { FaSearch } from 'react-icons/fa';
+
 
 const ManageStock = () => {
   const [tools ,setTools] = useState([]);
@@ -44,6 +45,7 @@ const ManageStock = () => {
 
   return (
     <StockSidebar>
+    <DashNavbar/>
       <div className='stock-content'>
         <h1>Welcome to Tool Details Section !</h1>
         
@@ -69,8 +71,8 @@ const ManageStock = () => {
                 <th scope='col'>ToolName</th>
                 <th scope='col'>Description</th>
                 <th scope='col'>Quantity</th>
-                <th scope='col'>AvailableQunatity</th>
-                <th scope='col'>AllocatedQuantity</th>
+                {/* <th scope='col'>AvailableQunatity</th>
+                <th scope='col'>AllocatedQuantity</th> */}
                 <th scope='col'>Action</th>
               </tr>
             </thead>
@@ -82,8 +84,8 @@ const ManageStock = () => {
                   <td>{tool.toolName}</td>
                   <td>{tool.description}</td>
                   <td>{tool.quantity}</td>
-                  <td>{tool.availableQuantity}</td>
-                  <td>{tool.allocatedQuantity}</td>
+                  {/* <td>{tool.availableQuantity}</td>
+                  <td>{tool.allocatedQuantity}</td> */}
                   <td>
                     <Link to={`/editTool/${tool.toolId}`}><button className='btn-edit'>Update</button></Link>
                     <button className='btn-delete' onClick={() => deleteTool(tool.toolId)}>Delete</button>

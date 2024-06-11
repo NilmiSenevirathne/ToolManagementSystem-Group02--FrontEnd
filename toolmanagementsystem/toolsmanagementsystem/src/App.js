@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter  as Router , Route,Routes } from 'react-router-dom';
 // import '../src/App.css';
+import HomePage from '../src/Components/HomePage/Home.jsx';
 import LoginForm from '../src/LoginPage/LoginForm.jsx';
 import ManageStock from './Position/StockSupervisor/ManageStock/ManageStock.jsx';
 import Toolbox from './Position/StockSupervisor/ToolBox/Toolbox.jsx';
@@ -25,9 +26,10 @@ import ToolStatosRep from "./Position/Sitesupervisor/ToolStatosRep.jsx";
 import AddReportDetails from "./Position/Sitesupervisor/AddReportDetails.jsx";
 import RequiredToolReport from "./Position/Sitesupervisor/RequiredToolReport.jsx";
 import Tool from './Position/StockSupervisor/ToolBox/CreateToolBox/Tools/Tool.jsx';
+import Cart from './Position/StockSupervisor/ToolBox/CreateToolBox/Tools/Cart.jsx';
 import DashBoard from './Position/Admin/Dashboard/DashBoard.jsx';
 import UpdateLocation from './Position/Manager/Pages/ManageProjects/Projects/Location/UpdateLocation.jsx';
-
+import StockProfile from './Components/Profile/StockProfile.jsx';
 
 
 function App() {
@@ -35,9 +37,10 @@ function App() {
 
       <>
          <Routes>
+                   
 
-                    {<Route  path='/' element={<LoginForm/>}> </Route> }
-    
+                    <Route  path='/' element={<LoginForm/>}> </Route> 
+                    <Route  path='/profile' element={<StockProfile/>}></Route>
                                      
                     {/* Admin pages  */}
                     <Route path="/admindashboard" element={<DashBoard/>} />
@@ -64,6 +67,7 @@ function App() {
                     <Route  path = "/maintoolbox"  element={<Toolbox/>}/>
                     <Route  path = "/createtoolbox"  element={<CreateToolbox/>}/>
                     <Route  path = "/tool"  element={<Tool/>}/>
+                    <Route  path='/cart' element={<Cart/>}/>
                     <Route  path = "/Stracktoolbox"  element={<STrackToolbox/>}/>
                     <Route  path = "/reports"  element={<Reports/>}/>
 
