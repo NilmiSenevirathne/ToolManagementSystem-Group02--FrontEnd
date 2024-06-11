@@ -43,8 +43,8 @@ export default function Home() {
       <tr key={index}>
         <th scope="row">{pagesVisited + index + 1}</th>
         <td>{project.projectId}</td>
-        <td>{project.description}</td>
         <td>{project.projectName}</td>
+        <td>{project.description}</td>
         <td>{project.siteSupervisorID}</td>
         <td>{project.siteSupervisorName}</td>
         <td>{project.locationId}</td>
@@ -60,7 +60,7 @@ export default function Home() {
             {clickedProjects[project.projectId] ? (
               <>
                 <Check style={{ color: 'green' }} /> {/* Show the tick icon */}
-                <span className="text-success">finished</span> {/* Show the finished status */}
+                <span className="text-success">Completed</span> {/* Show the finished status */}
               </>
             ) : (
               <button
@@ -86,16 +86,16 @@ export default function Home() {
       <div className='container-fluid'>
         <h3 style={{ textAlign: 'center' }}>Manage Projects</h3>
         <Link className="btn" style={{ backgroundColor: 'navy', color: 'white' }} to="/addprojects">Add Projects</Link>
-        <div className="py-4" style={{ maxHeight: '70vh', overflowY: 'auto', maxWidth: '1100px' }}>
+        <div className="py-4" style={{ maxHeight: '70vh', overflowY: 'auto' }}>
           <table className="table border shadow">
             <thead style={{ position: 'sticky', top: 0, zIndex: 1, background: '#fff' }}>
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">Project id</th>
-                <th scope="col">Description</th>
                 <th scope="col">projectName</th>
-                <th scope="col">supervisor</th>
-                <th scope="col">SiteSupervisor</th>
+                <th scope="col">Description</th>
+                <th scope="col">SiteSupervisor Id</th>
+                <th scope="col">SiteSupervisor Name</th>
                 <th scope="col">locationId</th>
                 <th scope="col">Date</th>
                 <th scope="col">Action</th>
@@ -107,7 +107,9 @@ export default function Home() {
               {displayProjects}
             </tbody>
           </table>
-          <ReactPaginate
+          
+        </div>
+        <ReactPaginate
             previousLabel={"Previous"}
             nextLabel={"Next"}
             pageCount={pageCount}
@@ -118,7 +120,6 @@ export default function Home() {
             disabledClassName={"paginationDisabled"}
             activeClassName={"paginationActive"}
           />
-        </div>
       </div>
     </Sidebar>
   );

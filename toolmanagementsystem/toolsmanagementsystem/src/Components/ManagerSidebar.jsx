@@ -26,12 +26,12 @@ const Sidebar = ({ children }) => {
     },
     {
       path: "/ViewInventory",
-      name: "ViewInventory",
+      name: "View Inventory",
       icon: <FaBriefcase />
     },
     {
-      path: "/tracktoolbox",
-      name: "Tracktoolbox",
+      path: "/ViewLocations",
+      name: "View Locations",
       icon: <FaSearch />
     },
    

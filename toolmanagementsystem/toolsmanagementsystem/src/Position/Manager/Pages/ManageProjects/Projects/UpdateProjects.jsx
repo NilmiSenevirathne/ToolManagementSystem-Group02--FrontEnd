@@ -110,8 +110,8 @@ const Id =useParams()
                       />
                     </div>
 
-                  <div className='col'>
-                  <label htmlFor="date" className="form-label">Date </label>
+                  <div className='mb-3'>
+                  <label htmlFor="Name" className="form-label">Date </label>
                   <input type={"date"} className='form-control' 
                     placeholder='Enter project date' 
                     name="date"

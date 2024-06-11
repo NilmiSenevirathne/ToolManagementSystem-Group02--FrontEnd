@@ -13,7 +13,7 @@ import StockSupervisorDashboard from './Position/StockSupervisor/Dashboard/Stock
 import ManagerDashboard from './Position/Manager/Pages/ManagerDashboard.jsx';
 import ManageProjects from './Position/Manager/Pages/ManageProjects/ManageProjects.jsx';
 import ViewInventory from './Position/Manager/Pages/ViewInventory.jsx';
-import MTrackToolbox from './Position/Manager/Pages/TrackToolbox.jsx';
+import ViewLocations from './Position/Manager/Pages/ViewLocations.jsx';
 import AddProjects from './Position/Manager/Pages/ManageProjects/Projects/AddProjects.jsx';
 import UpdateProjects from './Position/Manager/Pages/ManageProjects/Projects/UpdateProjects.jsx'
 import LocationHome from './Position/Manager/Pages/ManageProjects/Projects/Location/LocationHome.jsx';
@@ -46,7 +46,7 @@ function App() {
                     <Route path="/managerdashboard" element={<ManagerDashboard/>} />
                     <Route path="/manageprojects" element={<ManageProjects />} />
                     <Route path="/ViewInventory" element={<ViewInventory />} />
-                    <Route path="/tracktoolbox" element={<MTrackToolbox />} />
+                    <Route path="/ViewLocations" element={<ViewLocations />} />
                     <Route path="/addprojects" element={<AddProjects />} />
                     <Route path="/UpdateProjects/:project_id" element={<UpdateProjects />} />
                     <Route path="/AddLocation" element={<AddLocation />} />

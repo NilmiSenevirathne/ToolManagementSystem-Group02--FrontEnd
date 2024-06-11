@@ -11,13 +11,12 @@ export default function AddLocation() {
     const[locations,setlocation]=useState({
         locationId:"",
         locationName:""
-
       })
 
     const {locationId,locationName}=locations
 
     const onInputChange=(e)=>{
-        setlocation({...locations,[e.target.name]:e.target.value})
+        setlocation({...locations,[e.target.name]:e.target.value}) 
     }
 
     const onSubmit=async(e)=>{
@@ -30,7 +29,7 @@ export default function AddLocation() {
         }
 
         await axios.post("http://localhost:8080/location",locations)
-        navigate("/locationHome")
+        navigate("/ViewLocations")
     }
 
   return (
@@ -65,7 +64,7 @@ export default function AddLocation() {
                 </form>
                 <div className='mt-3' >
             <Link className='btn btn-outline-danger mx-2'to="/addprojects">Back</Link>
-            <Link className='btn btn-outline-primary text-decoration-none' to='/locationHome'>View Existing Locations</Link>
+            <Link className='btn btn-outline-primary text-decoration-none' to='/ViewLocations'>View Existing Locations</Link>
             </div>
             </div>
             </div>

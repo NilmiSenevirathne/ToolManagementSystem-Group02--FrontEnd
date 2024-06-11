@@ -4,20 +4,16 @@ import { Link, useNavigate } from 'react-router-dom';
 import Sidebar from '../../../../../Components/ManagerSidebar.jsx';
 
 export default function AddProjects() {
-  // Get location ids to the dropdown box
   const navigate = useNavigate();
 
   const [locations, setLocations] = useState([]);
-  const [existingProjectIds, setExistingProjectIds] = useState([]); // State to store existing project IDs
-
+  const [existingProjectIds, setExistingProjectIds] = useState([]); 
 
   useEffect(() => {
     fetchLocations();
-    fetchExistingProjectIds(); // Fetch existing project IDs when component mounts
-
+    fetchExistingProjectIds();
   }, []);
 
-  //get location method
   const fetchLocations = async () => {
     try {
       const response = await axios.get("http://localhost:8080/locations");
@@ -27,18 +23,15 @@ export default function AddProjects() {
     }
   };
 
-    // Function to fetch existing project IDs
-    const fetchExistingProjectIds = async () => {
-      try {
-        const response = await axios.get("http://localhost:8080/projects"); // Assuming this endpoint returns existing projects
-        setExistingProjectIds(response.data.map(project => project.projectId));
-      } catch (error) {
-        console.error('Error fetching existing project IDs:', error);
-      }
-    };
-  
+  const fetchExistingProjectIds = async () => {
+    try {
+      const response = await axios.get("http://localhost:8080/projects");
+      setExistingProjectIds(response.data.map(project => project.projectId));
+    } catch (error) {
+      console.error('Error fetching existing project IDs:', error);
+    }
+  };
 
-  // State to store project details
   const [projects, setProjects] = useState({
     projectId: "",
     projectName: "",
@@ -46,22 +39,26 @@ export default function AddProjects() {
     siteSupervisorID: "",
     siteSupervisorName: "",
     locationId: "",
-    date:""
-
+    locationName: "",
+    date: ""
   });
 
-  const { projectId, projectName, description, siteSupervisorID, siteSupervisorName, locationId,date } = projects;
+  const { projectId, projectName, description, siteSupervisorID, siteSupervisorName, locationId, locationName, date } = projects;
 
-  // Function to handle input changes
   const onInputChange = (e) => {
-    setProjects({ ...projects, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+
+    if (name === "locationId") {
+      const selectedLocation = locations.find(location => location.locationId === value);
+      setProjects({ ...projects, locationId: value, locationName: selectedLocation ? selectedLocation.locationName : "" });
+    } else {
+      setProjects({ ...projects, [name]: value });
+    }
   };
 
-  // Function to handle form submission
   const onSubmit = async (e) => {
     e.preventDefault();
 
-    // Check if the entered project ID already exists
     if (existingProjectIds.includes(projectId)) {
       alert("Project ID already exists. Please enter a different ID.");
       return;
@@ -80,7 +77,6 @@ export default function AddProjects() {
     }
   };
 
-  
   return (
     <Sidebar> 
       <div className='container-fluid'>
@@ -89,7 +85,7 @@ export default function AddProjects() {
             
             <h2 className='text-center m-4'>Create a Project for assign to site supervisor</h2>
             <form onSubmit={(e) => onSubmit(e)}>
-              {/* <div className='row mb-3'> */}
+              <div className='row mb-3'>
                 <div className='col'>
                   <label htmlFor="projectId" className="form-label">Project Id</label>
                   <input type="text" className='form-control'
@@ -105,42 +101,54 @@ export default function AddProjects() {
                     placeholder='Enter Project Name' 
                     name="projectName"
                     value={projectName}
-                    onChange={(e)=>onInputChange(e)}
+                    onChange={(e) => onInputChange(e)}
                   />
                 </div>
-              {/* </div> */}
-              {/* <div className='row mb-3'> */}
+              </div>
+              <div className='row mb-3'>
                 <div className='col'>
                   <label htmlFor="description" className="form-label">Description</label>
                   <input type={"text"} className='form-control' 
                     placeholder='Enter Description' 
                     name="description"
                     value={description}
-                    onChange={(e)=>onInputChange(e)}
+                    onChange={(e) => onInputChange(e)}
                   />
                 </div>
                 <div className='col'>
+                  <label htmlFor="date" className="form-label">Date</label>
+                  <input type={"date"} className='form-control' 
+                    name="date"
+                    value={date}
+                    onChange={(e) => onInputChange(e)}
+                  />
+                </div>
+                
+              </div>
+              <div className='row mb-3'>
+              <div className='col'>
                   <label htmlFor="siteSupervisorID" className="form-label">Site Supervisor ID</label>
                   <input type={"text"} className='form-control' 
                     placeholder='Enter Site Supervisor ID' 
                     name="siteSupervisorID"
                     value={siteSupervisorID}
-                    onChange={(e)=>onInputChange(e)}
+                    onChange={(e) => onInputChange(e)}
                   />
                 </div>
-              {/* </div> */}
-              {/* <div className='row mb-3'> */}
                 <div className='col'>
                   <label htmlFor="siteSupervisorName" className="form-label">Site Supervisor name</label>
                   <input type={"text"} className='form-control' 
                     placeholder='Enter Supervisor name' 
                     name="siteSupervisorName"
                     value={siteSupervisorName}
-                    onChange={(e)=>onInputChange(e)}
+                    onChange={(e) => onInputChange(e)}
                   />
                 </div>
-                {/* location drop down */}
-                <div className='col'>
+                
+                
+              </div>
+              <div className='row mb-3'>
+              <div className='col'>
                   <label htmlFor="locationId" className="form-label">Location ID</label>
                   <select className='form-control' name="locationId" value={locationId} onChange={onInputChange}>
                     <option value="">Select Location ID</option>
@@ -148,39 +156,25 @@ export default function AddProjects() {
                       <option key={location.id} value={location.locationId}>{location.locationId}</option>
                     ))}
                   </select>
-
-                  <div className='col'>
-                  <label htmlFor="siteSupervisorName" className="form-label">Date </label>
-                  <input type={"date"} className='form-control' 
-                    placeholder='Enter project date' 
-                    name="date"
-                    value={date}
-                    onChange={(e)=>onInputChange(e)}
+                </div>
+              <div className='col'>
+                  <label htmlFor="locationName" className="form-label">Location Name</label>
+                  <input type={"text"} className='form-control' 
+                    placeholder='Location Name' 
+                    name="locationName"
+                    value={locationName}
+                    readOnly
                   />
                 </div>
-
-
-                  <Link className="btn btn-outline-primary mt-2" to="/AddLocation" style={{ 
-                    color: "#ffc107", /* Yellow color */
-                    borderColor: "#ffc107" /* Yellow color */}}>Add Locations</Link>
-                    <button type="submit" className='btn btn-outline-primary'>Submit</button>
-
+             
                 </div>
-              {/* </div> */}
-              {/* <div className='row'> */}
-               
-                
-              {/* </div> */}
+              <button type="submit" className='btn btn-outline-primary'>Submit</button>
             </form>
-
           </div>
           <br/>
           <Link className='btn btn-outline-danger mx-2' to="/manageprojects">Back</Link>
-
         </div>
-
       </div>
-
     </Sidebar> 
   )
 }
