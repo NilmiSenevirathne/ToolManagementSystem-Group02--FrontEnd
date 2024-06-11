@@ -34,7 +34,6 @@ const Sidebar = ({ children }) => {
       name: "View Locations",
       icon: <FaSearch />
     },
-   
     {
       path: "/",
       name: "Logout",
@@ -47,13 +46,11 @@ const Sidebar = ({ children }) => {
       <div className='sidebar'>
         <div className='companylogo'>
           <h1  className='logo'>Dilum BMK Engineers (Pvt) Ltd</h1>
-
           <div className='details'>
               <img className="user" src={userpic}/>
               <h3 className='name'>Mr.Dilum Samaranayake</h3>
               <h2 className='role'>{role}</h2>
           </div>
-           
         </div>
         
         {
