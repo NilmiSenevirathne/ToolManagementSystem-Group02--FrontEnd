@@ -60,6 +60,7 @@ function CreateToolbox() {
     setToolbox({ ...toolbox, [e.target.name]: e.target.value });
   };
 
+  
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -83,7 +84,7 @@ function CreateToolbox() {
 
   return (
     <StockSidebar>
-      <DashNavbar />
+     
       <div className="form-container">
         <form onSubmit={onSubmit} className="form-content">
           <h2 className="text-center my-4">New Toolbox Details Form</h2>
@@ -159,22 +160,26 @@ function CreateToolbox() {
             </select>
           </div>
 
-          <div className="mb-3">
-            <label htmlFor="selectedTools" className="form-label">
-              Selected Tools
-            </label>
-            <ul>
-              {selectedTools.map((tool) => (
-                <li key={tool.toolId}>{tool.toolName}</li>
-              ))}
-            </ul>
-          </div>
-
           <div>
             <Link to="/tool" state={{ toolbox }}> {/* Pass the current form state */}
               <button type="button" className="selecttool">Select Tools</button>
             </Link>
           </div>
+
+          {/* //selectedtool textarea */}
+          <div className="mb-3">
+          <label htmlFor="selectedTools" className="form-label">
+          Selected Tools
+          </label>
+          <textarea 
+           id="selectedTools" 
+           className="form-control" 
+           rows="5"
+           readOnly
+           value={selectedTools.map(tool => tool.toolName).join(', ')}
+      />
+      </div>
+
 
           <button type="submit" className="submit">Submit</button>
           <button type="button" className="cancel" onClick={() => navigate("/managestock")}>Cancel</button>

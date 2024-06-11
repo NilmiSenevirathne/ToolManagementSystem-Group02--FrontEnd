@@ -75,7 +75,7 @@ const StockSupervisorDashboard = () => {
 
   return (
       <StockSidebar>
-      <DashNavbar/>
+      {/* <DashNavbar/> */}
         <div className='dashboard-content'>
           
           <h1 className='msg'>Welcome to {role} Dashboard!</h1>
