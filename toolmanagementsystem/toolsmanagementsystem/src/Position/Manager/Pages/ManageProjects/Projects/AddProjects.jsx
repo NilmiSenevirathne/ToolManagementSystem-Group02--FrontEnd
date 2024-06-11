@@ -43,6 +43,19 @@ export default function AddProjects() {
     date: ""
   });
 
+  const resetForm = () => {
+    setProjects({
+      projectId: "",
+    projectName: "",
+    description: "",
+    siteSupervisorID: "",
+    siteSupervisorName: "",
+    locationId: "",
+    locationName: "",
+    date: ""
+    });
+  };
+
   const { projectId, projectName, description, siteSupervisorID, siteSupervisorName, locationId, locationName, date } = projects;
 
   const onInputChange = (e) => {
@@ -168,7 +181,11 @@ export default function AddProjects() {
                 </div>
              
                 </div>
-              <button type="submit" className='btn btn-outline-primary'>Submit</button>
+                <div>
+                  <button type="button" className='btn btn-outline-secondary mx-2' onClick={resetForm}>Clear</button>
+                  <button type="submit" className='btn btn-outline-primary'>Submit</button>
+                </div>
+              
             </form>
           </div>
           <br/>
