@@ -24,6 +24,12 @@ const Reports = () => {
     }
   };
 
+    // Function to download image as PDF
+  const downloadPDF = (base64Data) => {
+    
+    alert("Downloading PDF...");
+  };
+
   return (
     <StockSidebar>
     <DashNavbar/>
@@ -39,7 +45,7 @@ const Reports = () => {
                 <th scope='col'>Report ID</th>
                 <th scope='col'>Created Date</th>
                 <th scope='col'>Project Name</th>
-                <th scope='col'>Action</th>
+                <th scope='col'>Report Data</th>
               </tr>
             </thead>
             <tbody>
@@ -48,7 +54,12 @@ const Reports = () => {
                   <td>{report.report_id}</td>
                   <td>{report.created_at}</td>
                   <td>{report.project_name}</td>
-                  <td><button className='downloadbtn'>Download</button></td>
+                  <td>
+                    <a href={`data:image/png;base64,${report.report_data}`} download="report.pdf">
+                      Download 
+                    </a>
+                  </td>
+                 
                 </tr>
               ))}
             </tbody>
