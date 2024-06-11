@@ -2,52 +2,35 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link, useParams } from 'react-router-dom';
 import Sidebar from '../../../../Components/ManagerSidebar.jsx';
-import { saveAs } from 'file-saver';
-import { PDFDocument, Text, Page, Document, StyleSheet } from '@react-pdf/renderer';
-
-
-
-const styles = StyleSheet.create({
-  page: {
-    flexDirection: 'column',
-    backgroundColor: '#E4E4E4',
-    padding: 10
-  },
-  section: {
-    margin: 10,
-    padding: 10,
-    flexGrow: 1
-  },
-  header: {
-    fontSize: 20,
-    textAlign: 'center',
-    marginBottom: 10
-  },
-  content: {
-    fontSize: 14,
-    marginBottom: 5
-  }
-});
-
-// const generatePdfBlob = async (pdfDoc, project) => {
-//   const asPdf = PDFDocument.create(pdfDoc);
-//   return await asPdf.toBlob();
-// };
+import { Check } from '@mui/icons-material'; // Import the Check icon from Material-UI
+import ReactPaginate from 'react-paginate'; // Import React Paginate
+import  './Home.css';
 
 export default function Home() {
-  const [projects, setProjects] = useState([]);
+  // State variables
+  const [projects, setProjects] = useState([]); // To store the list of projects
+  const [clickedProjects, setClickedProjects] = useState({});// To store the state of clicked projects
+  const [pageNumber, setPageNumber] = useState(0); // State to track current page number
 
+  // Constants for pagination
+  const projectsPerPage = 4; // Number of projects to show per page
+  const pagesVisited = pageNumber * projectsPerPage;
+
+  // useEffect hook to load projects when the component mounts
   useEffect(() => {
     loadProjects();
   }, []);
 
+  // Extract projectId from URL parameters (if needed)
   const { projectId } = useParams();
 
+  // Function to fetch projects from the backend
   const loadProjects = async () => {
     const result = await axios.get("http://localhost:8080/Projects");
     setProjects(result.data);
   };
 
+  // Function to delete a project
   const deleteProject = async (projectId) => {
     const confirmDelete = window.confirm("Are you sure you want to delete this project?");
     if (confirmDelete) {
@@ -56,65 +39,96 @@ export default function Home() {
     }
   };
 
-  // const generateReport = async (project) => {
-  //   const pdfDoc = (
-  //     <Document>
-  //       <Page size="A4" style={styles.page}>
-  //         <Text style={styles.header}>Project Report</Text>
-  //         <Text style={styles.content}>Project ID: {project.projectId}</Text>
-  //         <Text style={styles.content}>Project Name: {project.projectName}</Text>
-  //         <Text style={styles.content}>Description: {project.description}</Text>
-  //         {/* Add more project details as needed */}
-  //       </Page>
-  //     </Document>
-  //   );
+  // Function to handle the click event for a project
+  const handleClick = (projectId) => {
+    setClickedProjects(prevState => ({ ...prevState, [projectId]: true }));
+  };
 
-  //   const pdfBlob = await generatePdfBlob(pdfDoc, project);
-  //   saveAs(pdfBlob, `${project.projectName}_Report.pdf`);
-  // };
+  // Function to display the projects for the current page
+  const displayProjects = projects
+    .slice(pagesVisited, pagesVisited + projectsPerPage)// Get the projects for the current page
+    .map((project, index) => (
+      <tr key={index}>
+        <th scope="row">{pagesVisited + index + 1}</th>
+        <td>{project.projectId}</td>
+        <td>{project.projectName}</td>
+        <td>{project.description}</td>
+        <td>{project.siteSupervisorID}</td>
+        <td>{project.siteSupervisorName}</td>
+        <td>{project.locationId}</td>
+        <td>{project.date}</td>
+        <td>
+          <Link className='btn btn-success mx-2' to={`/UpdateProjects/${project.projectId}`}>Edit</Link>
+        </td>
+        <td>
+          <button className='btn btn-danger mx-2' onClick={() => deleteProject(project.projectId)}>Delete</button>
+        </td>
+        <td>
+          <div>
+            {clickedProjects[project.projectId] ? (
+              <>
+                <Check style={{ color: 'green' }} /> {/* Show the tick icon */}
+                <span className="text-success">Completed</span> {/* Show the finished status */}
+              </>
+            ) : (
+              <button
+                className='btn'
+                onClick={() => handleClick(project.projectId)}
+              >
+                Click Me
+              </button>
+            )}
+          </div>
+        </td>
+      </tr>
+    ));
+    // Calculate the total number of pages
+  const pageCount = Math.ceil(projects.length / projectsPerPage);
+
+  // Function to handle page change
+  const changePage = ({ selected }) => {
+    setPageNumber(selected);
+  };
 
   return (
     <Sidebar>
       <div className='container-fluid'>
-        <h3>Manage Projects</h3>
+        <h3 style={{ textAlign: 'center' }}>Manage Projects</h3>
         <Link className="btn" style={{ backgroundColor: 'navy', color: 'white' }} to="/addprojects">Add Projects</Link>
-        <div className="py-4" style={{ maxHeight: '70vh', overflowY: 'auto', maxWidth: '1100px' }}>
+        <div className="py-4" style={{ maxHeight: '70vh', overflowY: 'auto' }}>
           <table className="table border shadow">
-            <thead>
+            <thead style={{ position: 'sticky', top: 0, zIndex: 1, background: '#fff' }}>
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">Project id</th>
-                <th scope="col">Description</th>
                 <th scope="col">projectName</th>
-                <th scope="col">supervisor</th>
-                <th scope="col">SiteSupervisor</th>
+                <th scope="col">Description</th>
+                <th scope="col">SiteSupervisor Id</th>
+                <th scope="col">SiteSupervisor Name</th>
                 <th scope="col">locationId</th>
+                <th scope="col">Date</th>
                 <th scope="col">Action</th>
+                <th scope="col">Action</th>
+                <th scope="col">Status</th>
               </tr>
             </thead>
             <tbody>
-              {projects.map((project, index) => (
-                <tr key={index}>
-                  <th scope="row">{index + 1}</th>
-                  <td>{project.projectId}</td>
-                  <td>{project.description}</td>
-                  <td>{project.projectName}</td>
-                  <td>{project.siteSupervisorID}</td>
-                  <td>{project.siteSupervisorName}</td>
-                  <td>{project.locationId}</td>
-                  <td>{project.date}</td>
-                  <td>
-                    <Link className='btn btn-outline-primary mx-2' to={`/UpdateProjects/${project.projectId}`}>Edit</Link>
-                  </td>
-                  <td>
-                  <button className='btn btn-danger mx-2' onClick={() => deleteProject(project.projectId)}>Delete</button>
-                    {/* <button className='btn btn-danger mx-2' onClick={() => generateReport(project)}>Generate Report</button> */}
-                  </td>
-                </tr>
-              ))}
+              {displayProjects}
             </tbody>
           </table>
+          
         </div>
+        <ReactPaginate
+            previousLabel={"Previous"}
+            nextLabel={"Next"}
+            pageCount={pageCount}
+            onPageChange={changePage}
+            containerClassName={"pagination"}
+            previousLinkClassName={"previousBttn"}
+            nextLinkClassName={"nextBttn"}
+            disabledClassName={"paginationDisabled"}
+            activeClassName={"paginationActive"}
+          />
       </div>
     </Sidebar>
   );

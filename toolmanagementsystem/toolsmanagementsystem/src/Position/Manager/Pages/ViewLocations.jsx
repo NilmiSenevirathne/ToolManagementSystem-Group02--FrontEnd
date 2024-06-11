@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { Link, useParams } from 'react-router-dom';
-import Sidebar from '../../../../../../Components/ManagerSidebar.jsx';
-import './LocationHome.css';
-export default function LocationHome() {
+import React, { useEffect, useState } from 'react';// Import React Router components for navigation and parameter handling
+import axios from 'axios';// Import React and hooks
+import { Link, useParams } from 'react-router-dom';// Import axios for making HTTP requests
+import Sidebar from '../../../Components/ManagerSidebar.jsx';// Import Sidebar component
+
+
+export default function ViewLocations() {
 
   const [locations, setLocations] = useState([]);
   
@@ -30,13 +31,13 @@ export default function LocationHome() {
     }
   };
 
-
-
-
   return (
     <Sidebar> 
                <div className='container-fluid'>
                <h2>Location Details</h2>
+               <Link className="btn btn-outline-primary mt-2" to="/AddLocation" style={{ 
+                    color: "#ffc107", /* Yellow color */
+                    borderColor: "#ffc107" /* Yellow color */}}>Add Locations</Link>
 
                <div className='col-md-10 offset-md-1 border rounded p-4 mt-2 shadow' >
 
@@ -46,8 +47,8 @@ export default function LocationHome() {
               <thead>
                 <tr>
                   <th scope="col">#</th>
-                  <th scope="col">Location Name</th>
                   <th scope="col">Location Id</th>
+                  <th scope="col">Location Name</th>   
                   <th scope="col">Actions</th>
                 </tr>
               </thead>
@@ -55,8 +56,8 @@ export default function LocationHome() {
                 {locations.map((location, index) => (
                   <tr key={index}>
                     <th scope="row">{index + 1}</th>
-                    <td>{location.locationName}</td>
                     <td>{location.locationId}</td>
+                    <td>{location.locationName}</td>
                     <td>
                       <Link className='btn btn-outline-primary mx-2' to={`/UpdateLocation/${location.locationId}`}>Edit</Link>
                       <button className='btn btn-danger mx-2' onClick={()=>deleteLocations(location.locationId)}>Delete</button>
@@ -66,7 +67,6 @@ export default function LocationHome() {
               </tbody>
             </table>
           </div>
-          <Link className='btn btn-outline-danger mx-2' to="/AddLocation">Back</Link>
 
         </div>
         </div>

@@ -1,0 +1,25 @@
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .pagination li {
+    list-style: none;
+    margin: 0 5px;
+  }
+  
+  .pagination a {
+    text-decoration: none;
+    color: #007bff;
+  }
+  
+  .paginationActive a {
+    font-weight: bold;
+    color: #000;
+  }
+  
+  .paginationDisabled a {
+    color: #ddd;
+  }
+  

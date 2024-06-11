@@ -7,7 +7,7 @@ import axios from 'axios';
 import Sidebar from '../../../Components/ManagerSidebar.jsx';
 
 const StockSupervisorDashboard = () => {
-  const role = "StockSupervisor";
+  const role = "Manager";
   const [tools, setTools] = useState({});
   const [lineChartData, setLineChartData] = useState({});
   const [pieChartData, setPieChartData]= useState({});

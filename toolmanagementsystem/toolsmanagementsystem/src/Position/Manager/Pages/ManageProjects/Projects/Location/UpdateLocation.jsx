@@ -1,31 +1,35 @@
-import { Link,useNavigate ,useParams} from 'react-router-dom'
-import React, { useEffect,useState } from 'react'
-import axios from 'axios'
-import Sidebar from '../../../../../../Components/ManagerSidebar.jsx';
+import { Link,useNavigate ,useParams} from 'react-router-dom'// Import React Router components for navigation and parameter handling
+import React, { useEffect,useState } from 'react'// Import React and hooks
+import axios from 'axios'// Import axios for making HTTP requests
+import Sidebar from '../../../../../../Components/ManagerSidebar.jsx';// Import Sidebar component
 
 
+// Main function component for updating a location
 export default function UpdateLocation() {
 
 let navigate=useNavigate()
 
-//pass parameters in to variable
+// Retrieve location ID from URL parameters
 const LocId  = useParams()
 
+// State to store form data for location
     const[locations,setlocation]=useState({
         locationId:"",
         locationName:""
 
       })
 
+// Destructure state variables for easier access
     const {locationId,locationName}=locations
 
-  
+// Handle input changes
     const onInputChange=(e)=>{
         setlocation({...locations,[e.target.name]:e.target.value})
     }
 
+// Function to load location data based on the ID from URL
     const loadLocations =async ()=>{
-        const result=await axios.get(`http://localhost:8080/locations/${LocId.location_id}`)
+        const result=await axios.get(`http://localhost:8080/locations/${LocId.locationId}`)
         setlocation(result.data)
       }
       useEffect (()=>{
@@ -33,6 +37,7 @@ const LocId  = useParams()
       },[])
 
 
+    // Handle form submission
     const onSubmit=async(e)=>{
         e.preventDefault();
         //Location Form validation
@@ -40,19 +45,17 @@ const LocId  = useParams()
           alert("Please fill in all fields.");
           return;
         }
-        await axios.put(`http://localhost:8080/locations/${LocId.location_id}`,locations)
-        navigate("/locationHome")
+        // Send a PUT request to update the location
+        await axios.put(`http://localhost:8080/locations/${LocId.locationId}`,locations)
+        navigate("/locationHome")// Navigate to locationHome page upon success
     }
 
-    
-  return (
+    // Render the form inside the Sidebar component
+    return (
+    <Sidebar>
     <div className='container-fluid'>
-        <div className='row'>
-        <div className="col-lg-3">
-          <Sidebar/>
-        </div>
-        <div className="col-lg-6">
-            <div className='col-md-12 offset-md-1 border rounded p-4 mt-5 shadow'style={{ maxHeight: '100vh', overflowY: 'auto', maxWidth: '800px' }}>
+        <div className=' justify-content-center'>
+        <div className='col-md-12 border rounded p-4 mt-2 shadow' style={{ maxHeight: '80vh', overflowY: 'auto', maxWidth: '1000px' }}>
                 <h2 className='text-center m-4'>Edit Location</h2>
                 <form onSubmit={(e) =>onSubmit(e)}>
 
@@ -77,13 +80,14 @@ const LocId  = useParams()
                     <button type="submit" className='btn btn-outline-primary'>Submit</button>
                 </form>
             </div>
-            <div className='mt-3' style={{ marginLeft: '60px' }}>
-            <Link className='btn btn-outline-danger mx-2'to="/addprojects">Cancel</Link>
-            <Link className='btn btn-outline-primary text-decoration-none' to='/locationHome'>View Location Details</Link>
+            <br/>
+            <div>
+            <Link className='btn btn-outline-dark mx-2'to="/ViewLocations">Back</Link>
             </div>
             </div>
         </div>
      
-    </div>
+    </Sidebar>
+  
   )
 }

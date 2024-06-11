@@ -14,7 +14,7 @@ import StockSupervisorDashboard from './Position/StockSupervisor/Dashboard/Stock
 import ManagerDashboard from './Position/Manager/Pages/ManagerDashboard.jsx';
 import ManageProjects from './Position/Manager/Pages/ManageProjects/ManageProjects.jsx';
 import ViewInventory from './Position/Manager/Pages/ViewInventory.jsx';
-import MTrackToolbox from './Position/Manager/Pages/TrackToolbox.jsx';
+import ViewLocations from './Position/Manager/Pages/ViewLocations.jsx';
 import AddProjects from './Position/Manager/Pages/ManageProjects/Projects/AddProjects.jsx';
 import UpdateProjects from './Position/Manager/Pages/ManageProjects/Projects/UpdateProjects.jsx'
 import LocationHome from './Position/Manager/Pages/ManageProjects/Projects/Location/LocationHome.jsx';
@@ -28,9 +28,8 @@ import RequiredToolReport from "./Position/Sitesupervisor/RequiredToolReport.jsx
 import Tool from './Position/StockSupervisor/ToolBox/CreateToolBox/Tools/Tool.jsx';
 import Cart from './Position/StockSupervisor/ToolBox/CreateToolBox/Tools/Cart.jsx';
 import DashBoard from './Position/Admin/Dashboard/DashBoard.jsx';
+import UpdateLocation from './Position/Manager/Pages/ManageProjects/Projects/Location/UpdateLocation.jsx';
 import StockProfile from './Components/Profile/StockProfile.jsx';
-
-
 
 
 function App() {
@@ -50,12 +49,14 @@ function App() {
                     <Route path="/managerdashboard" element={<ManagerDashboard/>} />
                     <Route path="/manageprojects" element={<ManageProjects />} />
                     <Route path="/ViewInventory" element={<ViewInventory />} />
-                    <Route path="/tracktoolbox" element={<MTrackToolbox />} />
+                    <Route path="/ViewLocations" element={<ViewLocations />} />
                     <Route path="/addprojects" element={<AddProjects />} />
                     <Route path="/UpdateProjects/:project_id" element={<UpdateProjects />} />
                     <Route path="/AddLocation" element={<AddLocation />} />
                     <Route path="/locationHome" element={<LocationHome />} />
                     <Route path="/home" element={<Home/>}/>
+                    <Route path="/UpdateLocation/:locationId" element={<UpdateLocation />} />
+
 
 
                      {/* StockSupervisor pages  */}
