@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';// Import React Router compon
 import axios from 'axios';// Import React and hooks
 import { Link, useParams } from 'react-router-dom';// Import axios for making HTTP requests
 import Sidebar from '../../../Components/ManagerSidebar.jsx';// Import Sidebar component
-// import './LocationHome.css';
+
+
 export default function ViewLocations() {
 
   const [locations, setLocations] = useState([]);
