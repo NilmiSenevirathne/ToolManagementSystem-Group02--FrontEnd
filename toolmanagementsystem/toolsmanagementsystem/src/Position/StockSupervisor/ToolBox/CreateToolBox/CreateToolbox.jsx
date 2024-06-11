@@ -14,7 +14,7 @@ function CreateToolbox() {
   const [users, setUsers] = useState([]);
   const [projects, setProjects] = useState([]);
   const [selectedTools, setSelectedTools] = useState(initialState.selectedTools || []);
-
+  
   const [toolbox, setToolbox] = useState({
     toolbox_id: initialState.toolbox_id || "",
     project_id: initialState.project_id || "",
@@ -60,28 +60,31 @@ function CreateToolbox() {
     setToolbox({ ...toolbox, [e.target.name]: e.target.value });
   };
 
-  
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
-      const requestData = {
-        ...toolbox,
-        selectedTools: selectedTools,
-      };
-      console.log("Submitting data:", requestData);
-      const response = await axios.post("http://localhost:8080/toolbox/createtoolbox", requestData);
-      console.log("Response from server:", response);
-      alert("New Toolbox Successfully Added!");
-      navigate("/maintoolbox");
+        const requestData = {
+            ...toolbox,
+            selectedTools: selectedTools,
+        };
+        console.log("Submitting data:", requestData);
+        
+        const response = await axios.post("http://localhost:8080/toolbox/createToolbox", requestData);
+        console.log("Response from server:", response);
+        alert("New Toolbox Successfully Added!");
+        navigate("/maintoolbox");
     } catch (error) {
-      console.error("Error occurred while adding toolbox:", error);
-      if (error.response) {
-        console.error("Server responded with:", error.response.data);
-        alert("Unsuccessfully Added New Toolbox!");
-      }
+        console.error("Error occurred while adding toolbox:", error);
+        if (error.response) {
+            console.error("Server responded with:", error.response.data);
+            alert("Failed to add new toolbox: " + JSON.stringify(error.response.data));
+        } else {
+            alert("An error occurred. Please try again.");
+        }
     }
-  };
+};
 
+ 
   return (
     <StockSidebar>
      
@@ -166,7 +169,7 @@ function CreateToolbox() {
             </Link>
           </div>
 
-          {/* //selectedtool textarea */}
+          {/* selectedtool textarea */}
           <div className="mb-3">
           <label htmlFor="selectedTools" className="form-label">
           Selected Tools
