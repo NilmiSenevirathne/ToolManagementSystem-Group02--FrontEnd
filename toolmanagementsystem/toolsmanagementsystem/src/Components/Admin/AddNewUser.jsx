@@ -76,13 +76,17 @@ export default function AddNewUser() {
     } else {
       setOpen(true);
       const formData = new FormData();
-      formData.append("file", selectedPhoto);
+      if(selectedPhoto === null){
+        handleSave(null);
+      }else{
+        formData.append("file", selectedPhoto);
 
       await UploadImage(formData)
         .then(({ data }) => {
           handleSave(data.url);
         })
         .catch((err) => toast.error(err.response.data));
+      }
     }
   };
 
