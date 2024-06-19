@@ -20,6 +20,7 @@ const Tool = () => {
     fetchTools();
   }, []);
 
+  //retrive tools from database
   const fetchTools = async () => {
     try {
       const response = await axios.get('http://localhost:8080/tool/gettools');
@@ -29,11 +30,13 @@ const Tool = () => {
     }
   };
 
+  //tools search function
   const filteredTools = tools.filter((tool) =>
     tool.toolId.toLowerCase().includes(searchTools.toLowerCase()) ||
     tool.toolName.toLowerCase().includes(searchTools.toLowerCase())
   );
 
+  //add select tools to cart
   const addToCart = (toolId) => {
     const selectedTool = tools.find((tool) => tool.toolId === toolId);
     if (selectedTool) {
@@ -59,11 +62,13 @@ const Tool = () => {
     }
   };
 
+  //remove tools 
   const removeFromCart = (toolId) => {
     const updatedCartItems = cartItems.filter((item) => item.toolId !== toolId);
     setCartItems(updatedCartItems);
   };
 
+  //submit dialog box after selecting tools
   const handleSubmit = () => {
     if (cartItems.length > 0) {
       const formData = { 

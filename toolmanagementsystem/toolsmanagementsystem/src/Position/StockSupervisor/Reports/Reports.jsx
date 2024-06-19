@@ -24,12 +24,7 @@ const Reports = () => {
     }
   };
 
-    // Function to download image as PDF
-  const downloadPDF = (base64Data) => {
-    
-    alert("Downloading PDF...");
-  };
-
+   
   return (
     <StockSidebar>
     <DashNavbar/>
@@ -55,7 +50,7 @@ const Reports = () => {
                   <td>{report.created_at}</td>
                   <td>{report.project_name}</td>
                   <td>
-                    <a href={`data:image/png;base64,${report.report_data}`} download="report.pdf">
+                    <a href={`data:image/png;base64,${report.report_data}`} download="ToolReport.pdf">
                       Download 
                     </a>
                   </td>
