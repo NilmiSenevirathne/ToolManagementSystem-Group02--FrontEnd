@@ -13,12 +13,13 @@ export default function AddTool() {
     toolName: "",
     description: "",
     quantity: 0,
+    image: "",
   });
 
   const [errors, setErrors] = useState({});
   const [duplicateError, setDuplicateError] = useState("");
 
-  const { toolId, toolName, description, quantity } = tool;
+  const { toolId, toolName, description, quantity, image } = tool;
 
   const onInputChange = (e) => {
     setTool({ ...tool, [e.target.name]: e.target.value });
@@ -143,6 +144,22 @@ export default function AddTool() {
               onChange={(e) => onInputChange(e)}
             />
             {errors.quantity && <div className="invalid-feedback">{errors.quantity}</div>}
+          </div>
+
+          {/* add image field */}
+          <div className="mb-3">
+            <label htmlFor="image" className="form-label">
+              Tool Image
+            </label>
+            <input
+              type={"file"}
+              className={`form-control ${errors.image && "is-invalid"}`}
+              placeholder="Enter the the tool image"
+              name="image"
+              value={image}
+              onChange={(e) => onInputChange(e)}
+            />
+            {errors.description && <div className="invalid-feedback">{errors.description}</div>}
           </div>
 
           <button type="submit" className="submit-btn">
