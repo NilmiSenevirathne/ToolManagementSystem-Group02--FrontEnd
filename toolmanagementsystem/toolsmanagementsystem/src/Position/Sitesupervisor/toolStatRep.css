@@ -1,59 +1,159 @@
-
-.Createp{
-    margin: auto;
-    padding: 20px;
-   
-  
-}
-.topbarcontainer{
-    height: 75px;
-    width: 100%;
-    background-color: #002244;
-    display: flex;
-    align-items: center;
-    position: sticky;
-    top: 0;
-  
-}
-.topbartext{
-    color: white;
-    font-size: 30px;
-    padding: 10px;   
+.create-report {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f4f6f9;
+  padding: 20px;
 }
 
+.topbar-container {
+  width: 100%;
+  background-color: rgb(38, 196, 244);
+  color: white;
+  padding: 10px;
+  text-align: center;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  margin-bottom: 20px;
+}
 
-/* Styles for the form */
-.status-form {
-    margin-top: 20px;
-  }
-  
-  .status-form label {
-    display: block;
-    margin-bottom: 10px;
-  }
-  
-  .status-form input {
-    width: 100%;
-    padding: 8px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  .status-form button {
-    margin-top: 10px;
-    padding: 8px 16px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .status-form button:hover {
-    background-color: #0056b3;
-  }
-  .selected {
-    background-color: lightblue; 
-  }
-  
+.topbar-text {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.searchbar {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.searchbar input {
+  width: 50%;
+  padding: 10px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  gap: 20px;
+}
+
+.table-container {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th, .table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.table th {
+  background-color: rgb(38, 196, 244);
+  color: white;
+}
+
+.table tr:hover {
+  background-color: #f1f1f1;
+  cursor: pointer;
+}
+
+.form-container {
+  flex: 1;
+  padding: 20px;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form h2 {
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form-group input, .form-group textarea {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+}
+
+.form-group textarea {
+  resize: none;
+  height: 100px;
+}
+
+.generate-btn {
+  background-color: rgb(38, 196, 244);
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.generate-btn:hover {
+  background-color:rgb(38, 167, 206);
+}
+
+.report-table {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.report-table h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.report-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.report-table th, .report-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+.report-table th {
+  background-color: rgb(38, 196, 244);
+  color: white;
+}
+
+.report-table a {
+  color: rgb(38, 196, 244);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.report-table a:hover {
+  text-decoration: underline;
+}

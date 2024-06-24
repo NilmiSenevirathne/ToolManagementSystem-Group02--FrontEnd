@@ -1,160 +1,170 @@
-import "./toolStatRep.css";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useState, useEffect } from "react";
-import SearchIcon from '@mui/icons-material/Search';
-import jsPDF from 'jspdf';
+import jsPDF from "jspdf";
+import "./toolStatRep.css";
 
 const ToolStatosRep = () => {
-  const [toolbox, setTools] = useState([]);
-  const [selectedTool, setSelectedTool] = useState(null);
-  const [status, setStatus] = useState('');
-  const [searchQuery, setSearchQuery] = useState('');
-  const [details, setDetails] = useState('');
+  const [toolboxtool, setTools] = useState([]);
+  const [selectedTool, setSelectedTool] = useState({});
+  const [toolStatus, setToolStatus] = useState('');
   const [currentDate, setCurrentDate] = useState('');
   const [currentTime, setCurrentTime] = useState('');
+  const [reports, setReports] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
     loadTools();
-    // Set current date and time when component mounts
     setCurrentDate(new Date().toLocaleDateString());
     setCurrentTime(new Date().toLocaleTimeString());
   }, []);
 
   const loadTools = async () => {
-    const result = await axios.get('http://localhost:8080/gettoolbox');
-    setTools(result.data);
-  };
-  
-
-  const handleToolSelect = (tool) => {
-    setSelectedTool(tool);
-    setStatus(tool.status); // Assuming tool.status is the status of the tool
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!selectedTool) {
-      console.error("No tool selected");
-      return;
-    }
-
     try {
-      // Create a new PDF document
-      const doc = new jsPDF();
-
-      // Set up the content of the PDF document
-      doc.text(`Tool ID: ${selectedTool.toolId}`, 10, 10);
-      doc.text(`Tool Name: ${selectedTool.toolName}`, 10, 20);
-      doc.text(`Status: ${status}`, 10, 30);
-      doc.text(`Additional Details: ${details}`, 10, 40);
-      // Add other tool details as needed
-      doc.text(`Report generated on: ${currentDate} ${currentTime}`, 10, 50);
-
-      // Save the PDF document
-      const filename = `tool_report_${currentDate.replace(/\//g, "_")}_${currentTime.replace(/:/g, "-")}.pdf`;
-      doc.save(filename);
-
-      console.log("PDF report generated successfully");
+      const result = await axios.get('http://localhost:8080/getToolboxTools');
+      setTools(result.data);
     } catch (error) {
-      console.error("Error generating PDF report:", error);
+      console.error("Error loading tools:", error);
     }
   };
 
-  const filteredTools = toolbox.filter(toolbox=>
-    toolbox.toolbox_id.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    toolbox.project_id.toLowerCase().includes(searchQuery.toLowerCase())
+  const handleToolClick = (tool) => {
+    setSelectedTool(tool);
+  };
+
+  const handleToolStatusChange = (e) => {
+    setToolStatus(e.target.value);
+  };
+
+  const handleSearch = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
+  const filteredTools = toolboxtool.filter(tool =>
+    tool.toolBoxId.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
+ const generatePDF = () => {
+  if (!selectedTool || !toolStatus) {
+    alert('Please select a tool and add tool status.');
+    return;
+  }
+
+  const doc = new jsPDF();
+  doc.setFontSize(12);
+  const lineHeight = 10; // Define a standard line height
+
+  doc.text(`Generated Date: ${currentDate}`, 10, 10);
+  doc.text(`Generated Time: ${currentTime}`, 10, 20);
+
+  doc.text(`Tool Box Id: ${selectedTool.toolBoxId}`, 10, 30);
+  doc.text(`Tools:`, 10, 40);
+  
+  // Split tools into multiple lines if necessary
+  const tools = selectedTool.tools.split(',').map(tool => tool.trim());
+  tools.forEach((tool, index) => {
+    doc.text(tool, 30, 40 + (index * lineHeight));
+  });
+
+  doc.text(`Project Id: ${selectedTool.project_id}`, 10, 50 + (tools.length * lineHeight));
+  doc.text(`Site Supervisor Id: ${selectedTool.site_supervisor_id}`, 10, 60 + (tools.length * lineHeight));
+  doc.text(`Tool Status: ${toolStatus}`, 10, 70 + (tools.length * lineHeight));
+
+  const pdfData = doc.output();
+  const pdfBlob = new Blob([pdfData], { type: 'application/pdf' });
+  const pdfUrl = URL.createObjectURL(pdfBlob);
+  setReports([...reports, { url: pdfUrl, date: currentDate, time: currentTime }]);
+};
   return (
-    <div className='Createp'>
-      <div className="topbarcontainer">
-        <div className="topbartext">
+    <div className='create-report'>
+      <div className="topbar-container">
+        <div className="topbar-text">
           Tool Status Report
         </div>
       </div>
-
       <div className="searchbar">
-        <SearchIcon className="searchIcon" />
         <input
-          placeholder="Search tools using tool id or tool name"
-          className="searchInput"
+          type="text"
+          placeholder="Search by Tool Box ID"
           value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
+          onChange={handleSearch}
         />
       </div>
 
-      <div className="table">
-        <table className="table caption-top">
-          {/* Table header */}
+      <div className="content">
+        <div className="table-container">
+          <table className="table">
+            <thead>
+              <tr>
+                <th>Tool Box Id</th>
+                <th>Tools</th>
+                <th>Project Id</th>
+                <th>Site Supervisor Id</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filteredTools.map((tool) => (
+                <tr key={tool.toolBoxId} onClick={() => handleToolClick(tool)}>
+                  <td>{tool.toolBoxId}</td>
+                  <td>{tool.tools}</td>
+                  <td>{tool.project_id}</td>
+                  <td>{tool.site_supervisor_id}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <div className="form-container">
+          <div className="form">
+            <h2>Tool Box Details</h2>
+            <div className="form-group">
+              <label htmlFor="toolBoxId">Tool Box Id:</label>
+              <input type="text" id="toolBoxId" value={selectedTool.toolBoxId || ''} readOnly />
+            </div>
+            <div className="form-group">
+              <label htmlFor="tools">Tools:</label>
+              <textarea id="tools" rows="5" value={selectedTool.tools || ''} readOnly />
+            </div>
+            <div className="form-group">
+              <label htmlFor="projectId">Project Id:</label>
+              <input type="text" id="projectId" value={selectedTool.project_id || ''} readOnly />
+            </div>
+            <div className="form-group">
+              <label htmlFor="siteSupervisorId">Site Supervisor Id:</label>
+              <input type="text" id="siteSupervisorId" value={selectedTool.site_supervisor_id || ''} readOnly />
+            </div>
+            <div className="form-group">
+              <label htmlFor="toolStatus">Tool Status:</label>
+              <textarea id="toolStatus" rows="5" value={toolStatus} onChange={handleToolStatusChange} />
+            </div>
+            <button className="generate-btn" onClick={generatePDF}>Generate PDF</button>
+          </div>
+        </div>
+      </div>
+
+      <div className="report-table">
+        <h2>Report Table</h2>
+        <table>
           <thead>
             <tr>
-              <th scope="col">Tool Box Id</th>
-              <th scope="col">Project Id</th>
-              <th scope="col">Site Supervisor Id</th>
-              <th scope="col">Location Id</th>
-             
+              <th>Date</th>
+              <th>Time</th>
+              <th>Download</th>
             </tr>
           </thead>
-          {/* Table body */}
-          <tbody style={{ maxHeight: "230px", overflowY: "auto" }}>
-            {filteredTools.map((toolbox) => (
-              <tr key={toolbox.toolbox_id} onClick={() => handleToolSelect(toolbox)}>
-                <td>{toolbox.project_id}</td>
-                <td>{toolbox.site_supervisor_id}</td>
-                <td>{toolbox.location_id}</td>
-                
+          <tbody>
+            {reports.map((report, index) => (
+              <tr key={index}>
+                <td>{report.date}</td>
+                <td>{report.time}</td>
+                <td>
+                  <a href={report.url} download={`report_${index}.pdf`}>Download Report</a>
+                </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-
-      {/* Display selected tool details and status update form */}
-      {selectedTool && (
-        <div className="tool-details">
-          <h2>Selected Tool Details</h2>
-          <p>Tool ID: {selectedTool.toolId}</p>
-          <p>Tool Name: {selectedTool.toolName}</p>
-          {/* Add other tool details as needed */}
-
-          {/* Status update form */}
-          <form onSubmit={handleSubmit} className="status-form">
-            <fieldset>
-              <legend>General Information</legend>
-              <label>
-                Status:
-                <input
-                  type="text"
-                  value={status}
-                  onChange={(e) => setStatus(e.target.value)}
-                />
-              </label>
-            </fieldset>
-
-            <fieldset>
-              <legend>Additional Details</legend>
-              <label>
-                Additional Details:
-                <input
-                  type="text"
-                  value={details}
-                  onChange={(e) => setDetails(e.target.value)}
-                />
-              </label>
-            </fieldset>
-
-            <button type="submit">Generate Report</button>
-          </form>
-        </div>
-      )}
-
-      {/* Download link for the generated report */}
-      {selectedTool && (
-        <div className="download-link">
-          <p>Report generated on: {currentDate} {currentTime}</p>
-          <button onClick={handleSubmit}>Download Report</button>
-        </div>
-      )}
     </div>
   );
 };

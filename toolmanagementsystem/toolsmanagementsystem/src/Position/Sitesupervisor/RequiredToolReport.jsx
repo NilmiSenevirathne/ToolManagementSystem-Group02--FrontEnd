@@ -209,7 +209,7 @@ const RequiredToolReport = () => {
           </tbody>
         </table>
       </div>
-      <div className="btns">
+      <div className="btn">
         <button onClick={() => window.location.href = '/AddReportDetails'}>Add Required Report Details</button>
       </div>
     </div>

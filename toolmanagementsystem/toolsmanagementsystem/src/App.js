@@ -26,13 +26,15 @@ import AddReportDetails from "./Position/Sitesupervisor/AddReportDetails.jsx";
 import RequiredToolReport from "./Position/Sitesupervisor/RequiredToolReport.jsx";
 import ViewProjects from './Position/Sitesupervisor/ViewProjects.jsx';
 import STrackToolbox from './Position/StockSupervisor/TrackToolbox/STrackToolbox.jsx';
+import ViewRequiredToolReports from './Position/Sitesupervisor/View/ViewRequiredToolReports.jsx';
+import ViewToolStatusReports from './Position/Sitesupervisor/View/ViewToolStatusReports.jsx';
 function App() {
    return (
 
       <>
                     <Routes>
 
-                    {/* <Route path='/' element={<LoginForm/>}> </Route> */}
+                  <Route path='/LoginForm' element={<LoginForm/>}> </Route> /
 
                     {/* Manager pages  */}
                     <Route path="/managerdashboard" element={<ManagerDashboard/>} />
@@ -47,22 +49,23 @@ function App() {
 
 
                      {/* StockSupervisor pages  */}
-                    <Route path='/stocksupervisordashboard' element={<StockSupervisorDashboard/>} />
+                    <Route  path='/stocksupervisordashboard' element={<StockSupervisorDashboard/>} />
                     <Route  path = "/managestock"  element={<ManageStock/>}/>
                     <Route  path = "/addTool"  element={<AddTool/>}/>
-                    <Route path='/editTool/:toolId' element={<EditTool/>}/>
+                    <Route  path='/editTool/:toolId' element={<EditTool/>}/>
                     <Route  path = "/createtoolbox"  element={<CreateToolbox/>}/>
                     <Route  path = "/Stracktoolbox"  element={<STrackToolbox/>}/>
                     <Route  path = "/reports"  element={<Reports/>}/>
 
                     {/* SiteSupervisor pages */}
                    <Route path='/' element={<Dboard/>}> </Route>
-                     
                    <Route path="/CreateReports" element={<CreateReports/>}/>
                    <Route path="/ToolStatosRep" element={<ToolStatosRep/>}/>
                    <Route path="/RequiredToolReport" element={<RequiredToolReport/>}/>
-                  <Route path='/ViewProjects' element={<ViewProjects/>}/>
+                   <Route path='/ViewProjects' element={<ViewProjects/>}/>
                    <Route path="/AddReportDetails" element={<AddReportDetails/>}/>
+                   <Route path="/ViewRequiredToolReports" element={<ViewRequiredToolReports/>}/>
+                   <Route path="/ViewToolStatusReports" element={<ViewToolStatusReports/>}/>
                    </Routes>
 
                       </>
