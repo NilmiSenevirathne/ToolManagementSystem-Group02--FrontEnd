@@ -3,6 +3,7 @@ import { BrowserRouter  as Router , Route,Routes } from 'react-router-dom';
 // import '../src/App.css';
 import HomePage from '../src/Components/HomePage/Home.jsx';
 import LoginForm from '../src/LoginPage/LoginForm.jsx';
+import NewLogin from '../src/LoginPage/NewLogin.js';
 import ManageStock from './Position/StockSupervisor/ManageStock/ManageStock.jsx';
 import Toolbox from './Position/StockSupervisor/ToolBox/Toolbox.jsx';
 import CreateToolbox from './Position/StockSupervisor/ToolBox/CreateToolBox/CreateToolbox.jsx';
@@ -40,6 +41,8 @@ function App() {
                    
 
                     <Route  path='/' element={<LoginForm/>}> </Route> 
+
+                    
                     <Route  path='/profile' element={<StockProfile/>}></Route>
                                      
                     {/* Admin pages  */}
