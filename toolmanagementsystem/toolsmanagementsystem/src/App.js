@@ -1,5 +1,11 @@
+
 import React from 'react';
-import { BrowserRouter  as Router , Route,Routes } from 'react-router-dom';
+import {Route, BrowserRouter as Router, Routes} from 'react-router-dom';
+import './app.css';
+import LoginForm from '../src/LoginPage/LoginForm.jsx';
+import ManageStock  from './Position/StockSupervisor/ManageStock/ManageStock.jsx';
+import CreateToolbox from './Position/StockSupervisor/CreateToolBox/CreateToolbox.jsx';
+import TrackToolbox from './Position/StockSupervisor/TrackToolbox/STrackToolbox.js;
 // import '../src/App.css';
 import HomePage from '../src/Components/HomePage/Home.jsx';
 import LoginForm from '../src/LoginPage/LoginForm.jsx';
@@ -15,23 +21,26 @@ import StockSupervisorDashboard from './Position/StockSupervisor/Dashboard/Stock
 import ManagerDashboard from './Position/Manager/Pages/ManagerDashboard.jsx';
 import ManageProjects from './Position/Manager/Pages/ManageProjects/ManageProjects.jsx';
 import ViewInventory from './Position/Manager/Pages/ViewInventory.jsx';
-import MTrackToolbox from './Position/Manager/Pages/TrackToolbox.jsx';
+import ViewLocations from './Position/Manager/Pages/ViewLocations.jsx';
 import AddProjects from './Position/Manager/Pages/ManageProjects/Projects/AddProjects.jsx';
 import UpdateProjects from './Position/Manager/Pages/ManageProjects/Projects/UpdateProjects.jsx'
 import LocationHome from './Position/Manager/Pages/ManageProjects/Projects/Location/LocationHome.jsx';
 import AddLocation from './Position/Manager/Pages/ManageProjects/Projects/Location/AddLocation.jsx';
 import Home from './Position/Manager/Pages/ManageProjects/Home.jsx'
-import Dboard from './Position/Sitesupervisor/dashboard/Dboard.jsx';
+import Dboard from './Position/Sitesupervisor/dashboard/Dboard.jsx'
 import CreateReports from './Position/Sitesupervisor/CreateReports.jsx';
 import ToolStatosRep from "./Position/Sitesupervisor/ToolStatosRep.jsx";
 import AddReportDetails from "./Position/Sitesupervisor/AddReportDetails.jsx";
 import RequiredToolReport from "./Position/Sitesupervisor/RequiredToolReport.jsx";
+import ViewProjects from './Position/Sitesupervisor/ViewProjects.jsx';
+import STrackToolbox from './Position/StockSupervisor/TrackToolbox/STrackToolbox.jsx';
+import ViewRequiredToolReports from './Position/Sitesupervisor/View/ViewRequiredToolReports.jsx';
+import ViewToolStatusReports from './Position/Sitesupervisor/View/ViewToolStatusReports.jsx';
 import Tool from './Position/StockSupervisor/ToolBox/CreateToolBox/Tools/Tool.jsx';
 import Cart from './Position/StockSupervisor/ToolBox/CreateToolBox/Tools/Cart.jsx';
 import DashBoard from './Position/Admin/Dashboard/DashBoard.jsx';
+import UpdateLocation from './Position/Manager/Pages/ManageProjects/Projects/Location/UpdateLocation.jsx';
 import StockProfile from './Components/Profile/StockProfile.jsx';
-
-
 
 
 function App() {
@@ -41,6 +50,7 @@ function App() {
          <Routes>
                    
 
+                  <Route path='/LoginForm' element={<LoginForm/>}> </Route> 
                     <Route  path='/' element={<LoginForm/>}> </Route> 
 
                     
@@ -53,16 +63,18 @@ function App() {
                     <Route path="/managerdashboard" element={<ManagerDashboard/>} />
                     <Route path="/manageprojects" element={<ManageProjects />} />
                     <Route path="/ViewInventory" element={<ViewInventory />} />
-                    <Route path="/tracktoolbox" element={<MTrackToolbox />} />
+                    <Route path="/ViewLocations" element={<ViewLocations />} />
                     <Route path="/addprojects" element={<AddProjects />} />
                     <Route path="/UpdateProjects/:project_id" element={<UpdateProjects />} />
                     <Route path="/AddLocation" element={<AddLocation />} />
                     <Route path="/locationHome" element={<LocationHome />} />
                     <Route path="/home" element={<Home/>}/>
+                    <Route path="/UpdateLocation/:locationId" element={<UpdateLocation />} />
+
 
 
                      {/* StockSupervisor pages  */}
-                    <Route path='/stocksupervisordashboard' element={<StockSupervisorDashboard/>} />
+                    <Route  path='/stocksupervisordashboard' element={<StockSupervisorDashboard/>} />
                     <Route  path = "/managestock"  element={<ManageStock/>}/>
                     <Route  path = "/addTool"  element={<AddTool/>}/>
                     <Route  path='/editTool/:toolId' element={<EditTool/>}/>
@@ -75,17 +87,25 @@ function App() {
 
                     {/* SiteSupervisor pages */}
 
+                   <Route path='/' element={<Dboard/>}> </Route>
                    <Route path='/supervisordashboard' element={<Dboard/>}> </Route>
                    <Route path="/CreateReports" element={<CreateReports/>}/>
                    <Route path="/ToolStatosRep" element={<ToolStatosRep/>}/>
                    <Route path="/RequiredToolReport" element={<RequiredToolReport/>}/>
+                   <Route path='/ViewProjects' element={<ViewProjects/>}/>
                    <Route path="/AddReportDetails" element={<AddReportDetails/>}/>
-               </Routes>
+                   <Route path="/ViewRequiredToolReports" element={<ViewRequiredToolReports/>}/>
+                   <Route path="/ViewToolStatusReports" element={<ViewToolStatusReports/>}/>
+                   </Routes>
 
-       </>
+                      </>
 
      );
-
 }
 
 export default App;
+
+
+
+
+
