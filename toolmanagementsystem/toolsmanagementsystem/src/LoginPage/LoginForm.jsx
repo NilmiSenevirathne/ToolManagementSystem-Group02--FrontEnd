@@ -1,13 +1,13 @@
-// LoginForm.js
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './LoginForm.css';
 import Login from '../../src/images/user1.jpg';
 import Validation from '../../src/LoginPage/Validation.js';
-import { FaUser, FaLock } from "react-icons/fa";
+import { FaUser } from "react-icons/fa";
+import { FaLock } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
 
 function LoginForm() {
-    const navigate = useNavigate();
+    const navigate = useNavigate(); // Using useNavigate hook instead of Navigate component
 
     const [values, setValues] = useState({
         username: '',
@@ -15,12 +15,46 @@ function LoginForm() {
     });
 
     const [errors, setErrors] = useState({});
-
+    
     function handleChange(e) {
         setValues({ ...values, [e.target.name]: e.target.value });
     }
 
     function handleSubmit(e) {
+
+      e.preventDefault();
+
+      const validationErrors = Validation(values);
+      setErrors(validationErrors);
+
+      if (Object.keys(validationErrors).length === 0) {
+          fetch('http://localhost:8080/authentication/login', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(values),
+          })
+              .then(response => {
+                  if (response.ok) {
+                      console.log("Login Success!!");
+                     if((values.username === 'isuru@gmail.com') && (values.password === 'isuru@123') )
+                     {
+                        navigate("Admin");
+                     }
+                     else if((values.username === 'gagana@gmail.com') && (values.password === 'Gagana@623'))
+                     {
+                        navigate("Manager");
+                     }
+                     else if((values.username === 'nimantha@gmail.com') && (values.password === 'Nima#456'))
+                     {
+                        navigate("/stocksupervisordashboard");
+                     }
+                     else if((values.username === 'kusal@gmail.com') && (values.password === 'kusal#@8'))
+                     {
+                        navigate("/");
+                     }
+                       
         e.preventDefault();
 
         const validationErrors = Validation(values);
@@ -37,6 +71,7 @@ function LoginForm() {
             .then(response => {
                 if (response.ok) {
                     return response.text();      
+
                   } else {
                     return response.text().then(errorMessage => {
                         throw new Error(errorMessage);
@@ -75,6 +110,37 @@ function LoginForm() {
      
      
   return (
+
+    <div >
+        <div className='wrapper'>
+
+           
+           <form onSubmit={handleSubmit}>
+             
+                <h1 className='name'> Dilum BMK Engineers (Pvt)Ltd. </h1>
+                <img className="englogo" src={Login} alt=''/> 
+                <h1>Login</h1>
+
+                <div className='input-box'> 
+                   <label htmlFor='email'>Username</label>
+                   <input type='email' placeholder='Email' value={values.name} name='name' onChange={handleChange} />
+                  {errors.name && <p style= {{color: "red" , fontSize: "13px"}}> {errors.name}</p>}
+                   <FaUser className='icon' />
+                </div>
+
+                <div className='input-box'> 
+                   <label htmlFor='password'>Password</label>
+                   <input type='password' placeholder='password' value= {values.password} name='password' onChange={handleChange}/>
+                   {errors.password && <p style= {{color: "red" , fontSize: "13px"}}> {errors.password}</p>}
+                   <FaLock className='icon'/>
+                </div>
+                
+                    <button className='submit'>Login</button>
+                
+                
+            
+           </form>
+
     <div className='background'>
         <div className='loginconatin'>
             <div className='wrapper'>
@@ -102,8 +168,10 @@ function LoginForm() {
                 </form>
             </div>
             </div>
-        </div>
-    );
-}
 
-export default LoginForm;
+        </div>
+    </div>
+  )
+
+  }
+export default LoginForm
