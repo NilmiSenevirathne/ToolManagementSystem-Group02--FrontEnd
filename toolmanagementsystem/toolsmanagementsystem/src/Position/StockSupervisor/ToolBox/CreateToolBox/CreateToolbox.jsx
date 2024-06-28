@@ -63,26 +63,37 @@ function CreateToolbox() {
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
-        const requestData = {
-            ...toolbox,
-            selectedTools: selectedTools,
-        };
-        console.log("Submitting data:", requestData);
-        
-        const response = await axios.post("http://localhost:8080/toolbox/createToolbox", requestData);
-        console.log("Response from server:", response);
+      const requestData = {
+        toolbox_id: toolbox.toolbox_id,
+        project_id: toolbox.project_id,
+        site_supervisor_id: toolbox.site_supervisor_id,
+        Location_id: toolbox.Location_id,  // Ensure this matches the state key
+        selectedTools: selectedTools.map(tool => tool.toolId), // Adjust as per your backend
+      };
+  
+      console.log("Submitting data:", requestData);
+  
+      const response = await axios.post("http://localhost:8080/toolbox/create", requestData);
+      console.log("Response from server:", response);
+  
+      if (response.status === 201) {
         alert("New Toolbox Successfully Added!");
         navigate("/maintoolbox");
+      } else {
+        alert("Failed to add new toolbox. Please try again.");
+      }
     } catch (error) {
-        console.error("Error occurred while adding toolbox:", error);
-        if (error.response) {
-            console.error("Server responded with:", error.response.data);
-            alert("Failed to add new toolbox: " + JSON.stringify(error.response.data));
-        } else {
-            alert("An error occurred. Please try again.");
-        }
+      console.error("Error occurred while adding toolbox:", error);
+      if (error.response) {
+        console.error("Server responded with:", error.response.data);
+        alert("Failed to add new toolbox: " + JSON.stringify(error.response.data));
+      } else {
+        alert("An error occurred. Please try again.");
+      }
     }
-};
+  };
+  
+  
 
  
   return (
