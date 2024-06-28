@@ -1,7 +1,8 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Sidebar from '../../../Components/Sidebar/Sidebar';
+import StockSidebar from "../../../Components/Sidebar/StockSidebar";
+import DashNavbar from '../../../Components/Navbar/DashNavbar.jsx';
 import './addtool.css';
 
 export default function AddTool() {
@@ -12,12 +13,13 @@ export default function AddTool() {
     toolName: "",
     description: "",
     quantity: 0,
+    image: "",
   });
 
   const [errors, setErrors] = useState({});
   const [duplicateError, setDuplicateError] = useState("");
 
-  const { toolId, toolName, description, quantity } = tool;
+  const { toolId, toolName, description, quantity, image } = tool;
 
   const onInputChange = (e) => {
     setTool({ ...tool, [e.target.name]: e.target.value });
@@ -77,10 +79,11 @@ export default function AddTool() {
   };
 
   return (
-    <Sidebar>
-      <div className="form-container">
+    <StockSidebar>
+    <DashNavbar/>
+      <div className="addform">
         <form onSubmit={(e) => onSubmit(e)} className="form-content">
-          <h2 className="text-center my-4">New Tool Details Form</h2>
+          <h2 className="text-center m-4">New Tool Details Form</h2>
 
           <div className="mb-3">
             <label htmlFor="toolId" className="form-label">
@@ -143,14 +146,29 @@ export default function AddTool() {
             {errors.quantity && <div className="invalid-feedback">{errors.quantity}</div>}
           </div>
 
-          <button type="submit" className="btn btn-outline-primary">
+          {/* add image field */}
+          <div className="mb-3">
+            <label htmlFor="image" className="form-label">
+              Tool Image
+            </label>
+            <input
+              type={"file"}
+              className={`form-control ${errors.image && "is-invalid"}`}
+              placeholder="Enter the the tool image"
+              name="image"
+              value={image}
+              onChange={(e) => onInputChange(e)}
+            />
+            {errors.description && <div className="invalid-feedback">{errors.description}</div>}
+          </div>
+
+          <button type="submit" className="submit-btn">
             Submit
           </button>
-          <Link className="btn btn-outline-danger mx-2" to="/managestock">
-            Cancel
-          </Link>
+          <br/>
+          <Link to="/managestock"><button className="cancel-btn">Cancel</button></Link>
         </form>
       </div>
-      </Sidebar>
+  </StockSidebar>
   );
 }

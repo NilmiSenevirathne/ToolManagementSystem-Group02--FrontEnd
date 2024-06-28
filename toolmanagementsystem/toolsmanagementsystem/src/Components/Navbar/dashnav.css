@@ -1,0 +1,24 @@
+/* dashnav.css */
+.navbar-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #0a094d; /* Example background color */
+    padding: 10px 20px;
+    color: #fff; /* Example text color */
+    width: 1350px;
+    height: 50px;
+    margin-left: -40px;
+    margin-top: -2rem;
+  }
+  
+  .details-user  {
+    margin-left: 90px;
+    
+  }
+  
+  .user-profile p:first-child {
+    font-weight: bold;
+  }
+  
+  

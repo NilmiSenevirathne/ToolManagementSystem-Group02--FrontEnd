@@ -1,0 +1,53 @@
+/* manager sidebar.css */
+
+.details .user{
+    display: flex;
+    align-self: center;
+    width: 8rem;
+    border-radius: 50%;
+    margin-top: 1rem;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1rem;
+} 
+
+.details .name {
+    text-align: center; 
+    font-size:15px;
+}
+
+.details .role{
+    text-align: center;
+    font-size:24px;
+}
+.menu{
+    position:fixed;
+    top: 60px;
+    left: 0;
+    bottom: 0;
+    width: 300px;
+    z-index: 996;
+    transition: all 0.3s;
+    padding: 20px;
+}
+
+
+.sidebar {
+    position: fixed; /* Fixed position */
+    top: 0; /* Align to the top */
+    left: 0; /* Align to the left */
+    margin-right: auto;
+    bottom: 0;
+    width: 250px;
+    height: 100vh; /* Adjust the height of the sidebar to fit the viewport */
+    z-index: 996;
+    transition: all 0.3s;
+    padding: 20px;
+    width: 100px;
+
+  }
+ 
+  .link {
+    text-decoration: none; /* Remove underline */
+  }
+  
