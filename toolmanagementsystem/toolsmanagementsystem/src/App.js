@@ -1,15 +1,7 @@
-
 import React from 'react';
 import {Route, BrowserRouter as Router, Routes} from 'react-router-dom';
-import './app.css';
+//import './app.css';
 import LoginForm from '../src/LoginPage/LoginForm.jsx';
-import ManageStock  from './Position/StockSupervisor/ManageStock/ManageStock.jsx';
-import CreateToolbox from './Position/StockSupervisor/CreateToolBox/CreateToolbox.jsx';
-import TrackToolbox from './Position/StockSupervisor/TrackToolbox/STrackToolbox.js;
-// import '../src/App.css';
-import HomePage from '../src/Components/HomePage/Home.jsx';
-import LoginForm from '../src/LoginPage/LoginForm.jsx';
-import NewLogin from '../src/LoginPage/NewLogin.js';
 import ManageStock from './Position/StockSupervisor/ManageStock/ManageStock.jsx';
 import Toolbox from './Position/StockSupervisor/ToolBox/Toolbox.jsx';
 import CreateToolbox from './Position/StockSupervisor/ToolBox/CreateToolBox/CreateToolbox.jsx';
@@ -33,7 +25,6 @@ import ToolStatosRep from "./Position/Sitesupervisor/ToolStatosRep.jsx";
 import AddReportDetails from "./Position/Sitesupervisor/AddReportDetails.jsx";
 import RequiredToolReport from "./Position/Sitesupervisor/RequiredToolReport.jsx";
 import ViewProjects from './Position/Sitesupervisor/ViewProjects.jsx';
-import STrackToolbox from './Position/StockSupervisor/TrackToolbox/STrackToolbox.jsx';
 import ViewRequiredToolReports from './Position/Sitesupervisor/View/ViewRequiredToolReports.jsx';
 import ViewToolStatusReports from './Position/Sitesupervisor/View/ViewToolStatusReports.jsx';
 import Tool from './Position/StockSupervisor/ToolBox/CreateToolBox/Tools/Tool.jsx';
@@ -50,7 +41,7 @@ function App() {
          <Routes>
                    
 
-                  <Route path='/LoginForm' element={<LoginForm/>}> </Route> 
+                   
                     <Route  path='/' element={<LoginForm/>}> </Route> 
 
                     
