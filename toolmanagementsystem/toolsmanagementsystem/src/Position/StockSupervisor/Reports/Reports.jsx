@@ -1,106 +1,32 @@
-<<<<<<< Updated upstream
 import React, { useState, useEffect } from 'react';
 import StockSidebar from '../../../Components/Sidebar/StockSidebar.jsx';
-import DashNavbar from '../../../Components/Navbar/DashNavbar.jsx';
 import axios from 'axios';
-import './reports.css'
 
 const Reports = () => {
-  const [requiredtoolreports, setRequiredtoolreports] = useState([]);
   const [reports, setReports] = useState([]);
-  const [error, setError] = useState(null);
-=======
-import React, { useState, useEffect } from 'react'
-import StockSidebar from '../../../Components/Sidebar/StockSidebar.jsx';
-import axios from 'axios';
-
-const Reports = () => {
-  const [requiredreport , setRequiredReport] = useState([]);
-  const [reports , setReports]= useState([]);
-
-  useEffect(() =>{
-     loadReport();
-  }, []);
-
-
-   //fetch reports details from the backend
-   const loadReport = async () =>{
-    try{
-
-      const result  = await axios.get("http://localhost:8080/api/reports/getreports");
-      setReports(result.data);
-      console.log(result.data);
-    }catch (error){
-      console.error(" Error fetching report details", error);
-    }
-   };
-
-  return (
-          <StockSidebar>
-              <div className='report-content'>
-                 <h1>Welcome to Tool Report Section !</h1>
-
-                 <div className='tablesection'>
-                 <table className='table'>
-                 <thead>
-                    <tr>
-                       <th scope='col'>ReportID </th>
-                       <th scope='col'>Created At</th>
-                       <th scope='col'>Action</th>
-                  
-
-                    </tr>
-                 </thead>
-                 <tbody>
-                
-                  {/*Map over the tools array to render tool details*/}
-                  {reports.map ((report,index) =>(
-                  <tr key={report.report_id}>
-                     
-                     <td>{report.report_id}</td>
-                     <td>{report.created_at}</td>
-                    
-
-                     <td><button>Download</button></td>
-
-                  </tr>
-
-
-                ))}
-                
-                 </tbody>
-              </table>
-                 </div>
-              </div>
-              </StockSidebar>
-       
-    
-  )
-}
->>>>>>> Stashed changes
+  const [error, setError] = useState(null); // State to handle error
 
   useEffect(() => {
+    // Function to load reports when component mounts
     loadReports();
   }, []);
 
-  // Fetch reports details from the database
   const loadReports = async () => {
     try {
       const result = await axios.get("http://localhost:8080/api/reports/getreports");
       setReports(result.data);
     } catch (error) {
       console.error("Error fetching reports:", error);
-      alert("Failed to fetch reports. Please try again later.");
+      setError("Failed to fetch reports. Please try again later."); // Set error state
     }
   };
 
-   
   return (
     <StockSidebar>
-    <DashNavbar/>
       <div className='report-content'>
         <h2>Welcome to Report Section!</h2>
 
+        {/* Render error message if error state is set */}
         {error && <p>{error}</p>}
 
         <div className='reporttable'>
@@ -120,11 +46,11 @@ const Reports = () => {
                   <td>{report.created_at}</td>
                   <td>{report.project_name}</td>
                   <td>
-                    <a href={`data:image/png;base64,${report.report_data}`} download="ToolReport.pdf">
+                    {/* Assuming report_data is base64 encoded PDF data */}
+                    <a href={`data:application/pdf;base64,${report.report_data}`} download={`Report_${report.report_id}.pdf`}>
                       Download 
                     </a>
                   </td>
-                 
                 </tr>
               ))}
             </tbody>
