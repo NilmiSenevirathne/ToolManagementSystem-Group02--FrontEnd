@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 import React, { useState, useEffect } from 'react';
 import StockSidebar from '../../../Components/Sidebar/StockSidebar.jsx';
 import DashNavbar from '../../../Components/Navbar/DashNavbar.jsx';
@@ -8,6 +9,75 @@ const Reports = () => {
   const [requiredtoolreports, setRequiredtoolreports] = useState([]);
   const [reports, setReports] = useState([]);
   const [error, setError] = useState(null);
+=======
+import React, { useState, useEffect } from 'react'
+import StockSidebar from '../../../Components/Sidebar/StockSidebar.jsx';
+import axios from 'axios';
+
+const Reports = () => {
+  const [requiredreport , setRequiredReport] = useState([]);
+  const [reports , setReports]= useState([]);
+
+  useEffect(() =>{
+     loadReport();
+  }, []);
+
+
+   //fetch reports details from the backend
+   const loadReport = async () =>{
+    try{
+
+      const result  = await axios.get("http://localhost:8080/api/reports/getreports");
+      setReports(result.data);
+      console.log(result.data);
+    }catch (error){
+      console.error(" Error fetching report details", error);
+    }
+   };
+
+  return (
+          <StockSidebar>
+              <div className='report-content'>
+                 <h1>Welcome to Tool Report Section !</h1>
+
+                 <div className='tablesection'>
+                 <table className='table'>
+                 <thead>
+                    <tr>
+                       <th scope='col'>ReportID </th>
+                       <th scope='col'>Created At</th>
+                       <th scope='col'>Action</th>
+                  
+
+                    </tr>
+                 </thead>
+                 <tbody>
+                
+                  {/*Map over the tools array to render tool details*/}
+                  {reports.map ((report,index) =>(
+                  <tr key={report.report_id}>
+                     
+                     <td>{report.report_id}</td>
+                     <td>{report.created_at}</td>
+                    
+
+                     <td><button>Download</button></td>
+
+                  </tr>
+
+
+                ))}
+                
+                 </tbody>
+              </table>
+                 </div>
+              </div>
+              </StockSidebar>
+       
+    
+  )
+}
+>>>>>>> Stashed changes
 
   useEffect(() => {
     loadReports();
