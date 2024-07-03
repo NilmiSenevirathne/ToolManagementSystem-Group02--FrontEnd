@@ -1,6 +1,7 @@
 import React from 'react';
 import {Route, BrowserRouter as Router, Routes} from 'react-router-dom';
 //import './app.css';
+import Home from '../src/Components/HomePage/Home.jsx';
 import LoginForm from '../src/LoginPage/LoginForm.jsx';
 import ManageStock from './Position/StockSupervisor/ManageStock/ManageStock.jsx';
 import Toolbox from './Position/StockSupervisor/ToolBox/Toolbox.jsx';
@@ -18,7 +19,6 @@ import AddProjects from './Position/Manager/Pages/ManageProjects/Projects/AddPro
 import UpdateProjects from './Position/Manager/Pages/ManageProjects/Projects/UpdateProjects.jsx'
 import LocationHome from './Position/Manager/Pages/ManageProjects/Projects/Location/LocationHome.jsx';
 import AddLocation from './Position/Manager/Pages/ManageProjects/Projects/Location/AddLocation.jsx';
-import Home from './Position/Manager/Pages/ManageProjects/Home.jsx'
 import Dboard from './Position/Sitesupervisor/dashboard/Dboard.jsx'
 import CreateReports from './Position/Sitesupervisor/CreateReports.jsx';
 import ToolStatosRep from "./Position/Sitesupervisor/ToolStatosRep.jsx";
@@ -41,7 +41,7 @@ function App() {
          <Routes>
                    
 
-                   
+                    
                     <Route  path='/' element={<LoginForm/>}> </Route> 
 
                     
@@ -77,8 +77,8 @@ function App() {
                     <Route  path = "/reports"  element={<Reports/>}/>
 
                     {/* SiteSupervisor pages */}
-
-                   <Route path='/' element={<Dboard/>}> </Route>
+ 
+                   <Route path='/sitesupervisor' element={<Dboard/>}> </Route>
                    <Route path='/supervisordashboard' element={<Dboard/>}> </Route>
                    <Route path="/CreateReports" element={<CreateReports/>}/>
                    <Route path="/ToolStatosRep" element={<ToolStatosRep/>}/>

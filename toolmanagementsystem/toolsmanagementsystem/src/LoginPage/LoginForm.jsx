@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import './LoginForm.css';
 import Login from '../../src/images/user1.jpg';
 import Validation from '../../src/LoginPage/Validation.js';
-import { FaUser, FaLock } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
 
 function LoginForm() {
     const navigate = useNavigate();
@@ -19,6 +20,7 @@ function LoginForm() {
         setValues({ ...values, [e.target.name]: e.target.value });
     }
 
+    //sumit function
     function handleSubmit(e) {
         e.preventDefault();
 
@@ -55,8 +57,8 @@ function LoginForm() {
                     case 'stocksupervisor':
                         navigate("/stocksupervisordashboard");
                         break;
-                    case 'supervisor':
-                        navigate("/supervisordashboard");
+                    case 'sitesupervisor':
+                        navigate("/sitesupervisor");
                         break;
                     default:
                         throw new Error('Unknown role');
@@ -79,21 +81,51 @@ function LoginForm() {
                 <img className="englogo" src={Login} alt=''/> 
                 <h1>Login</h1>
 
-                <div className='input-box'> 
-                    <label htmlFor='username'>Username</label>
-                    <input type='text' placeholder='Username' value={values.username} name='username' onChange={handleChange} />
-                    {errors.username && <p style={{ color: "red", fontSize: "13px" }}>{errors.username}</p>}
-                    <FaUser className='icon' />
+                <div> 
+                <TextField
+                        id="outlined-username-input"
+                        label="Username"
+                        type="text"
+                        value={values.username}
+                        name='username'
+                        onChange={handleChange}
+                        autoComplete="current-username"
+                        fullWidth
+                        margin="normal"
+                        error={!!errors.username}
+                        helperText={errors.username}
+                    />
+                    
                 </div>
 
-                <div className='input-box'> 
-                    <label htmlFor='password'>Password</label>
-                    <input type='password' placeholder='Password' value={values.password} name='password' onChange={handleChange}/>
-                    {errors.password && <p style={{ color: "red", fontSize: "13px" }}>{errors.password}</p>}
-                    <FaLock className='icon'/>
+               
+                <div> 
+                    
+                   <TextField
+                        id="outlined-password-input"
+                        label="Password"
+                        type="password"
+                        value={values.password}
+                        name='password'
+                        onChange={handleChange}
+                        autoComplete="current-password"
+                        fullWidth
+                        margin="normal"
+                        error={!!errors.password}
+                        helperText={errors.password}
+                    />
+                    
                 </div>
                 
-                <button type='submit' className='submit'>Login</button>
+                <Button
+                    type='submit'
+                    className='submit'
+                    variant="contained"
+                    color="primary"
+                    fullWidth
+                >
+                    Login
+                </Button>
             </form>
         </div>
     );
