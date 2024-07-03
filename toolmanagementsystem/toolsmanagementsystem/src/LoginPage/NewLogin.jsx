@@ -22,6 +22,7 @@ function NewLogin() {
   });
 
   const [errors, setErrors] = useState({});
+  const [serverError, setServerError] = useState('');
 
   function handleChange(e) {
     setValues({ ...values, [e.target.name]: e.target.value });
@@ -38,29 +39,31 @@ function NewLogin() {
     return errors;
   }
 
-  function handleSubmit(e) {
+  // Submit function
+  async function handleSubmit(e) {
     e.preventDefault();
 
     const validationErrors = Validation(values);
     setErrors(validationErrors);
 
     if (Object.keys(validationErrors).length === 0) {
-      fetch('http://localhost:8080/authentication/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(values),
-      })
-      .then(async response => {
-        if (response.ok) {
-          return response.text();
-        } else {
+      try {
+        const response = await fetch('http://localhost:8080/authentication/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(values),
+        });
+
+        if (!response.ok) {
           const errorMessage = await response.text();
-          throw new Error(errorMessage);
+          console.error('Server error message:', errorMessage);
+          setServerError(errorMessage); // Set server error message
+          throw new Error('Login failed');
         }
-      })
-      .then(role => {
+
+        const role = await response.text();
         console.log("Login Success!!");
         switch (role.toLowerCase()) {
           case 'admin':
@@ -78,10 +81,9 @@ function NewLogin() {
           default:
             throw new Error('Unknown role');
         }
-      })
-      .catch(error => {
+      } catch (error) {
         console.error('Error during login:', error);
-      });
+      }
     } else {
       console.error('Form validation errors:', validationErrors);
     }
@@ -173,6 +175,11 @@ function NewLogin() {
               >
                 Login
               </Button>
+              {serverError && (
+                <Typography color="error" variant="body2">
+                  {serverError}
+                </Typography>
+              )}
             </Box>
           </Box>
         </Grid>
