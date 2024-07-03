@@ -7,7 +7,6 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
-import Login from '../../src/images/user1.jpg';
 import Validation from '../../src/LoginPage/Validation.js';
 import backgroundImage from '../images/background3.jpg';
 import Logo from '../images/user1.jpg';
