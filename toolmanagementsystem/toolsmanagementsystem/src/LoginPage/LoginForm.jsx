@@ -1,10 +1,19 @@
-import React, { useEffect, useState } from 'react';
-import './LoginForm.css';
-import Login from '../../src/images/user1.jpg';
-import Validation from '../../src/LoginPage/Validation.js';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
+import CssBaseline from '@mui/material/CssBaseline';
+import Login from '../../src/images/user1.jpg';
+import Validation from '../../src/LoginPage/Validation.js';
+import backgroundImage from '../images/background3.jpg';
+import Logo from '../images/user1.jpg';
+
+
+const defaultTheme = createTheme();
 
 function LoginForm() {
     const navigate = useNavigate();
@@ -20,7 +29,6 @@ function LoginForm() {
         setValues({ ...values, [e.target.name]: e.target.value });
     }
 
-    //sumit function
     function handleSubmit(e) {
         e.preventDefault();
 
@@ -75,59 +83,82 @@ function LoginForm() {
     }
 
     return (
-        <div className='wrapper'>
-            <form onSubmit={handleSubmit}>
-                <h1 className='name'> Dilum BMK Engineers (Pvt)Ltd. </h1>
-                <img className="englogo" src={Login} alt=''/> 
-                <h1>Login</h1>
+        <ThemeProvider theme={defaultTheme}>
+            <CssBaseline />
+            <Grid container component="main" sx={{ height: '100vh' }}>
+                <Grid
+                    item
+                    xs={false}
+                    sm={4}
+                    md={7}
+                    sx={{
+                        backgroundImage: `url(${backgroundImage})`,
+                        backgroundColor: (t) =>
+                            t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center',
+                    }}
+                />
 
-                <div> 
-                <TextField
-                        id="outlined-username-input"
-                        label="Username"
-                        type="text"
-                        value={values.username}
-                        name='username'
-                        onChange={handleChange}
-                        autoComplete="current-username"
-                        fullWidth
-                        margin="normal"
-                        error={!!errors.username}
-                        helperText={errors.username}
-                    />
-                    
-                </div>
-
-               
-                <div> 
-                    
-                   <TextField
-                        id="outlined-password-input"
-                        label="Password"
-                        type="password"
-                        value={values.password}
-                        name='password'
-                        onChange={handleChange}
-                        autoComplete="current-password"
-                        fullWidth
-                        margin="normal"
-                        error={!!errors.password}
-                        helperText={errors.password}
-                    />
-                    
-                </div>
                 
-                <Button
-                    type='submit'
-                    className='submit'
-                    variant="contained"
-                    color="primary"
-                    fullWidth
-                >
-                    Login
-                </Button>
-            </form>
-        </div>
+                <Grid item xs={12} sm={8} md={5} elevation={6}>
+                    <Box
+                        sx={{
+                            my: 8,
+                            mx: 4,
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                        }}
+                    >
+                        <Box component="img" src={Logo} alt="Company Logo" sx={{ width: 100, height: 100, mb: 1 }} />
+                            <Typography component="h1" variant="h3">
+                              Login
+                            </Typography>
+                        <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
+                            
+                            
+                            <TextField
+                                id="outlined-username-input"
+                                label="Username"
+                                type="text"
+                                value={values.username}
+                                name='username'
+                                onChange={handleChange}
+                                autoComplete="current-username"
+                                fullWidth
+                                margin="normal"
+                                error={!!errors.username}
+                                helperText={errors.username}
+                            />
+                            <TextField
+                                id="outlined-password-input"
+                                label="Password"
+                                type="password"
+                                value={values.password}
+                                name='password'
+                                onChange={handleChange}
+                                autoComplete="current-password"
+                                fullWidth
+                                margin="normal"
+                                error={!!errors.password}
+                                helperText={errors.password}
+                            />
+                            <Button
+                                type='submit'
+                                className='submit'
+                                variant="contained"
+                                color="primary"
+                                fullWidth
+                                sx={{ mt: 3, mb: 2 }}
+                            >
+                                Login
+                            </Button>
+                        </Box>
+                    </Box>
+                </Grid>
+            </Grid>
+        </ThemeProvider>
     );
 }
 
