@@ -65,6 +65,8 @@ function App() {
 
 
                      {/* StockSupervisor pages  */}
+
+                     
                     <Route  path='/stocksupervisordashboard' element={<StockSupervisorDashboard/>} />
                     <Route  path = "/managestock"  element={<ManageStock/>}/>
                     <Route  path = "/addTool"  element={<AddTool/>}/>

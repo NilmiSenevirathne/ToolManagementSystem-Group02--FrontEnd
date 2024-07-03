@@ -6,6 +6,8 @@ import axios from 'axios';
 import StockSidebar from '../../../Components/Sidebar/StockSidebar';
 import DashNavbar from '../../../Components/Navbar/DashNavbar.jsx';
 
+import { CssBaseline, Grid } from '@mui/material';
+
 const StockSupervisorDashboard = () => {
   const role = "StockSupervisor";
   const [tools, setTools] = useState({});
@@ -74,21 +76,13 @@ const StockSupervisorDashboard = () => {
   
 
   return (
-      <StockSidebar>
-      <DashNavbar/>
-        <div className='dashboard-content'>
-          
-          <h1 className='msg'>Welcome to {role} Dashboard!</h1>
-          <div className='chart'>
-             <Chart type="doughnut" data={pieChartData} options={chartOptions} />
-          </div>
-
-          <div className='chart'>
-              <Chart type="line" data={lineChartData} options={lineChartOptions} />
-            </div>
-        </div>
+    <Grid container>
+        <CssBaseline />
+        <Grid item>
+           <StockSidebar/>
+        </Grid>
         
-        </StockSidebar>
+    </Grid>
 
   );
 }
