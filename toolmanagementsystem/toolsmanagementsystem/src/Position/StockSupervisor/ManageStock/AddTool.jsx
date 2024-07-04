@@ -2,8 +2,8 @@ import axios from "axios";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import StockSidebar from "../../../Components/Sidebar/StockSidebar";
-import DashNavbar from '../../../Components/Navbar/DashNavbar.jsx';
 import './addtool.css';
+import StockSuperviorNavbar from "../../../Components/Navbar/StockSupervisorNavbar.jsx";
 
 export default function AddTool() {
   let navigate = useNavigate();
@@ -80,7 +80,7 @@ export default function AddTool() {
 
   return (
     <StockSidebar>
-    <DashNavbar/>
+    <StockSuperviorNavbar/>
       <div className="addform">
         <form onSubmit={(e) => onSubmit(e)} className="form-content">
           <h2 className="text-center m-4">New Tool Details Form</h2>

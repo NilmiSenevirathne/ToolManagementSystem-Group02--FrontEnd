@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import StockSidebar from '../../../Components/Sidebar/StockSidebar.jsx'
-import DashNavbar from '../../../Components/Navbar/DashNavbar.jsx';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 import './maintoolbox.css'
+import StockSuperviorNavbar from '../../../Components/Navbar/StockSupervisorNavbar.jsx';
 
 const Toolbox = () => {
   const [toolbox , setToolbox] = useState([]);
@@ -36,7 +36,7 @@ const Toolbox = () => {
 
   return (
     <StockSidebar>
-    <DashNavbar/>
+    <StockSuperviorNavbar/>
         <div className='toolbox'>
 
             <h1>Welcome to ToolBox Details Section!</h1>

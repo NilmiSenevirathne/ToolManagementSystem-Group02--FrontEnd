@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import StockSidebar from '../../../../Components/Sidebar/StockSidebar.jsx';
-import DashNavbar from '../../../../Components/Navbar/DashNavbar.jsx';
 import axios from "axios";
 import './toolbox.css';
 

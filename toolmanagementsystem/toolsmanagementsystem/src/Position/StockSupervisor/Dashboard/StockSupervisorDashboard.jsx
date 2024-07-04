@@ -1,12 +1,10 @@
 // StockSupervisor Dashboard.jsx
 import React, { useState, useEffect } from 'react';
-import './Dashboard.css';
 import { Chart } from 'primereact/chart';
 import axios from 'axios';
 import StockSidebar from '../../../Components/Sidebar/StockSidebar';
-import DashNavbar from '../../../Components/Navbar/DashNavbar.jsx';
-
 import { CssBaseline, Grid } from '@mui/material';
+import StockSuperviorNavbar from '../../../Components/Navbar/StockSupervisorNavbar.jsx';
 
 const StockSupervisorDashboard = () => {
   const role = "StockSupervisor";
@@ -80,6 +78,10 @@ const StockSupervisorDashboard = () => {
         <CssBaseline />
         <Grid item>
            <StockSidebar/>
+        </Grid>
+
+        <Grid item xs>
+           <StockSuperviorNavbar/>
         </Grid>
         
     </Grid>

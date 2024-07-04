@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { TextField, Badge, Dialog, DialogTitle, DialogContent, DialogActions, Button } from '@mui/material';
 import axios from 'axios';
 import StockSidebar from '../../../../../Components/Sidebar/StockSidebar.jsx';
-import DashNavbar from '../../../../../Components/Navbar/DashNavbar.jsx';
 import { FaCartArrowDown } from 'react-icons/fa';
 import { useNavigate, useLocation } from 'react-router-dom';
 import './tools.css';
+import StockSuperviorNavbar from '../../../../../Components/Navbar/StockSupervisorNavbar.jsx';
 
 const Tool = () => {
   const [tools, setTools] = useState([]);
@@ -84,7 +84,7 @@ const Tool = () => {
 
   return (
     <StockSidebar>
-      <DashNavbar/>
+      <StockSuperviorNavbar/>
       <div className='toolsection'>
         <h1>Tools Section!</h1>
         <div style={{ display: 'flex', alignItems: 'center', marginBottom: '20px' }}>
