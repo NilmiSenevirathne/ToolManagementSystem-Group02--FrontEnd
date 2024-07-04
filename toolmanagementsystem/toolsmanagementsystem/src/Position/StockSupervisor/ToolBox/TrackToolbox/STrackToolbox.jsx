@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import StockSidebar from '../../../../Components/Sidebar/StockSidebar.jsx';
-import DashNavbar from '../../../../Components/Navbar/DashNavbar.jsx';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import StockSuperviorNavbar from '../../../../Components/Navbar/StockSupervisorNavbar.jsx';
 
 const STrackToolbox = () => {
   let navigate = useNavigate();
@@ -39,7 +39,7 @@ const STrackToolbox = () => {
 
   return (
     <StockSidebar>
-      <DashNavbar />
+      <StockSuperviorNavbar />
       <div className='stock-content'>
         <h1>Welcome to TrackToolbox Section!</h1>
 

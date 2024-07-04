@@ -5,6 +5,7 @@ import { FaTh, FaCartPlus, FaBriefcase, FaNewspaper } from 'react-icons/fa';
 import { RiLogoutCircleRLine } from 'react-icons/ri';
 import companyLogo from '../../images/BMKLogo.jpg';
 
+
 const StockSidebar = () => {
   const navigate = useNavigate();
 

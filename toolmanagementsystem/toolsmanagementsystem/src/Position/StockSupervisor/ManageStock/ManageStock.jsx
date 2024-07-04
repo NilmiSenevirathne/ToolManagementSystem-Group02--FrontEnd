@@ -3,8 +3,8 @@ import './managestock.css';
 import axios from "axios";
 import { Link , useParams } from 'react-router-dom';
 import StockSidebar from '../../../Components/Sidebar/StockSidebar';
-import DashNavbar from '../../../Components/Navbar/DashNavbar.jsx';
 import { TextField } from '@mui/material'; // Import TextField from Material UI
+import StockSuperviorNavbar from '../../../Components/Navbar/StockSupervisorNavbar.jsx';
 
 
 const ManageStock = () => {
@@ -45,7 +45,7 @@ const ManageStock = () => {
 
   return (
     <StockSidebar>
-    <DashNavbar/>
+    <StockSuperviorNavbar/>
       <div className='stock-content'>
         <h1>Welcome to Tool Details Section !</h1>
         
