@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import StockSidebar from '../../../../Components/Sidebar/StockSidebar.jsx';
+import StockSupervisorNavbar from '../../../../Components/Navbar/StockSupervisorNavbar.jsx';
+import { Grid,  Container, Box, Typography, TextField, Select, MenuItem, Button } from "@mui/material";
+
 import axios from "axios";
-import './toolbox.css';
+
 
 function CreateToolbox() {
   const navigate = useNavigate();
@@ -96,109 +99,156 @@ function CreateToolbox() {
 
  
   return (
-    <StockSidebar>
-     
-      <div className="form-container">
-        <form onSubmit={onSubmit} className="form-content">
-          <h2 className="text-center my-4">New Toolbox Details Form</h2>
+    
+     <Grid container>
+         <Grid item>
+             <StockSidebar/>
+         </Grid>
 
-          <div className="mb-3">
-            <label htmlFor="toolboxId" className="form-label">
-              Toolbox ID
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Enter new toolbox id"
-              name="toolbox_id"
-              value={toolbox.toolbox_id}
-              onChange={onInputChange}
-            />
-          </div>
+         <Grid item xs>
+             <StockSupervisorNavbar/>
 
-          <div className="mb-3">
-            <label htmlFor="projectId" className="form-label">
-              Project
-            </label>
-            <select
-              className="form-control"
-              name="project_id"
-              value={toolbox.project_id}
-              onChange={onInputChange}
+             <Container maxWidth="md">
+          <Box mt={4}>
+          <Box 
+              p={4} 
+              border={1} 
+              borderRadius={8} 
+              borderColor="grey.300"
+              boxShadow={3}
             >
-              <option value="">Select project</option>
-              {projects.map((project) => (
-                <option key={project.projectId} value={project.projectId}>
-                  {project.projectName}
-                </option>
-              ))}
-            </select>
-          </div>
+             
+            <Typography variant="h4" align="center" gutterBottom>
+              New Toolbox Details Form
+            </Typography>
+            <form onSubmit={onSubmit}>
+              <Grid container spacing={2}>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    fullWidth
+                    variant="outlined"
+                    margin="normal"
+                    label="Toolbox ID"
+                    name="toolbox_id"
+                    value={toolbox.toolbox_id}
+                    onChange={onInputChange}
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    select
+                    fullWidth
+                    variant="outlined"
+                    margin="normal"
+                    label="Project"
+                    name="project_id"
+                    value={toolbox.project_id}
+                    onChange={onInputChange}
+                  >
+                    <MenuItem value="">
+                      <em>Select project</em>
+                    </MenuItem>
+                    {projects.map((project) => (
+                      <MenuItem key={project.projectId} value={project.projectId}>
+                        {project.projectName}
+                      </MenuItem>
+                    ))}
+                  </TextField>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    select
+                    fullWidth
+                    variant="outlined"
+                    margin="normal"
+                    label="Site Supervisor"
+                    name="site_supervisor_id"
+                    value={toolbox.site_supervisor_id}
+                    onChange={onInputChange}
+                  >
+                    <MenuItem value="">
+                      <em>Select Name</em>
+                    </MenuItem>
+                    {users.map((user) => (
+                      <MenuItem key={user.userid} value={user.userid}>
+                        {user.firstname} {user.lastname}
+                      </MenuItem>
+                    ))}
+                  </TextField>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    select
+                    fullWidth
+                    variant="outlined"
+                    margin="normal"
+                    label="Location"
+                    name="Location_id"
+                    value={toolbox.Location_id}
+                    onChange={onInputChange}
+                  >
+                    <MenuItem value="">
+                      <em>Select Location</em>
+                    </MenuItem>
+                    {locations.map((loc) => (
+                      <MenuItem key={loc.locationId} value={loc.locationId}>
+                        {loc.locationName}
+                      </MenuItem>
+                    ))}
+                  </TextField>
+                </Grid>
+              </Grid>
+              <Box my={2}>
+                <Link to="/tool" state={{ toolbox }} style={{ textDecoration: 'none' }}>
+                  <Button variant="contained" color="primary">
+                    Select Tools
+                  </Button>
+                </Link>
+              </Box>
+              <TextField
+                fullWidth
+                variant="outlined"
+                margin="normal"
+                label="Selected Tools"
+                value={selectedTools.map(tool => tool.toolName).join(', ')}
+                InputProps={{
+                  readOnly: true,
+                }}
+                multiline
+                rows={4}
+              />
+              
+               {/* submit button */}
+              <Box mt={2} display="flex" justifyContent="center" gap={2}>
+                  <Box flexGrow={1}>
+                    <Button
+                      variant="contained"
+                      sx={{ bgcolor: 'green', width: '100%', fontSize: '1.25rem' }}
+                      type="submit"
+                    >
+                      Submit
+                    </Button>
+                  </Box>
 
-          <div className="mb-3">
-            <label htmlFor="sitesupervisorId" className="form-label">
-              Site Supervisor
-            </label>
-            <select
-              className="form-control"
-              name="site_supervisor_id"
-              value={toolbox.site_supervisor_id}
-              onChange={onInputChange}
-            >
-              <option value="">Select Name</option>
-              {users.map((user) => (
-                <option key={user.userid} value={user.userid}>
-                  {user.firstname} {user.lastname}
-                </option>
-              ))}
-            </select>
-          </div>
+                {/* cancel button */}
+                  <Box flexGrow={1}>
+                    <Link to="/maintoolbox" style={{ textDecoration: 'none' }}>
+                      <Button
+                        variant="contained"
+                        sx={{ bgcolor: 'red', width: '100%', fontSize: '1.25rem' }}
+                      >
+                        Cancel
+                      </Button>
+                    </Link>
+                  </Box>
+                </Box>
+            </form>
+            </Box>
+          </Box>
+        </Container>
 
-          <div className="mb-3">
-            <label htmlFor="locationId" className="form-label">
-              Location
-            </label>
-            <select
-              className="form-control"
-              name="Location_id"
-              value={toolbox.Location_id}
-              onChange={onInputChange}
-            >
-              <option value="">Select Location</option>
-              {locations.map((loc) => (
-                <option key={loc.locationId} value={loc.locationId}>
-                  {loc.locationName}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <div>
-            <Link to="/tool" state={{ toolbox }}> {/* Pass the current form state */}
-              <button type="button" className="selecttool">Select Tools</button>
-            </Link>
-          </div>
-
-          {/* selectedtool textarea */}
-          <div className="mb-3">
-          <label htmlFor="selectedTools" className="form-label">
-          Selected Tools
-          </label>
-          <textarea 
-           id="selectedTools" 
-           className="form-control" 
-           rows="5"
-           readOnly
-           value={selectedTools.map(tool => tool.toolName).join(', ')}
-      />
-      </div>
-
-
-          <button type="submit" className="submit">Submit</button>
-          <button type="button" className="cancel" onClick={() => navigate("/managestock")}>Cancel</button>
-        </form>
-      </div>
-    </StockSidebar>
+         </Grid>
+     </Grid>
   );
 }
 
