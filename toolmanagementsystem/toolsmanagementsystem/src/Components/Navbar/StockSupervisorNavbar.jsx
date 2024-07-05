@@ -32,7 +32,7 @@ const StockSupervisorNavbar = () => {
     <AppBar position="static">
       <Toolbar>
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          Stock Supervisor Dashboard!
+          Stock Supervisor
         </Typography>
         
         {user.firstname && (
