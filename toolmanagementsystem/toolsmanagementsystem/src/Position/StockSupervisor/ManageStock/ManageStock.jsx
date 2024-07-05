@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import './managestock.css';
 import axios from "axios";
 import { Link, useParams } from 'react-router-dom';
 import StockSidebar from '../../../Components/Sidebar/StockSidebar';
@@ -73,11 +72,11 @@ const ManageStock = () => {
             <Table stickyHeader aria-label="Tools Table" sx={{ borderCollapse: 'separate', borderSpacing: 0 }}>
               <TableHead>
                 <TableRow>
-                  <TableCell sx={{ fontWeight: 'bold', textAlign: 'center' }}>Tool_ID</TableCell>
-                  <TableCell sx={{ fontWeight: 'bold', textAlign: 'center' }}>ToolName</TableCell>
-                  <TableCell sx={{ fontWeight: 'bold', textAlign: 'center' }}>Description</TableCell>
-                  <TableCell sx={{ fontWeight: 'bold', textAlign: 'center' }}>Quantity</TableCell>
-                  <TableCell sx={{ fontWeight: 'bold', textAlign: 'center' }}>Action</TableCell>
+                  <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'blue', color: 'white'   }}>Tool_ID</TableCell>
+                  <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'blue', color: 'white'   }}>ToolName</TableCell>
+                  <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'blue', color: 'white'   }}>Description</TableCell>
+                  <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'blue', color: 'white'  }}>Quantity</TableCell>
+                  <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'blue', color: 'white'   }}>Action</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
