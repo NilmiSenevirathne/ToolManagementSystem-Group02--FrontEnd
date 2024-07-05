@@ -198,9 +198,9 @@ function CreateToolbox() {
                   </TextField>
                 </Grid>
               </Grid>
-              <Box my={2}>
+              <Box my={2} display="flex" justifyContent="center">
                 <Link to="/tool" state={{ toolbox }} style={{ textDecoration: 'none' }}>
-                  <Button variant="contained" color="primary">
+                  <Button variant="contained"  sx={{ bgcolor: 'blue', width: '100%', fontSize: '1.25rem', maxWidth:"150px" }}>
                     Select Tools
                   </Button>
                 </Link>
