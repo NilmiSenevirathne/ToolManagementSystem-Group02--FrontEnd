@@ -2,8 +2,8 @@ import axios from "axios";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import StockSidebar from "../../../Components/Sidebar/StockSidebar";
-import './addtool.css';
 import StockSuperviorNavbar from "../../../Components/Navbar/StockSupervisorNavbar.jsx";
+import { CssBaseline , Grid, Box, Typography, TextField, Button,Container} from "@mui/material";
 
 export default function AddTool() {
   let navigate = useNavigate();
@@ -79,96 +79,118 @@ export default function AddTool() {
   };
 
   return (
-    <StockSidebar>
-    <StockSuperviorNavbar/>
-      <div className="addform">
-        <form onSubmit={(e) => onSubmit(e)} className="form-content">
-          <h2 className="text-center m-4">New Tool Details Form</h2>
+  
+   <Grid container>
+      <CssBaseline/>
+      <Grid item>
+        <StockSidebar/>
+      </Grid>
+      <Grid item xs>
+        <StockSuperviorNavbar/>
 
-          <div className="mb-3">
-            <label htmlFor="toolId" className="form-label">
-              ToolID
-            </label>
-            <input
-              type={"text"}
-              className={`form-control ${errors.toolId || duplicateError ? "is-invalid" : ""}`}
-              placeholder="Enter new toolid"
-              name="toolId"
-              value={toolId}
-              onChange={(e) => onInputChange(e)}
-            />
-            {errors.toolId && <div className="invalid-feedback">{errors.toolId}</div>}
-            {duplicateError && <div className="invalid-feedback">{duplicateError}</div>}
-          </div>
+        <Container maxWidth="sm">
+          <Box mt={4}>
+            <Box 
+              p={4} 
+              border={1} 
+              borderRadius={8} 
+              borderColor="grey.300"
+              boxShadow={3}
+            >
 
-          <div className="mb-3">
-            <label htmlFor="toolName" className="form-label">
-              ToolName
-            </label>
-            <input
-              type={"text"}
-              className={`form-control ${errors.toolName && "is-invalid"}`}
-              placeholder="Enter tool name"
-              name="toolName"
-              value={toolName}
-              onChange={(e) => onInputChange(e)}
-            />
-            {errors.toolName && <div className="invalid-feedback">{errors.toolName}</div>}
-          </div>
+            <Typography variant="h4" align="center" gutterBottom>
+              New Tool Details Form
+            </Typography>
+            <form onSubmit={onSubmit}>
+              <TextField
+                variant="outlined"
+                fullWidth
+                label="Tool ID"
+                name="toolId"
+                value={toolId}
+                onChange={onInputChange}
+                error={!!errors.toolId || !!duplicateError}
+                helperText={errors.toolId || duplicateError}
+                margin="normal"
+              />
+              <TextField
+                variant="outlined"
+                fullWidth
+                label="Tool Name"
+                name="toolName"
+                value={toolName}
+                onChange={onInputChange}
+                error={!!errors.toolName}
+                helperText={errors.toolName}
+                margin="normal"
+              />
+              <TextField
+                variant="outlined"
+                fullWidth
+                label="Description"
+                name="description"
+                value={description}
+                onChange={onInputChange}
+                error={!!errors.description}
+                helperText={errors.description}
+                margin="normal"
+              />
+              <TextField
+                variant="outlined"
+                fullWidth
+                type="number"
+                label="Quantity"
+                name="quantity"
+                value={quantity}
+                onChange={onInputChange}
+                error={!!errors.quantity}
+                helperText={errors.quantity}
+                margin="normal"
+              />
+              <TextField
+                variant="outlined"
+                fullWidth
+                type="file"
+                label="Tool Image"
+                name="image"
+                value={image}
+                onChange={onInputChange}
+                error={!!errors.image}
+                helperText={errors.image}
+                margin="normal"
+              />
+              
+              {/* submit button */}
+              <Box mt={2} display="flex" justifyContent="center" gap={2}>
+                  <Box flexGrow={1}>
+                    <Button
+                      variant="contained"
+                      sx={{ bgcolor: 'green', width: '100%', fontSize: '1.25rem' }}
+                      type="submit"
+                    >
+                      Submit
+                    </Button>
+                  </Box>
 
-          <div className="mb-3">
-            <label htmlFor="description" className="form-label">
-              Description
-            </label>
-            <input
-              type={"text"}
-              className={`form-control ${errors.description && "is-invalid"}`}
-              placeholder="Enter the tool description"
-              name="description"
-              value={description}
-              onChange={(e) => onInputChange(e)}
-            />
-            {errors.description && <div className="invalid-feedback">{errors.description}</div>}
-          </div>
+                {/* cancel button */}
+                  <Box flexGrow={1}>
+                    <Link to="/managestock" style={{ textDecoration: 'none' }}>
+                      <Button
+                        variant="contained"
+                        sx={{ bgcolor: 'red', width: '100%', fontSize: '1.25rem' }}
+                      >
+                        Cancel
+                      </Button>
+                    </Link>
+                  </Box>
+                </Box>
 
-          <div className="mb-3">
-            <label htmlFor="quantity" className="form-label">
-              Quantity
-            </label>
-            <input
-              type={'number'}
-              className={`form-control ${errors.quantity && "is-invalid"}`}
-              placeholder="Enter the quantity"
-              name="quantity"
-              value={quantity}
-              onChange={(e) => onInputChange(e)}
-            />
-            {errors.quantity && <div className="invalid-feedback">{errors.quantity}</div>}
-          </div>
+            </form>
+            </Box>
+          </Box>
+        </Container>
 
-          {/* add image field */}
-          <div className="mb-3">
-            <label htmlFor="image" className="form-label">
-              Tool Image
-            </label>
-            <input
-              type={"file"}
-              className={`form-control ${errors.image && "is-invalid"}`}
-              placeholder="Enter the the tool image"
-              name="image"
-              value={image}
-              onChange={(e) => onInputChange(e)}
-            />
-            {errors.description && <div className="invalid-feedback">{errors.description}</div>}
-          </div>
-
-          <button type="submit" className="submit-btn">
-            Submit
-          </button>
-          <br/>
-          <Link to="/managestock"><button className="cancel-btn">Cancel</button></Link>
-        </form>
-      </div>
-  </StockSidebar>
+      </Grid>
+   </Grid>
   );
 }
