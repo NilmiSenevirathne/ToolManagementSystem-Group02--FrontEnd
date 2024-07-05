@@ -4,7 +4,7 @@ import axios from "axios";
 import { Link, useParams } from 'react-router-dom';
 import StockSidebar from '../../../Components/Sidebar/StockSidebar';
 import StockSuperviorNavbar from '../../../Components/Navbar/StockSupervisorNavbar.jsx';
-import { CssBaseline, Grid, TextField, Button, Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
+import { CssBaseline, Grid, TextField, Button, Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Box } from '@mui/material';
 
 const ManageStock = () => {
   const [tools, setTools] = useState([]);
@@ -70,14 +70,14 @@ const ManageStock = () => {
           </div>
 
           <TableContainer component={Paper} style={{ maxHeight: 400 }}>
-            <Table stickyHeader aria-label="Tools Table">
+            <Table stickyHeader aria-label="Tools Table" sx={{ borderCollapse: 'separate', borderSpacing: 0 }}>
               <TableHead>
                 <TableRow>
-                  <TableCell>Tool_ID</TableCell>
-                  <TableCell>ToolName</TableCell>
-                  <TableCell>Description</TableCell>
-                  <TableCell>Quantity</TableCell>
-                  <TableCell>Action</TableCell>
+                  <TableCell sx={{ fontWeight: 'bold', textAlign: 'center' }}>Tool_ID</TableCell>
+                  <TableCell sx={{ fontWeight: 'bold', textAlign: 'center' }}>ToolName</TableCell>
+                  <TableCell sx={{ fontWeight: 'bold', textAlign: 'center' }}>Description</TableCell>
+                  <TableCell sx={{ fontWeight: 'bold', textAlign: 'center' }}>Quantity</TableCell>
+                  <TableCell sx={{ fontWeight: 'bold', textAlign: 'center' }}>Action</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -86,16 +86,16 @@ const ManageStock = () => {
                     <TableCell component="th" scope="row">
                       {tool.toolId}
                     </TableCell>
-                    <TableCell>{tool.toolName}</TableCell>
-                    <TableCell>{tool.description}</TableCell>
-                    <TableCell>{tool.quantity}</TableCell>
+                    <TableCell sx={{ textAlign: 'center' }}>{tool.toolName}</TableCell>
+                    <TableCell sx={{ textAlign: 'center' }}>{tool.description}</TableCell>
+                    <TableCell sx={{ textAlign: 'center' }}>{tool.quantity}</TableCell>
                     <TableCell>
                       <Link to={`/editTool/${tool.toolId}`}>
-                        <Button variant="contained" color="primary" size="small" style={{ marginRight: '10px' }}>
+                        <Button variant="contained" sx={{ bgcolor: 'purple', size:"small" }} style={{ marginRight: '10px' }}>
                           Update
                         </Button>
                       </Link>
-                      <Button variant="contained" color="secondary" size="small" onClick={() => deleteTool(tool.toolId)}>
+                      <Button variant="contained" sx={{ bgcolor: 'red', size:"small" }} onClick={() => deleteTool(tool.toolId)}>
                         Delete
                       </Button>
                     </TableCell>
@@ -105,13 +105,13 @@ const ManageStock = () => {
             </Table>
           </TableContainer>
           <br />
-          <div>
+          <Box display="flex" justifyContent="center">
             <Link to='/addtool'>
-              <Button variant="contained" color="primary">
+              <Button variant="contained" sx={{ bgcolor: 'green', width: '100%', maxWidth: '250px', fontSize: '1.25rem' }}>
                 Add Tool
               </Button>
             </Link>
-          </div>
+          </Box>
         </div>
       </Grid>
     </Grid>
