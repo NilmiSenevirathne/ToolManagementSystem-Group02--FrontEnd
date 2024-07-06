@@ -50,12 +50,12 @@ const Toolbox = () => {
               Welcome to ToolBox Details Section!
             </Typography>
             <TableContainer component={Paper}>
-              <Table>
+              <Table stickyHeader aria-label="Toolbox Table" sx={{ borderCollapse: 'separate', borderSpacing: 0,'& .MuiTableCell-root':{border:'1px solid rgba(224,224,224,1)',} , }}>
                 <TableHead>
                   <TableRow>
-                    <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'blue', color: 'white'   }}>ToolBox ID</TableCell>
-                    <TableCell sx={{ fontWeight: 'bold', textAlign: 'center',  backgroundColor: 'blue', color: 'white'  }}>Project ID</TableCell>
-                    <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'blue', color: 'white'  }}>Location ID</TableCell>
+                    <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white'   }}>ToolBox ID</TableCell>
+                    <TableCell sx={{ fontWeight: 'bold', textAlign: 'center',  backgroundColor: 'grey', color: 'white'  }}>Project ID</TableCell>
+                    <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white'  }}>Location ID</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>

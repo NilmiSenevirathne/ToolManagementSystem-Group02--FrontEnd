@@ -69,14 +69,14 @@ const ManageStock = () => {
           </div>
 
           <TableContainer component={Paper} style={{ maxHeight: 400 }}>
-            <Table stickyHeader aria-label="Tools Table" sx={{ borderCollapse: 'separate', borderSpacing: 0 }}>
+            <Table stickyHeader aria-label="Tools Table" sx={{ borderCollapse: 'separate', borderSpacing: 0 ,'& .MuiTableCell-root':{border:'1px solid rgba(224,224,224,1)',} ,}}>
               <TableHead>
                 <TableRow>
-                  <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'blue', color: 'white'   }}>Tool_ID</TableCell>
-                  <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'blue', color: 'white'   }}>ToolName</TableCell>
-                  <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'blue', color: 'white'   }}>Description</TableCell>
-                  <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'blue', color: 'white'  }}>Quantity</TableCell>
-                  <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'blue', color: 'white'   }}>Action</TableCell>
+                  <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white'   }}>Tool_ID</TableCell>
+                  <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white'   }}>ToolName</TableCell>
+                  <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white'   }}>Description</TableCell>
+                  <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white'  }}>Quantity</TableCell>
+                  <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white'   }}>Action</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
