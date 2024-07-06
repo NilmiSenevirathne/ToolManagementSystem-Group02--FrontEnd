@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import AssessmentIcon from '@mui/icons-material/Assessment';
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 
 const Sbar = () => {
   return (
@@ -27,7 +28,7 @@ const Sbar = () => {
             <li><AssessmentIcon/> <span>Create Reports</span></li>
           </Link>
           <Link to="/LoginForm" style={{textDecoration:"none"}}>
-            <li><AssessmentIcon/> <span>Logout</span></li>
+            <li><ExitToAppIcon/> <span>Logout</span></li>
           </Link>
         </ul>
       </div>

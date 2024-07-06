@@ -28,13 +28,14 @@ import ViewProjects from './Position/Sitesupervisor/ViewProjects.jsx';
 import STrackToolbox from './Position/StockSupervisor/TrackToolbox/STrackToolbox.jsx';
 import ViewRequiredToolReports from './Position/Sitesupervisor/View/ViewRequiredToolReports.jsx';
 import ViewToolStatusReports from './Position/Sitesupervisor/View/ViewToolStatusReports.jsx';
+import AddToolStatus from './Position/Sitesupervisor/AddToolStatus.jsx';
 function App() {
    return (
 
       <>
                     <Routes>
 
-                  <Route path='/LoginForm' element={<LoginForm/>}> </Route> /
+                  <Route path='/LoginForm' element={<LoginForm/>}/> 
 
                     {/* Manager pages  */}
                     <Route path="/managerdashboard" element={<ManagerDashboard/>} />
@@ -66,6 +67,7 @@ function App() {
                    <Route path="/AddReportDetails" element={<AddReportDetails/>}/>
                    <Route path="/ViewRequiredToolReports" element={<ViewRequiredToolReports/>}/>
                    <Route path="/ViewToolStatusReports" element={<ViewToolStatusReports/>}/>
+                   <Route path="/AddToolStatus" element={<AddToolStatus/>}/>
                    </Routes>
 
                       </>
