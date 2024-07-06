@@ -3,6 +3,7 @@ import StockSidebar from '../../../../Components/Sidebar/StockSidebar.jsx';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import StockSuperviorNavbar from '../../../../Components/Navbar/StockSupervisorNavbar.jsx';
+import {Grid, Container, Box, Typography, TextField, Button, Paper} from '@mui/material';
 
 const STrackToolbox = () => {
   let navigate = useNavigate();
@@ -38,38 +39,53 @@ const STrackToolbox = () => {
   };
 
   return (
-    <StockSidebar>
-      <StockSuperviorNavbar />
-      <div className='stock-content'>
-        <h1>Welcome to TrackToolbox Section!</h1>
+    
+    <Grid container>
+         <Grid item>
+             <StockSidebar/>
+         </Grid>
+         <Grid item xs>
+             <StockSuperviorNavbar/>
+             <Container maxWidth="md">
+          <Box mt={4}>
+            <Typography variant="h4" align="center" gutterBottom>
+              Welcome to TrackToolbox Section!
+            </Typography>
+            <Box display="flex" flexDirection="column" alignItems="center">
+              <TextField
+                label="Enter the Toolbox ID"
+                variant="outlined"
+                name="toolboxId"
+                value={toolbox.toolboxId}
+                onChange={onInputChange}
+                fullWidth
+                margin="normal"
+              />
+              <Button variant="contained" color="primary" onClick={onSearchClick}>
+                Search
+              </Button>
+            </Box>
+            {error && (
+              <Typography color="error" align="center" mt={2}>
+                {error}
+              </Typography>
+            )}
+            {toolboxDetails && (
+              <Paper elevation={3} sx={{ mt: 4, p: 2 }}>
+                <Typography variant="h5" gutterBottom>
+                  Toolbox Details
+                </Typography>
+                <Typography>ID: {toolboxDetails.id}</Typography>
+                <Typography>Name: {toolboxDetails.name}</Typography>
+                <Typography>Description: {toolboxDetails.description}</Typography>
+                {/* Add more fields as necessary */}
+              </Paper>
+            )}
+          </Box>
+        </Container>
+         </Grid>
 
-        <div>
-          <label htmlFor="toolboxId" className="form-label">
-            Enter the Toolbox ID
-          </label>
-          <input
-            type="text"
-            placeholder="Enter toolbox id"
-            name="toolboxId"
-            value={toolbox.toolboxId}
-            onChange={onInputChange}
-          />
-          <button onClick={onSearchClick}>Search</button>
-        </div>
-
-        {error && <p style={{ color: 'red' }}>{error}</p>}
-
-        {toolboxDetails && (
-          <div className='toolbox-details'>
-            <h2>Toolbox Details</h2>
-            <p>ID: {toolboxDetails.id}</p>
-            <p>Name: {toolboxDetails.name}</p>
-            <p>Description: {toolboxDetails.description}</p>
-            {/* Add more fields as necessary */}
-          </div>
-        )}
-      </div>
-    </StockSidebar>
+    </Grid>
   );
 };
 
