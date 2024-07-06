@@ -75,7 +75,7 @@ const Toolbox = () => {
                   Create ToolBox
                 </Button>
               </Link>
-              <Link to='/tracktoolbox' style={{ textDecoration: 'none' }}>
+              <Link to='/Stracktoolbox' style={{ textDecoration: 'none' }}>
                 <Button variant="contained" color="secondary" sx={{ fontSize: '1rem' }}>
                   Track ToolBox
                 </Button>
