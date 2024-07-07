@@ -9,7 +9,7 @@ const Dboard = () => {
   const [toolInventoryData, setToolInventoryData] = useState([]);
 
   useEffect(() => {
-      axios.get('http://localhost:8080/toolInventory')
+      axios.get('http://localhost:8080/tool/toolInventory')
           .then(response => {
               setToolInventoryData(response.data);
           })

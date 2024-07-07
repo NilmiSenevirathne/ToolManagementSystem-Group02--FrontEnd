@@ -1,6 +1,7 @@
 import React from 'react';
 import Navbar from '../Navbar/Navbar.jsx';
 import { CCarousel, CCarouselItem, CImage } from '@coreui/react'; // Import components from CoreUI
+import ReactPaginate from 'react-paginate';
 
 // Import images
 import Img1 from '../../images/back1.jpg'; 

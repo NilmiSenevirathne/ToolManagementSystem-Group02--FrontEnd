@@ -158,7 +158,7 @@ const ToolStatosRep = () => {
               <textarea id="toolStatus" rows="5" value={toolStatus} onChange={handleToolStatusChange} />
             </div>
             <button className="generate-btn" onClick={generatePDF}>Generate PDF</button>
-            <button className="add-report-btn" onClick={() => window.location.href = '/AddToolStatus'}>Add Report </button>
+         
           </div>
         </div>
       </div>
