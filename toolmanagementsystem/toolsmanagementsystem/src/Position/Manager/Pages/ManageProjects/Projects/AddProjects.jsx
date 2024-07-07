@@ -202,7 +202,7 @@ export default function AddProjects() {
             </form>
           </div>
           <br/>
-          <Link className='btn btn-outline-dark mx-2' to="/manageprojects">Back</Link>
+          <Link className='btn btn-outline-dark mx-2' to="/manageprojects">Back to projects</Link>
         </div>
       </div>
     </Sidebar> 
