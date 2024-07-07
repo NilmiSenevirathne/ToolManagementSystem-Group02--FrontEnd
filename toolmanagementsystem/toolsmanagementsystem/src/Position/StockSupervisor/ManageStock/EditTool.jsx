@@ -1,8 +1,9 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
-import './edittool.css';
 import StockSidebar from "../../../Components/Sidebar/StockSidebar";
+import StockSuperviorNavbar from "../../../Components/Navbar/StockSupervisorNavbar";
+import { CssBaseline, Grid, Box, Typography,TextField,Button,Container } from "@mui/material";
 
 export default function EditTool() {
   const navigate = useNavigate();
@@ -50,74 +51,96 @@ export default function EditTool() {
   };
 
   return (
-      <StockSidebar>
-        
-          <div className="updateform">
-            
-            <form onSubmit={(e) => onSubmit(e)}>
-            <h2 className="text-center m-4">Update Tool Details</h2>
-              <div className="mb-3">
-                <label htmlFor="toolId" className="form-label">
-                  ToolID
-                </label>
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Enter new tool id"
+    
+    <Grid container>
+       <CssBaseline/>
+       <Grid item>
+          <StockSidebar/>
+       </Grid>
+
+       <Grid item xs>
+          <StockSuperviorNavbar/>
+
+          <Container maxWidth="sm">
+          <Box mt={4}>
+            <Box 
+              p={4} 
+              border={1} 
+              borderRadius={8} 
+              borderColor="grey.300"
+              boxShadow={3}
+            >
+              <Typography variant="h4" align="center" gutterBottom>
+                Update Tool Details
+              </Typography>
+              <form onSubmit={onSubmit}>
+                <TextField
+                  variant="outlined"
+                  fullWidth
+                  label="Tool ID"
                   name="toolId"
                   value={values.toolId}
-                  onChange={(e) => onInputChange(e)}
-                  readOnly // Make the ID field read-only
+                  onChange={onInputChange}
+                  margin="normal"
+                  InputProps={{
+                    readOnly: true,
+                  }}
                 />
-              </div>
-              <div className="mb-3">
-                <label htmlFor="toolName" className="form-label">
-                  ToolName
-                </label>
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Enter tool name"
+                <TextField
+                  variant="outlined"
+                  fullWidth
+                  label="Tool Name"
                   name="toolName"
                   value={values.toolName}
-                  onChange={(e) => onInputChange(e)}
+                  onChange={onInputChange}
+                  margin="normal"
                 />
-              </div>
-              <div className="mb-3">
-                <label htmlFor="description" className="form-label">
-                  Description
-                </label>
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Enter the tool description"
+                <TextField
+                  variant="outlined"
+                  fullWidth
+                  label="Description"
                   name="description"
                   value={values.description}
-                  onChange={(e) => onInputChange(e)}
+                  onChange={onInputChange}
+                  margin="normal"
                 />
-              </div>
-              <div className="mb-3">
-                <label htmlFor="quantity" className="form-label">
-                  Quantity
-                </label>
-                <input
+                <TextField
+                  variant="outlined"
+                  fullWidth
                   type="number"
-                  className="form-control"
-                  placeholder="Enter the quantity"
+                  label="Quantity"
                   name="quantity"
                   value={values.quantity}
-                  onChange={(e) => onInputChange(e)}
+                  onChange={onInputChange}
+                  margin="normal"
+                  inputProps={{ min: 0 }}
                 />
-              </div>
-              <button type="submit" className="update-btn">
-                Update
-              </button>
-
-              <br/>
-              <Link  to="/managestock"><button className="btn-cancel">Cancel</button></Link>
-            </form>
-          </div>
-        
-    </StockSidebar>
+                <Box mt={2} display="flex" justifyContent="center" gap={2}>
+                  <Box flexGrow={1}>
+                    <Button
+                      variant="contained"
+                      sx={{ bgcolor: 'green', width: '100%', fontSize: '1.25rem' }}
+                      type="submit"
+                    >
+                      Update
+                    </Button>
+                  </Box>
+                  <Box flexGrow={1}>
+                    <Link to="/managestock" style={{ textDecoration: 'none' }}>
+                      <Button
+                        variant="contained"
+                        sx={{ bgcolor: 'red', width: '100%', fontSize: '1.25rem' }}
+                      >
+                        Cancel
+                      </Button>
+                    </Link>
+                  </Box>
+                </Box>
+              </form>
+            </Box>
+          </Box>
+        </Container>  
+       </Grid>
+    </Grid>
   );
 }

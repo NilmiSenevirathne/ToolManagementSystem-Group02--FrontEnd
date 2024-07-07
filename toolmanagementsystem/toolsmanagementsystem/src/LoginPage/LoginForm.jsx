@@ -1,10 +1,18 @@
-// LoginForm.js
 import React, { useState } from 'react';
-import './LoginForm.css';
-import Login from '../../src/images/user1.jpg';
-import Validation from '../../src/LoginPage/Validation.js';
-import { FaUser, FaLock } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
+import CssBaseline from '@mui/material/CssBaseline';
+import Validation from '../../src/LoginPage/Validation.js';
+import backgroundImage from '../images/background3.jpg';
+import Logo from '../images/user1.jpg';
+
+
+const defaultTheme = createTheme();
 
 function LoginForm() {
     const navigate = useNavigate();
@@ -15,7 +23,7 @@ function LoginForm() {
     });
 
     const [errors, setErrors] = useState({});
-
+    
     function handleChange(e) {
         setValues({ ...values, [e.target.name]: e.target.value });
     }
@@ -27,7 +35,7 @@ function LoginForm() {
         setErrors(validationErrors);
 
         if (Object.keys(validationErrors).length === 0) {
-            fetch('http://localhost:8080/authentication/login' , {
+            fetch('http://localhost:8080/authentication/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -36,72 +44,120 @@ function LoginForm() {
             })
             .then(response => {
                 if (response.ok) {
-                    console.log("Login Success!!");
-
-                    if (values.username === 'isuru@gmail.com' && values.password === 'isuru@123') {
+                    return response.text();      
+                } else {
+                    return response.text().then(errorMessage => {
+                        throw new Error(errorMessage);
+                    });
+                }
+            })
+            .then(role => {
+                console.log("Login Success!!");
+               
+                switch (role.toLowerCase()) {
+                    case 'admin':
                         navigate("/admindashboard");
-                        
-                    } else if (values.username === 'gagana@gmail.com' && values.password === 'Gagana&623') {
+                        break;
+                    case 'manager':
                         navigate("/managerdashboard");
-
-                    } else if (values.username === 'nimantha@gmail.com' && values.password === 'Nima#456') {
+                        break;
+                    case 'stocksupervisor':
                         navigate("/stocksupervisordashboard");
+                        break;
+                    case 'sitesupervisor':
+                        navigate("/sitesupervisor");
+                        break;
+                    default:
+                        throw new Error('Unknown role');
+                }
+            })
+            .catch(error => {
+                console.error('Error during login:', error);
+                // Handle login error, maybe show a message to the user
+            });
+        } else {
+            console.error('Form validation errors:', validationErrors);
+            // Handle form validation errors, maybe display them to the user
+        }
+    }
 
-                     }
-                     else if((values.username === 'kusal@gmail.com') && (values.password === 'kusal#@8'))
-                     {
-                        navigate("/supervisordashboard");
-                     }
-                       
-                  } else {
-                      throw new Error('Login failed'); // Throw error for unsuccessful response
-                  }
-              })
-              .then(data => {
-                  // Handle successful login response
-                  console.log(data); // This will be the data returned from backend
-                  // Redirect to dashboard or do something else
-              })
-              .catch(error => {
-                  console.error('Error during login:', error);
-                  // Handle login error, maybe show a message to the user
-              });
-      } else {
-          console.error('Form validation errors:', validationErrors);
-          // Handle form validation errors, maybe display them to the user
-      }
-  }
-     
-     
-  return (
-    <div className='background'>
-        <div className='loginconatin'>
-            <div className='wrapper'>
-                <form onSubmit={handleSubmit}>
-                    <h1 className='name'> Dilum BMK Engineers (Pvt)Ltd. </h1>
-                    <img className="englogo" src={Login} alt=''/>
-                    <h1>Login</h1>
+    return (
+        <ThemeProvider theme={defaultTheme}>
+            <CssBaseline />
+            <Grid container component="main" sx={{ height: '100vh' }}>
+                <Grid
+                    item
+                    xs={false}
+                    sm={4}
+                    md={7}
+                    sx={{
+                        backgroundImage: `url(${backgroundImage})`,
+                        backgroundColor: (t) =>
+                            t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center',
+                    }}
+                />
 
-
-                    <div className='input-box'>
-                        <label htmlFor='username'>Username</label>
-                        <input type='email' placeholder='Email' value={values.username} name='username' onChange={handleChange} />
-                        {errors.username && <p style={{ color: "red", fontSize: "13px" }}>{errors.username}</p>}
-                        <FaUser className='icon' />
-                    </div>
-
-                    <div className='input-box'>
-                        <label htmlFor='password'>Password</label>
-                        <input type='password' placeholder='password' value={values.password} name='password' onChange={handleChange} />
-                        {errors.password && <p style={{ color: "red", fontSize: "13px" }}>{errors.password}</p>}
-                        <FaLock className='icon' />
-                    </div>
-
-                    <button className='submit' type="submit">Login</button>
-                </form>
-            </div>
-            </div>
-        </div>
+                
+                <Grid item xs={12} sm={8} md={5} elevation={6}>
+                    <Box
+                        sx={{
+                            my: 8,
+                            mx: 4,
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                        }}
+                    >
+                        <Box component="img" src={Logo} alt="Company Logo" sx={{ width: 100, height: 100, mb: 1 }} />
+                            <Typography component="h1" variant="h3">
+                              Login
+                            </Typography>
+                        <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
+                            
+                            
+                            <TextField
+                                id="outlined-username-input"
+                                label="Username"
+                                type="text"
+                                value={values.username}
+                                name='username'
+                                onChange={handleChange}
+                                autoComplete="current-username"
+                                fullWidth
+                                margin="normal"
+                                error={!!errors.username}
+                                helperText={errors.username}
+                            />
+                            <TextField
+                                id="outlined-password-input"
+                                label="Password"
+                                type="password"
+                                value={values.password}
+                                name='password'
+                                onChange={handleChange}
+                                autoComplete="current-password"
+                                fullWidth
+                                margin="normal"
+                                error={!!errors.password}
+                                helperText={errors.password}
+                            />
+                            <Button
+                                type='submit'
+                                className='submit'
+                                variant="contained"
+                                color="primary"
+                                fullWidth
+                                sx={{ mt: 3, mb: 2 }}
+                            >
+                                Login
+                            </Button>
+                        </Box>
+                    </Box>
+                </Grid>
+            </Grid>
+        </ThemeProvider>
     );
 }
 

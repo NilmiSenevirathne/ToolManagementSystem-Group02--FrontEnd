@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import backgroundImage from '../../images/new.webp'; // Import your background image
+import backgroundImage from '../../images/new.webp'; 
 import "./addReport.css";
+
 const AddReportDetails = () => {
     const [projectName, setProjectName] = useState('');
     const [reportPdf, setReportPdf] = useState(null);
@@ -17,6 +18,12 @@ const AddReportDetails = () => {
   
     const handleSubmit = async (e) => {
       e.preventDefault();
+
+      //confirmation dialog
+      const isConfirmed = window.confirm("Are you sure you want to submit?");
+      if (!isConfirmed) {
+        return; // If the user cancels, do not proceed with the form submission
+      }
       
       // Create FormData object to send the file along with other form data
       const formData = new FormData();
@@ -46,53 +53,50 @@ const AddReportDetails = () => {
     };
   
     return (
-      
         <div className="background-container">
           <img src={backgroundImage} alt="Background" className="background-image" />
           <div className="form-container">
-            <div style={{ maxWidth: '600px', padding: '20px', border: '1px solid #ccc', borderRadius: '5px' }}>
+            <div className="form-content">
               <h2>Add Required Report Details</h2>
               <form onSubmit={handleSubmit}>
-                {/* Report ID field */}
-                <div style={{ marginBottom: '20px' }}>
-                  <label htmlFor="reportId" style={{ display: 'block', marginBottom: '5px' }}>Report ID:</label>
+             
+                <div className="form-group">
+                  <label htmlFor="reportId">Report ID:</label>
                   <input
                     type="text"
                     id="reportId"
-                    value={reportId} // Display generated Report ID here
-                    style={{ width: '100%', padding: '10px', fontSize: '16px' }}
+                    value={reportId} 
+                    readOnly
                   />
                 </div>
-                {/* Project Name field */}
-                <div style={{ marginBottom: '20px' }}>
-                  <label htmlFor="projectName" style={{ display: 'block', marginBottom: '5px' }}>Project Name:</label>
+               
+                <div className="form-group">
+                  <label htmlFor="projectName">Project Name:</label>
                   <input
                     type="text"
                     id="projectName"
                     value={projectName}
                     onChange={handleProjectNameChange}
-                    style={{ width: '100%', padding: '10px', fontSize: '16px' }}
                   />
                 </div>
-                {/* Report PDF field */}
-                <div style={{ marginBottom: '20px' }}>
-                  <label htmlFor="reportPdf" style={{ display: 'block', marginBottom: '5px' }}>Report PDF:</label>
+               
+                <div className="form-group">
+                  <label htmlFor="reportPdf">Report PDF:</label>
                   <input
                     type="file"
                     id="reportPdf"
                     onChange={handleReportPdfChange}
-                    style={{ width: '100%', padding: '10px', fontSize: '16px' }}
                   />
                 </div>
-                {/* Submit button */}
-                <button type="submit" style={{ background: '#007bff', color: '#fff', padding: '10px 20px', fontSize: '16px', border: 'none', borderRadius: '5px', cursor: 'pointer' }}>Submit</button>
+               
+                <button type="submit" className="submit-button" Link to="/ViewRequiredToolReports">Submit</button>
               </form>
-              {/* Display the generated Report ID if available */}
+            
               {reportId && <p>Generated Report ID: {reportId}</p>}
             </div>
           </div>
         </div>
     );
-  };
+};
 
 export default AddReportDetails;
