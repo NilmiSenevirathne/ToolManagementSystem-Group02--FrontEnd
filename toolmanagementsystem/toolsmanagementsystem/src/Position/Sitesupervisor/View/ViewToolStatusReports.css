@@ -1,0 +1,75 @@
+/* viewRequiredToolReports.css */
+.rep {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.Createp {
+    width: 80%;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.topbarcontainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.topbartext {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.searchbar {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.searchIcon {
+    margin-right: 10px;
+}
+
+.searchInput {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.table {
+    width: 100%;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+thead {
+    background-color: #f9f9f9;
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+button {
+    padding: 5px 10px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}

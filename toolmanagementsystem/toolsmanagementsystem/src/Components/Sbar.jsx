@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import AssessmentIcon from '@mui/icons-material/Assessment';
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 
 const Sbar = () => {
   return (
@@ -23,12 +24,32 @@ const Sbar = () => {
           <Link to="/" style={{textDecoration:"none"}}>
             <li><DashboardIcon/><span>Dashboard</span></li>
           </Link>
-          <Link to="/CreateReports" style={{textDecoration:"none"}}>
-            <li><AssessmentIcon/> <span>Create Reports</span></li>
+          <Link to="/ViewToolStatusReports" style={{textDecoration:"none"}}>
+            <li><AssessmentIcon/> <span>View Tool Status Reports</span></li>
+          </Link>
+          <Link to="/ViewRequiredToolReports" style={{textDecoration:"none"}}>
+            <li><AssessmentIcon/> <span>View Required Tool Reports</span></li>
+          </Link>
+          <Link to="/ToolstatosRep" style={{textDecoration:"none"}}>
+            <li><AssessmentIcon/> <span>Create Tool Status Reports</span></li>
+          </Link>
+
+         <Link to="/RequiredToolReport" style={{textDecoration:"none"}}>
+            <li><AssessmentIcon/> <span>Create Required Tool Reports</span></li>
+          </Link>
+
+          <Link to="/AddToolStatus" style={{textDecoration:"none"}}>
+            <li><AssessmentIcon/> <span>Add Tool Status Reports</span></li>
+          </Link>
+
+          <Link to="/AddReportDetails" style={{textDecoration:"none"}}>
+            <li><AssessmentIcon/> <span>Add Required Tool Reports</span></li>
           </Link>
           <Link to="/LoginForm" style={{textDecoration:"none"}}>
-            <li><AssessmentIcon/> <span>Logout</span></li>
+            <li><ExitToAppIcon/> <span>Logout</span></li>
           </Link>
+
+
         </ul>
       </div>
     </div>
