@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { TextField, Badge, Dialog, DialogTitle, DialogContent, DialogActions, Button } from '@mui/material';
+import { Grid, Container, Box, Typography, Table, TableHead, TableRow, TableCell, TableBody, TextField, Badge, Dialog, DialogTitle, DialogContent, DialogActions, Button } from '@mui/material';
 import axios from 'axios';
 import StockSidebar from '../../../../../Components/Sidebar/StockSidebar.jsx';
-import DashNavbar from '../../../../../Components/Navbar/DashNavbar.jsx';
 import { FaCartArrowDown } from 'react-icons/fa';
 import { useNavigate, useLocation } from 'react-router-dom';
-import './tools.css';
+import StockSuperviorNavbar from '../../../../../Components/Navbar/StockSupervisorNavbar.jsx';
+
 
 const Tool = () => {
   const [tools, setTools] = useState([]);
@@ -83,81 +83,111 @@ const Tool = () => {
   };
 
   return (
-    <StockSidebar>
-      <DashNavbar/>
-      <div className='toolsection'>
-        <h1>Tools Section!</h1>
-        <div style={{ display: 'flex', alignItems: 'center', marginBottom: '20px' }}>
-          <TextField
-            label="Search Tools"
-            variant="outlined"
-            fullWidth
-            value={searchTools}
-            onChange={(e) => setSearchTools(e.target.value)}
-            style={{ flex: 1 }}
-          />
-        </div>
-        <div className='tablesection'>
-          <table className='table'>
-            <thead>
-              <tr>
-                <th scope='col'>Tool_ID</th>
-                <th scope='col'>ToolName</th>
-                <th scope='col'>Description</th>
-                <th scope='col'>Quantity</th>
-                <th scope='col'>Action</th>
-              </tr>
-            </thead>
-            <tbody className='bodysection'>
-              {filteredTools.map((tool) => (
-                <tr key={tool.toolId}>
-                  <td>{tool.toolId}</td>
-                  <td>{tool.toolName}</td>
-                  <td>{tool.description}</td>
-                  <td>{tool.quantity}</td>
-                  <td>
-                    <button className='btnAdd' onClick={() => addToCart(tool.toolId)}>Add Tool</button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-        <button className='cart-icon' onClick={() => setShowCartDetails(true)}>
-          <FaCartArrowDown />
-          <Badge badgeContent={cartItems.length} color="secondary"></Badge>
-        </button>
-      </div>
+    
+    <Grid container>
+        <Grid item>
+            <StockSidebar/>
+        </Grid>
+
+        <Grid item xs>
+            <StockSuperviorNavbar/>
+
+        <Container maxWidth="lg">
+          <Box mt={4}>
+            <Typography variant="h4" align="center" gutterBottom>
+              Tools Section
+            </Typography>
+            <Box display="flex" alignItems="center" mb={2}>
+              <TextField
+                label="Search Tools"
+                variant="outlined"
+                fullWidth
+                value={searchTools}
+                onChange={(e) => setSearchTools(e.target.value)}
+              />
+            </Box>
+            
+            {/*  show tools table */}
+            <Box sx={{ height: '400px', overflow: 'auto' }}>
+              <Table stickyHeader aria-label="Tools Table" sx={{ borderCollapse: 'separate', borderSpacing: 0,'& .MuiTableCell-root':{border:'1px solid rgba(224,224,224,1)',} , }}>
+                <TableHead>
+                  <TableRow>
+                    <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', color: 'white' , background:"grey"}}>Tool_ID</TableCell>
+                    <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', color: 'white' , background:"grey" }}>ToolName</TableCell>
+                    <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', color: 'white' , background:"grey"}}>Description</TableCell>
+                    <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', color: 'white' , background:"grey" }}>Quantity</TableCell>
+                    <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', color: 'white' , background:"grey"}}>Action</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {filteredTools.map((tool) => (
+                    <TableRow key={tool.toolId}>
+                      <TableCell align="center">{tool.toolId}</TableCell>
+                      <TableCell align="center">{tool.toolName}</TableCell>
+                      <TableCell align="center">{tool.description}</TableCell>
+                      <TableCell align="center">{tool.quantity}</TableCell>
+                      <TableCell align="center">
+                        <Button variant="contained" color="primary" onClick={() => addToCart(tool.toolId)}>
+                          Add Tool
+                        </Button>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </Box>
+
+          
+            <Button
+              variant="contained"
+              startIcon={<FaCartArrowDown />}
+              onClick={() => setShowCartDetails(true)}
+              sx={{ position: 'fixed', bottom: '20px', left: '50%', transform:"translateX(-50%)", background:"green" }}
+            >
+              <Badge badgeContent={cartItems.length} color="secondary"></Badge>
+              View Tool Cart
+            </Button>
+          </Box>
+        </Container>
+      </Grid>
+
       <Dialog open={showCartDetails} onClose={() => setShowCartDetails(false)}>
         <DialogTitle>Selected Tools</DialogTitle>
         <DialogContent>
-          <table className='table'>
-            <thead>
-              <tr>
-                <th>Tool_ID</th>
-                <th>ToolName</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', color: 'white', background:"black" }}>Tool_ID</TableCell>
+                <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', color: 'white', background:"black"  }}>ToolName</TableCell>
+                <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', color: 'white', background:"black"  }}>Action</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
               {cartItems.map((item) => (
-                <tr key={item.toolId}>
-                  <td>{item.toolId}</td>
-                  <td>{item.toolName}</td>
-                  <td>
-                    <button onClick={() => removeFromCart(item.toolId)}>Remove</button>
-                  </td>
-                </tr>
+                <TableRow key={item.toolId}>
+                  <TableCell align="center">{item.toolId}</TableCell>
+                  <TableCell align="center">{item.toolName}</TableCell>
+                  <TableCell align="center">
+                    <Button variant="contained" color="secondary" onClick={() => removeFromCart(item.toolId)}>
+                      Remove
+                    </Button>
+                  </TableCell>
+                </TableRow>
               ))}
-            </tbody>
-          </table>
+            </TableBody>
+          </Table>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleSubmit}>Submit</Button>
-          <Button onClick={() => setShowCartDetails(false)}>Close</Button>
+          <Button variant="contained" sx={{ textAlign: 'center', color: 'white', background:"green" }} onClick={handleSubmit}>
+            Submit
+          </Button>
+          <Button variant="contained" sx={{ textAlign: 'center', color: 'white', background:"red"  }} onClick={() => setShowCartDetails(false)}>
+            Close
+          </Button>
         </DialogActions>
       </Dialog>
-    </StockSidebar>
+    </Grid>
+
   );
 };
 

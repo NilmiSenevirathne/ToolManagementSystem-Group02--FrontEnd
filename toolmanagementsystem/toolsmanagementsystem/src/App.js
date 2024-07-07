@@ -1,12 +1,9 @@
-
 import React from 'react';
 import {Route, BrowserRouter as Router, Routes} from 'react-router-dom';
-
 import LoginForm from '../src/LoginPage/LoginForm.jsx';
-
-
-
-
+//import './app.css';
+import Home from '../src/Components/HomePage/Home.jsx';
+import LoginForm from '../src/LoginPage/LoginForm.jsx';
 
 import ManageStock from './Position/StockSupervisor/ManageStock/ManageStock.jsx';
 import Toolbox from './Position/StockSupervisor/ToolBox/Toolbox.jsx';
@@ -24,14 +21,12 @@ import AddProjects from './Position/Manager/Pages/ManageProjects/Projects/AddPro
 import UpdateProjects from './Position/Manager/Pages/ManageProjects/Projects/UpdateProjects.jsx'
 import LocationHome from './Position/Manager/Pages/ManageProjects/Projects/Location/LocationHome.jsx';
 import AddLocation from './Position/Manager/Pages/ManageProjects/Projects/Location/AddLocation.jsx';
-import Home from './Position/Manager/Pages/ManageProjects/Home.jsx'
 import Dboard from './Position/Sitesupervisor/dashboard/Dboard.jsx'
 import CreateReports from './Position/Sitesupervisor/CreateReports.jsx';
 import ToolStatosRep from "./Position/Sitesupervisor/ToolStatosRep.jsx";
 import AddReportDetails from "./Position/Sitesupervisor/AddReportDetails.jsx";
 import RequiredToolReport from "./Position/Sitesupervisor/RequiredToolReport.jsx";
 import ViewProjects from './Position/Sitesupervisor/ViewProjects.jsx';
-
 import ViewRequiredToolReports from './Position/Sitesupervisor/View/ViewRequiredToolReports.jsx';
 import ViewToolStatusReports from './Position/Sitesupervisor/View/ViewToolStatusReports.jsx';
 import AddToolStatus from './Position/Sitesupervisor/AddToolStatus.jsx';
@@ -48,7 +43,10 @@ function App() {
 
       <>
          <Routes>
-                   
+
+
+                    
+
                     <Route  path='/' element={<LoginForm/>}> </Route> 
                     <Route  path='/profile' element={<StockProfile/>}></Route>
                                      
@@ -70,6 +68,8 @@ function App() {
 
 
                      {/* StockSupervisor pages  */}
+
+                     
                     <Route  path='/stocksupervisordashboard' element={<StockSupervisorDashboard/>} />
                     <Route  path = "/managestock"  element={<ManageStock/>}/>
                     <Route  path = "/addTool"  element={<AddTool/>}/>
@@ -83,7 +83,10 @@ function App() {
 
                     {/* SiteSupervisor pages */}
 
-                   <Route path='/Dashboard' element={<Dboard/>}> </Route>
+                   
+ 
+                   <Route path='/sitesupervisor' element={<Dboard/>}> </Route>
+
                    <Route path='/supervisordashboard' element={<Dboard/>}> </Route>
                    <Route path="/CreateReports" element={<CreateReports/>}/>
                    <Route path="/ToolStatosRep" element={<ToolStatosRep/>}/>

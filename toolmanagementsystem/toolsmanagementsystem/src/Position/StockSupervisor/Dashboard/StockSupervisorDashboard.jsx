@@ -1,96 +1,72 @@
-// StockSupervisor Dashboard.jsx
-import React, { useState, useEffect } from 'react';
-import './Dashboard.css';
-import { Chart } from 'primereact/chart';
-import axios from 'axios';
+import React from 'react';
+import { CssBaseline, Grid, Box, Typography } from '@mui/material';
+import { Pie, Line } from 'react-chartjs-2';
 import StockSidebar from '../../../Components/Sidebar/StockSidebar';
-import DashNavbar from '../../../Components/Navbar/DashNavbar.jsx';
+import StockSupervisorNavbar from '../../../Components/Navbar/StockSupervisorNavbar.jsx';
+import { Chart as ChartJS, ArcElement, Tooltip, Legend, CategoryScale, LinearScale, PointElement, LineElement, Title } from 'chart.js';
+
+ChartJS.register(ArcElement, Tooltip, Legend, CategoryScale, LinearScale, PointElement, LineElement, Title);
 
 const StockSupervisorDashboard = () => {
-  const role = "StockSupervisor";
-  const [tools, setTools] = useState({});
-  const [lineChartData, setLineChartData] = useState({});
-  const [pieChartData, setPieChartData]= useState({});
-  const [chartOptions, setChartOptions] = useState({});
-  const [lineChartOptions, setLineChartOptions] = useState({});
+  const pieData = {
+    labels: ['Allocated_Tools', 'Available_Tools'],
+    datasets: [
+      {
+        label: '',
+        data: [100, 67,],
+        backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)'],
+        borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)'],
+        borderWidth: 1,
+      },
+    ],
+  };
 
-  useEffect(() => {
-    const loadTools = async () => {
-      // Fetch data from API
-      try {
-        const response  = await axios.get("http://localhost:8080/tool/gettools");
-        //Assuming the response structure is similar to this:
-        const result = {
-          allocatedTool: 44,
-          availableTool: 100,
-        };
-        setTools(result);
-  
-        // Set line chart data
-        const lineData = {
-          labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-          datasets: [
-            {
-              label: 'Variation in amount of tools during the year',
-              data: [65, 59, 80, 81, 56, 55, 40],
-              fill: false,
-              borderColor: 'rgba(255, 99, 132, 0.5)',
-              backgroundColor: 'rgba(255, 99, 132, 0.3)',
-            },
-          ],
-        };
-        setLineChartData(lineData);
-
-        //pie chart data
-        const pieData = {
-          labels:['Allocated Tools' , 'Available Tools'],
-          datasets:[
-           {
-          
-            data:[result.allocatedTool, result.availableTool],
-            backgroundColor:['#FF6384', '#36A2EB'],
-            hoverBackgroundColor: ['#FF6384', '#36A2EB'],
-           },
-          ],
-        };
-        setPieChartData(pieData);
-  
-        // Set chart options
-        const options = {
-          responsive: true,
-          maintainAspectRatio: false,
-        };
-        setChartOptions(options);
-        setLineChartOptions(options);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-  
-    // Call loadTools function when component mounts
-    loadTools();
-  }, []); // Empty dependency array ensures this effect runs only once on mount
-
-  
+  const lineData = {
+    labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+    datasets: [
+      {
+        label: 'Tools',
+        data: [65, 59, 80, 81, 56, 55, 40],
+        fill: false,
+        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+        borderColor: 'rgba(75, 192, 192, 1)',
+      },
+    ],
+  };
 
   return (
-      <StockSidebar>
-      <DashNavbar/>
-        <div className='dashboard-content'>
+    <Grid container>
+      <CssBaseline />
+      <Grid item>
+        <StockSidebar />
+      </Grid>
+      <Grid item xs>
+        <StockSupervisorNavbar />
+        <Box sx={{ p: 3 }}>
           
-          <h1 className='msg'>Welcome to {role} Dashboard!</h1>
-          <div className='chart'>
-             <Chart type="doughnut" data={pieChartData} options={chartOptions} />
-          </div>
+          {/* Pie chart */}
+          <Grid container spacing={3}>
+            <Grid item xs={12} md={6}>
+              <Box sx={{ p: 3, border: '1px solid #ccc', borderRadius: '8px' }}>
+                
+                <Pie data={pieData} />
+              </Box>
+            </Grid>
 
-          <div className='chart'>
-              <Chart type="line" data={lineChartData} options={lineChartOptions} />
-            </div>
-        </div>
-        
-        </StockSidebar>
-
+            {/* Line chart */}
+            <Grid item xs={12} md={6}>
+              <Box sx={{ p: 3, border: '1px solid #ccc', borderRadius: '8px' }}>
+                <Typography variant="h6" gutterBottom>
+                  Tools Variation of the Year
+                </Typography>
+                <Line data={lineData} />
+              </Box>
+            </Grid>
+          </Grid>
+        </Box>
+      </Grid>
+    </Grid>
   );
-}
+};
 
 export default StockSupervisorDashboard;

@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import StockSidebar from '../../../../Components/Sidebar/StockSidebar.jsx';
-import DashNavbar from '../../../../Components/Navbar/DashNavbar.jsx';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import StockSuperviorNavbar from '../../../../Components/Navbar/StockSupervisorNavbar.jsx';
+import {Grid, Container, Box, Typography, TextField, Button, Paper, Table, TableHead, TableRow, TableCell, TableBody} from '@mui/material';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 const STrackToolbox = () => {
   let navigate = useNavigate();
@@ -18,9 +20,11 @@ const STrackToolbox = () => {
     setToolbox({ ...toolbox, [e.target.name]: e.target.value });
   };
 
+  //get the toolbox details from id 
   const fetchToolboxDetails = async () => {
     try {
-      const response = await axios.get(`http://localhost:8080/toolbox/${toolbox.toolboxId}`);
+      const id = toolbox.toolboxId;
+      const response = await axios.get(`http://localhost:8080/toolbox/${id}`);
       setToolboxDetails(response.data);
       setError(null);
     } catch (err) {
@@ -28,6 +32,8 @@ const STrackToolbox = () => {
       setToolboxDetails(null);
     }
   };
+
+  
 
   const onSearchClick = () => {
     if (toolbox.toolboxId) {
@@ -38,38 +44,73 @@ const STrackToolbox = () => {
   };
 
   return (
-    <StockSidebar>
-      <DashNavbar />
-      <div className='stock-content'>
-        <h1>Welcome to TrackToolbox Section!</h1>
+    
+    <Grid container>
+         <Grid item>
+             <StockSidebar/>
+         </Grid>
+         <Grid item xs>
+             <StockSuperviorNavbar/>
+             <Container maxWidth="md">
+          <Box mt={4}>
+            <Typography variant="h4" align="center" gutterBottom>
+              Welcome to TrackToolbox Section!
+            
+            
+            </Typography>
+            <Box display="flex" flexDirection="column" alignItems="center">
+              <TextField
+                label="Enter the Toolbox ID"
+                variant="outlined"
+                name="toolboxId"
+                value={toolbox.toolboxId}
+                onChange={onInputChange}
+                fullWidth
+                margin="normal"
+              />
+              <Button variant="contained" color="primary" onClick={onSearchClick}>
+                Search
+              </Button>
+            </Box>
+            {error && (
+              <Typography color="error" align="center" mt={2}>
+                {error}
+              </Typography>
+            )}
+            {toolboxDetails && (
+                <Paper elevation={3} sx={{ mt: 4, p: 2 }}>
+                <Typography variant="h5" gutterBottom>
+                  Toolbox Details
+                </Typography>
+                <Table stickyHeader aria-label="Toolbox Details Table" sx={{ borderCollapse: 'separate', borderSpacing: 0 ,'& .MuiTableCell-root':{border:'1px solid rgba(224,224,224,1)',} ,}}>
+                  <TableHead>
+                    <TableRow>
+                      <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white'   }}>ID</TableCell>
+                      <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white'   }}>Location</TableCell>
+                      <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white'   }}>Project</TableCell>
+                      <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white'   }}>Site_Supervisor</TableCell>
+                      <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white'   }}>Selected Tools</TableCell>
+                      
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    <TableRow>
+                      <TableCell>{toolboxDetails.toolbox_id}</TableCell>
+                      <TableCell>{toolboxDetails.location_id}</TableCell>
+                      <TableCell>{toolboxDetails.project_id}</TableCell>
+                      <TableCell>{toolboxDetails.site_supervisor_id}</TableCell>
+                      <TableCell>{toolboxDetails.selectedTools}</TableCell>
+                      
+                    </TableRow>
+                  </TableBody>
+                </Table>
+              </Paper>
+            )}
+          </Box>
+        </Container>
+         </Grid>
 
-        <div>
-          <label htmlFor="toolboxId" className="form-label">
-            Enter the Toolbox ID
-          </label>
-          <input
-            type="text"
-            placeholder="Enter toolbox id"
-            name="toolboxId"
-            value={toolbox.toolboxId}
-            onChange={onInputChange}
-          />
-          <button onClick={onSearchClick}>Search</button>
-        </div>
-
-        {error && <p style={{ color: 'red' }}>{error}</p>}
-
-        {toolboxDetails && (
-          <div className='toolbox-details'>
-            <h2>Toolbox Details</h2>
-            <p>ID: {toolboxDetails.id}</p>
-            <p>Name: {toolboxDetails.name}</p>
-            <p>Description: {toolboxDetails.description}</p>
-            {/* Add more fields as necessary */}
-          </div>
-        )}
-      </div>
-    </StockSidebar>
+    </Grid>
   );
 };
 
