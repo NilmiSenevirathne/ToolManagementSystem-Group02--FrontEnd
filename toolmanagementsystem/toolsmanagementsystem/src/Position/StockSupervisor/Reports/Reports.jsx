@@ -1,72 +1,76 @@
 import React, { useState, useEffect } from 'react';
 import StockSidebar from '../../../Components/Sidebar/StockSidebar.jsx';
-import DashNavbar from '../../../Components/Navbar/DashNavbar.jsx';
+import StockSupervisorNavbar from '../../../Components/Navbar/StockSupervisorNavbar.jsx';
 import axios from 'axios';
-import './reports.css'
+import {Grid , Table, TableHead, TableRow, TableCell, TableBody, Container, Typography, Box} from '@mui/material';
 
 const Reports = () => {
-  const [requiredtoolreports, setRequiredtoolreports] = useState([]);
   const [reports, setReports] = useState([]);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState(null); // State to handle error
 
   useEffect(() => {
+    // Function to load reports when component mounts
     loadReports();
   }, []);
 
-  // Fetch reports details from the database
   const loadReports = async () => {
     try {
       const result = await axios.get("http://localhost:8080/api/reports/getreports");
       setReports(result.data);
     } catch (error) {
       console.error("Error fetching reports:", error);
-      alert("Failed to fetch reports. Please try again later.");
+      setError("Failed to fetch reports. Please try again later."); // Set error state
     }
   };
 
-    // Function to download image as PDF
-  const downloadPDF = (base64Data) => {
-    
-    alert("Downloading PDF...");
-  };
-
   return (
-    <StockSidebar>
-    <DashNavbar/>
-      <div className='report-content'>
-        <h2>Welcome to Report Section!</h2>
+    
+    <Grid container>
+        <Grid item >
+            <StockSidebar/>
+        </Grid>
 
-        {error && <p>{error}</p>}
+        <Grid item xs>
+            <StockSupervisorNavbar/>
 
-        <div className='reporttable'>
-          <table>
-            <thead>
-              <tr>
-                <th scope='col'>Report ID</th>
-                <th scope='col'>Created Date</th>
-                <th scope='col'>Project Name</th>
-                <th scope='col'>Report Data</th>
-              </tr>
-            </thead>
-            <tbody>
-              {reports.map((report, index) => (
-                <tr key={index}>
-                  <td>{report.report_id}</td>
-                  <td>{report.created_at}</td>
-                  <td>{report.project_name}</td>
-                  <td>
-                    <a href={`data:image/png;base64,${report.report_data}`} download="report.pdf">
-                      Download 
-                    </a>
-                  </td>
-                 
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </StockSidebar>
+            <Container maxWidth="lg">
+          <Box mt={4}>
+            <Typography variant="h4" align="center" gutterBottom>
+              Welcome to Report Section!
+            </Typography>
+            
+            {/* Render error message if error state is set */}
+            {error && <Typography color="error" align="center">{error}</Typography>}
+
+            <Table stickyHeader aria-label="Reports Table" sx={{ borderCollapse: 'separate', borderSpacing: 0,'& .MuiTableCell-root':{border:'1px solid rgba(224,224,224,1)',} , }}>
+              <TableHead>
+                <TableRow>
+                  <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', color: 'white', background:'grey' }}>Report ID</TableCell>
+                  <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', color: 'white', background:'grey' }}>Created Date</TableCell>
+                  <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', color: 'white', background:'grey' }}>Project Name</TableCell>
+                  <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', color: 'white' , background:'grey'}}>Report Data</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {reports.map((report, index) => (
+                  <TableRow key={index}>
+                    <TableCell align="center">{report.report_id}</TableCell>
+                    <TableCell align="center">{report.created_at}</TableCell>
+                    <TableCell align="center">{report.project_name}</TableCell>
+                    <TableCell align="center">
+                      {/* Assuming report_data is base64 encoded PDF data */}
+                      <a href={`data:application/pdf;base64,${report.report_data}`} download={`Report_${report.report_id}.pdf`}>
+                        Download
+                      </a>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </Box>
+        </Container>
+        </Grid>
+    </Grid>
   );
 };
 
