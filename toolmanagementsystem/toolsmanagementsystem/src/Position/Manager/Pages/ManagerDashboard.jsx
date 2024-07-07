@@ -1,114 +1,93 @@
-import React from 'react';
-import { PieChart, Pie,Tooltip,Cell, LineChart,
-  Brush,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,} from 'recharts';
+// StockSupervisor Dashboard.jsx
+import React, { useState, useEffect } from 'react';
+import './MCSSDashboard.css';
+import { Chart } from 'primereact/chart';
+import axios from 'axios';
+// import Sidebar from '../../../Components/ManagerSidebar.jsx';
+import Sidebar from '../../../Components/ManagerSidebar.jsx';
 
+const StockSupervisorDashboard = () => {
+  const role = "Manager";
+  const [tools, setTools] = useState({});
+  const [lineChartData, setLineChartData] = useState({});
+  const [pieChartData, setPieChartData]= useState({});
+  const [chartOptions, setChartOptions] = useState({});
+  const [lineChartOptions, setLineChartOptions] = useState({});
 
-const ManagerDashboard = () => {
-  const data01 =[
-    {name:"Facebook", value:20000},
-    {name: "Instagram",value:15000},
-   
-  ];
-  const COLORS = ['#0088FE', '#00C49F'];
+  useEffect(() => {
+    const loadTools = async () => {
+      // Fetch data from API
+      try {
+        const response  = await axios.get("http://localhost:8080/tool/gettools");
+        //Assuming the response structure is similar to this:
+        const result = {
+          allocatedTool: 44,
+          availableTool: 100,
+        };
+        setTools(result);
+  
+        // Set line chart data
+        const lineData = {
+          labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+          datasets: [
+            {
+              label: 'Variation in amount of tools during the year',
+              data: [65, 59, 80, 81, 56, 55, 40],
+              fill: false,
+              borderColor: 'rgba(255, 99, 132, 0.5)',
+              backgroundColor: 'rgba(255, 99, 132, 0.3)',
+            },
+          ],
+        };
+        setLineChartData(lineData);
 
-  const data02 = [
-    {
-      name: 'Jan ',
-      
-      pv: 2400,
-      amt: 2400,
-    },
-    {
-      name: 'Feb',
-     
-      pv: 1398,
-      amt: 2210,
-    },
-    {
-      name: 'March',
-      
-      pv: 9800,
-      amt: 2290,
-    },
-    {
-      name: 'April',
-      
-      pv: 3908,
-      amt: 2000,
-    },
-    {
-      name: 'May',
-     
-      pv: 4800,
-      amt: 2181,
-    },
-    {
-      name: 'June',
-      
-      pv: 3800,
-      amt: 2500,
-    },
-    {
-      name: 'July',
-      
-      pv: 4300,
-      amt: 2100,
-    },
-  ];
-
-
-
-    
-    
-  return (
-     <div>
-      <h1>Dashboard</h1>
-        <PieChart width={400} height={400}>
-          <Pie
-           dataKey="value"
-           isAnimationActive={false}
-           data={data01}
-           cx="50%"
-           cy="50%"
-           outerRadius={80}
-           fill="#8884d8"
-           label
-          >
-             {data01.map((entry, index) => (
-            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+        //pie chart data
+        const pieData = {
+          labels:['Allocated Tools' , 'Available Tools'],
+          datasets:[
+           {
           
-          ))}
-          </Pie>
-        </PieChart>
+            data:[result.allocatedTool, result.availableTool],
+            backgroundColor:['#FF6384', '#36A2EB'],
+            hoverBackgroundColor: ['#FF6384', '#36A2EB'],
+           },
+          ],
+        };
+        setPieChartData(pieData);
+  
+        // Set chart options
+        const options = {
+          responsive: true,
+          maintainAspectRatio: false,
+        };
+        setChartOptions(options);
+        setLineChartOptions(options);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+  
+    // Call loadTools function when component mounts
+    loadTools();
+  }, []); // Empty dependency array ensures this effect runs only once on mount
 
-        <LineChart
-            width={500}
-            height={200}
-            data={data02}
-            syncId="anyId"
-            margin={{
-              top: 10,
-              right: 30,
-              left: 0,
-              bottom: 0,
-            }}
-          >
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name" />
-            <YAxis />
-            <Tooltip />
-            <Line type="monotone" dataKey="pv" stroke="#82ca9d" fill="#82ca9d" />
-            <Brush />
-          </LineChart>
-     </div>
-    
-  );
   
 
-};
+  return (
+      <Sidebar>
+        <div className='dashboard-content'>
+          <h1 className='msg'>Welcome to {role} Dashboard!</h1>
+          <div className='chart'>
+             <Chart type="doughnut" data={pieChartData} options={chartOptions} />
+          </div>
 
-export default ManagerDashboard;
+          <div className='chart'>
+              <Chart type="line" data={lineChartData} options={lineChartOptions} />
+            </div>
+        </div>
+        </Sidebar>
+
+  );
+}
+
+export default StockSupervisorDashboard;
