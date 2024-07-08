@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
 import Validation from '../../src/LoginPage/Validation.js';
-import backgroundImage from '../images/background3.jpg';
+import backgroundImage from '../images/back7.png';
 import Logo from '../images/user1.jpg';
 
 
