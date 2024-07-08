@@ -1,10 +1,24 @@
-import jsPDF from 'jspdf';
-import "./requiredToolReports.css"
-import SearchIcon from '@mui/icons-material/Search';
-
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useEffect, useState } from "react";
-
+import jsPDF from "jspdf";
+import {
+  Box,
+  Typography,
+  TextField,
+  Button,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+  IconButton,
+  Checkbox,
+  Grid,
+} from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
+import Sbar from "../../Components/Sbar";
 
 const RequiredToolReport = () => {
   const [tools, setTools] = useState([]);
@@ -25,7 +39,7 @@ const RequiredToolReport = () => {
     } catch (error) {
       console.error("Error loading tools:", error);
     }
-  }
+  };
 
   const handleToolSelect = (tool) => {
     setSelectedTools((prevSelectedTools) =>
@@ -37,12 +51,12 @@ const RequiredToolReport = () => {
 
   const generateReport = () => {
     if (!projectName) {
-      window.alert("Please enter the project name!");
+      alert("Please enter the project name!");
       return;
     }
 
     if (selectedTools.length === 0) {
-      window.alert("Please select relevant tools for the project!");
+      alert("Please select relevant tools for the project!");
       return;
     }
     const report = generatePDF(selectedTools);
@@ -50,10 +64,10 @@ const RequiredToolReport = () => {
     setReportGenerated(true);
     setProjectName(''); // Clear project name
     setSelectedTools([]); // Clear selected tools
-    window.alert("Report generated successfully!");
+    alert("Report generated successfully!");
   };
 
-  function generatePDF(selectedTools) {
+  const generatePDF = (selectedTools) => {
     const doc = new jsPDF();
     const currentTime = new Date().toLocaleString();
 
@@ -106,111 +120,126 @@ const RequiredToolReport = () => {
     const pdfBlob = new Blob([pdfData], { type: 'application/pdf' });
     const pdfUrl = URL.createObjectURL(pdfBlob);
 
-    // window.open(pdfUrl);
     return { data: pdfUrl, date: currentTime, projectName: projectName };
-  }
+  };
 
-  const filteredTools = tools.filter(tool =>
+  const filteredTools = tools.filter((tool) =>
     tool.toolId.toLowerCase().includes(searchQuery.toLowerCase()) ||
     tool.toolName.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   return (
-    <div className="rep">
-      <div className='Createp'>
-        <div className="topbarcontainer">
-          <div className="topbartext">
-            Required Tool Reports
-          </div>
-        </div>
-      </div>
 
-      <div className="searchbar">
-        <SearchIcon className="searchIcon" />
-        <input
-          placeholder="Search tools using tool id or tool name"
-          className="searchInput"
+    <div>
+      <Sbar/>
+   
+    <Box sx={{ padding: 3 ,marginLeft:'310px'}}>
+      <Typography variant="h4" gutterBottom>
+        Required Tool Reports
+      </Typography>
+
+      <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+        <IconButton color="primary">
+          <SearchIcon />
+        </IconButton>
+        <TextField
+          label="Search tools using tool id or tool name"
+          variant="outlined"
+          fullWidth
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
+          sx={{ ml: 1 }}
         />
-      </div>
+      </Box>
 
-      <div className="table">
-        <table className="table caption-top">
-          <thead>
-            <tr>
-              <th scope="col">Tool Id</th>
-              <th scope="col">Tool Name</th>
-              <th scope="col">Description</th>
-              <th scope="col">Quantity</th>
-              <th scope="col">Allocate Tool</th>
-              <th scope="col">Available Tool</th>
-              <th scope="col">Select</th>
-            </tr>
-          </thead>
-          <tbody style={{ maxHeight: "230px", overflowY: "auto" }}>
+      <TableContainer component={Paper} sx={{ mb: 2 }}>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>Tool Id</TableCell>
+              <TableCell>Tool Name</TableCell>
+              <TableCell>Description</TableCell>
+              <TableCell>Quantity</TableCell>
+              <TableCell>Allocate Tool</TableCell>
+              <TableCell>Available Tool</TableCell>
+              <TableCell>Select</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody sx={{ maxHeight: 230, overflowY: 'auto' }}>
             {filteredTools.map((tool) => (
-              <tr key={tool.toolId}>
-                <td>{tool.toolId}</td>
-                <td>{tool.toolName}</td>
-                <td>{tool.description}</td>
-                <td>{tool.quantity}</td>
-                <td>{tool.allocatedTool}</td>
-                <td>{tool.availableTool}</td>
-                <td>
-                  <input
-                    type="checkbox"
-                    onChange={() => handleToolSelect(tool)}
+              <TableRow key={tool.toolId}>
+                <TableCell>{tool.toolId}</TableCell>
+                <TableCell>{tool.toolName}</TableCell>
+                <TableCell>{tool.description}</TableCell>
+                <TableCell>{tool.quantity}</TableCell>
+                <TableCell>{tool.allocatedTool}</TableCell>
+                <TableCell>{tool.availableTool}</TableCell>
+                <TableCell>
+                  <Checkbox
                     checked={selectedTools.includes(tool)}
+                    onChange={() => handleToolSelect(tool)}
                   />
-                </td>
-              </tr>
+                </TableCell>
+              </TableRow>
             ))}
-          </tbody>
-        </table>
-      </div>
+          </TableBody>
+        </Table>
+      </TableContainer>
 
-      <div className="projectNameInput">
-        <input
-          type="text"
-          placeholder="Enter Project Name"
-          value={projectName}
-          onChange={(e) => setProjectName(e.target.value)}
-        />
-      </div>
-<div className="btn">
-      <div className="btns">
-      <div className="cont"> <button onClick={generateReport}>Generate Report</button>
-      </div>
-      </div>
-  </div>
+      <TextField
+        label="Enter Project Name"
+        variant="outlined"
+        fullWidth
+        value={projectName}
+        onChange={(e) => setProjectName(e.target.value)}
+        sx={{ mb: 2 }}
+      />
 
-      <div className="reportTable">
-        <h2>Report Table</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>Date and Time</th>
-              <th>Project Name</th>
-              <th>Report</th>
-            </tr>
-          </thead>
-          <tbody>
-            {reportData.map((report, index) => (
-              <tr key={index}>
-                <td>{report.date}</td>
-                <td>{report.projectName}</td>
-                <td>
-                  <a href={report.data} download={`report_${index}.pdf`}>Download Report</a>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-     
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={generateReport}
+      >
+        Generate Report
+      </Button>
+
+      <Box sx={{ mt: 3 }}>
+        <Typography variant="h6" gutterBottom>
+          Report Table
+        </Typography>
+        <TableContainer component={Paper}>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>Date and Time</TableCell>
+                <TableCell>Project Name</TableCell>
+                <TableCell>Report</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {reportData.map((report, index) => (
+                <TableRow key={index}>
+                  <TableCell>{report.date}</TableCell>
+                  <TableCell>{report.projectName}</TableCell>
+                  <TableCell>
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      href={report.data}
+                      download={`report_${index}.pdf`}
+                    >
+                      Download Report
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Box>
+    </Box>
     </div>
   );
-}
+};
 
 export default RequiredToolReport;

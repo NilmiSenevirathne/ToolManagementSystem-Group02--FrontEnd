@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import backgroundImage from '../../images/new.webp'; 
-import "./addReport.css";
 import { Link } from 'react-router-dom';
+import { Container, TextField, Button, Typography, Paper, Grid, InputLabel, FormControl, Input } from '@mui/material';
+import Sbar from '../../Components/Sbar';
 
-const AddReportDetails = () => {
+const AddToolStatus = () => {
     const [projectName, setProjectName] = useState('');
     const [reportPdf, setReportPdf] = useState(null);
     const [reportId, setReportId] = useState(null);
@@ -20,72 +20,104 @@ const AddReportDetails = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        // Confirmation dialog
         const isConfirmed = window.confirm("Are you sure you want to submit?");
         if (!isConfirmed) {
             return;
         }
-
+        
+        // Create FormData object
         const formData = new FormData();
         formData.append('projectName', projectName);
-        formData.append('reportPdf', reportPdf);
+        formData.append('reportPdf', reportPdf); // Ensure field name matches backend
 
         try {
+            // Send POST request
             const response = await axios.post('http://localhost:8080/api/toolboxstatus', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
             });
+
+            // Update state with response data
             setReportId(response.data.reportId);
+
+            // Clear form fields
             setProjectName('');
             setReportPdf(null);
             alert('Report details added successfully!');
         } catch (error) {
-            console.error('Error adding report details:', error.response ? error.response.data : error.message);
+            console.error('Error adding report details:', error);
             alert('An error occurred while adding report details.');
         }
     };
 
     return (
-        <div className="background-container">
-            <img src={backgroundImage} alt="Background" className="background-image" />
-            <div className="form-container">
-                <div className="form-content">
-                    <h2>Add Tool Status Reports</h2>
-                    <form onSubmit={handleSubmit}>
-                        <div className="form-group">
-                            <label htmlFor="reportId">Report ID:</label>
-                            <input
-                                type="text"
-                                id="reportId"
-                                value={reportId} 
-                                readOnly
-                            />
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="projectName">Project Name:</label>
-                            <input
-                                type="text"
+        <Container>
+            <Sbar/>
+            <Paper
+                style={{
+                    marginLeft:'300px',
+                    backgroundSize: 'cover',
+                    padding: '20px',
+                    borderRadius: '8px',
+                    marginTop: '20px'
+                }}
+            >
+                <Typography variant="h4" gutterBottom>
+                    Add Tool Status Reports
+                </Typography>
+                <form onSubmit={handleSubmit}>
+                    <Grid container spacing={2}>
+                        
+                        <Grid item xs={12}>
+                            <TextField
+                                fullWidth
+                                label="Project Name"
                                 id="projectName"
                                 value={projectName}
                                 onChange={handleProjectNameChange}
                             />
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="reportPdf">Report PDF:</label>
-                            <input
-                                type="file"
-                                id="reportPdf"
-                                onChange={handleReportPdfChange}
-                            />
-                        </div>
-                        <button type="submit" className="submit-button">Submit</button>
-                    </form>
-                    {reportId && <p>Generated Report ID: {reportId}</p>}
-                    <Link to="/ViewToolStatusReports" className="view-reports-link">View Tool Status Reports</Link>
-                </div>
-            </div>
-        </div>
+                        </Grid>
+                        <Grid item xs={12}>
+                            <FormControl fullWidth>
+                                <InputLabel htmlFor="reportPdf">Report PDF</InputLabel>
+                                <Input
+                                    type="file"
+                                    id="reportPdf"
+                                    onChange={handleReportPdfChange}
+                                />
+                            </FormControl>
+                        </Grid>
+                        <Grid item xs={12}>
+                            <Button
+                                type="submit"
+                                variant="contained"
+                                color="primary"
+                                fullWidth
+                            >
+                                Submit
+                            </Button>
+                        </Grid>
+                    </Grid>
+                </form>
+                {reportId && (
+                    <Typography variant="body1" style={{ marginTop: '20px' }}>
+                        Generated Report ID: {reportId}
+                    </Typography>
+                )}
+        <Link to="/ViewRequiredToolReports" style={{ textDecoration: 'none' }}>
+          <Button
+            variant="outlined"
+            color="primary"
+            sx={{ mt: 2 }}
+          >
+            View Required Tool Reports
+          </Button>
+        </Link>
+            </Paper>
+        </Container>
     );
 };
 
-export default AddReportDetails;
+export default AddToolStatus;
