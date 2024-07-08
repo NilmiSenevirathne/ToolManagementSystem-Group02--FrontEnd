@@ -1,71 +1,80 @@
 import React, { useState } from 'react';
-import { FaTh, FaBars, FaCartPlus, FaBriefcase, FaSearch, FaNewspaper } from 'react-icons/fa';
-import { RiLogoutCircleRLine } from "react-icons/ri";
-import { NavLink } from 'react-router-dom';
-import userpic from '../images/user1.jpg';
-import './ManagerSidebar.css';
+import { useNavigate } from 'react-router-dom';
+import { Drawer, List, ListItem, ListItemText, ListItemIcon, Typography, Box, IconButton } from '@mui/material';
+import { FaTh, FaCartPlus, FaBriefcase, FaNewspaper } from 'react-icons/fa';
+import { RiLogoutCircleRLine } from 'react-icons/ri';
+import companyLogo from '../images/BMKLogo.jpg';
+import MenuIcon from '@mui/icons-material/Menu';
 
-// Sidebar component which includes navigation menu and a container for children components
-const Sidebar = ({ children }) => {
-  const [isOpen,setIsOpen] = useState(false);
-  const toggle = () => setIsOpen (!isOpen);
+const StockSidebar = () => {
+  const navigate = useNavigate();
+  const [collapsed, setCollapsed] = useState(false);
 
-  const role = "Manager"
-  
-  // Array of menu items for the sidebar
-  const menuItem = [
-    {
-      path: "/managerdashboard",
-      name: "Managerdashboard",
-      icon: <FaTh />
-    },
-    {
-      path: "/manageprojects",
-      name: "Manageprojects",
-      icon: <FaCartPlus />
-    },
-    {
-      path: "/ViewInventory",
-      name: "View Inventory",
-      icon: <FaBriefcase />
-    },
-    {
-      path: "/ViewLocations",
-      name: "View Locations",
-      icon: <FaSearch />
-    },
-    {
-      path: "/",
-      name: "Logout",
-      icon: <RiLogoutCircleRLine />
-    }
-  ];
+  const handleToggleSidebar = () => {
+    setCollapsed(!collapsed);
+  };
 
   return (
-    <div className='container'>
-      <div className='sidebar'>{/* Sidebar section */}
-        <div className='companylogo'>{/* Company logo and user details section */}
-          <h1  className='logo'>Dilum BMK Engineers (Pvt) Ltd</h1>
-          <div className='details'>
-              <img className="user" src={userpic}/>{/* User image */}
-              <h3 className='name'>Mr.Dilum Samaranayake</h3>{/* User name */}
-              <h2 className='role'>{role}</h2>{/* User role */}
-          </div>
-        </div>
+    <Box sx={{ display: 'flex', position: 'relative' }}>
+      <Drawer
+        variant="permanent"
+        sx={{
+          width: collapsed ? 60 : 240,
+          flexShrink: 0,
+          whiteSpace: 'nowrap',
+          '& .MuiDrawer-paper': {
+            width: collapsed ? 60 : 240,
+            transition: 'width 0.3s',
+            backgroundColor: "#131842",
+            boxSizing: 'border-box',
+            overflowX: 'hidden', // Ensure contents don't overflow when collapsed
+          },
+        }}
+      >
+        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '16px 0' }}>
+          <img src={companyLogo} alt="Company Logo" style={{ width: 40, height: 40, marginRight: 8 }} />
+          {!collapsed && (
+            <Typography variant="h6" sx={{ color: 'white' }}>
+              Dilum BMK Engineers
+            </Typography>
+          )}
+        </Box>
 
-        {/* Menu items mapping */}
-        {
-          menuItem.map((item, index) => (
-            <NavLink to={item.path} key={index} className="link" activeClassName="active">
-              <div className="icon">{item.icon}</div>{/* Menu item icon */}
-              <div className="text">{item.name}</div>{/* Menu item text */}
-            </NavLink>
-          ))
-        }
-      </div>
-      <main>{children}</main>{/* Main container to render children components */}
-    </div>
+        <List>
+          {[
+            { text: 'Managerdashboard', icon: <FaTh />, path: '/ManagerDashboard' },
+            { text: 'Manageprojects', icon: <FaCartPlus />, path: '/ManageProjects' },
+            { text: 'LocationHome', icon: <FaBriefcase />, path: '/locationHome' },
+            { text: 'Reports', icon: <FaNewspaper />, path: '/reports' },
+            { text: 'Logout', icon: <RiLogoutCircleRLine />, path: '/' },
+          ].map((item, index) => (
+            <ListItem button key={index} onClick={() => navigate(item.path)} sx={{ my: 2 }}>
+              <ListItemIcon sx={{ color: 'white' }}>{item.icon}</ListItemIcon>
+              {!collapsed && (
+                <ListItemText primary={item.text} sx={{ color: 'white' }} />
+              )}
+            </ListItem>
+          ))}
+        </List>
+      </Drawer>
+
+      <IconButton
+        color="inherit"
+        aria-label="open drawer"
+        onClick={handleToggleSidebar}
+        edge="start"
+        sx={{
+          position: 'absolute',
+          top: 16,
+          left: collapsed ? 16 : 256, // Adjust position based on the collapsed state
+          transition: 'left 0.3s',
+          zIndex: 1300 // Ensures the button is above other elements
+        }}
+      >
+        <MenuIcon />
+      </IconButton>
+    </Box>
   );
-}
+};
 
-export default Sidebar;
+export default StockSidebar;
