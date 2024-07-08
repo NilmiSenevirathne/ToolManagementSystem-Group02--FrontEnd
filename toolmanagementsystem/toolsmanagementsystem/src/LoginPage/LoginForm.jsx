@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
-import './LoginForm.css';
-import Login from '../../src/images/user1.jpg';
 import Validation from '../../src/LoginPage/Validation.js';
-import { FaUser, FaLock } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
@@ -11,10 +8,8 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
-import Validation from '../../src/LoginPage/Validation.js';
 import backgroundImage from '../images/back7.png';
-import Logo from '../images/user1.jpg';
-
+import Logo from '../../src/images/BMKLogo.jpg'; 
 
 const defaultTheme = createTheme();
 
@@ -47,9 +42,8 @@ function LoginForm() {
                 body: JSON.stringify(values),
             })
             .then(response => {
-                if (response.ok) 
+                if (response.ok) {
                     return response.text();
-    
                 } else {
                     return response.text().then(errorMessage => {
                         throw new Error(errorMessage);
@@ -68,7 +62,6 @@ function LoginForm() {
                     case 'stocksupervisor':
                         navigate("/stocksupervisordashboard");
                         break;
-                  
                     case 'sitesupervisor':
                         navigate("/sitesupervisor");
                         break;
@@ -78,58 +71,9 @@ function LoginForm() {
             })
             .catch(error => {
                 console.error('Error during login:', error);
-
             });
         } else {
             console.error('Form validation errors:', validationErrors);
-        }
-    }
-
-    return (
-        <div className='background'>
-            <div className='loginconatin'>
-                <div className='wrapper'>
-                    <form onSubmit={handleSubmit}>
-                        <h1 className='name'> Dilum BMK Engineers (Pvt)Ltd. </h1>
-                        <img className="englogo" src={Login} alt='' />
-                        <h1>Login</h1>
-
-                        <div className='input-box'>
-                            <label htmlFor='username'>Username</label>
-                            <input
-                                type='email'
-                                placeholder='Email'
-                                value={values.username}
-                                name='username'
-                                onChange={handleChange}
-                            />
-                            {errors.username && <p style={{ color: "red", fontSize: "13px" }}>{errors.username}</p>}
-                            <FaUser className='icon' />
-                        </div>
-
-                        <div className='input-box'>
-                            <label htmlFor='password'>Password</label>
-                            <input
-                                type='password'
-                                placeholder='password'
-                                value={values.password}
-                                name='password'
-                                onChange={handleChange}
-                            />
-                            {errors.password && <p style={{ color: "red", fontSize: "13px" }}>{errors.password}</p>}
-                            <FaLock className='icon' />
-                        </div>
-
-                        <button className='submit' type="submit">Login</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-                // Handle login error, maybe show a message to the user
-            });
-        } else {
-            console.error('Form validation errors:', validationErrors);
-            // Handle form validation errors, maybe display them to the user
         }
     }
 
@@ -150,8 +94,6 @@ function LoginForm() {
                         backgroundPosition: 'center',
                     }}
                 />
-
-                
                 <Grid item xs={12} sm={8} md={5} elevation={6}>
                     <Box
                         sx={{
@@ -163,12 +105,10 @@ function LoginForm() {
                         }}
                     >
                         <Box component="img" src={Logo} alt="Company Logo" sx={{ width: 100, height: 100, mb: 1 }} />
-                            <Typography component="h1" variant="h3">
-                              Login
-                            </Typography>
+                        <Typography component="h1" variant="h3">
+                            Login
+                        </Typography>
                         <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
-                            
-                            
                             <TextField
                                 id="outlined-username-input"
                                 label="Username"
