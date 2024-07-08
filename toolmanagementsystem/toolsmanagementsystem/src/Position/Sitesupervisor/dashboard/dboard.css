@@ -1,24 +1,24 @@
-.dashboard {
+.dboard-container {
   display: flex;
   flex-direction: row;
 }
 
-.homeContainer {
-  display: flex;
-  flex-direction: column;
+.dboard-homeContainer {
   flex-grow: 1;
   padding: 20px;
   background-color: #f4f6f9;
+  margin-left: 250px; /* Ensure the dashboard content doesn't overlap the sidebar */
+  overflow: hidden;
 }
 
-.buttonContainer {
+.dboard-buttonContainer {
   display: flex;
   justify-content: space-around;
   margin-bottom: 20px;
 }
 
-.button {
-  background-color:rgb(38, 196, 244);
+.dboard-button {
+  background-color: rgb(38, 196, 244);
   border: none;
   color: white;
   padding: 15px 32px;
@@ -30,27 +30,27 @@
   cursor: pointer;
   transition-duration: 0.4s;
   border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.buttonText {
+.dboard-buttonText {
   font-weight: bold;
 }
 
-.button:hover {
+.dboard-button:hover {
   background-color: white;
   color: black;
   border: 2px solid rgb(38, 196, 244);
 }
 
-.chartContainer {
+.dboard-chartContainer {
   background: white;
   padding: 20px;
   border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.chartTitle {
+.dboard-chartTitle {
   text-align: center;
   margin-bottom: 20px;
   color: #333;
