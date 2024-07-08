@@ -44,7 +44,7 @@ const Toolbox = () => {
       loadToolbox();
       alert('Toolbox deleted Successfully!');
     } catch (error) {
-      alert('Error occurred when deleting the tool!');
+      alert('Error occurred when deleting the toolbox!');
     }
   };
 
@@ -79,7 +79,7 @@ const Toolbox = () => {
                       <TableCell sx={{ textAlign: 'center' }}>{tool.project_id}</TableCell>
                       <TableCell sx={{ textAlign: 'center' }}>{tool.location_id}</TableCell>
                       <TableCell sx={{ textAlign: 'center' }}>
-                        <Link to={`/editTool/${tool.toolbox_id}`}>
+                        <Link to={`/editToolbox/${toolbox.toolbox_id}`}>
                           <Button variant="contained" sx={{ bgcolor: 'purple', size: 'small' }} style={{ marginRight: '10px' }}>
                             Update
                           </Button>
