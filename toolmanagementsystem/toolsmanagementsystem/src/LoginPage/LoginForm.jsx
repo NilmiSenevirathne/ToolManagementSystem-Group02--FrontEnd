@@ -9,7 +9,7 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
 import backgroundImage from '../images/back7.png';
-import Logo from '../../src/images/BMKLogo.jpg'; 
+import Logo from '../../src/images/user1.jpg'; 
 
 const defaultTheme = createTheme();
 
