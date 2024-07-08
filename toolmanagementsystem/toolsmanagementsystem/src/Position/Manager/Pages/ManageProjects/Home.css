@@ -1,86 +1,16 @@
-.pagination {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-  }
-  
-  .pagination li {
-    list-style: none;
-    margin: 0 5px;
-  }
-  
-  .pagination a {
-    text-decoration: none;
-    color: #007bff;
-  }
-  
-  .paginationActive a {
-    font-weight: bold;
-    color: #000;
-  }
-  
-  .paginationDisabled a {
-    color: #ddd;
-  }
-  /* Home.css */
-
 .container-fluid {
-  padding: 20px;
-}
-
-h3 {
-  margin-bottom: 20px;
-}
-
-.table {
-  margin-bottom: 0;
-}
-
-.table thead th {
-  position: sticky;
-  top: 0;
-  background-color: #fff;
-  z-index: 1;
-}
-
-.table tbody tr {
-  transition: background-color 0.3s ease;
-}
-
-.table tbody tr:hover {
-  background-color: #f1f1f1;
-}
-
-.btn-success, .btn-danger {
-  margin-right: 5px;
-}
-
-.pagination {
   display: flex;
-  justify-content: center;
-  padding: 20px 0;
+  flex-direction: row;
 }
 
-.pagination a {
-  margin: 0 5px;
-  padding: 10px 15px;
-  border-radius: 5px;
-  border: 1px solid #ddd;
-  color: #007bff;
-  text-decoration: none;
-  transition: background-color 0.3s ease;
+
+
+.main-content {
+  margin-left: 250px; /* This should match the width of the sidebar */
+  padding: 20px;
+  flex-grow: 1;
 }
 
-.pagination a:hover {
-  background-color: #f1f1f1;
-}
-
-.pagination .paginationActive a {
-  background-color: #007bff;
-  color: white;
-}
-
-.pagination .paginationDisabled a {
-  color: #ccc;
-  pointer-events: none;
+.table-container {
+  overflow-x: auto;
 }
