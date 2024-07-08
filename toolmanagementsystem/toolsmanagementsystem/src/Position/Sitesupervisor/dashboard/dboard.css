@@ -6,7 +6,7 @@
 .dboard-homeContainer {
   flex-grow: 1;
   padding: 20px;
-  background-color: #f4f6f9;
+  
   margin-left: 250px; /* Ensure the dashboard content doesn't overlap the sidebar */
   overflow: hidden;
 }

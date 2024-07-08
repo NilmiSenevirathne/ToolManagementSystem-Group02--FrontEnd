@@ -23,6 +23,7 @@
     "file-saver": "^2.0.5",
     "jspdf": "^2.5.1",
     "mdb-react-ui-kit": "^8.0.0",
+    "pdfjs-dist": "^4.4.168",
     "primeicons": "^7.0.0",
     "primereact": "^10.6.3",
     "react": "^18.3.1",

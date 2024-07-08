@@ -22,7 +22,7 @@ function LoginForm() {
     });
 
     const [errors, setErrors] = useState({});
-
+    
     function handleChange(e) {
         setValues({ ...values, [e.target.name]: e.target.value });
     }
@@ -43,7 +43,11 @@ function LoginForm() {
             })
             .then(response => {
                 if (response.ok) {
+
                     return response.text();
+
+                    return response.text();      
+
                 } else {
                     return response.text().then(errorMessage => {
                         throw new Error(errorMessage);
@@ -52,6 +56,7 @@ function LoginForm() {
             })
             .then(role => {
                 console.log("Login Success!!");
+               
                 switch (role.toLowerCase()) {
                     case 'admin':
                         navigate("/admindashboard");
@@ -71,6 +76,10 @@ function LoginForm() {
             })
             .catch(error => {
                 console.error('Error during login:', error);
+
+
+                // Handle login error, maybe show a message to the user
+
             });
         } else {
             console.error('Form validation errors:', validationErrors);
@@ -93,7 +102,7 @@ function LoginForm() {
                         backgroundSize: 'cover',
                         backgroundPosition: 'center',
                     }}
-                />
+
                 <Grid item xs={12} sm={8} md={5} elevation={6}>
                     <Box
                         sx={{
