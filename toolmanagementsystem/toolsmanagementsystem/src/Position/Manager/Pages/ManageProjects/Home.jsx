@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link, useParams } from 'react-router-dom';
-import Sidebar from '../../../../Components/ManagerSidebar.jsx';
+import ManagerSidebar from '../../../../Components/ManagerSidebar.jsx';
 import { Check } from '@mui/icons-material'; // Import the Check icon from Material-UI
 import ReactPaginate from 'react-paginate'; // Import React Paginate
 import './Home.css';
+import ManagerNavbar from '../../../../Components/Navbar/ManagerNavbar.jsx';
+import {Grid , Table, TableHead, TableRow, TableCell, TableBody, Container, Typography, Box} from '@mui/material';
 
 export default function Home() {
   // State variables
@@ -109,51 +111,61 @@ export default function Home() {
   };
 
   return (
-    <Sidebar>
-      <div className='container-fluid'>
-        <h3 style={{ textAlign: 'center' }}>Manage Projects</h3>
-        <Link className="btn" style={{ backgroundColor: 'navy', color: 'white' }} to="/addprojects">Add Projects</Link>
-        <div className="py-4">
-          <input
-            type="text"
-            placeholder="Search..."
-            value={searchTerm}
-            onChange={handleSearchChange}
-            className="form-control mb-4"
+    
+    <Grid container>
+        <Grid item >
+            <ManagerSidebar/>
+        </Grid>
+
+        <Grid item xs>
+            <ManagerNavbar/>
+
+            <Container maxWidth="lg">
+          <Box mt={4}>
+            <Typography variant="h4" align="center" gutterBottom>
+              Welcome to Project Details 
+            </Typography>
+            
+            {/* Render error message if error state is set */}
+            {/* {error && <Typography color="error" align="center">{error}</Typography>} */}
+            <Link className="btn" style={{ backgroundColor: 'navy', color: 'white' }} to="/addprojects">Add Projects</Link>
+
+            <table className="table border shadow">
+              <thead style={{ top: 0, zIndex: 1, background: '#fff' }}>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Project id</th>
+                  <th scope="col">Project Name</th>
+                  <th scope="col">Description</th>
+                  <th scope="col">Site Supervisor ID</th>
+                  <th scope="col">Site Supervisor Name</th>
+                  <th scope="col">Location ID</th>
+                  <th scope="col">Date</th>
+                  <th scope="col">Action</th>
+                  <th scope="col">Action</th>
+                  <th scope="col">Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {displayProjects}
+              </tbody>
+            </table>
+            <ReactPaginate
+            previousLabel={"Previous"}
+            nextLabel={"Next"}
+            pageCount={pageCount}
+            onPageChange={changePage}
+            containerClassName={"pagination"}
+            previousLinkClassName={"previousBttn"}
+            nextLinkClassName={"nextBttn"}
+            disabledClassName={"paginationDisabled"}
+            activeClassName={"paginationActive"}
           />
-          <table className="table border shadow">
-            <thead style={{ top: 0, zIndex: 1, background: '#fff' }}>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">Project id</th>
-                <th scope="col">Project Name</th>
-                <th scope="col">Description</th>
-                <th scope="col">Site Supervisor ID</th>
-                <th scope="col">Site Supervisor Name</th>
-                <th scope="col">Location ID</th>
-                <th scope="col">Date</th>
-                <th scope="col">Action</th>
-                <th scope="col">Action</th>
-                <th scope="col">Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              {displayProjects}
-            </tbody>
-          </table>
-        </div>
-        <ReactPaginate
-          previousLabel={"Previous"}
-          nextLabel={"Next"}
-          pageCount={pageCount}
-          onPageChange={changePage}
-          containerClassName={"pagination"}
-          previousLinkClassName={"previousBttn"}
-          nextLinkClassName={"nextBttn"}
-          disabledClassName={"paginationDisabled"}
-          activeClassName={"paginationActive"}
-        />
-      </div>
-    </Sidebar>
+
+
+          </Box>
+        </Container>
+        </Grid>
+    </Grid>
   );
 }
