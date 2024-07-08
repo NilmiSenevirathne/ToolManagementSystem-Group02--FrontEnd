@@ -116,7 +116,6 @@ export default function Home() {
         <Grid item >
             <ManagerSidebar/>
         </Grid>
-
         <Grid item xs>
             <ManagerNavbar/>
 
