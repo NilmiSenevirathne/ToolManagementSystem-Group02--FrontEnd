@@ -15,14 +15,14 @@ function CreateToolbox() {
   const [locations, setLocations] = useState([]);
   const [users, setUsers] = useState([]);
   const [projects, setProjects] = useState([]);
-  const [selectedTools, setSelectedTools] = useState(initialState.selectedTools || []);
+  // const [selectedTools, setSelectedTools] = useState(initialState.selectedTools || []);
   
   const [toolbox, setToolbox] = useState({
     toolbox_id: initialState.toolbox_id || "",
     project_id: initialState.project_id || "",
     site_supervisor_id: initialState.site_supervisor_id || "",
     location_id: initialState.location_id || "",
-    //selectedTools: initialState.selectedTools || [],
+    // selectedTools: initialState.selectedTools || [],
   });
 
   useEffect(() => {
@@ -72,8 +72,8 @@ function CreateToolbox() {
         toolbox_id: toolbox.toolbox_id,
         project_id: toolbox.project_id,
         site_supervisor_id: toolbox.site_supervisor_id,
-        location_id: toolbox.location_id, 
-        // selectedTools: toolbox.selectedTools.map(tool =>tool.toolId),
+        location_id: toolbox.location_id,  // Ensure this matches the state key
+        // selectedTools: selectedTools.map(tool => tool.toolId), // Adjust as per your backend
       };
   
       console.log("Submitting data:", requestData);
