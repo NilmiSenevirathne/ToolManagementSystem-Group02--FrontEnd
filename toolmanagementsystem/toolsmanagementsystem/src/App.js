@@ -33,8 +33,8 @@ import UpdateLocation from './Position/Manager/Pages/ManageProjects/Projects/Loc
 import StockProfile from './Components/Profile/StockProfile.jsx';
 import UpdateToolbox from './Position/StockSupervisor/ToolBox/UpdateToolbox/UpdateToolbox.jsx';
 import TrackToolboxes from './Position/Sitesupervisor/TrackToolBoxes.jsx';
-
-
+import UserManage from '../src/Position/Admin/UserManage/UserManage.jsx'
+import UserReg from '../src/Position/Admin/UserReg/UserReg.jsx'
 
 function App() {
    return (
@@ -54,7 +54,9 @@ function App() {
                                      
                     {/* Admin pages  */}
                     <Route path="/admindashboard" element={<DashBoard/>} />
-                    
+                    <Route path="/usernamage" element={<UserManage/>} />
+                    <Route path="/userreg" element={<UserReg/>} />
+
                     {/* Manager pages  */}
                     <Route path="/managerdashboard" element={<ManagerDashboard/>} />
                     <Route path="/manageprojects" element={<ManageProjects />} />
