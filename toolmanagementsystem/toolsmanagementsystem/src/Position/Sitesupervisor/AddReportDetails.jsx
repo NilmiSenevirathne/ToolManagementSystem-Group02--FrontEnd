@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import backgroundImage from '../../images/new.webp'; 
 import "./addReport.css";
+import { Link } from 'react-router-dom';
 
 const AddReportDetails = () => {
     const [projectName, setProjectName] = useState('');
@@ -93,6 +94,7 @@ const AddReportDetails = () => {
               </form>
             
               {reportId && <p>Generated Report ID: {reportId}</p>}
+              <Link to="/ViewRequiredToolReports" className="view-reports-link">View Required Tool Reports</Link>
             </div>
           </div>
         </div>

@@ -3,7 +3,6 @@ import "./requiredToolReports.css"
 import SearchIcon from '@mui/icons-material/Search';
 
 import axios from "axios";
-import { Link } from "react-router-dom"
 import { useEffect, useState } from "react";
 
 
@@ -21,7 +20,7 @@ const RequiredToolReport = () => {
 
   const loadTools = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/gettools');
+      const response = await axios.get('http://localhost:8080/tool/gettools');
       setTools(response.data);
     } catch (error) {
       console.error("Error loading tools:", error);
@@ -209,9 +208,7 @@ const RequiredToolReport = () => {
           </tbody>
         </table>
       </div>
-      <div className="btn">
-        <button onClick={() => window.location.href = '/AddReportDetails'}>Add Required Report Details</button>
-      </div>
+     
     </div>
   );
 }
