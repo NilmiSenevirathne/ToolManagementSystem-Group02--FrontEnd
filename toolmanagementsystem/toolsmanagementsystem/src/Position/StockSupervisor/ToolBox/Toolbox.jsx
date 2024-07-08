@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import StockSidebar from '../../../Components/Sidebar/StockSidebar.jsx'
-import DashNavbar from '../../../Components/Navbar/DashNavbar.jsx';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
-import './maintoolbox.css'
+import StockSuperviorNavbar from '../../../Components/Navbar/StockSupervisorNavbar.jsx';
+import { Grid , Box, Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, Container} from '@mui/material';
 
 const Toolbox = () => {
   const [toolbox , setToolbox] = useState([]);
@@ -35,47 +35,57 @@ const Toolbox = () => {
   };
 
   return (
-    <StockSidebar>
-    <DashNavbar/>
-        <div className='toolbox'>
+   
+    <Grid container>
+         <Grid item>
+            <StockSidebar/>
+         </Grid>
 
-            <h1>Welcome to ToolBox Details Section!</h1>
+         <Grid item xs>
+             <StockSuperviorNavbar/>
 
-            <div className='toolboxsection'>  
-            <table className='table'>
-              <thead>
-                <tr>
-                  <th scope='col'>ToolBox ID</th>
-                  <th scope='col'>Project ID</th>
-                  <th scope='col'>Location ID</th>
-                  
+          <Container maxWidth="md">
+          <Box mt={4}>
+            <Typography variant="h4" align="center" gutterBottom>
+              Welcome to ToolBox Details Section!
+            </Typography>
+            <TableContainer component={Paper}>
+              <Table stickyHeader aria-label="Toolbox Table" sx={{ borderCollapse: 'separate', borderSpacing: 0,'& .MuiTableCell-root':{border:'1px solid rgba(224,224,224,1)',} , }}>
+                <TableHead>
+                  <TableRow>
+                    <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white'   }}>ToolBox ID</TableCell>
+                    <TableCell sx={{ fontWeight: 'bold', textAlign: 'center',  backgroundColor: 'grey', color: 'white'  }}>Project ID</TableCell>
+                    <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white'  }}>Location ID</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {tools.map((tool, index) => (
+                    <TableRow key={tool.toolbox_id}>
+                      <TableCell sx={{textAlign: 'center' }}>{tool.toolbox_id}</TableCell>
+                      <TableCell sx={{textAlign: 'center' }}>{tool.project_id}</TableCell>
+                      <TableCell sx={{textAlign: 'center' }}>{tool.location_id}</TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+            <Box mt={2} display="flex" justifyContent="center" gap={2}>
+              <Link to='/createtoolbox' style={{ textDecoration: 'none' }}>
+                <Button variant="contained" color="primary" sx={{ fontSize: '1rem' }}>
+                  Create ToolBox
+                </Button>
+              </Link>
+              <Link to='/Stracktoolbox' style={{ textDecoration: 'none' }}>
+                <Button variant="contained" color="secondary" sx={{ fontSize: '1rem' }}>
+                  Track ToolBox
+                </Button>
+              </Link>
+            </Box>
+          </Box>
+        </Container>
 
-                </tr>
-              </thead>
-              <tbody>
-                
-                {/*Map over the tools array to render tool details*/}
-                {tools.map ((tool,index) =>(
-                  <tr key={tool.toolbox_id}> {/* Add key attribute */}
-                     
-                     <td>{tool.toolbox_id}</td>
-                     <td>{tool.project_id}</td>
-                     <td>{tool.location_id}</td>
-
-                  </tr>
-
-
-                ))}
-                
-              </tbody>
-            </table>
-
-            <hr/><br/>
-            <div><Link to ='/createtoolbox'><button className='btn-create'>CreateToolBox</button></Link>
-            <Link to ='/Stracktoolbox'><button className='btn-track'>TrackToolBox</button></Link></div>
-        </div>
-        </div>
-    </StockSidebar>
+         </Grid>
+    </Grid>
   )
 }
 

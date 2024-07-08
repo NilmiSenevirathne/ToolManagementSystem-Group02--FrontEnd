@@ -1,20 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import './managestock.css'; 
 import axios from "axios";
-import { Link , useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import StockSidebar from '../../../Components/Sidebar/StockSidebar';
-import DashNavbar from '../../../Components/Navbar/DashNavbar.jsx';
-import { TextField } from '@mui/material'; // Import TextField from Material UI
-
+import StockSuperviorNavbar from '../../../Components/Navbar/StockSupervisorNavbar.jsx';
+import { CssBaseline, Grid, TextField, Button, Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Box } from '@mui/material';
 
 const ManageStock = () => {
-  const [tools ,setTools] = useState([]);
+  const [tools, setTools] = useState([]);
   const [searchTools, setSearchTools] = useState('');
-  const {toolId} = useParams();
+  const { toolId } = useParams();
 
-  useEffect(()=>{
+  useEffect(() => {
     loadTools();
-  },[]);
+  }, []);
 
   // fetch tools details from the backend
   const loadTools = async () => {
@@ -25,7 +23,7 @@ const ManageStock = () => {
   // delete tool details from the database
   const deleteTool = async (toolId) => {
     const isConfirmed = window.confirm("Are you sure you want to delete this tool?");
-    if(!isConfirmed) {
+    if (!isConfirmed) {
       return;
     }
     try {
@@ -44,61 +42,78 @@ const ManageStock = () => {
   );
 
   return (
-    <StockSidebar>
-    <DashNavbar/>
-      <div className='stock-content'>
-        <h1>Welcome to Tool Details Section !</h1>
-        
-        {/* Add search input field with the search button */}
-        <div style={{ display: 'flex', alignItems: 'center', marginBottom: '20px' }}>
-          <TextField
-            label="Search Tools"
-            variant="outlined"
-            fullWidth
-            value={searchTools}
-            onChange={(e) => setSearchTools(e.target.value)}
-            style={{ flex: 1 }}
-          />
+    <Grid container>
+      <CssBaseline />
 
-        </div>
+      <Grid item>
+        <StockSidebar />
+      </Grid>
 
-        {/* Display filtered tools in a table */}
-        <div className='table-container'>
-          <table className='table'>
-            <thead>
-              <tr>
-                <th scope='col'>Tool_ID</th>
-                <th scope='col'>ToolName</th>
-                <th scope='col'>Description</th>
-                <th scope='col'>Quantity</th>
-                {/* <th scope='col'>AvailableQunatity</th>
-                <th scope='col'>AllocatedQuantity</th> */}
-                <th scope='col'>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {/* Map over the filtered tools array to render tool details */}
-              {filteredTools.map((tool, index) => (
-                <tr key={tool.toolId}>
-                  <td>{tool.toolId}</td>
-                  <td>{tool.toolName}</td>
-                  <td>{tool.description}</td>
-                  <td>{tool.quantity}</td>
-                  {/* <td>{tool.availableQuantity}</td>
-                  <td>{tool.allocatedQuantity}</td> */}
-                  <td>
-                    <Link to={`/editTool/${tool.toolId}`}><button className='btn-edit'>Update</button></Link>
-                    <button className='btn-delete' onClick={() => deleteTool(tool.toolId)}>Delete</button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+      <Grid item xs>
+        <StockSuperviorNavbar />
+
+        <div style={{ margin: '20px' }}>
+          <Typography variant="h4" gutterBottom>Welcome to Tool Details Section!</Typography>
+          <div style={{ display: 'flex', alignItems: 'center', marginBottom: '20px' }}>
+            <TextField
+              label="Search Tools"
+              variant="outlined"
+              fullWidth
+              value={searchTools}
+              onChange={(e) => setSearchTools(e.target.value)}
+              style={{ flex: 1, marginRight: '10px' }}
+            />
+            <Button variant="contained" color="primary" onClick={() => setSearchTools('')}>
+              Clear
+            </Button>
+          </div>
+
+          <TableContainer component={Paper} style={{ maxHeight: 400 }}>
+            <Table stickyHeader aria-label="Tools Table" sx={{ borderCollapse: 'separate', borderSpacing: 0 ,'& .MuiTableCell-root':{border:'1px solid rgba(224,224,224,1)',} ,}}>
+              <TableHead>
+                <TableRow>
+                  <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white'   }}>Tool_ID</TableCell>
+                  <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white'   }}>ToolName</TableCell>
+                  <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white'   }}>Description</TableCell>
+                  <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white'  }}>Quantity</TableCell>
+                  <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white'   }}>Action</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {filteredTools.map((tool) => (
+                  <TableRow key={tool.toolId}>
+                    <TableCell component="th" scope="row">
+                      {tool.toolId}
+                    </TableCell>
+                    <TableCell sx={{ textAlign: 'center' }}>{tool.toolName}</TableCell>
+                    <TableCell sx={{ textAlign: 'center' }}>{tool.description}</TableCell>
+                    <TableCell sx={{ textAlign: 'center' }}>{tool.quantity}</TableCell>
+                    <TableCell>
+                      <Link to={`/editTool/${tool.toolId}`}>
+                        <Button variant="contained" sx={{ bgcolor: 'purple', size:"small" }} style={{ marginRight: '10px' }}>
+                          Update
+                        </Button>
+                      </Link>
+                      <Button variant="contained" sx={{ bgcolor: 'red', size:"small" }} onClick={() => deleteTool(tool.toolId)}>
+                        Delete
+                      </Button>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+          <br />
+          <Box display="flex" justifyContent="center">
+            <Link to='/addtool'>
+              <Button variant="contained" sx={{ bgcolor: 'green', width: '100%', maxWidth: '250px', fontSize: '1.25rem' }}>
+                Add Tool
+              </Button>
+            </Link>
+          </Box>
         </div>
-        <br/>
-        <div><Link to='/addtool'><button className='btn-add'>AddTool</button></Link></div>
-      </div>
-    </StockSidebar>
+      </Grid>
+    </Grid>
   );
 };
 
