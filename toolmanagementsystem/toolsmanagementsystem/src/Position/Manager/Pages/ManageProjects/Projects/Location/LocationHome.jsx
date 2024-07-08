@@ -46,13 +46,11 @@ export default function LocationHome() {
 
         <Container maxWidth="lg">
       <Box mt={4}>
-        <Typography variant="h4" align="center" gutterBottom>
-          Welcome to Location Details 
-        </Typography>
+        
         
         {/* Render error message if error state is set */}
         {/* {error && <Typography color="error" align="center">{error}</Typography>} */}
-        <Link className="btn" style={{ backgroundColor: 'navy', color: 'white' }} to="/addlocations">Add Locations</Link>
+        <Link className="btn" style={{ backgroundColor: 'navy', color: 'white' }} to="/AddLocation">Add Locations</Link>
 
         <table className="table border shadow">
         <thead style={{ top: 0, zIndex: 1, background: '#fff' }}>
