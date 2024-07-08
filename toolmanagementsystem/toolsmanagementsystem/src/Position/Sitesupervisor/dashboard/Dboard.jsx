@@ -1,10 +1,25 @@
 import React, { useState, useEffect } from 'react';
-import "./dboard.css";
 import axios from 'axios';
 import Sbar from "../../../Components/Sbar";
-import { Link } from "react-router-dom";
-import LocationOnIcon from '@mui/icons-material/LocationOn';
-import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, CartesianGrid } from 'recharts';
+import StockSupervisorNavbar from '../../../Components/Navbar/StockSupervisorNavbar';
+import {
+  BarChart, Bar, XAxis, YAxis, Tooltip, Legend, CartesianGrid, ResponsiveContainer
+} from 'recharts';
+
+import {
+  Box,
+  Typography,
+  Button,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper
+} from '@mui/material';
+import './dboard.css';
+import Navbr from '../../../Components/Navbar/Navbar';
 
 const Dboard = () => {
   const [toolInventoryData, setToolInventoryData] = useState([]);
@@ -31,63 +46,86 @@ const Dboard = () => {
   };
 
   return (
-    <div className='dboard-container'>
+    <div>
+      <Navbr/>
+    
+    <Box display="flex" className='dboard-container'>
+      
       <Sbar />
-      <div className='dboard-homeContainer'>
-        <div className="dboard-chartContainer">
-          <h2 className="dboard-chartTitle">Tool Inventory</h2>
-          <BarChart
-            width={800}
-            height={400}
-            data={toolInventoryData}
-            margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
-          >
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="toolName" />
-            <YAxis />
-            <Tooltip />
-            <Legend />
-            <Bar dataKey="quantity" fill="rgb(38, 196, 244)" />
-          </BarChart>
-        </div>
+      <Box flexGrow={1} className='dboard-homeContainer'>
+        <Box className="dboard-chartContainer">
+          <Typography variant="h4" className="dboard-chartTitle">Tool Inventory</Typography>
+          <ResponsiveContainer width="100%" height={400}>
+            <BarChart
+              data={toolInventoryData}
+              margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
+              barSize={50}
+            >
+              <CartesianGrid strokeDasharray="3 3" strokeOpacity={0.2} />
+              <XAxis dataKey="toolName"  />
+              <YAxis  />
+              <Tooltip 
+                contentStyle={{ backgroundColor: '#333', border: 'none' }} 
+                itemStyle={{ color: '#fff' }} 
+              />
+              <Legend wrapperStyle={{ color: 'white' }} />
+              <Bar 
+                dataKey="quantity" 
+                fill="url(#colorUv)" 
+                animationBegin={800} 
+                animationDuration={1200} 
+                isAnimationActive={true}
+              />
+              <defs>
+                <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="5%" stopColor="#38c4f4" stopOpacity={0.8} />
+                  <stop offset="95%" stopColor="#38c4f4" stopOpacity={0} />
+                </linearGradient>
+              </defs>
+            </BarChart>
+          </ResponsiveContainer>
+        </Box>
 
-        <Link to="/TrackToolBoxes" style={{ textDecoration: "none" }}>
-          <li><LocationOnIcon /><span>Track Toolboxes</span></li>
-        </Link>
-
-        <div className="tool-location-container">
-          <h2 className="dboard-chartTitle">Tool Locations</h2>
-          <table className="tool-location-table">
-            <thead>
-              <tr>
-              <th>Tool Id</th>
-                <th>Tool Name</th>
-                <th>Location</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {toolInventoryData.map(tool => (
-                <tr key={tool.tool_Id}>
-                   <td>{tool.toolId}</td>
-                  <td>{tool.toolName}</td>
-                  <td>
-                    {toolLocations
-                      .filter(locationTrack => locationTrack.tool.toolId === tool.toolId)
-                      .map(locationTrack => locationTrack.location.locationName)
-                      .join(', ')}
-                  </td>
-                  <td>
-                    <button onClick={() => fetchToolLocation(tool.toolId)}>
-                      Show Location
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
+        <Box className="tool-location-container">
+          <Typography variant="h4" className="dboard-chartTitle">Tool Locations</Typography>
+          <TableContainer component={Paper}>
+            <Table className="tool-location-table">
+              <TableHead>
+                <TableRow>
+                  <TableCell>Tool Id</TableCell>
+                  <TableCell>Tool Name</TableCell>
+                  <TableCell>Location</TableCell>
+                  <TableCell>Action</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {toolInventoryData.map(tool => (
+                  <TableRow key={tool.toolId}>
+                    <TableCell>{tool.toolId}</TableCell>
+                    <TableCell>{tool.toolName}</TableCell>
+                    <TableCell>
+                      {toolLocations
+                        .filter(locationTrack => locationTrack.tool.toolId === tool.toolId)
+                        .map(locationTrack => locationTrack.location.locationName)
+                        .join(', ')}
+                    </TableCell>
+                    <TableCell>
+                      <Button
+                        variant="contained"
+                        color="secondary"
+                        onClick={() => fetchToolLocation(tool.toolId)}
+                      >
+                        Show Location
+                      </Button>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </Box>
+      </Box>
+    </Box>
     </div>
   );
 };
