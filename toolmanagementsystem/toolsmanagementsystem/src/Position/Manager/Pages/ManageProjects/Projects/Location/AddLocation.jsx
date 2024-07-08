@@ -1,7 +1,9 @@
 import { Link, useNavigate } from 'react-router-dom'; // Import React Router components for navigation
 import React, { useState } from 'react'; // Import React and useState hook
 import axios from 'axios'; // Import axios for making HTTP requests
-import Sidebar from '../../../../../../Components/ManagerSidebar.jsx'; // Import Sidebar component
+import ManagerSidebar from '../../../../../../Components/ManagerSidebar.jsx'; // Import Sidebar component
+import ManagerNavbar from '../../../../../../Components/Navbar/ManagerNavbar.jsx';
+import {Grid , Table, TableHead, TableRow, TableCell, TableBody, Container, Typography, Box} from '@mui/material';
 
 // Main function component for adding a new location
 export default function AddLocation() {
@@ -62,11 +64,24 @@ export default function AddLocation() {
 
   // Render the form inside the Sidebar component
   return (
-    <Sidebar>
-      <div className='container-fluid'>
-        <div className="py-2" style={{ maxHeight: '70vh', maxWidth: '800px' }}>
-          <div className='col-md-12 offset-md-3 border rounded p-4 mt-3 shadow'>
-            <h2 className='text-center m-4'>Add a New Location</h2>
+    <Grid container>
+    <Grid item >
+        <ManagerSidebar/>
+    </Grid>
+
+    <Grid item xs>
+        <ManagerNavbar/>
+
+        <Container maxWidth="md">
+      <Box mt={4}>
+      <Box 
+              p={4} 
+              border={1} 
+              borderRadius={8} 
+              borderColor="grey.300"
+              boxShadow={3}
+            >
+             
             <form onSubmit={(e) => onSubmit(e)}>
               <div className='mb-3'>
                 <label htmlFor="locationId" className="form-label">Location Id</label>
@@ -109,9 +124,10 @@ export default function AddLocation() {
               </div>
               <br />
             </form>
-          </div>
-        </div>
-      </div>
-    </Sidebar>
+            </Box>
+            </Box>
+    </Container>
+    </Grid>
+</Grid>
   );
 }
