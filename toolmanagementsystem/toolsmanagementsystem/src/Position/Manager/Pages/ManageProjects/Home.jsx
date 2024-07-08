@@ -4,16 +4,17 @@ import { Link, useParams } from 'react-router-dom';
 import Sidebar from '../../../../Components/ManagerSidebar.jsx';
 import { Check } from '@mui/icons-material'; // Import the Check icon from Material-UI
 import ReactPaginate from 'react-paginate'; // Import React Paginate
-import  './Home.css';
+import './Home.css';
 
 export default function Home() {
   // State variables
   const [projects, setProjects] = useState([]); // To store the list of projects
-  const [clickedProjects, setClickedProjects] = useState({});// To store the state of clicked projects
+  const [clickedProjects, setClickedProjects] = useState({}); // To store the state of clicked projects
   const [pageNumber, setPageNumber] = useState(0); // State to track current page number
+  const [searchTerm, setSearchTerm] = useState(''); // State for search term
 
   // Constants for pagination
-  const projectsPerPage = 4; // Number of projects to show per page
+  const projectsPerPage = 2; // Number of projects to show per page
   const pagesVisited = pageNumber * projectsPerPage;
 
   // useEffect hook to load projects when the component mounts
@@ -44,9 +45,25 @@ export default function Home() {
     setClickedProjects(prevState => ({ ...prevState, [projectId]: true }));
   };
 
+  // Function to handle the search input change
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  // Filter projects based on the search term
+  const filteredProjects = projects.filter((project) =>
+    project.projectId.toString().includes(searchTerm) ||
+    project.projectName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    project.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    project.siteSupervisorID.toString().includes(searchTerm) ||
+    project.siteSupervisorName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    project.locationId.toString().includes(searchTerm) ||
+    project.date.includes(searchTerm)
+  );
+
   // Function to display the projects for the current page
-  const displayProjects = projects
-    .slice(pagesVisited, pagesVisited + projectsPerPage)// Get the projects for the current page
+  const displayProjects = filteredProjects
+    .slice(pagesVisited, pagesVisited + projectsPerPage) // Get the projects for the current page
     .map((project, index) => (
       <tr key={index}>
         <th scope="row">{pagesVisited + index + 1}</th>
@@ -75,15 +92,16 @@ export default function Home() {
                 className='btn'
                 onClick={() => handleClick(project.projectId)}
               >
-                Click Me
+                Click if finished
               </button>
             )}
           </div>
         </td>
       </tr>
     ));
-    // Calculate the total number of pages
-  const pageCount = Math.ceil(projects.length / projectsPerPage);
+
+  // Calculate the total number of pages
+  const pageCount = Math.ceil(filteredProjects.length / projectsPerPage);
 
   // Function to handle page change
   const changePage = ({ selected }) => {
@@ -95,17 +113,24 @@ export default function Home() {
       <div className='container-fluid'>
         <h3 style={{ textAlign: 'center' }}>Manage Projects</h3>
         <Link className="btn" style={{ backgroundColor: 'navy', color: 'white' }} to="/addprojects">Add Projects</Link>
-        <div className="py-4" style={{ maxHeight: '70vh', overflowY: 'auto' }}>
+        <div className="py-4">
+          <input
+            type="text"
+            placeholder="Search..."
+            value={searchTerm}
+            onChange={handleSearchChange}
+            className="form-control mb-4"
+          />
           <table className="table border shadow">
-            <thead style={{ position: 'sticky', top: 0, zIndex: 1, background: '#fff' }}>
+            <thead style={{ top: 0, zIndex: 1, background: '#fff' }}>
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">Project id</th>
-                <th scope="col">projectName</th>
+                <th scope="col">Project Name</th>
                 <th scope="col">Description</th>
-                <th scope="col">SiteSupervisor Id</th>
-                <th scope="col">SiteSupervisor Name</th>
-                <th scope="col">locationId</th>
+                <th scope="col">Site Supervisor ID</th>
+                <th scope="col">Site Supervisor Name</th>
+                <th scope="col">Location ID</th>
                 <th scope="col">Date</th>
                 <th scope="col">Action</th>
                 <th scope="col">Action</th>
@@ -116,19 +141,18 @@ export default function Home() {
               {displayProjects}
             </tbody>
           </table>
-          
         </div>
         <ReactPaginate
-            previousLabel={"Previous"}
-            nextLabel={"Next"}
-            pageCount={pageCount}
-            onPageChange={changePage}
-            containerClassName={"pagination"}
-            previousLinkClassName={"previousBttn"}
-            nextLinkClassName={"nextBttn"}
-            disabledClassName={"paginationDisabled"}
-            activeClassName={"paginationActive"}
-          />
+          previousLabel={"Previous"}
+          nextLabel={"Next"}
+          pageCount={pageCount}
+          onPageChange={changePage}
+          containerClassName={"pagination"}
+          previousLinkClassName={"previousBttn"}
+          nextLinkClassName={"nextBttn"}
+          disabledClassName={"paginationDisabled"}
+          activeClassName={"paginationActive"}
+        />
       </div>
     </Sidebar>
   );
