@@ -3,8 +3,34 @@ import { Button,Typography, Box , Grid} from '@mui/material';
 import HomeNavbar from '../HomePage/HomeNavbar.jsx';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import backgroundImage from '../../images/home4.png';
+import Navbar from '../Navbar/Navbar.jsx';
+import { CCarousel, CCarouselItem, CImage } from '@coreui/react'; // Import components from CoreUI
+import ReactPaginate from 'react-paginate';
+import { Button, Typography, Box } from '@mui/material';
+import { styled } from '@mui/material/styles';
 
+const Root = styled(Box)(({ theme }) => ({
+  height: '100vh',
+  backgroundImage: 'url("back1.jpg")',
+  backgroundSize: 'cover',
+  backgroundPosition: 'center',
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  justifyContent: 'center',
+  textAlign: 'center',
+  color: 'white',
+}));
 
+const Title = styled(Typography)(({ theme }) => ({
+  fontSize: '4rem',
+  fontWeight: 'bold',
+  marginBottom: theme.spacing(2),
+}));
+
+const LoginButton = styled(Button)(({ theme }) => ({
+  marginTop: theme.spacing(4),
+}));
 
 function Home() {
   const handleLogin = () => {
