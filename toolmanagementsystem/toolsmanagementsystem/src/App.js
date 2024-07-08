@@ -63,7 +63,6 @@ function App() {
                     <Route path="/UpdateLocation/:locationId" element={<UpdateLocation />} />
 
 
-
                      {/* StockSupervisor pages  */}
 
                      
