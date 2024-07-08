@@ -19,7 +19,7 @@ const StockSidebar = () => {
       <Drawer
         variant="permanent"
         sx={{
-          width: collapsed ? 60 : 240,
+          width: collapsed ? 80 : 240,
           flexShrink: 0,
           whiteSpace: 'nowrap',
           '& .MuiDrawer-paper': {
