@@ -52,8 +52,9 @@ const LocId  = useParams()
 
     // Render the form inside the Sidebar component
     return (
-    <Sidebar>
+    
     <div className='container-fluid'>
+            <Sidebar className='sidebar' />
         <div className=' justify-content-center'>
         <div className='col-md-12 border rounded p-4 mt-2 shadow' style={{ maxHeight: '80vh', overflowY: 'auto', maxWidth: '1000px' }}>
                 <h2 className='text-center m-4'>Edit Location</h2>
@@ -87,7 +88,7 @@ const LocId  = useParams()
             </div>
         </div>
      
-    </Sidebar>
+   
   
   )
 }
