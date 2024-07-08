@@ -104,8 +104,9 @@ export default function AddProjects() {
   };
 
   return (
-    <Sidebar> 
+    
       <div className='container-fluid'>
+        <Sidebar className='sidebar'/>
         <div className=' justify-content-center'>
           <div className='col-md-12 border rounded p-4 mt-2 shadow' style={{ maxHeight: '80vh', overflowY: 'auto', maxWidth: '1000px' }}>
             
@@ -205,6 +206,6 @@ export default function AddProjects() {
           <Link className='btn btn-outline-dark mx-2' to="/manageprojects">Back to projects</Link>
         </div>
       </div>
-    </Sidebar> 
+    
   )
 }
