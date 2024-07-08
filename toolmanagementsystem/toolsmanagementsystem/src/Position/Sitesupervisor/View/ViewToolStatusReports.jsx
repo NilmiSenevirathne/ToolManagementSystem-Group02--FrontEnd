@@ -1,9 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './ViewToolStatusReports.css'
+import {
+    Box,
+    Table,
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableHead,
+    TableRow,
+    Paper,
+    Typography,
+    TextField,
+    IconButton,
+    Button,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogContentText,
+    DialogTitle
+} from '@mui/material';
+import { Search as SearchIcon, Delete as DeleteIcon, Visibility as VisibilityIcon } from '@mui/icons-material';
+import Sbar from '../../../Components/Sbar';
 
 const ViewToolStatusReports = () => {
     const [reports, setReports] = useState([]);
+    const [searchQuery, setSearchQuery] = useState('');
+    const [openDialog, setOpenDialog] = useState(false);
+    const [selectedReportData, setSelectedReportData] = useState(null);
 
     useEffect(() => {
         loadReports();
@@ -30,62 +53,104 @@ const ViewToolStatusReports = () => {
         }
     }
 
-    const base64ToImageSrc = (base64) => {
-        const byteCharacters = atob(base64);
-        const byteNumbers = new Array(byteCharacters.length);
-        for (let i = 0; i < byteCharacters.length; i++) {
-            byteNumbers[i] = byteCharacters.charCodeAt(i);
-        }
-        const byteArray = new Uint8Array(byteNumbers);
-        const blob = new Blob([byteArray], { type: 'application/pdf' });
-        return URL.createObjectURL(blob);
+    const filteredReports = reports.filter(report =>
+        report.projectName.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+
+    const base64ToPdfSrc = (base64) => {
+        return `data:application/pdf;base64,${base64}`;
     };
 
-    const handleViewPdfClick = (reportData, e) => {
-        const confirmView = window.confirm("Do you want to view this PDF?");
-        if (confirmView) {
-            const src = base64ToImageSrc(reportData);
-            if (src) {
-                window.open(src, '_blank', 'noopener,noreferrer');
-            }
-        } else {
-            e.preventDefault();
-        }
+    const handleViewPdfClick = (reportData) => {
+        setSelectedReportData(reportData);
+        setOpenDialog(true);
+    };
+
+    const handleCloseDialog = () => {
+        setOpenDialog(false);
+        setSelectedReportData(null);
     };
 
     return (
         <div>
-            <h2>View Tool Status Reports</h2>
-            <div className="table">
-                <table className="table caption-top">
-                    <thead>
-                        <tr>
-                            <th scope="col">Report Id</th>
-                            <th scope="col">Created At</th>
-                            <th scope="col">Project Name</th>
-                            <th scope="col">Report Data</th>
-                            <th scope="col">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody style={{ maxHeight: "230px", overflowY: "auto" }}>
-                        {reports.map((report) => (
-                            <tr key={report.reportId}>
-                                <td>{report.reportId}</td>
-                                <td>{report.created_at}</td>
-                                <td>{report.projectName}</td>
-                                <td>
-                                    <button onClick={(e) => handleViewPdfClick(report.statusPdf, e)}>View PDF</button>
-                                </td>
-                                <td>
-                                    <button onClick={() => deleteReport(report.reportId)}>Delete</button>
-                                </td>
-                            </tr>
+            <Sbar/>
+        <Box sx={{ padding: 2 ,marginLeft: '350px'}}>
+            <Typography variant="h4" sx={{ marginBottom: 2 }}>View Tool Status Reports</Typography>
+            <Box sx={{ display: 'flex', alignItems: 'center', marginBottom: 2 }}>
+                <SearchIcon sx={{ marginRight: 1 }} />
+                <TextField
+                    variant="outlined"
+                    placeholder="Search by project name"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    fullWidth
+                />
+            </Box>
+            <TableContainer component={Paper}>
+                <Table>
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>Report Id</TableCell>
+                            <TableCell>Created At</TableCell>
+                            <TableCell>Project Name</TableCell>
+                            <TableCell>Report Data</TableCell>
+                            <TableCell>Actions</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {filteredReports.map((report) => (
+                            <TableRow key={report.reportId}>
+                                <TableCell>{report.reportId}</TableCell>
+                                <TableCell>{report.created_at}</TableCell>
+                                <TableCell>{report.projectName}</TableCell>
+                                <TableCell>
+                                    <IconButton onClick={() => handleViewPdfClick(report.statusPdf)}>
+                                        <VisibilityIcon />
+                                    </IconButton>
+                                </TableCell>
+                                <TableCell>
+                                    <IconButton onClick={() => deleteReport(report.reportId)}>
+                                        <DeleteIcon />
+                                    </IconButton>
+                                </TableCell>
+                            </TableRow>
                         ))}
-                    </tbody>
-                </table>
-            </div>
+                    </TableBody>
+                </Table>
+            </TableContainer>
+
+            <Dialog
+                open={openDialog}
+                onClose={handleCloseDialog}
+                maxWidth="lg"
+                fullWidth
+            >
+                <DialogTitle>View PDF</DialogTitle>
+                <DialogContent>
+                    <DialogContentText>
+                        You can view the PDF by clicking the button below.
+                    </DialogContentText>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={() => {
+                            const src = base64ToPdfSrc(selectedReportData);
+                            window.open(src, '_blank', 'noopener,noreferrer');
+                            handleCloseDialog();
+                        }}
+                    >
+                        Open PDF
+                    </Button>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleCloseDialog} color="primary">
+                        Close
+                    </Button>
+                </DialogActions>
+            </Dialog>
+        </Box>
         </div>
     );
-}
+};
 
 export default ViewToolStatusReports;
