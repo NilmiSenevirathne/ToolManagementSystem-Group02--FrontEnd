@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link, useParams } from 'react-router-dom';
-import Sidebar from '../../../../../../Components/ManagerSidebar.jsx';
+import ManagerSidebar from '../../../../../../Components/ManagerSidebar.jsx';
 import './LocationHome.css';
+import {Grid , Table, TableHead, TableRow, TableCell, TableBody, Container, Typography, Box} from '@mui/material';
+import ManagerNavbar from '../../../../../../Components/Navbar/ManagerNavbar.jsx';
+
 export default function LocationHome() {
 
   const [locations, setLocations] = useState([]);
@@ -31,18 +34,26 @@ export default function LocationHome() {
   };
 
 
-
-
   return (
-    <Sidebar> 
-               <div className='container-fluid'>
-               <h2>Location Details</h2>
+    
+    <Grid container>
+    <Grid item >
+        <ManagerSidebar/>
+    </Grid>
 
-               <div className='col-md-10 offset-md-1 border rounded p-4 mt-2 shadow' >
+    <Grid item xs>
+        <ManagerNavbar/>
 
-               <div className="py-4" style={{ maxHeight: '70vh', overflowY: 'auto', maxWidth: '1100px' }}>
+        <Container maxWidth="lg">
+      <Box mt={4}>
+        <Typography variant="h4" align="center" gutterBottom>
+          Welcome to Project Details 
+        </Typography>
+        
+        {/* Render error message if error state is set */}
+        {/* {error && <Typography color="error" align="center">{error}</Typography>} */}
 
-            <table className="table border shadow">
+        <table className="table border shadow">
               <thead>
                 <tr>
                   <th scope="col">#</th>
@@ -65,12 +76,14 @@ export default function LocationHome() {
                 ))}
               </tbody>
             </table>
-          </div>
-          <Link className='btn btn-outline-danger mx-2' to="/AddLocation">Back</Link>
 
-        </div>
-        </div>
+        
 
-    </Sidebar> 
+
+      </Box>
+    </Container>
+    </Grid>
+</Grid>
+   
   );
 }
