@@ -1,7 +1,7 @@
-/* requiredToolReports.css */
+
 .rep {
   margin: auto;
-  width: 80%; /* Adjust the width as needed */
+  width: 80%; 
 }
 
 .topbarcontainer {
@@ -16,11 +16,11 @@
 }
 
 .searchbar {
-  margin-top: 20px; /* Add spacing between top bar and search bar */
+  margin-top: 20px;
   display: flex;
-  align-items: center; /* Center items vertically */
-  padding: 10px; /* Add padding */
-  background-color: #f1f1f1; /* Light gray background */
+  align-items: center; 
+  padding: 10px; 
+  background-color: #f1f1f1; 
 }
 
 .searchIcon {
