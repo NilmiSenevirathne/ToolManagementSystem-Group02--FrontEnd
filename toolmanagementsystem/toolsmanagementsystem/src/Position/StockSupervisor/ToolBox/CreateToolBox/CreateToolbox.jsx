@@ -2,10 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import StockSidebar from '../../../../Components/Sidebar/StockSidebar.jsx';
 import StockSupervisorNavbar from '../../../../Components/Navbar/StockSupervisorNavbar.jsx';
-import { Grid,  Container, Box, Typography, TextField, Select, MenuItem, Button } from "@mui/material";
-
+import { Grid, Container, Box, Typography, TextField, Select, MenuItem, Button } from "@mui/material";
 import axios from "axios";
-
 
 function CreateToolbox() {
   const navigate = useNavigate();
@@ -21,8 +19,7 @@ function CreateToolbox() {
     toolbox_id: initialState.toolbox_id || "",
     project_id: initialState.project_id || "",
     site_supervisor_id: initialState.site_supervisor_id || "",
-    Location_id: initialState.Location_id || "",
-    selectedTools: initialState.selectedTools || [],
+    location_id: initialState.location_id || "",
   });
 
   useEffect(() => {
@@ -62,6 +59,7 @@ function CreateToolbox() {
     setToolbox({ ...toolbox, [e.target.name]: e.target.value });
   };
 
+  //submit the new toolbox details
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -69,8 +67,8 @@ function CreateToolbox() {
         toolbox_id: toolbox.toolbox_id,
         project_id: toolbox.project_id,
         site_supervisor_id: toolbox.site_supervisor_id,
-        Location_id: toolbox.Location_id,  // Ensure this matches the state key
-        selectedTools: selectedTools.map(tool => tool.toolId), // Adjust as per your backend
+        location_id: toolbox.location_id,  // Ensure this matches the state key
+        // selectedTools: selectedTools.map(tool => tool.toolId), // Adjust as per your backend
       };
   
       console.log("Submitting data:", requestData);
@@ -95,130 +93,117 @@ function CreateToolbox() {
     }
   };
   
-  
- 
   return (
-    
-     <Grid container>
-         <Grid item>
-             <StockSidebar/>
-         </Grid>
-
-         <Grid item xs>
-             <StockSupervisorNavbar/>
-
-             <Container maxWidth="md">
+    <Grid container>
+      <Grid item>
+        <StockSidebar />
+      </Grid>
+      <Grid item xs>
+        <StockSupervisorNavbar />
+        <Container maxWidth="md">
           <Box mt={4}>
-          <Box 
-              p={4} 
-              border={1} 
-              borderRadius={8} 
-              borderColor="grey.300"
-              boxShadow={3}
-            >
-             
-            <Typography variant="h4" align="center" gutterBottom>
-              New Toolbox Details Form
-            </Typography>
-            <form onSubmit={onSubmit}>
-              <Grid container spacing={2}>
-                <Grid item xs={12} sm={6}>
-                  <TextField
-                    fullWidth
-                    variant="outlined"
-                    margin="normal"
-                    label="Toolbox ID"
-                    name="toolbox_id"
-                    value={toolbox.toolbox_id}
-                    onChange={onInputChange}
-                  />
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <TextField
-                    select
-                    fullWidth
-                    variant="outlined"
-                    margin="normal"
-                    label="Project"
-                    name="project_id"
-                    value={toolbox.project_id}
-                    onChange={onInputChange}
-                  >
-                    <MenuItem value="">
-                      <em>Select project</em>
-                    </MenuItem>
-                    {projects.map((project) => (
-                      <MenuItem key={project.projectId} value={project.projectId}>
-                        {project.projectName}
+            <Box p={4} border={1} borderRadius={8} borderColor="grey.300" boxShadow={3}>
+              <Typography variant="h4" align="center" gutterBottom>
+                New Toolbox Details Form
+              </Typography>
+              <form onSubmit={onSubmit}>
+                <Grid container spacing={2}>
+                  <Grid item xs={12} sm={6}>
+                    <TextField
+                      fullWidth
+                      variant="outlined"
+                      margin="normal"
+                      label="Toolbox ID"
+                      name="toolbox_id"
+                      value={toolbox.toolbox_id}
+                      onChange={onInputChange}
+                    />
+                  </Grid>
+                  <Grid item xs={12} sm={6}>
+                    <TextField
+                      select
+                      fullWidth
+                      variant="outlined"
+                      margin="normal"
+                      label="Project"
+                      name="project_id"
+                      value={toolbox.project_id}
+                      onChange={onInputChange}
+                    >
+                      <MenuItem value="">
+                        <em>Select project</em>
                       </MenuItem>
-                    ))}
-                  </TextField>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <TextField
-                    select
-                    fullWidth
-                    variant="outlined"
-                    margin="normal"
-                    label="Site Supervisor"
-                    name="site_supervisor_id"
-                    value={toolbox.site_supervisor_id}
-                    onChange={onInputChange}
-                  >
-                    <MenuItem value="">
-                      <em>Select Name</em>
-                    </MenuItem>
-                    {users.map((user) => (
-                      <MenuItem key={user.userid} value={user.userid}>
-                        {user.firstname} {user.lastname}
+                      {projects.map((project) => (
+                        <MenuItem key={project.projectId} value={project.projectId}>
+                          {project.projectName}
+                        </MenuItem>
+                      ))}
+                    </TextField>
+                  </Grid>
+                  <Grid item xs={12} sm={6}>
+                    <TextField
+                      select
+                      fullWidth
+                      variant="outlined"
+                      margin="normal"
+                      label="Site Supervisor"
+                      name="site_supervisor_id"
+                      value={toolbox.site_supervisor_id}
+                      onChange={onInputChange}
+                    >
+                      <MenuItem value="">
+                        <em>Select Name</em>
                       </MenuItem>
-                    ))}
-                  </TextField>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <TextField
-                    select
-                    fullWidth
-                    variant="outlined"
-                    margin="normal"
-                    label="Location"
-                    name="Location_id"
-                    value={toolbox.Location_id}
-                    onChange={onInputChange}
-                  >
-                    <MenuItem value="">
-                      <em>Select Location</em>
-                    </MenuItem>
-                    {locations.map((loc) => (
-                      <MenuItem key={loc.locationId} value={loc.locationId}>
-                        {loc.locationName}
+                      {users.map((user) => (
+                        <MenuItem key={user.userid} value={user.userid}>
+                          {user.firstname} {user.lastname}
+                        </MenuItem>
+                      ))}
+                    </TextField>
+                  </Grid>
+                  <Grid item xs={12} sm={6}>
+                    <TextField
+                      select
+                      fullWidth
+                      variant="outlined"
+                      margin="normal"
+                      label="Location"
+                      name="location_id"
+                      value={toolbox.location_id}
+                      onChange={onInputChange}
+                    >
+                      <MenuItem value="">
+                        <em>Select Location</em>
                       </MenuItem>
-                    ))}
-                  </TextField>
+                      {locations.map((loc) => (
+                        <MenuItem key={loc.locationId} value={loc.locationId}>
+                          {loc.locationName}
+                        </MenuItem>
+                      ))}
+                    </TextField>
+                  </Grid>
                 </Grid>
-              </Grid>
-              <Box my={2} display="flex" justifyContent="center">
-                <Link to="/tool" state={{ toolbox }} style={{ textDecoration: 'none' }}>
-                  <Button variant="contained"  sx={{ bgcolor: 'blue', width: '100%', fontSize: '1.25rem', maxWidth:"150px" }}>
-                    Select Tools
-                  </Button>
-                </Link>
-              </Box>
-              <TextField
-                fullWidth
-                variant="outlined"
-                margin="normal"
-                label="Selected Tools"
-                value={selectedTools.map(tool => tool.toolName).join(', ')}
-                InputProps={{
-                  readOnly: true,
-                }}
-                multiline
-                rows={4}
-              />
-              
-               {/* submit button */}
-              <Box mt={2} display="flex" justifyContent="center" gap={2}>
+                <Box my={2} display="flex" justifyContent="center">
+                  <Link to="/tool" state={{ toolbox }} style={{ textDecoration: 'none' }}>
+                    <Button variant="contained" sx={{ bgcolor: 'blue', width: '100%', fontSize: '1.25rem', maxWidth: "150px" }}>
+                      Select Tools
+                    </Button>
+                  </Link>
+                </Box>
+                <TextField
+                  fullWidth
+                  variant="outlined"
+                  margin="normal"
+                  label="Selected Tools"
+                  value={selectedTools.map(tool => tool.toolName).join(', ')}
+                  InputProps={{
+                    readOnly: true,
+                  }}
+                  multiline
+                  rows={4}
+                />
+                {/* submit button */}
+                <Box mt={2} display="flex" justifyContent="center" gap={2}>
                   <Box flexGrow={1}>
                     <Button
                       variant="contained"
@@ -228,8 +213,7 @@ function CreateToolbox() {
                       Submit
                     </Button>
                   </Box>
-
-                {/* cancel button */}
+                  {/* cancel button */}
                   <Box flexGrow={1}>
                     <Link to="/maintoolbox" style={{ textDecoration: 'none' }}>
                       <Button
@@ -241,13 +225,12 @@ function CreateToolbox() {
                     </Link>
                   </Box>
                 </Box>
-            </form>
+              </form>
             </Box>
           </Box>
         </Container>
-
-         </Grid>
-     </Grid>
+      </Grid>
+    </Grid>
   );
 }
 
