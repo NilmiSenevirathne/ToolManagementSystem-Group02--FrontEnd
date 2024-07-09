@@ -14,7 +14,7 @@ export default function UpdateToolbox() {
     project_id: "",
     site_supervisor_id: "",
     location_id: "",
-    selectedTools: [],  // Changed to an array
+    // selectedTools: [],  // Changed to an array
   });
 
   useEffect(() => {
@@ -27,9 +27,11 @@ export default function UpdateToolbox() {
         console.error("Error fetching toolbox:", error);
       }
     };
+    
 
     fetchToolbox();
   }, [toolbox_id]);
+
 
   const onInputChange = (e) => {
     setToolbox({ ...values, [e.target.name]: e.target.value });
@@ -106,7 +108,7 @@ export default function UpdateToolbox() {
                   onChange={onInputChange}
                   margin="normal"
                 />
-                <TextField
+                {/* <TextField
                   variant="outlined"
                   fullWidth
                   label="Selected Tools"
@@ -114,7 +116,7 @@ export default function UpdateToolbox() {
                   value={values.selectedTools.join(", ")}  // Changed to display as comma-separated string
                   onChange={(e) => setToolbox({ ...values, selectedTools: e.target.value.split(", ") })}
                   margin="normal"
-                />
+                /> */}
                 <Box mt={2} display="flex" justifyContent="center" gap={2}>
                   <Box flexGrow={1}>
                     <Button
