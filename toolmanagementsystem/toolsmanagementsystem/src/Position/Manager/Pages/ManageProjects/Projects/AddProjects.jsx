@@ -2,7 +2,7 @@ import axios from 'axios'; // Import axios for making HTTP requests
 import React, { useState, useEffect } from 'react'; // Import React and hooks
 import { Link, useNavigate } from 'react-router-dom';// Import React Router components
 import ManagerSidebar from '../../../../../Components/ManagerSidebar.jsx';// Import Sidebar component
-import {Grid , Table, TableHead, TableRow, TableCell, TableBody, Container, Typography, Box} from '@mui/material';
+import {Grid ,Container, Box} from '@mui/material';
 import ManagerNavbar from '../../../../../Components/Navbar/ManagerNavbar.jsx';
 
 export default function AddProjects() {
@@ -47,25 +47,27 @@ export default function AddProjects() {
     siteSupervisorName: "",
     locationId: "",
     locationName: "",
-    date: ""
+    startDate: "",
+    endDate:""
   });
 
   // Function to reset the form
   const resetForm = () => {
     setProjects({
-      projectId: "",
+    projectId: "",
     projectName: "",
     description: "",
     siteSupervisorID: "",
     siteSupervisorName: "",
     locationId: "",
     locationName: "",
-    date: ""
+    StartDate: "",
+    EndDate:""
     });
   };
 
   // Destructure form data from projects state
-  const { projectId, projectName, description, siteSupervisorID, siteSupervisorName, locationId, locationName, date } = projects;
+  const { projectId, projectName, description, siteSupervisorID, siteSupervisorName, locationId, locationName, startDate,endDate } = projects;
 
   // Handle input changes
   const onInputChange = (e) => {
@@ -91,7 +93,7 @@ export default function AddProjects() {
     }
 
     // Check if all fields are filled
-    if (!projectId || !projectName || !description || !siteSupervisorID || !siteSupervisorName || !locationId || !date) {
+    if (!projectId || !projectName || !description || !siteSupervisorID || !siteSupervisorName || !locationId || !startDate || !endDate) {
       alert("Please fill in all fields.");
       return;
     }
@@ -157,10 +159,18 @@ export default function AddProjects() {
                   />
                 </div>
                 <div className='col'>
-                  <label htmlFor="date" className="form-label">Date</label>
+                  <label htmlFor="startDate" className="form-label">Start Date</label>
                   <input type={"date"} className='form-control' 
-                    name="date"
-                    value={date}
+                    name="startDate"
+                    value={startDate}
+                    onChange={(e) => onInputChange(e)}
+                  />
+                </div>
+                <div className='col'>
+                  <label htmlFor="endDate" className="form-label">End Date</label>
+                  <input type={"date"} className='form-control' 
+                    name="endDate"
+                    value={endDate}
                     onChange={(e) => onInputChange(e)}
                   />
                 </div>
