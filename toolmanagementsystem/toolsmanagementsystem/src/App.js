@@ -14,7 +14,7 @@ import StockSupervisorDashboard from './Position/StockSupervisor/Dashboard/Stock
 import ManagerDashboard from './Position/Manager/Pages/ManagerDashboard.jsx';
 import ManageProjects from './Position/Manager/Pages/ManageProjects/ManageProjects.jsx';
 import ToolStockDetails from './Position/Manager/Pages/ToolStockDetails.jsx';
-import ViewLocations from './Position/Manager/Pages/ViewLocations.jsx';
+import ViewToolBoxDetails from './Position/Manager/Pages/ViewToolBoxDetails.jsx';
 import AddProjects from './Position/Manager/Pages/ManageProjects/Projects/AddProjects.jsx';
 import UpdateProjects from './Position/Manager/Pages/ManageProjects/Projects/UpdateProjects.jsx'
 import LocationHome from './Position/Manager/Pages/ManageProjects/Projects/Location/LocationHome.jsx';
@@ -38,10 +38,7 @@ function App() {
    return (
 
       <>
-         <Routes>
-                   
-
-                    
+         <Routes> 
                     <Route  path='/' element={<LoginForm/>}> </Route> 
 
                     
@@ -54,6 +51,7 @@ function App() {
                     <Route path="/managerdashboard" element={<ManagerDashboard/>} />
                     <Route path="/manageprojects" element={<ManageProjects />} />
                     <Route path="/Toolstockdetails" element={<ToolStockDetails />} />
+                    <Route path="/ViewToolBoxDetails" element={<ViewToolBoxDetails />} />
                     <Route path="/addprojects" element={<AddProjects />} />
                     <Route path="/UpdateProjects/:project_id" element={<UpdateProjects />} />
                     <Route path="/AddLocation" element={<AddLocation />} />
