@@ -1,7 +1,9 @@
 import axios from 'axios'; // Import axios for making HTTP requests
 import React, { useState, useEffect } from 'react'; // Import React and hooks
 import { Link, useNavigate } from 'react-router-dom';// Import React Router components
-import Sidebar from '../../../../../Components/ManagerSidebar.jsx';// Import Sidebar component
+import ManagerSidebar from '../../../../../Components/ManagerSidebar.jsx';// Import Sidebar component
+import {Grid ,Container, Box} from '@mui/material';
+import ManagerNavbar from '../../../../../Components/Navbar/ManagerNavbar.jsx';
 
 export default function AddProjects() {
   const navigate = useNavigate();// Initialize navigation
@@ -45,25 +47,27 @@ export default function AddProjects() {
     siteSupervisorName: "",
     locationId: "",
     locationName: "",
-    date: ""
+    startDate: "",
+    endDate:""
   });
 
   // Function to reset the form
   const resetForm = () => {
     setProjects({
-      projectId: "",
+    projectId: "",
     projectName: "",
     description: "",
     siteSupervisorID: "",
     siteSupervisorName: "",
     locationId: "",
     locationName: "",
-    date: ""
+    StartDate: "",
+    EndDate:""
     });
   };
 
   // Destructure form data from projects state
-  const { projectId, projectName, description, siteSupervisorID, siteSupervisorName, locationId, locationName, date } = projects;
+  const { projectId, projectName, description, siteSupervisorID, siteSupervisorName, locationId, locationName, startDate,endDate } = projects;
 
   // Handle input changes
   const onInputChange = (e) => {
@@ -89,7 +93,7 @@ export default function AddProjects() {
     }
 
     // Check if all fields are filled
-    if (!projectId || !projectName || !description || !siteSupervisorID || !siteSupervisorName || !locationId || !date) {
+    if (!projectId || !projectName || !description || !siteSupervisorID || !siteSupervisorName || !locationId || !startDate || !endDate) {
       alert("Please fill in all fields.");
       return;
     }
@@ -104,12 +108,25 @@ export default function AddProjects() {
   };
 
   return (
-    <Sidebar> 
-      <div className='container-fluid'>
-        <div className=' justify-content-center'>
-          <div className='col-md-12 border rounded p-4 mt-2 shadow' style={{ maxHeight: '80vh', overflowY: 'auto', maxWidth: '1000px' }}>
-            
-            <h2 className='text-center m-4'>Create a Project for assign to site supervisor</h2>
+    <Grid container>
+    <Grid item >
+        <ManagerSidebar/>
+    </Grid>
+
+    <Grid item xs>
+        <ManagerNavbar/>
+
+        <Container maxWidth="md">
+      <Box mt={4}>
+      <Box 
+              p={4} 
+              border={1} 
+              borderRadius={8} 
+              borderColor="grey.300"
+              boxShadow={3}
+            >
+      
+            <h2 className='text-center m-4'>Add New projects</h2>
             <form onSubmit={(e) => onSubmit(e)}>
               <div className='row mb-3'>
                 <div className='col'>
@@ -142,10 +159,18 @@ export default function AddProjects() {
                   />
                 </div>
                 <div className='col'>
-                  <label htmlFor="date" className="form-label">Date</label>
+                  <label htmlFor="startDate" className="form-label">Start Date</label>
                   <input type={"date"} className='form-control' 
-                    name="date"
-                    value={date}
+                    name="startDate"
+                    value={startDate}
+                    onChange={(e) => onInputChange(e)}
+                  />
+                </div>
+                <div className='col'>
+                  <label htmlFor="endDate" className="form-label">End Date</label>
+                  <input type={"date"} className='form-control' 
+                    name="endDate"
+                    value={endDate}
                     onChange={(e) => onInputChange(e)}
                   />
                 </div>
@@ -198,13 +223,13 @@ export default function AddProjects() {
                   <button type="button" className='btn btn-outline-secondary mx-2' onClick={resetForm}>Clear</button>
                   <button type="submit" className='btn btn-outline-primary'>Submit</button>
                 </div>
-              
             </form>
-          </div>
-          <br/>
-          <Link className='btn btn-outline-dark mx-2' to="/manageprojects">Back to projects</Link>
-        </div>
-      </div>
-    </Sidebar> 
+         
+          </Box>
+            </Box>
+    </Container>
+    </Grid>
+</Grid>
+    
   )
 }

@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link, useParams } from 'react-router-dom';
-import Sidebar from '../../../../../../Components/ManagerSidebar.jsx';
+import ManagerSidebar from '../../../../../../Components/ManagerSidebar.jsx';
 import './LocationHome.css';
-export default function LocationHome() {
+import { Grid, Container, Box, Typography, Button } from '@mui/material';
+import ManagerNavbar from '../../../../../../Components/Navbar/ManagerNavbar.jsx';
 
+export default function LocationHome() {
   const [locations, setLocations] = useState([]);
-  
-  useEffect (()=>{
+
+  useEffect(() => {
     loadLocations();
-  },[]);
-  
-  const { locationId } = useParams();  
+  }, []);
+
+  const { locationId } = useParams();
 
   const loadLocations = async () => {
     try {
@@ -26,51 +28,47 @@ export default function LocationHome() {
     const confirmDelete = window.confirm("Are you sure you want to delete this location?");
     if (confirmDelete) {
       await axios.delete(`http://localhost:8080/location/${locationId}`);
-      loadLocations();
+      loadLocations(); // Refresh the locations list after deletion
     }
   };
 
-
-
-
   return (
-    <Sidebar> 
-               <div className='container-fluid'>
-               <h2>Location Details</h2>
+    <Grid container>
+      <Grid item>
+        <ManagerSidebar />
+      </Grid>
 
-               <div className='col-md-10 offset-md-1 border rounded p-4 mt-2 shadow' >
-
-               <div className="py-4" style={{ maxHeight: '70vh', overflowY: 'auto', maxWidth: '1100px' }}>
-
+      <Grid item xs>
+        <ManagerNavbar />
+        <Container maxWidth="lg">
+          <Box mt={4}>
+            <Link className="btn" style={{ backgroundColor: 'navy', color: 'white' }} to="/AddLocation">Add Locations</Link>
             <table className="table border shadow">
-              <thead>
+              <thead style={{ top: 0, zIndex: 1, background: '#fff' }}>
                 <tr>
                   <th scope="col">#</th>
-                  <th scope="col">Location Name</th>
                   <th scope="col">Location Id</th>
+                  <th scope="col">Location Name</th> 
                   <th scope="col">Actions</th>
                 </tr>
               </thead>
               <tbody>
                 {locations.map((location, index) => (
                   <tr key={index}>
-                    <th scope="row">{index + 1}</th>
-                    <td>{location.locationName}</td>
+                    <th scope="row">{index + 1}</th> 
                     <td>{location.locationId}</td>
+                    <td>{location.locationName}</td>
                     <td>
                       <Link className='btn btn-outline-primary mx-2' to={`/UpdateLocation/${location.locationId}`}>Edit</Link>
-                      <button className='btn btn-danger mx-2' onClick={()=>deleteLocations(location.locationId)}>Delete</button>
+                      <button className='btn btn-danger mx-2' onClick={() => deleteLocations(location.locationId)}>Delete</button>
                     </td>
                   </tr>
                 ))}
               </tbody>
             </table>
-          </div>
-          <Link className='btn btn-outline-danger mx-2' to="/AddLocation">Back</Link>
-
-        </div>
-        </div>
-
-    </Sidebar> 
+          </Box>
+        </Container>
+      </Grid>
+    </Grid>
   );
 }

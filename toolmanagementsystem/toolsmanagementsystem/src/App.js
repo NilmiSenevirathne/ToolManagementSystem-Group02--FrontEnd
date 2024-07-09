@@ -1,6 +1,10 @@
 import React from 'react';
 import {Route, BrowserRouter as Router, Routes} from 'react-router-dom';
 import LoginForm from '../src/LoginPage/LoginForm.jsx';
+
+
+
+
 import ManageStock from './Position/StockSupervisor/ManageStock/ManageStock.jsx';
 import Toolbox from './Position/StockSupervisor/ToolBox/Toolbox.jsx';
 import CreateToolbox from './Position/StockSupervisor/ToolBox/CreateToolBox/CreateToolbox.jsx';
@@ -11,8 +15,8 @@ import EditTool from './Position/StockSupervisor/ManageStock/EditTool.jsx';
 import StockSupervisorDashboard from './Position/StockSupervisor/Dashboard/StockSupervisorDashboard.jsx';
 import ManagerDashboard from './Position/Manager/Pages/ManagerDashboard.jsx';
 import ManageProjects from './Position/Manager/Pages/ManageProjects/ManageProjects.jsx';
-import ViewInventory from './Position/Manager/Pages/ViewInventory.jsx';
-import ViewLocations from './Position/Manager/Pages/ViewLocations.jsx';
+import ToolStockDetails from './Position/Manager/Pages/ToolStockDetails.jsx';
+import ViewToolBoxDetails from './Position/Manager/Pages/ViewToolBoxDetails.jsx';
 import AddProjects from './Position/Manager/Pages/ManageProjects/Projects/AddProjects.jsx';
 import UpdateProjects from './Position/Manager/Pages/ManageProjects/Projects/UpdateProjects.jsx'
 import LocationHome from './Position/Manager/Pages/ManageProjects/Projects/Location/LocationHome.jsx';
@@ -31,23 +35,21 @@ import Cart from './Position/StockSupervisor/ToolBox/CreateToolBox/Tools/Cart.js
 import DashBoard from './Position/Admin/Dashboard/DashBoard.jsx';
 import UpdateLocation from './Position/Manager/Pages/ManageProjects/Projects/Location/UpdateLocation.jsx';
 import StockProfile from './Components/Profile/StockProfile.jsx';
+import ManagerProfile from './Components/Profile/ManagerProfile.jsx';
 import UpdateToolbox from './Position/StockSupervisor/ToolBox/UpdateToolbox/UpdateToolbox.jsx';
 import TrackToolboxes from './Position/Sitesupervisor/TrackToolBoxes.jsx';
 import UserManage from '../src/Position/Admin/UserManage/UserManage.jsx'
 import UserReg from '../src/Position/Admin/UserReg/UserReg.jsx'
+
 
 function App() {
    return (
 
       <>
          <Routes>
-
                    
-                   
-
 
                     
-
                     <Route  path='/' element={<LoginForm/>}> </Route> 
 
                     <Route  path='/profile' element={<StockProfile/>}></Route>
@@ -60,14 +62,14 @@ function App() {
                     {/* Manager pages  */}
                     <Route path="/managerdashboard" element={<ManagerDashboard/>} />
                     <Route path="/manageprojects" element={<ManageProjects />} />
-                    <Route path="/ViewInventory" element={<ViewInventory />} />
-                    <Route path="/ViewLocations" element={<ViewLocations />} />
+                    <Route path="/Toolstockdetails" element={<ToolStockDetails />} />
+                    <Route path="/ViewToolBoxDetails" element={<ViewToolBoxDetails />} />
                     <Route path="/addprojects" element={<AddProjects />} />
                     <Route path="/UpdateProjects/:project_id" element={<UpdateProjects />} />
                     <Route path="/AddLocation" element={<AddLocation />} />
                     <Route path="/locationHome" element={<LocationHome />} />
+                    <Route path="/ManagerProfile" element={<ManagerProfile />} />
                     <Route path="/UpdateLocation/:locationId" element={<UpdateLocation />} />
-
 
 
                      {/* StockSupervisor pages  */}
