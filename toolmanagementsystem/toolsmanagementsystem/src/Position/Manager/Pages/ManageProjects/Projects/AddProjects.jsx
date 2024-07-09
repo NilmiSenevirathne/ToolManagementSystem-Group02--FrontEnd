@@ -124,7 +124,7 @@ export default function AddProjects() {
               boxShadow={3}
             >
       
-            <h2 className='text-center m-4'>Create a Project for assign to site supervisor</h2>
+            <h2 className='text-center m-4'>Add New projects</h2>
             <form onSubmit={(e) => onSubmit(e)}>
               <div className='row mb-3'>
                 <div className='col'>
