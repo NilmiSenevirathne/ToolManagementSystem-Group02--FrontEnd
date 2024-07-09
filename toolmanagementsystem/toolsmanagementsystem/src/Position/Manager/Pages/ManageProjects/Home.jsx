@@ -2,15 +2,13 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link, useParams } from 'react-router-dom';
 import ManagerSidebar from '../../../../Components/ManagerSidebar.jsx';
-import { Check } from '@mui/icons-material'; // Import the Check icon from Material-UI
 import ReactPaginate from 'react-paginate'; // Import React Paginate
 import './Home.css';
 import ManagerNavbar from '../../../../Components/Navbar/ManagerNavbar.jsx';
-import { Grid, Container, Typography, Box, TextField } from '@mui/material';
+import { Grid, Container, Typography, Box, TextField, Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
 
 export default function Home() {
   const [projects, setProjects] = useState([]); // To store the list of projects
-  const [clickedProjects, setClickedProjects] = useState({}); // To store the state of clicked projects
   const [pageNumber, setPageNumber] = useState(0); // State to track current page number
   const [searchTerm, setSearchTerm] = useState(''); // State for search term
 
@@ -46,9 +44,7 @@ export default function Home() {
     }
   };
 
-  const handleClick = (projectId) => {
-    setClickedProjects(prevState => ({ ...prevState, [projectId]: true }));
-  };
+ 
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
@@ -69,42 +65,28 @@ export default function Home() {
   const displayProjects = filteredProjects
     .slice(pagesVisited, pagesVisited + projectsPerPage) // Get the projects for the current page
     .map((project, index) => (
-      <tr key={index}>
-        <th scope="row">{pagesVisited + index + 1}</th>
-        <td>{project.projectId}</td>
-        <td>{project.projectName}</td>
-        <td>{project.description}</td>
-        <td>{project.siteSupervisorID}</td>
-        <td>{project.siteSupervisorName}</td>
-        <td>{project.locationId}</td>
-        <td>{project.locationName}</td>
-        <td>{project.startDate}</td>
-        <td>{project.endDate}</td>
-
-        <td>
-          <Link className='btn btn-success mx-2' to={`/UpdateProjects/${project.projectId}`}>Edit</Link>
-        </td>
-        <td>
-          <button className='btn btn-danger mx-2' onClick={() => deleteProject(project.projectId)}>Delete</button>
-        </td>
-        <td>
-          <div>
-            {clickedProjects[project.projectId] ? (
-              <>
-                <Check style={{ color: 'green' }} /> {/* Show the tick icon */}
-                <span className="text-success">Completed</span> {/* Show the finished status */}
-              </>
-            ) : (
-              <button
-                className='btn'
-                onClick={() => handleClick(project.projectId)}
-              >
-                Not Completed
-              </button>
-            )}
-          </div>
-        </td>
-      </tr>
+      <TableRow key={index}>
+        <TableCell>{pagesVisited + index + 1}</TableCell>
+        <TableCell>{project.projectId}</TableCell>
+        <TableCell>{project.projectName}</TableCell>
+        <TableCell>{project.description}</TableCell>
+        <TableCell>{project.siteSupervisorID}</TableCell>
+        <TableCell>{project.siteSupervisorName}</TableCell>
+        <TableCell>{project.locationId}</TableCell>
+        <TableCell>{project.locationName}</TableCell>
+        <TableCell>{project.startDate}</TableCell>
+        <TableCell>{project.endDate}</TableCell>
+        <TableCell>
+          <Button variant="contained" color="primary" component={Link} to={`/UpdateProjects/${project.projectId}`}>
+            Edit
+          </Button>
+        </TableCell>
+        <TableCell>
+          <Button variant="contained" color="secondary" onClick={() => deleteProject(project.projectId)}>
+            Delete
+          </Button>
+        </TableCell>
+      </TableRow>
     ));
 
   const pageCount = Math.ceil(filteredProjects.length / projectsPerPage);
@@ -133,41 +115,53 @@ export default function Home() {
                 onChange={handleSearchChange}
                 fullWidth
               />
-              <Link className="btn" style={{ backgroundColor: 'navy', color: 'white', marginLeft: '20px' }} to="/addprojects">Add Projects</Link>
+              <Button
+                variant="contained"
+                color="primary"
+                component={Link}
+                to="/addprojects"
+                style={{ marginLeft: '20px' }}
+              >
+                Add Projects
+              </Button>
             </Box>
-            <table className="table border shadow">
-              <thead style={{ top: 0, zIndex: 1, background: '#fff' }}>
-                <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">Project id</th>
-                  <th scope="col">Project Name</th>
-                  <th scope="col">Description</th>
-                  <th scope="col">Site Supervisor ID</th>
-                  <th scope="col">Site Supervisor Name</th>
-                  <th scope="col">Location ID</th>
-                  <th scope="col">Location Name</th>
-                  <th scope="col">Start Date</th>
-                  <th scope="col">End Date</th>
-                  <th scope="col">Action</th>
-                  <th scope="col">Action</th>
-                  <th scope="col">Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                {displayProjects}
-              </tbody>
-            </table>
-            <ReactPaginate
-              previousLabel={"Previous"}
-              nextLabel={"Next"}
-              pageCount={pageCount}
-              onPageChange={changePage}
-              containerClassName={"pagination"}
-              previousLinkClassName={"previousBttn"}
-              nextLinkClassName={"nextBttn"}
-              disabledClassName={"paginationDisabled"}
-              activeClassName={"paginationActive"}
-            />
+            <TableContainer component={Paper}>
+              <Table stickyHeader aria-label="sticky table">
+                <TableHead>
+                  <TableRow>
+                    <TableCell>#</TableCell>
+                    <TableCell>Project ID</TableCell>
+                    <TableCell>Project Name</TableCell>
+                    <TableCell>Description</TableCell>
+                    <TableCell>Site Supervisor ID</TableCell>
+                    <TableCell>Site Supervisor Name</TableCell>
+                    <TableCell>Location ID</TableCell>
+                    <TableCell>Location Name</TableCell>
+                    <TableCell>Start Date</TableCell>
+                    <TableCell>End Date</TableCell>
+                    <TableCell>Action</TableCell>
+                    <TableCell>Action</TableCell>
+                    
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {displayProjects}
+                </TableBody>
+              </Table>
+            </TableContainer>
+            <Box mt={2} display="flex" justifyContent="center">
+              <ReactPaginate
+                previousLabel={"Previous"}
+                nextLabel={"Next"}
+                pageCount={pageCount}
+                onPageChange={changePage}
+                containerClassName={"pagination"}
+                previousLinkClassName={"previousBttn"}
+                nextLinkClassName={"nextBttn"}
+                disabledClassName={"paginationDisabled"}
+                activeClassName={"paginationActive"}
+              />
+            </Box>
           </Box>
         </Container>
       </Grid>
