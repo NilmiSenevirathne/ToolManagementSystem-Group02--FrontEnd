@@ -68,7 +68,7 @@ function CreateToolbox() {
         project_id: toolbox.project_id,
         site_supervisor_id: toolbox.site_supervisor_id,
         location_id: toolbox.location_id,  // Ensure this matches the state key
-        // selectedTools: selectedTools.map(tool => tool.toolId), // Adjust as per your backend
+        selectedTools: selectedTools.map(tool => tool.toolId), // Adjust as per your backend
       };
   
       console.log("Submitting data:", requestData);
