@@ -2,7 +2,7 @@ import { Link,useNavigate ,useParams} from 'react-router-dom'// Import React Rou
 import React, { useEffect,useState } from 'react'// Import React and hooks
 import axios from 'axios'// Import axios for making HTTP requests
 import ManagerSidebar from '../../../../../../Components/ManagerSidebar.jsx';// Import Sidebar component
-import {Grid , Container,Typography, Box} from '@mui/material';
+import {Grid , Container, Box} from '@mui/material';
 import ManagerNavbar from '../../../../../../Components/Navbar/ManagerNavbar.jsx';
 
 
@@ -102,7 +102,5 @@ const LocId  = useParams()
     </Grid>
 </Grid>
      
-   
-  
   )
 }
