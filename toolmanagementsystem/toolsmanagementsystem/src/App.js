@@ -1,6 +1,10 @@
 import React from 'react';
 import {Route, BrowserRouter as Router, Routes} from 'react-router-dom';
 import LoginForm from '../src/LoginPage/LoginForm.jsx';
+
+
+
+
 import ManageStock from './Position/StockSupervisor/ManageStock/ManageStock.jsx';
 import Toolbox from './Position/StockSupervisor/ToolBox/Toolbox.jsx';
 import CreateToolbox from './Position/StockSupervisor/ToolBox/CreateToolBox/CreateToolbox.jsx';
@@ -68,6 +72,7 @@ function App() {
                     <Route path="/UpdateProjects/:project_id" element={<UpdateProjects />} />
                     <Route path="/AddLocation" element={<AddLocation />} />
                     <Route path="/locationHome" element={<LocationHome />} />
+
                     <Route path="/UpdateLocation/:locationId" element={<UpdateLocation />} />
 
 
