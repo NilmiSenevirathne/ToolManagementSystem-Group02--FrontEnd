@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import StockSidebar from '../../../../Components/Sidebar/StockSidebar.jsx';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import StockSuperviorNavbar from '../../../../Components/Navbar/StockSupervisorNavbar.jsx';
-import { Grid, Container, Box, Typography, TextField, Button, Paper, Table, TableHead, TableRow, TableCell, TableBody } from '@mui/material';
+import { Grid, Container, Box, Typography, Button, Paper, Table, TableHead, TableRow, TableCell, TableBody, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 const STrackToolbox = () => {
@@ -15,9 +15,19 @@ const STrackToolbox = () => {
 
   const [toolboxDetails, setToolboxDetails] = useState(null);
   const [error, setError] = useState(null);
+  const [toolboxIds, setToolboxIds] = useState([]);
 
   const onInputChange = (e) => {
     setToolbox({ ...toolbox, [e.target.name]: e.target.value });
+  };
+
+  const fetchToolboxIds = async () => {
+    try {
+      const response = await axios.get("http://localhost:8080/toolbox/gettoolbox");
+      setToolboxIds(response.data);
+    } catch (error) {
+      console.error("Error fetching ToolboxId: ", error);
+    }
   };
 
   const fetchToolboxDetails = async () => {
@@ -40,6 +50,10 @@ const STrackToolbox = () => {
     }
   };
 
+  useEffect(() => {
+    fetchToolboxIds();
+  }, []);
+
   return (
     <Grid container>
       <Grid item>
@@ -53,15 +67,22 @@ const STrackToolbox = () => {
               Welcome to TrackToolbox Section!
             </Typography>
             <Box display="flex" flexDirection="column" alignItems="center">
-              <TextField
-                label="Enter the Toolbox ID"
-                variant="outlined"
-                name="toolboxId"
-                value={toolbox.toolboxId}
-                onChange={onInputChange}
-                fullWidth
-                margin="normal"
-              />
+              <FormControl fullWidth margin="normal">
+                <InputLabel id="toolbox-select-label">Select Toolbox ID</InputLabel>
+                <Select
+                  labelId="toolbox-select-label"
+                  label="Select Toolbox ID"
+                  name="toolboxId"
+                  value={toolbox.toolboxId}
+                  onChange={onInputChange}
+                >
+                  {toolboxIds.map((tb) => (
+                    <MenuItem key={tb.toolbox_id} value={tb.toolbox_id}>
+                      {tb.toolbox_id}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
               <Button variant="contained" color="primary" onClick={onSearchClick}>
                 Search
               </Button>
@@ -92,7 +113,7 @@ const STrackToolbox = () => {
                       <TableCell>{toolboxDetails.location_id}</TableCell>
                       <TableCell>{toolboxDetails.project_id}</TableCell>
                       <TableCell>{toolboxDetails.site_supervisor_id}</TableCell>
-                      <TableCell>{toolboxDetails.selectedTools}</TableCell>
+                      <TableCell>{toolboxDetails.selectedTools.join(', ')}</TableCell>
                     </TableRow>
                   </TableBody>
                 </Table>
