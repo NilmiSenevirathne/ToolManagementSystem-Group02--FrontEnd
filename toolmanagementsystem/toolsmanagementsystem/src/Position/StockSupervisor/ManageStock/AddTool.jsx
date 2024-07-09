@@ -13,13 +13,13 @@ export default function AddTool() {
     toolName: "",
     description: "",
     quantity: 0,
-    image: "",
+    
   });
 
   const [errors, setErrors] = useState({});
   const [duplicateError, setDuplicateError] = useState("");
 
-  const { toolId, toolName, description, quantity, image } = tool;
+  const { toolId, toolName, description, quantity } = tool;
 
   const onInputChange = (e) => {
     setTool({ ...tool, [e.target.name]: e.target.value });
@@ -147,18 +147,7 @@ export default function AddTool() {
                 helperText={errors.quantity}
                 margin="normal"
               />
-              <TextField
-                variant="outlined"
-                fullWidth
-                type="file"
-                label="Tool Image"
-                name="image"
-                value={image}
-                onChange={onInputChange}
-                error={!!errors.image}
-                helperText={errors.image}
-                margin="normal"
-              />
+             
               
               {/* submit button */}
               <Box mt={2} display="flex" justifyContent="center" gap={2}>

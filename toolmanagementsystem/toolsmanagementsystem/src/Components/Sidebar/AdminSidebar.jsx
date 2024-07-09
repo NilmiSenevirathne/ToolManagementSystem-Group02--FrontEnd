@@ -59,10 +59,9 @@ const StockSidebar = () => {
 
         <List>
           {[
-            { text: 'Dashboard', icon: <FaTh />, path: '/stocksupervisordashboard' },
-            { text: 'Manage Stock', icon: <FaCartPlus />, path: '/managestock' },
-            { text: 'ToolBox', icon: <FaBriefcase />, path: '/maintoolbox' },
-            { text: 'Reports', icon: <FaNewspaper />, path: '/reports' },
+            { text: 'Dashboard', icon: <FaTh />, path: '/admindashboard' },
+            { text: 'User Manage', icon: <FaCartPlus />, path: '/usernamage' },
+            { text: 'UserRegistration', icon: <FaNewspaper/>, path: '/userreg' },
             { text: 'Logout', icon: <RiLogoutCircleRLine />, action:handleLogout , path:'/'},
           ].map((item, index) => (
             <ListItem button key={index} onClick={() => navigate(item.path)} sx={{ 

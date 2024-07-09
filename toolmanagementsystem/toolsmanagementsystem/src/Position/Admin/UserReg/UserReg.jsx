@@ -1,16 +1,22 @@
-import "./userReg.css"
-import Sbar from "../../components/Sbar/Sbar"
-import Navbar from "../../components/navbar/Navbar"
+import React from "react"
+import {Grid, CssBaseline} from '@mui/material';
+import AdminSidebar from '../../../Components/Sidebar/AdminSidebar.jsx';
+import AdminNavbar from '../../../Components/Navbar/Adminnavbar.jsx';
+
 
 
 const UserReg = () => {
   return (
-    <div className='userRg'>
-      <Sbar/>
-    <div className="listContainer">
-     <Navbar/>
-    </div>
-    </div>
+    <Grid container>
+      <CssBaseline/>
+         <Grid item>
+            <AdminSidebar/>
+         </Grid>
+
+         <Grid item xs>
+             <AdminNavbar/>
+         </Grid>
+    </Grid>
   )
 }
 
