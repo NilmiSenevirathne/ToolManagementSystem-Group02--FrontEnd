@@ -20,7 +20,6 @@ const Toolbox = () => {
       const result = await axios.get("http://localhost:8080/toolbox/gettoolbox");
       
       
-
       //allocatedQuantity and availableQuantity functionalities
       const updatedTools = result.data.map(tool =>({
         ...tool,
@@ -56,6 +55,7 @@ const Toolbox = () => {
                     <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white'   }}>ToolBox ID</TableCell>
                     <TableCell sx={{ fontWeight: 'bold', textAlign: 'center',  backgroundColor: 'grey', color: 'white'  }}>Project ID</TableCell>
                     <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white'  }}>Location ID</TableCell>
+                    
                   </TableRow>
                 </TableHead>
                 <TableBody>
