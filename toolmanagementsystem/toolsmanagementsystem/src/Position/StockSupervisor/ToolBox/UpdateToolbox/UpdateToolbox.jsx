@@ -14,15 +14,18 @@ export default function UpdateToolbox() {
     project_id: "",
     site_supervisor_id: "",
     location_id: "",
-    selectedTools: [],  // Changed to an array
   });
 
   useEffect(() => {
     const fetchToolbox = async () => {
+      if (!toolbox_id) {
+        console.error("Toolbox ID is missing in URL parameters.");
+        return;
+      }
       try {
-        const response = await axios.get(`http://localhost:8080/toolbox/${toolbox_id}`);
-        const { project_id, site_supervisor_id, location_id, selectedTools } = response.data;
-        setToolbox({ ...values, project_id, site_supervisor_id, location_id, selectedTools });
+        const response = await axios.get(`http://localhost:8080/toolbox/search/${toolbox_id}`);
+        const { project_id, site_supervisor_id, location_id } = response.data;
+        setToolbox({ ...values, project_id, site_supervisor_id, location_id });
       } catch (error) {
         console.error("Error fetching toolbox:", error);
       }
@@ -45,7 +48,9 @@ export default function UpdateToolbox() {
     } catch (error) {
       console.error("Error occurred while updating toolbox:", error);
       if (error.response) {
-        alert("Server responded with:", error.response.data);
+        alert("Server responded with: " + error.response.data);
+      } else {
+        alert("Error occurred while updating toolbox: " + error.message);
       }
     }
   };
@@ -64,7 +69,7 @@ export default function UpdateToolbox() {
           <Box mt={4}>
             <Box p={4} border={1} borderRadius={8} borderColor="grey.300" boxShadow={3}>
               <Typography variant="h4" align="center" gutterBottom>
-                Update Toolbox Details
+                Update Toolbox Details Form
               </Typography>
               <form onSubmit={onSubmit}>
                 <TextField
@@ -104,15 +109,6 @@ export default function UpdateToolbox() {
                   name="location_id"
                   value={values.location_id}
                   onChange={onInputChange}
-                  margin="normal"
-                />
-                <TextField
-                  variant="outlined"
-                  fullWidth
-                  label="Selected Tools"
-                  name="selectedTools"
-                  value={values.selectedTools.join(", ")}  // Changed to display as comma-separated string
-                  onChange={(e) => setToolbox({ ...values, selectedTools: e.target.value.split(", ") })}
                   margin="normal"
                 />
                 <Box mt={2} display="flex" justifyContent="center" gap={2}>
