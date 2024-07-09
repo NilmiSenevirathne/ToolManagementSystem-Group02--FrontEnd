@@ -1,7 +1,9 @@
 import axios from 'axios'// Import axios for making HTTP requests
 import React, { useEffect, useState } from 'react'// Import React and hooks
 import { Link,useNavigate, useParams } from 'react-router-dom'// Import React Router components
-import Sidebar from '../../../../../Components/ManagerSidebar.jsx';// Import Sidebar component
+import ManagerSidebar from '../../../../../Components/ManagerSidebar.jsx';// Import Sidebar component
+import {Grid , Container, Box} from '@mui/material';
+import ManagerNavbar from '../../../../../Components/Navbar/ManagerNavbar.jsx';
 
 export default function Updateprojects() {
 
@@ -17,12 +19,14 @@ const Id =useParams() // Get the project ID from the URL parameters
           siteSupervisorID:"",
           siteSupervisorName:"",
           locationId:"",
-          date:""
+          locationName:"",
+          startDate:"",
+          endDate:""
 
         })
 
         // Destructure project details from the state
-        const{projectId,projectName,description,siteSupervisorID,siteSupervisorName,locationId,date}=projects
+        const{projectId,projectName,description,siteSupervisorID,siteSupervisorName,locationId,locationName,startDate,endDate}=projects
            
           
         // Handle input changes
@@ -50,11 +54,23 @@ const Id =useParams() // Get the project ID from the URL parameters
             
     
   return (
-    <Sidebar>
-    <div className='container-fluid'>
-        <div className=' justify-content-center'>
-        <div className='col-md-12 border rounded p-4 mt-2 shadow' style={{ maxHeight: '80vh', overflowY: 'auto', maxWidth: '1000px' }}>
-         
+    <Grid container>
+    <Grid item >
+        <ManagerSidebar/>
+    </Grid>
+
+    <Grid item xs>
+        <ManagerNavbar/>
+
+        <Container maxWidth="md">
+      <Box mt={4}>
+      <Box 
+              p={4} 
+              border={1} 
+              borderRadius={8} 
+              borderColor="grey.300"
+              boxShadow={3}
+            >
         <h2 className='text-center m-4'>Edit Projects Details </h2>
                 <form onSubmit={(e) =>onSubmit(e)}>
                     <div className='mb-3'>
@@ -115,26 +131,41 @@ const Id =useParams() // Get the project ID from the URL parameters
                       onChange={(e)=>onInputChange(e)}
                       />
                     </div>
+                    <div className='mb-3'>
+                      <lable htmlFor="locationName" className="form-lable">Location Name</lable>
+                      <input type={"text"} className='form-control' 
+                      placeholder='Enter Location Name'
+                      name="locationName"
+                      value={locationName}
+                      onChange={(e)=>onInputChange(e)}
+                      />
+                    </div>
 
                   <div className='mb-3'>
-                  <label htmlFor="Name" className="form-label">Date </label>
+                  <label htmlFor="startDate" className="form-label">Start Date </label>
                   <input type={"date"} className='form-control' 
-                    placeholder='Enter project date' 
-                    name="date"
-                    value={date}
+                    placeholder='Enter project start date' 
+                    name="startDate"
+                    value={startDate}
                     onChange={(e)=>onInputChange(e)}
                   />
                   </div>
-
+                  <div className='mb-3'>
+                  <label htmlFor="endDate" className="form-label">End Date </label>
+                  <input type={"date"} className='form-control' 
+                    placeholder='Enter project end date' 
+                    name="endDate"
+                    value={endDate}
+                    onChange={(e)=>onInputChange(e)}
+                  />
+                  </div>
                     <button type="submit" className='btn btn-outline-primary'>Submit</button>
 
                 </form>
-                </div>
-                <br/>
-                <Link className='btn btn-dark mx-2'to="/manageprojects">Back</Link>
-
-                </div>
-        </div>
-        </Sidebar> 
+                </Box>
+            </Box>
+    </Container>
+    </Grid>
+</Grid>      
   )
 }
