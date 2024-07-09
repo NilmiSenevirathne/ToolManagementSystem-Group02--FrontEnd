@@ -81,7 +81,7 @@ const Toolbox = () => {
                       <TableCell sx={{ textAlign: 'center' }}>{tool.location_id}</TableCell>
                       <TableCell sx={{ textAlign: 'center' }}>{tool.createdDate}</TableCell>
                       <TableCell sx={{ textAlign: 'center' }}>
-                        <Link to={`/editToolbox/${toolbox.toolbox_id}`}>
+                        <Link to={`/editToolbox/${tool.toolbox_id}`}>
                           <Button variant="contained" sx={{ bgcolor: 'purple', size: 'small' }} style={{ marginRight: '10px' }}>
                             Update
                           </Button>
