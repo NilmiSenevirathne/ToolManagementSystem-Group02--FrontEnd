@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import StockSidebar from '../../../Components/Sidebar/StockSidebar.jsx'
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
-import StockSuperviorNavbar from '../../../Components/Navbar/StockSupervisorNavbar.jsx';
 import { Grid , Box, Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, Container} from '@mui/material';
 import ManagerSidebar from '../../../Components/ManagerSidebar.jsx';
 import ManagerNavbar from '../../../Components/Navbar/ManagerNavbar.jsx';
@@ -22,7 +20,6 @@ const Toolbox = () => {
       const result = await axios.get("http://localhost:8080/toolbox/gettoolbox");
       
       
-
       //allocatedQuantity and availableQuantity functionalities
       const updatedTools = result.data.map(tool =>({
         ...tool,
@@ -58,6 +55,7 @@ const Toolbox = () => {
                     <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white'   }}>ToolBox ID</TableCell>
                     <TableCell sx={{ fontWeight: 'bold', textAlign: 'center',  backgroundColor: 'grey', color: 'white'  }}>Project ID</TableCell>
                     <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white'  }}>Location ID</TableCell>
+                    
                   </TableRow>
                 </TableHead>
                 <TableBody>

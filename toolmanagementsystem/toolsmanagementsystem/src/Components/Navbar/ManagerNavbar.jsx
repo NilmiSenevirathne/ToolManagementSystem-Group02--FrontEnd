@@ -9,8 +9,7 @@ const ManagerNavbar = () => {
   const navigate = useNavigate();
 
   const user = {
-    firstname: 'John',
-    lastname: 'Doe',
+    firstname: 'Mr.Dilum Samaranayake',
     avatar: profile
   };
 
@@ -23,7 +22,7 @@ const ManagerNavbar = () => {
   };
 
   const handleProfileClick = () => {
-    navigate('/profile');
+    navigate('/ManagerProfile');
     handleMenuClose();
   };
 
