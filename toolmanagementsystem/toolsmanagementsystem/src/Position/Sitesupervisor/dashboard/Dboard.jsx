@@ -3,7 +3,6 @@ import axios from 'axios';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css'; // Import Leaflet CSS
 import Sbar from "../../../Components/Sbar";
-import StockSupervisorNavbar from '../../../Components/Navbar/StockSupervisorNavbar';
 import {
   BarChart, Bar, XAxis, YAxis, Tooltip, Legend, CartesianGrid, ResponsiveContainer
 } from 'recharts';
