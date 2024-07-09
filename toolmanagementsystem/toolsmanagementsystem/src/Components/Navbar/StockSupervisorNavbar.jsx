@@ -9,8 +9,8 @@ const StockSupervisorNavbar = () => {
   const navigate = useNavigate();
 
   const user = {
-    firstname: 'John',
-    lastname: 'Doe',
+    firstname: 'Nimantha ',
+    lastname: 'Dissanayake',
     avatar: profile
   };
 
