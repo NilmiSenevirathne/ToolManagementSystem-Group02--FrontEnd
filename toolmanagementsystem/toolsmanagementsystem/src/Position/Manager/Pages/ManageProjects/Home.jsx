@@ -99,7 +99,7 @@ export default function Home() {
                 className='btn'
                 onClick={() => handleClick(project.projectId)}
               >
-                Click if finished
+                Not Completed
               </button>
             )}
           </div>
