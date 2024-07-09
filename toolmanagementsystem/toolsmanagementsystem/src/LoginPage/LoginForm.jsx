@@ -8,8 +8,8 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
-import backgroundImage from '../images/back7.png';
-import Logo from '../../src/images/user1.jpg';
+import backgroundImage from '../images/backnew.jpg';
+import Logo from '../../src/images/BMKLogo.jpg';
 
 const defaultTheme = createTheme();
 
@@ -105,8 +105,10 @@ function LoginForm() {
                             alignItems: 'center',
                         }}
                     >
-                        <Box component="img" src={Logo} alt="Company Logo" sx={{ width: 100, height: 100, mb: 1 }} />
-                        <Typography component="h1" variant="h3">
+                        <Box component="img" src={Logo} alt="Company Logo" sx={{ width: 100, height: 100, mb: 1 }} /><Typography component="h1" variant="h3">
+                            Tools Management System
+                        </Typography>
+                        <Typography component="h4" variant="h4">
                             Login
                         </Typography>
                         <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
