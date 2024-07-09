@@ -13,7 +13,9 @@ import Reports from './Position/StockSupervisor/Reports/Reports.jsx';
 import AddTool from './Position/StockSupervisor/ManageStock/AddTool.jsx';
 import EditTool from './Position/StockSupervisor/ManageStock/EditTool.jsx';
 import StockSupervisorDashboard from './Position/StockSupervisor/Dashboard/StockSupervisorDashboard.jsx';
+
 import ManagerDashboard from './Position/Manager/Pages/ManagerDashboard.jsx';
+import ManagerTrackToolBox from './Position/Manager/Pages/ManagerTrackToolBox.jsx';
 import ManageProjects from './Position/Manager/Pages/ManageProjects/ManageProjects.jsx';
 import ToolStockDetails from './Position/Manager/Pages/ToolStockDetails.jsx';
 import ViewToolBoxDetails from './Position/Manager/Pages/ViewToolBoxDetails.jsx';
@@ -21,8 +23,8 @@ import AddProjects from './Position/Manager/Pages/ManageProjects/Projects/AddPro
 import UpdateProjects from './Position/Manager/Pages/ManageProjects/Projects/UpdateProjects.jsx'
 import LocationHome from './Position/Manager/Pages/ManageProjects/Projects/Location/LocationHome.jsx';
 import AddLocation from './Position/Manager/Pages/ManageProjects/Projects/Location/AddLocation.jsx';
-import Dboard from './Position/Sitesupervisor/dashboard/Dboard.jsx'
 
+import Dboard from './Position/Sitesupervisor/dashboard/Dboard.jsx'
 import ToolStatosRep from "./Position/Sitesupervisor/ToolStatosRep.jsx";
 import AddReportDetails from "./Position/Sitesupervisor/AddReportDetails.jsx";
 import RequiredToolReport from "./Position/Sitesupervisor/RequiredToolReport.jsx";
@@ -70,6 +72,7 @@ function App() {
                     <Route path="/locationHome" element={<LocationHome />} />
                     <Route path="/ManagerProfile" element={<ManagerProfile />} />
                     <Route path="/UpdateLocation/:locationId" element={<UpdateLocation />} />
+                    <Route path="/ManagerTrackToolBox" element={<ManagerTrackToolBox />} />
 
 
                      {/* StockSupervisor pages  */}
