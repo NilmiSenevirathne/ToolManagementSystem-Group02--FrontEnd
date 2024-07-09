@@ -1,7 +1,9 @@
 import { Link,useNavigate ,useParams} from 'react-router-dom'// Import React Router components for navigation and parameter handling
 import React, { useEffect,useState } from 'react'// Import React and hooks
 import axios from 'axios'// Import axios for making HTTP requests
-import Sidebar from '../../../../../../Components/ManagerSidebar.jsx';// Import Sidebar component
+import ManagerSidebar from '../../../../../../Components/ManagerSidebar.jsx';// Import Sidebar component
+import {Grid , Container, Box} from '@mui/material';
+import ManagerNavbar from '../../../../../../Components/Navbar/ManagerNavbar.jsx';
 
 
 // Main function component for updating a location
@@ -52,10 +54,23 @@ const LocId  = useParams()
 
     // Render the form inside the Sidebar component
     return (
-    <Sidebar>
-    <div className='container-fluid'>
-        <div className=' justify-content-center'>
-        <div className='col-md-12 border rounded p-4 mt-2 shadow' style={{ maxHeight: '80vh', overflowY: 'auto', maxWidth: '1000px' }}>
+      <Grid container>
+      <Grid item >
+          <ManagerSidebar/>
+      </Grid>
+  
+      <Grid item xs>
+          <ManagerNavbar/>
+  
+          <Container maxWidth="md">
+        <Box mt={4}>
+        <Box 
+                p={4} 
+                border={1} 
+                borderRadius={8} 
+                borderColor="grey.300"
+                boxShadow={3}
+              >
                 <h2 className='text-center m-4'>Edit Location</h2>
                 <form onSubmit={(e) =>onSubmit(e)}>
 
@@ -79,15 +94,13 @@ const LocId  = useParams()
                     </div>
                     <button type="submit" className='btn btn-outline-primary'>Submit</button>
                 </form>
-            </div>
-            <br/>
-            <div>
+            
             <Link className='btn btn-outline-dark mx-2'to="/ViewLocations">Back</Link>
-            </div>
-            </div>
-        </div>
+            </Box>
+            </Box>
+    </Container>
+    </Grid>
+</Grid>
      
-    </Sidebar>
-  
   )
 }

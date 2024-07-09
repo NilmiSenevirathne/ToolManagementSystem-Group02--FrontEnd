@@ -15,7 +15,7 @@ import EditTool from './Position/StockSupervisor/ManageStock/EditTool.jsx';
 import StockSupervisorDashboard from './Position/StockSupervisor/Dashboard/StockSupervisorDashboard.jsx';
 import ManagerDashboard from './Position/Manager/Pages/ManagerDashboard.jsx';
 import ManageProjects from './Position/Manager/Pages/ManageProjects/ManageProjects.jsx';
-import ViewInventory from './Position/Manager/Pages/ViewInventory.jsx';
+import ToolStockDetails from './Position/Manager/Pages/ToolStockDetails.jsx';
 import ViewLocations from './Position/Manager/Pages/ViewLocations.jsx';
 import AddProjects from './Position/Manager/Pages/ManageProjects/Projects/AddProjects.jsx';
 import UpdateProjects from './Position/Manager/Pages/ManageProjects/Projects/UpdateProjects.jsx'
@@ -66,15 +66,13 @@ function App() {
                     {/* Manager pages  */}
                     <Route path="/managerdashboard" element={<ManagerDashboard/>} />
                     <Route path="/manageprojects" element={<ManageProjects />} />
-                    <Route path="/ViewInventory" element={<ViewInventory />} />
-                    <Route path="/ViewLocations" element={<ViewLocations />} />
+                    <Route path="/Toolstockdetails" element={<ToolStockDetails />} />
                     <Route path="/addprojects" element={<AddProjects />} />
                     <Route path="/UpdateProjects/:project_id" element={<UpdateProjects />} />
                     <Route path="/AddLocation" element={<AddLocation />} />
                     <Route path="/locationHome" element={<LocationHome />} />
 
                     <Route path="/UpdateLocation/:locationId" element={<UpdateLocation />} />
-
 
 
                      {/* StockSupervisor pages  */}
