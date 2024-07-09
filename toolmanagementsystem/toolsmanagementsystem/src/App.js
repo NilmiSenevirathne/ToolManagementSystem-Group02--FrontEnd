@@ -2,7 +2,7 @@ import React from 'react';
 import {Route, BrowserRouter as Router, Routes} from 'react-router-dom';
 import LoginForm from '../src/LoginPage/LoginForm.jsx';
 //import './app.css';
-import Home from '../src/Components/HomePage/Home.jsx';
+
 
 
 import ManageStock from './Position/StockSupervisor/ManageStock/ManageStock.jsx';
@@ -70,7 +70,7 @@ function App() {
                     <Route path="/UpdateProjects/:project_id" element={<UpdateProjects />} />
                     <Route path="/AddLocation" element={<AddLocation />} />
                     <Route path="/locationHome" element={<LocationHome />} />
-                    <Route path="/home" element={<Home/>}/>
+          
                     <Route path="/UpdateLocation/:locationId" element={<UpdateLocation />} />
 
 
