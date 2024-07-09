@@ -15,14 +15,14 @@ function CreateToolbox() {
   const [locations, setLocations] = useState([]);
   const [users, setUsers] = useState([]);
   const [projects, setProjects] = useState([]);
-  const [selectedTools, setSelectedTools] = useState(initialState.selectedTools || []);
+  // const [selectedTools, setSelectedTools] = useState(initialState.selectedTools || []);
   
   const [toolbox, setToolbox] = useState({
     toolbox_id: initialState.toolbox_id || "",
     project_id: initialState.project_id || "",
     site_supervisor_id: initialState.site_supervisor_id || "",
-    Location_id: initialState.Location_id || "",
-    selectedTools: initialState.selectedTools || [],
+    location_id: initialState.location_id || "",
+    // selectedTools: initialState.selectedTools || [],
   });
 
   useEffect(() => {
@@ -31,6 +31,7 @@ function CreateToolbox() {
     fetchProjects();
   }, []);
 
+  //fetch project details from the database
   const fetchProjects = async () => {
     try {
       const response = await axios.get("http://localhost:8080/Projects");
@@ -40,6 +41,7 @@ function CreateToolbox() {
     }
   };
 
+  //fetch project location details from the database 
   const fetchLocations = async () => {
     try {
       const response = await axios.get("http://localhost:8080/locations");
@@ -49,6 +51,7 @@ function CreateToolbox() {
     }
   };
 
+  //fetch sitesupervisor details from the database
   const fetchUsers = async () => {
     try {
       const response = await axios.get("http://localhost:8080/authentication/getUsertoolbox");
@@ -69,8 +72,8 @@ function CreateToolbox() {
         toolbox_id: toolbox.toolbox_id,
         project_id: toolbox.project_id,
         site_supervisor_id: toolbox.site_supervisor_id,
-        Location_id: toolbox.Location_id,  // Ensure this matches the state key
-        selectedTools: selectedTools.map(tool => tool.toolId), // Adjust as per your backend
+        location_id: toolbox.location_id,  // Ensure this matches the state key
+        // selectedTools: selectedTools.map(tool => tool.toolId), // Adjust as per your backend
       };
   
       console.log("Submitting data:", requestData);
@@ -183,8 +186,8 @@ function CreateToolbox() {
                     variant="outlined"
                     margin="normal"
                     label="Location"
-                    name="Location_id"
-                    value={toolbox.Location_id}
+                    name="location_id"
+                    value={toolbox.location_id}
                     onChange={onInputChange}
                   >
                     <MenuItem value="">
@@ -210,7 +213,7 @@ function CreateToolbox() {
                 variant="outlined"
                 margin="normal"
                 label="Selected Tools"
-                value={selectedTools.map(tool => tool.toolName).join(', ')}
+                // value={selectedTools.map(tool => tool.toolName).join(', ')}
                 InputProps={{
                   readOnly: true,
                 }}

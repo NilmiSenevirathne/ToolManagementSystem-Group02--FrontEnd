@@ -35,6 +35,7 @@ import Cart from './Position/StockSupervisor/ToolBox/CreateToolBox/Tools/Cart.js
 import DashBoard from './Position/Admin/Dashboard/DashBoard.jsx';
 import UpdateLocation from './Position/Manager/Pages/ManageProjects/Projects/Location/UpdateLocation.jsx';
 import StockProfile from './Components/Profile/StockProfile.jsx';
+import UpdateToolbox from './Position/StockSupervisor/ToolBox/UpdateToolbox/UpdateToolbox.jsx';
 import TrackToolboxes from './Position/Sitesupervisor/TrackToolBoxes.jsx';
 
 
@@ -83,6 +84,7 @@ function App() {
                     <Route  path='/editTool/:toolId' element={<EditTool/>}/>
                     <Route  path = "/maintoolbox"  element={<Toolbox/>}/>
                     <Route  path = "/createtoolbox"  element={<CreateToolbox/>}/>
+                    <Route  path='/editToolbox/:toolbox_id' element={<UpdateToolbox/>}/>
                     <Route  path = "/tool"  element={<Tool/>}/>
                     <Route  path='/cart' element={<Cart/>}/>
                     <Route  path = "/Stracktoolbox"  element={<STrackToolbox/>}/>
