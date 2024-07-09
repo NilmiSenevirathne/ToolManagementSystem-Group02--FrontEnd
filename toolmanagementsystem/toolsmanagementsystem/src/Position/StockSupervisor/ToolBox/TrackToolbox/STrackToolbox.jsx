@@ -92,7 +92,7 @@ const STrackToolbox = () => {
                       <TableCell>{toolboxDetails.location_id}</TableCell>
                       <TableCell>{toolboxDetails.project_id}</TableCell>
                       <TableCell>{toolboxDetails.site_supervisor_id}</TableCell>
-                      <TableCell>{toolboxDetails.selectedTools}</TableCell>
+                      <TableCell>{toolboxDetails.selectedTools.join(',')}</TableCell>
                     </TableRow>
                   </TableBody>
                 </Table>
