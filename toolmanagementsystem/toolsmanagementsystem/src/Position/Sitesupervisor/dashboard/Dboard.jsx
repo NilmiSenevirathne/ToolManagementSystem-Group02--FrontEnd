@@ -19,7 +19,7 @@ import {
   Paper
 } from '@mui/material';
 import './dboard.css';
-import Navbr from '../../../Components/Navbar/Navbar';
+import Navbr from '../../../Components/Navbar/Navbr';
 
 const Dboard = () => {
   const [toolInventoryData, setToolInventoryData] = useState([]);
