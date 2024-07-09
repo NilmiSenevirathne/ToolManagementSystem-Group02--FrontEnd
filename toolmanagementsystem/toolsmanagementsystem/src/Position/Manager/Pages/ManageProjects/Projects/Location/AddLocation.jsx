@@ -3,7 +3,7 @@ import React, { useState } from 'react'; // Import React and useState hook
 import axios from 'axios'; // Import axios for making HTTP requests
 import ManagerSidebar from '../../../../../../Components/ManagerSidebar.jsx'; // Import Sidebar component
 import ManagerNavbar from '../../../../../../Components/Navbar/ManagerNavbar.jsx';
-import {Grid , Table, TableHead, TableRow, TableCell, TableBody, Container, Typography, Box} from '@mui/material';
+import {Grid ,Container, Box} from '@mui/material';
 
 // Main function component for adding a new location
 export default function AddLocation() {
