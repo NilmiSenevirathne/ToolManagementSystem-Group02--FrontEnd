@@ -5,8 +5,9 @@ import ManagerSidebar from '../../../../Components/ManagerSidebar.jsx';
 import { Check } from '@mui/icons-material'; // Import the Check icon from Material-UI
 import ReactPaginate from 'react-paginate'; // Import React Paginate
 import './Home.css';
+import './pagination.css'; // Import the custom pagination CSS
 import ManagerNavbar from '../../../../Components/Navbar/ManagerNavbar.jsx';
-import {Grid , Table, TableHead, TableRow, TableCell, TableBody, Container, Typography, Box} from '@mui/material';
+import { Grid, Table, TableHead, TableRow, TableCell, TableBody, Container, Typography, Box, TextField } from '@mui/material';
 
 export default function Home() {
   // State variables
@@ -111,24 +112,27 @@ export default function Home() {
   };
 
   return (
-    
     <Grid container>
-        <Grid item >
-            <ManagerSidebar/>
-        </Grid>
-        <Grid item xs>
-            <ManagerNavbar/>
-
-            <Container maxWidth="lg">
+      <Grid item>
+        <ManagerSidebar />
+      </Grid>
+      <Grid item xs>
+        <ManagerNavbar />
+        <Container maxWidth="lg">
           <Box mt={4}>
             <Typography variant="h4" align="center" gutterBottom>
-              Welcome to Project Details 
+              Welcome to Project Details
             </Typography>
-            
-            {/* Render error message if error state is set */}
-            {/* {error && <Typography color="error" align="center">{error}</Typography>} */}
-            <Link className="btn" style={{ backgroundColor: 'navy', color: 'white' }} to="/addprojects">Add Projects</Link>
-
+            <Box mb={2} display="flex" justifyContent="space-between">
+              <TextField
+                label="Search Projects"
+                variant="outlined"
+                value={searchTerm}
+                onChange={handleSearchChange}
+                fullWidth
+              />
+              <Link className="btn" style={{ backgroundColor: 'navy', color: 'white', marginLeft: '20px' }} to="/addprojects">Add Projects</Link>
+            </Box>
             <table className="table border shadow">
               <thead style={{ top: 0, zIndex: 1, background: '#fff' }}>
                 <tr>
@@ -150,21 +154,19 @@ export default function Home() {
               </tbody>
             </table>
             <ReactPaginate
-            previousLabel={"Previous"}
-            nextLabel={"Next"}
-            pageCount={pageCount}
-            onPageChange={changePage}
-            containerClassName={"pagination"}
-            previousLinkClassName={"previousBttn"}
-            nextLinkClassName={"nextBttn"}
-            disabledClassName={"paginationDisabled"}
-            activeClassName={"paginationActive"}
-          />
-
-
+              previousLabel={"Previous"}
+              nextLabel={"Next"}
+              pageCount={pageCount}
+              onPageChange={changePage}
+              containerClassName={"pagination"}
+              previousLinkClassName={"previousBttn"}
+              nextLinkClassName={"nextBttn"}
+              disabledClassName={"paginationDisabled"}
+              activeClassName={"paginationActive"}
+            />
           </Box>
         </Container>
-        </Grid>
+      </Grid>
     </Grid>
   );
 }
