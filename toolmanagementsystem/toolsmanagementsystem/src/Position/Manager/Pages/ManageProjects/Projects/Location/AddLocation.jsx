@@ -3,7 +3,7 @@ import React, { useState } from 'react'; // Import React and useState hook
 import axios from 'axios'; // Import axios for making HTTP requests
 import ManagerSidebar from '../../../../../../Components/ManagerSidebar.jsx'; // Import Sidebar component
 import ManagerNavbar from '../../../../../../Components/Navbar/ManagerNavbar.jsx';
-import { Grid, Container, Box } from '@mui/material';
+import { Grid, Container, Box, TextField, Button, Typography, Paper } from '@mui/material'; // Import Material-UI components
 
 // Main function component for adding a new location
 export default function AddLocation() {
@@ -62,47 +62,47 @@ export default function AddLocation() {
 
         <Container maxWidth="md">
           <Box mt={4}>
-            <Box
-              p={4}
-              border={1}
-              borderRadius={8}
-              borderColor="grey.300"
-              boxShadow={3}
-            >
-              <form onSubmit={(e) => onSubmit(e)}>
-                <div className='mb-3'>
-                  <label htmlFor="locationId" className="form-label">Location Id</label>
-                  <input
-                    type="text"
-                    className='form-control'
-                    placeholder='Enter Location Id'
+            <Paper elevation={3}>
+              <Box p={4}>
+                <Typography variant="h6" gutterBottom>
+                  Add New Location
+                </Typography>
+                <form onSubmit={(e) => onSubmit(e)}>
+                  <TextField
+                    fullWidth
+                    label="Location Id"
                     name="locationId"
                     value={locationId}
                     onChange={(e) => onInputChange(e)}
+                    margin="normal"
+                    variant="outlined"
                   />
-                </div>
-                <div className='mb-3'>
-                  <label htmlFor="locationName" className="form-label">Location Name</label>
-                  <input
-                    type="text"
-                    className='form-control'
-                    placeholder='Enter Location Name'
+                  <TextField
+                    fullWidth
+                    label="Location Name"
                     name="locationName"
                     value={locationName}
                     onChange={(e) => onInputChange(e)}
+                    margin="normal"
+                    variant="outlined"
                   />
-                </div>
-                
-                <div className='d-flex justify-content-between'>
-                  <Link className='btn btn-outline-dark' to="/locationHome">Back to Location Details</Link>
-                  <div>
-                    <button type="button" className='btn btn-outline-secondary mx-2' onClick={resetForm}>Clear</button>
-                    <button type="submit" className='btn btn-outline-primary'>Submit</button>
-                  </div>
-                </div>
-                <br />
-              </form>
-            </Box>
+                  
+                  <Box mt={2} display="flex" justifyContent="space-between">
+                    <Button variant="outlined" color="secondary" component={Link} to="/locationHome">
+                      Back to Location Details
+                    </Button>
+                    <Box>
+                      <Button variant="outlined" color="secondary" onClick={resetForm} style={{ marginRight: '10px' }}>
+                        Clear
+                      </Button>
+                      <Button variant="contained" color="primary" type="submit">
+                        Submit
+                      </Button>
+                    </Box>
+                  </Box>
+                </form>
+              </Box>
+            </Paper>
           </Box>
         </Container>
       </Grid>
