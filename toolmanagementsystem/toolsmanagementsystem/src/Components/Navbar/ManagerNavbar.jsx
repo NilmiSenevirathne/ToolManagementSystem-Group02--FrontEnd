@@ -9,7 +9,7 @@ const ManagerNavbar = () => {
   const navigate = useNavigate();
 
   const user = {
-    firstname: 'Dilum Samaranayake',
+    firstname: 'Mr.Dilum Samaranayake',
     avatar: profile
   };
 
