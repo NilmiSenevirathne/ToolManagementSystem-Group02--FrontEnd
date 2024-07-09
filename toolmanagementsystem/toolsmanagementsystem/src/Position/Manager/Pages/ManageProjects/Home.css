@@ -14,3 +14,41 @@
 .table-container {
   overflow-x: auto;
 }
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+}
+
+.pagination li {
+  margin: 0 5px;
+}
+
+.pagination a {
+  color: navy;
+  padding: 10px 15px;
+  text-decoration: none;
+  border-radius: 5px;
+  border: 1px solid navy;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.pagination a:hover {
+  background-color: navy;
+  color: white;
+}
+
+.paginationActive a {
+  background-color: navy;
+  color: white;
+  border: 1px solid navy;
+}
+
+.paginationDisabled a {
+  color: gray;
+  border: 1px solid gray;
+  pointer-events: none;
+}
