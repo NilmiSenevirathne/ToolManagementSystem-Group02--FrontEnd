@@ -9,8 +9,8 @@ const StockSupervisorNavbar = () => {
   const navigate = useNavigate();
 
   const user = {
-    firstname: 'Nimantha ',
-    lastname: 'Dissanayake',
+    firstname: 'Isuru',
+    lastname: 'Hasalaka',
     avatar: profile
   };
 
@@ -32,7 +32,7 @@ const StockSupervisorNavbar = () => {
     <AppBar position="static">
       <Toolbar>
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          Stock Supervisor
+          Admin
         </Typography>
         
         {user.firstname && (

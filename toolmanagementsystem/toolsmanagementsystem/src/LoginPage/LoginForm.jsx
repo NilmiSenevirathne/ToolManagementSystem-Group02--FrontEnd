@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Validation from '../../src/LoginPage/Validation.js';
 import { useNavigate } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
@@ -7,11 +8,8 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
-import Validation from '../../src/LoginPage/Validation.js';
-
 import backgroundImage from '../images/back7.png';
-
-import Logo from '../images/user1.jpg';
+import Logo from '../../src/images/user1.jpg';
 
 const defaultTheme = createTheme();
 
@@ -24,7 +22,7 @@ function LoginForm() {
     });
 
     const [errors, setErrors] = useState({});
-    
+
     function handleChange(e) {
         setValues({ ...values, [e.target.name]: e.target.value });
     }
@@ -45,7 +43,7 @@ function LoginForm() {
             })
             .then(response => {
                 if (response.ok) {
-                    return response.text();      
+                    return response.text();
                 } else {
                     return response.text().then(errorMessage => {
                         throw new Error(errorMessage);
@@ -54,7 +52,6 @@ function LoginForm() {
             })
             .then(role => {
                 console.log("Login Success!!");
-               
                 switch (role.toLowerCase()) {
                     case 'admin':
                         navigate("/admindashboard");
@@ -78,7 +75,6 @@ function LoginForm() {
             });
         } else {
             console.error('Form validation errors:', validationErrors);
-            // Handle form validation errors, maybe display them to the user
         }
     }
 
@@ -99,7 +95,6 @@ function LoginForm() {
                         backgroundPosition: 'center',
                     }}
                 />
-
                 <Grid item xs={12} sm={8} md={5} elevation={6}>
                     <Box
                         sx={{
