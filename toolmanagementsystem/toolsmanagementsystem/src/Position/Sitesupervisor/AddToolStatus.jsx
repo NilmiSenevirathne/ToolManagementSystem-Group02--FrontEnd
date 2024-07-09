@@ -106,13 +106,13 @@ const AddToolStatus = () => {
                         Generated Report ID: {reportId}
                     </Typography>
                 )}
-        <Link to="/ViewRequiredToolReports" style={{ textDecoration: 'none' }}>
+        <Link to="/ViewToolStatusReports" style={{ textDecoration: 'none' }}>
           <Button
             variant="outlined"
             color="primary"
             sx={{ mt: 2 }}
           >
-            View Required Tool Reports
+            View Tool Status Reports
           </Button>
         </Link>
             </Paper>
