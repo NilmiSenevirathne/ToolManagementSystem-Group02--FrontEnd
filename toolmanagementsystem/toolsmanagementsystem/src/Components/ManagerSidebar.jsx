@@ -45,7 +45,7 @@ const StockSidebar = () => {
             { text: 'Managerdashboard', icon: <FaTh />, path: '/ManagerDashboard' },
             { text: 'Manageprojects', icon: <FaCartPlus />, path: '/ManageProjects' },
             { text: 'LocationHome', icon: <FaBriefcase />, path: '/locationHome' },
-            { text: 'Reports', icon: <FaNewspaper />, path: '/reports' },
+            { text: 'Tools Stock Details', icon: <FaNewspaper />, path: '/Toolstockdetails' },
             { text: 'Logout', icon: <RiLogoutCircleRLine />, path: '/' },
           ].map((item, index) => (
             <ListItem button key={index} onClick={() => navigate(item.path)} sx={{ my: 2 }}>

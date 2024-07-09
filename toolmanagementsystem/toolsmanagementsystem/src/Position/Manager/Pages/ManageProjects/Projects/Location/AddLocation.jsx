@@ -94,7 +94,7 @@ export default function AddLocation() {
                 </div>
                 
                 <div className='d-flex justify-content-between'>
-                  <Link className='btn btn-outline-dark' to="/ViewLocations">Back</Link>
+                  <Link className='btn btn-outline-dark' to="/locationHome">Back to Location Details</Link>
                   <div>
                     <button type="button" className='btn btn-outline-secondary mx-2' onClick={resetForm}>Clear</button>
                     <button type="submit" className='btn btn-outline-primary'>Submit</button>
