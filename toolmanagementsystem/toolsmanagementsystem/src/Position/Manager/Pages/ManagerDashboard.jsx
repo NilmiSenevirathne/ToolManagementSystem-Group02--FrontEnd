@@ -1,39 +1,26 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { CssBaseline, Grid, Box, Typography } from '@mui/material';
-import { Pie, Line } from 'react-chartjs-2';
-import ManagerSidebar from '../../../Components/ManagerSidebar.jsx';
-// import StockSidebar from '../../../Components/Sidebar/StockSidebar';
+import axios from 'axios';
 import ManagerNavbar from '../../../Components/Navbar/ManagerNavbar.jsx';
-import { Chart as ChartJS, ArcElement, Tooltip, Legend, CategoryScale, LinearScale, PointElement, LineElement, Title } from 'chart.js';
+import ManagerSidebar from '../../../Components/ManagerSidebar.jsx';
 
-ChartJS.register(ArcElement, Tooltip, Legend, CategoryScale, LinearScale, PointElement, LineElement, Title);
+import {
+  BarChart, Bar, XAxis, YAxis, Tooltip, Legend, CartesianGrid, ResponsiveContainer
+} from 'recharts';
 
-const ManagerDashboard = () => {
-  const pieData = {
-    labels: ['Allocated_Tools', 'Available_Tools'],
-    datasets: [
-      {
-        label: '',
-        data: [100, 67,],
-        backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)'],
-        borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)'],
-        borderWidth: 1,
-      },
-    ],
-  };
-
-  const lineData = {
-    labels: ['January', 'February', 'March', 'April', 'May', 'June'],
-    datasets: [
-      {
-        label: 'Tools',
-        data: [65, 59, 80, 81, 56, 55, 40],
-        fill: false,
-        backgroundColor: 'rgba(75, 192, 192, 0.2)',
-        borderColor: 'rgba(75, 192, 192, 1)',
-      },
-    ],
-  };
+const StockSupervisorDashboard = () => {
+  
+  const [toolInventoryData, setToolInventoryData] = useState([]);
+  
+  useEffect(() => {
+    axios.get('http://localhost:8080/tool/toolInventory')
+      .then(response => {
+        setToolInventoryData(response.data);
+      })
+      .catch(error => {
+        console.error('Error fetching tool inventory data:', error);
+      });
+  }, []);
 
   return (
     <Grid container>
@@ -43,31 +30,41 @@ const ManagerDashboard = () => {
       </Grid>
       <Grid item xs>
         <ManagerNavbar />
-        <Box sx={{ p: 3 }}>
-          
-          {/* Pie chart */}
-          <Grid container spacing={3}>
-            <Grid item xs={12} md={6}>
-              <Box sx={{ p: 3, border: '1px solid #ccc', borderRadius: '8px' }}>
-                
-                <Pie data={pieData} />
-              </Box>
-            </Grid>
-
-            {/* Line chart */}
-            <Grid item xs={12} md={6}>
-              <Box sx={{ p: 3, border: '1px solid #ccc', borderRadius: '8px' }}>
-                <Typography variant="h6" gutterBottom>
-                  Tools Variation of the Year
-                </Typography>
-                <Line data={lineData} />
-              </Box>
-            </Grid>
-          </Grid>
+        <Box className="dboard-chartContainer">
+          <Typography variant="h4" className="dboard-chartTitle">Tool Inventory</Typography>
+          <ResponsiveContainer width="100%" height={400}>
+            <BarChart
+              data={toolInventoryData}
+              margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
+              barSize={50}
+            >
+              <CartesianGrid strokeDasharray="3 3" strokeOpacity={0.2} />
+              <XAxis dataKey="toolName" />
+              <YAxis />
+              <Tooltip 
+                contentStyle={{ backgroundColor: '#333', border: 'none' }} 
+                itemStyle={{ color: '#fff' }} 
+              />
+              <Legend wrapperStyle={{ color: 'white' }} />
+              <Bar 
+                dataKey="quantity" 
+                fill="url(#colorUv)" 
+                animationBegin={800} 
+                animationDuration={1200} 
+                isAnimationActive={true}
+              />
+              <defs>
+                <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="5%" stopColor="#38c4f4" stopOpacity={0.8} />
+                  <stop offset="95%" stopColor="#38c4f4" stopOpacity={0} />
+                </linearGradient>
+              </defs>
+            </BarChart>
+          </ResponsiveContainer>
         </Box>
       </Grid>
     </Grid>
   );
 };
 
-export default ManagerDashboard;
+export default StockSupervisorDashboard;

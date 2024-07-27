@@ -17,18 +17,26 @@ import {
   TableHead,
   TableRow,
   Paper,
+  Select,
+  MenuItem,
+  InputLabel,
+  FormControl,
+  Checkbox,
+  FormControlLabel,
+  ListItemText, // Import ListItemText here
 } from "@mui/material";
 import { ArrowDownward as ArrowDownwardIcon } from "@mui/icons-material";
 import Sbar from "../../Components/Sbar";
 
 const ToolStatosRep = () => {
   const [toolboxtool, setTools] = useState([]);
-  const [selectedTool, setSelectedTool] = useState({});
-  const [toolStatus, setToolStatus] = useState("");
+  const [selectedTools, setSelectedTools] = useState([]);
+  const [toolStatuses, setToolStatuses] = useState({});
   const [currentDate, setCurrentDate] = useState("");
   const [currentTime, setCurrentTime] = useState("");
   const [reports, setReports] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
+  const [status, setStatus] = useState("");
 
   useEffect(() => {
     loadTools();
@@ -39,19 +47,29 @@ const ToolStatosRep = () => {
 
   const loadTools = async () => {
     try {
-      const result = await axios.get("http://localhost:8080/getToolboxTools");
+      const result = await axios.get("http://localhost:8080/toolbox/gettoolbox");
       setTools(result.data);
     } catch (error) {
       console.error("Error loading tools:", error);
     }
   };
 
-  const handleToolClick = (tool) => {
-    setSelectedTool(tool);
+  const handleToolSelect = (tool) => {
+    setSelectedTools((prevSelectedTools) => {
+      const isSelected = prevSelectedTools.some(t => t.toolbox_id === tool.toolbox_id);
+      if (isSelected) {
+        return prevSelectedTools.filter(t => t.toolbox_id !== tool.toolbox_id);
+      } else {
+        return [...prevSelectedTools, tool];
+      }
+    });
   };
 
-  const handleToolStatusChange = (e) => {
-    setToolStatus(e.target.value);
+  const handleToolStatusChange = (toolName, status) => {
+    setToolStatuses((prevStatuses) => ({
+      ...prevStatuses,
+      [toolName]: status,
+    }));
   };
 
   const handleSearch = (e) => {
@@ -59,12 +77,16 @@ const ToolStatosRep = () => {
   };
 
   const filteredTools = toolboxtool.filter((tool) =>
-    tool.toolBoxId.toLowerCase().includes(searchQuery.toLowerCase())
+    tool.toolbox_id.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
+  const handleStatusChange = (e) => {
+    setStatus(e.target.value);
+  };
+
   const generatePDF = () => {
-    if (!selectedTool || !toolStatus) {
-      alert("Please select a tool and add tool status.");
+    if (selectedTools.length === 0 || Object.values(toolStatuses).some(status => !status)) {
+      alert("Please select tools and add status for all selected tools.");
       return;
     }
 
@@ -75,33 +97,41 @@ const ToolStatosRep = () => {
     const doc = new jsPDF();
     doc.setFontSize(12);
     const lineHeight = 10;
+    const pageWidth = doc.internal.pageSize.getWidth();
+    let y = 10;
 
-    doc.text(`Generated Date: ${currentDate}`, 10, 10);
-    doc.text(`Generated Time: ${currentTime}`, 10, 20);
+    doc.text(`Generated Date: ${currentDate}`, 10, y);
+    y += lineHeight;
+    doc.text(`Generated Time: ${currentTime}`, 10, y);
+    y += lineHeight;
 
-    doc.text(`Tool Box Id: ${selectedTool.toolBoxId}`, 10, 30);
-    doc.text(`Tools:`, 10, 40);
+    selectedTools.forEach((tool) => {
+      doc.text(`Tool Box Id: ${tool.toolbox_id}`, 10, y);
+      y += lineHeight;
+      doc.text(`Project Id: ${tool.project_id}`, 10, y);
+      y += lineHeight;
+      doc.text(`Site Supervisor Id: ${tool.site_supervisor_id}`, 10, y);
+      y += lineHeight;
+      doc.text(`Location Id: ${tool.location_id}`, 10, y);
+      y += lineHeight;
+      doc.text(
+        `Created Date: ${new Date(tool.createdDate).toLocaleDateString()}`,
+        10,
+        y
+      );
+      y += lineHeight;
+      doc.text("Selected Tools and Statuses:", 10, y);
+      y += lineHeight;
 
-    const tools = selectedTool.tools.split(",").map((tool) => tool.trim());
-    tools.forEach((tool, index) => {
-      doc.text(tool, 30, 40 + index * lineHeight);
+      tool.selectedTools.forEach((toolName, index) => {
+        doc.text(`${index + 1}. ${toolName} - Status: ${toolStatuses[toolName] || "Not provided"}`, 20, y);
+        y += lineHeight;
+        if (y > doc.internal.pageSize.getHeight() - 20) {
+          doc.addPage();
+          y = 10;
+        }
+      });
     });
-
-    doc.text(
-      `Project Id: ${selectedTool.project_id}`,
-      10,
-      50 + tools.length * lineHeight
-    );
-    doc.text(
-      `Site Supervisor Id: ${selectedTool.site_supervisor_id}`,
-      10,
-      60 + tools.length * lineHeight
-    );
-    doc.text(
-      `Tool Status: ${toolStatus}`,
-      10,
-      70 + tools.length * lineHeight
-    );
 
     const pdfBlob = doc.output("blob");
     const pdfUrl = URL.createObjectURL(pdfBlob);
@@ -140,6 +170,7 @@ const ToolStatosRep = () => {
           onChange={handleSearch}
           sx={{ mb: 2 }}
         />
+
         <Grid item xs={12}>
           <Typography variant="h6" gutterBottom>
             Tool List
@@ -148,21 +179,49 @@ const ToolStatosRep = () => {
             <Table>
               <TableHead>
                 <TableRow>
+                  <TableCell>Select</TableCell>
                   <TableCell>Tool Box Id</TableCell>
-                  <TableCell>Tools</TableCell>
                   <TableCell>Project Id</TableCell>
                   <TableCell>Site Supervisor Id</TableCell>
+                  <TableCell>Location Id</TableCell>
+                  <TableCell>Created Date</TableCell>
+                  <TableCell>Selected Tools</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
-                {filteredTools.map((tool) => (
-                  <TableRow key={tool.toolBoxId} hover onClick={() => handleToolClick(tool)}>
-                    <TableCell>{tool.toolBoxId}</TableCell>
-                    <TableCell>{tool.tools}</TableCell>
-                    <TableCell>{tool.project_id}</TableCell>
-                    <TableCell>{tool.site_supervisor_id}</TableCell>
+                {filteredTools.length === 0 ? (
+                  <TableRow>
+                    <TableCell colSpan={7}>No tools found</TableCell>
                   </TableRow>
-                ))}
+                ) : (
+                  filteredTools.map((tool) => (
+                    <TableRow
+                      key={tool.toolbox_id}
+                      hover
+                      onClick={() => handleToolSelect(tool)}
+                    >
+                      <TableCell>
+                        <FormControlLabel
+                          control={
+                            <Checkbox
+                              checked={selectedTools.some(t => t.toolbox_id === tool.toolbox_id)}
+                              onChange={() => handleToolSelect(tool)}
+                            />
+                          }
+                          label=""
+                        />
+                      </TableCell>
+                      <TableCell>{tool.toolbox_id}</TableCell>
+                      <TableCell>{tool.project_id}</TableCell>
+                      <TableCell>{tool.site_supervisor_id}</TableCell>
+                      <TableCell>{tool.location_id}</TableCell>
+                      <TableCell>
+                        {new Date(tool.createdDate).toLocaleDateString()}
+                      </TableCell>
+                      <TableCell>{tool.selectedTools.join(", ")}</TableCell>
+                    </TableRow>
+                  ))
+                )}
               </TableBody>
             </Table>
           </TableContainer>
@@ -173,87 +232,108 @@ const ToolStatosRep = () => {
             <Card>
               <CardContent>
                 <Typography variant="h6">Tool Box Details</Typography>
-                <TextField
-                  fullWidth
-                  margin="normal"
-                  label="Tool Box Id"
-                  value={selectedTool.toolBoxId || ""}
-                  InputProps={{ readOnly: true }}
-                />
-                <TextField
-                  fullWidth
-                  margin="normal"
-                  label="Tools"
-                  multiline
-                  rows={5}
-                  value={selectedTool.tools || ""}
-                  InputProps={{ readOnly: true }}
-                />
-                <TextField
-                  fullWidth
-                  margin="normal"
-                  label="Project Id"
-                  value={selectedTool.project_id || ""}
-                  InputProps={{ readOnly: true }}
-                />
-                <TextField
-                  fullWidth
-                  margin="normal"
-                  label="Site Supervisor Id"
-                  value={selectedTool.site_supervisor_id || ""}
-                  InputProps={{ readOnly: true }}
-                />
-                <TextField
-                  fullWidth
-                  margin="normal"
-                  label="Tool Status"
-                  multiline
-                  rows={5}
-                  value={toolStatus}
-                  onChange={handleToolStatusChange}
-                />
+                {selectedTools.length > 0 && (
+                  <>
+                    <TextField
+                      fullWidth
+                      margin="normal"
+                      label="Tool Box Id"
+                      value={selectedTools.map(tool => tool.toolbox_id).join(", ")}
+                      InputProps={{ readOnly: true }}
+                    />
+                    <TextField
+                      fullWidth
+                      margin="normal"
+                      label="Project Id"
+                      value={selectedTools.map(tool => tool.project_id).join(", ")}
+                      InputProps={{ readOnly: true }}
+                    />
+                    <TextField
+                      fullWidth
+                      margin="normal"
+                      label="Site Supervisor Id"
+                      value={selectedTools.map(tool => tool.site_supervisor_id).join(", ")}
+                      InputProps={{ readOnly: true }}
+                    />
+                    <TextField
+                      fullWidth
+                      margin="normal"
+                      label="Location Id"
+                      value={selectedTools.map(tool => tool.location_id).join(", ")}
+                      InputProps={{ readOnly: true }}
+                    />
+                    <TextField
+                      fullWidth
+                      margin="normal"
+                      label="Created Date"
+                      value={selectedTools.map(tool => new Date(tool.createdDate).toLocaleDateString()).join(", ")}
+                      InputProps={{ readOnly: true }}
+                    />
+                    <FormControl fullWidth margin="normal">
+                      <InputLabel>Select Damaged Tools</InputLabel>
+                      <Select
+                        multiple
+                        value={Object.keys(toolStatuses)}
+                        onChange={(e) => {
+                          const selectedToolStatuses = e.target.value.reduce((acc, toolName) => {
+                            acc[toolName] = toolStatuses[toolName] || "";
+                            return acc;
+                          }, {});
+                          setToolStatuses(selectedToolStatuses);
+                        }}
+                        renderValue={(selected) => selected.join(", ")}
+                      >
+                        {selectedTools.flatMap(tool => tool.selectedTools).map((toolName, index) => (
+                          <MenuItem key={index} value={toolName}>
+                            <Checkbox checked={Object.keys(toolStatuses).includes(toolName)} />
+                            <ListItemText primary={toolName} />
+                          </MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
+                    {Object.keys(toolStatuses).map((toolName) => (
+                      <TextField
+                        key={toolName}
+                        fullWidth
+                        margin="normal"
+                        label={`Status for ${toolName}`}
+                        value={toolStatuses[toolName] || ""}
+                        onChange={(e) => handleToolStatusChange(toolName, e.target.value)}
+                      />
+                    ))}
+                  </>
+                )}
               </CardContent>
               <CardActions>
-                <Button variant="contained" color="primary" onClick={generatePDF}>
-                  Generate PDF
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={generatePDF}
+                >
+                  Generate PDF Report
                 </Button>
               </CardActions>
             </Card>
           </Grid>
-
-          <Grid item xs={12}>
-            <Typography variant="h6" gutterBottom>
-              Report Table
-            </Typography>
-            <TableContainer component={Paper}>
-              <Table>
-                <TableHead>
-                  <TableRow>
-                    <TableCell>Date</TableCell>
-                    <TableCell>Time</TableCell>
-                    <TableCell>Download</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {reports.map((report, index) => (
-                    <TableRow key={index}>
-                      <TableCell>{report.date}</TableCell>
-                      <TableCell>{report.time}</TableCell>
-                      <TableCell>
-                        <Button
-                          variant="contained"
-                          color="primary"
-                          href={report.url}
-                          download={`report_${index}.pdf`}
-                        >
-                          Download Report
-                        </Button>
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
+          <Grid item xs={12} md={6}>
+            <Typography variant="h6">Generated Reports</Typography>
+            <ul>
+              {reports.map((report, index) => (
+                <li key={index}>
+                  <Typography variant="body2">
+                    Date: {report.date}, Time: {report.time}
+                  </Typography>
+                  <Button
+                    href={report.url}
+                    target="_blank"
+                    variant="contained"
+                    color="primary"
+                  >
+                    Download PDF
+                  </Button>
+                </li>
+              ))}
+            </ul>
           </Grid>
         </Grid>
       </Box>

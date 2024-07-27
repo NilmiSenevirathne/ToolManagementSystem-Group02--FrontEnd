@@ -64,7 +64,7 @@ const STrackToolbox = () => {
         <Container maxWidth="md">
           <Box mt={4}>
             <Typography variant="h4" align="center" gutterBottom>
-              Welcome to TrackToolbox Section!
+              Welcome to   View Tools of Toolbox Section!
             </Typography>
             <Box display="flex" flexDirection="column" alignItems="center">
               <FormControl fullWidth margin="normal">

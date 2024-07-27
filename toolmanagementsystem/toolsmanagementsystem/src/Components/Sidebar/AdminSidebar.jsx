@@ -36,6 +36,7 @@ const StockSidebar = () => {
       <Drawer
         variant="permanent"
         sx={{
+          
           width: collapsed ? 60 : 240,
           flexShrink: 0,
           whiteSpace: 'nowrap',

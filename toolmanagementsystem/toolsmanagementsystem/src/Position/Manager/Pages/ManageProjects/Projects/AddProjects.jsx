@@ -12,6 +12,22 @@ export default function AddProjects() {
   const [locations, setLocations] = useState([]);
   const [existingProjectIds, setExistingProjectIds] = useState([]); 
 
+  // State for storing form data
+  const [projects, setProjects] = useState({
+    projectId: "",
+    projectName: "",
+    description: "",
+    siteSupervisorID: "",
+    siteSupervisorName: "",
+    locationId: "",
+    locationName: "",
+    startDate: "",
+    endDate: ""
+  });
+
+  // State for validation errors
+  const [errors, setErrors] = useState({});
+
   // Fetch locations and existing project IDs when the component mounts
   useEffect(() => {
     fetchLocations();
@@ -38,19 +54,6 @@ export default function AddProjects() {
     }
   };
 
-  // State for storing form data
-  const [projects, setProjects] = useState({
-    projectId: "",
-    projectName: "",
-    description: "",
-    siteSupervisorID: "",
-    siteSupervisorName: "",
-    locationId: "",
-    locationName: "",
-    startDate: "",
-    endDate: ""
-  });
-
   // Function to reset the form
   const resetForm = () => {
     setProjects({
@@ -64,6 +67,7 @@ export default function AddProjects() {
       startDate: "",
       endDate: ""
     });
+    setErrors({});
   };
 
   // Destructure form data from projects state
@@ -72,6 +76,18 @@ export default function AddProjects() {
   // Handle input changes
   const onInputChange = (e) => {
     const { name, value } = e.target;
+
+    // Validate projectId
+    if (name === "projectId") {
+      const projectIdPattern = /^P\d{3}$/;
+      if (!projectIdPattern.test(value)) {
+        setErrors({ ...errors, projectId: "Project ID must be in the format P001" });
+      } else {
+        const newErrors = { ...errors };
+        delete newErrors.projectId;
+        setErrors(newErrors);
+      }
+    }
 
     // If the location ID is changed, update the location name
     if (name === "locationId") {
@@ -98,12 +114,22 @@ export default function AddProjects() {
       return;
     }
 
+    // Check for validation errors
+    if (Object.keys(errors).length > 0) {
+      alert("Please correct the errors in the form.");
+      return;
+    }
+
     // Try to add the new project to the backend
     try {
       await axios.post("http://localhost:8080/project", projects);
       navigate("/manageprojects"); // Navigate to manage projects page
     } catch (error) {
-      console.error('Error adding project:', error);
+      if (error.response && error.response.status === 409) {
+        alert("Project ID already exists. Please enter a different ID.");
+      } else {
+        console.error('Error adding project:', error);
+      }
     }
   };
 
@@ -132,6 +158,8 @@ export default function AddProjects() {
                     onChange={onInputChange}
                     margin="normal"
                     variant="outlined"
+                    error={!!errors.projectId}
+                    helperText={errors.projectId}
                   />
                   <TextField
                     fullWidth

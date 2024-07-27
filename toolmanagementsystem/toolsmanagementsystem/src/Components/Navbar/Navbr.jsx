@@ -1,37 +1,61 @@
-import React, { useEffect, useState } from 'react';
-import './navbar.css';
-import SearchIcon from '@mui/icons-material/Search';
-import MailOutlineIcon from '@mui/icons-material/MailOutline';
-import NotificationsIcon from '@mui/icons-material/Notifications';
+import React, { useState } from 'react';
+import { AppBar, Toolbar, Typography, Avatar, IconButton, Menu, MenuItem, Box } from '@mui/material';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import profile from '../../images/profile.jpg';
 import { useNavigate } from 'react-router-dom';
 
 const Navbr = () => {
-  const [user, setUser] = useState({ name: '', profilePhoto: '' });
+  const [anchorEl, setAnchorEl] = useState(null);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    // Fetch user data from local storage or an API
-    const loggedUser = JSON.parse(localStorage.getItem('user'));
-    if (loggedUser) {
-      setUser(loggedUser);
-    } else {
-      // Handle user not logged in, redirect to login page
-      navigate('/login');
-    }
-  }, [navigate]);
+  const user = {
+    firstname: 'Kusal',
+    lastname: 'Senarathne',
+    avatar: profile
+  };
+
+  const handleMenuOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+    
+  };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleProfileClick = () => {
+    navigate('/SiteSupervisorProfile');
+    handleMenuClose();
+  };
 
   return (
-    <div className="topbarContainer">
-      <div className="topbarLeft">
-        <SearchIcon />
-      </div>
-      
-        <div className="topbarUser">
-          <img src={user.profilePhoto} alt="User" className="topbarImg" />
-          <span className="topbarUserName">{user.name}</span>
-        </div>
-      </div>
-    
+    <AppBar position="static">
+      <Toolbar>
+        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+         Site Supervisor
+        </Typography>
+        
+        {user.firstname && (
+          <Box display="flex" alignItems="center">
+            <Typography variant="body1" component="span" sx={{ marginRight: 1 }}>
+              {user.firstname}
+            </Typography>
+            <IconButton color="inherit" onClick={handleMenuOpen}>
+              <Avatar alt="Profile Image" src={user.avatar} />
+              <ArrowDropDownIcon />
+            </IconButton>
+            <Menu
+              anchorEl={anchorEl}
+              open={Boolean(anchorEl)}
+              onClose={handleMenuClose}
+            >
+              <MenuItem onClick={handleProfileClick}>Profile</MenuItem>
+             
+            </Menu>
+          </Box>
+        )}
+      </Toolbar>
+    </AppBar>
   );
 };
 

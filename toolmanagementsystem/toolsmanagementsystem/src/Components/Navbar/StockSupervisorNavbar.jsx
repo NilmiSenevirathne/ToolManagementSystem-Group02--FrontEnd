@@ -9,8 +9,7 @@ const StockSupervisorNavbar = () => {
   const navigate = useNavigate();
 
   const user = {
-    firstname: 'Nimantha ',
-    lastname: 'Dissanayake',
+    firstname: 'Mr. Nimantha Dissanayake ',
     avatar: profile
   };
 
@@ -19,13 +18,11 @@ const StockSupervisorNavbar = () => {
     
   };
 
-  const handleMenuClose = () => {
-    setAnchorEl(null);
-  };
+ 
 
   const handleProfileClick = () => {
     navigate('/profile');
-    handleMenuClose();
+    
   };
 
   return (
@@ -47,10 +44,9 @@ const StockSupervisorNavbar = () => {
             <Menu
               anchorEl={anchorEl}
               open={Boolean(anchorEl)}
-              onClose={handleMenuClose}
+              
             >
               <MenuItem onClick={handleProfileClick}>Profile</MenuItem>
-              <MenuItem onClick={handleMenuClose}>Settings</MenuItem>
             </Menu>
           </Box>
         )}

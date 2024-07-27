@@ -44,10 +44,7 @@ const Sbar = () => {
               <Typography variant="h6" sx={{ color: 'white', textAlign: 'center' }}>
                 Dilum BMK Engineers
               </Typography>
-              <img src={profimg} alt="Profile" style={{ width: 100, height: 100, borderRadius: '50%', objectFit: 'cover', marginTop: 10 }} />
-              <Typography variant="subtitle1" sx={{ color: 'white', marginTop: 1 }}>
-                Site Supervisor
-              </Typography>
+             
             </>
           )}
         </Box>
@@ -55,14 +52,15 @@ const Sbar = () => {
         <List>
           {[
             { text: 'Dashboard', icon: <DashboardIcon />, path: '/sitesupervisor' },
-            { text: 'View Tool Status Reports', icon: <AssessmentIcon />, path: '/ViewToolStatusReports' },
+           
             { text: 'View Required Tool Reports', icon: <AssessmentIcon />, path: '/ViewRequiredToolReports' },
+            { text: 'View Tool Status Reports', icon: <AssessmentIcon />, path: '/ViewToolStatusReports' },
             { text: 'View Projects', icon: <AssessmentIcon />, path: '/ViewProjects' },
             { text: 'Create Tool Status Reports', icon: <AddBoxIcon />, path: '/ToolstatosRep' },
             { text: 'Create Required Tool Reports', icon: <AddBoxIcon />, path: '/RequiredToolReport' },
             { text: 'Add Tool Status Reports', icon: <StorageIcon />, path: '/AddToolStatus' },
             { text: 'Add Required Tool Reports', icon: <StorageIcon />, path: '/AddReportDetails' },
-            { text: 'Logout', icon: <ExitToAppIcon />, path: '/LoginForm' },
+            { text: 'Logout', icon: <ExitToAppIcon />, path: '/' },
           ].map((item, index) => (
             <ListItem 
               button 

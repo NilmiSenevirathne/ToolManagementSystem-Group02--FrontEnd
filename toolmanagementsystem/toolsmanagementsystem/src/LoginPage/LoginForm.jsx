@@ -105,7 +105,7 @@ function LoginForm() {
                             alignItems: 'center',
                         }}
                     >
-                        <Box component="img" src={Logo} alt="Company Logo" sx={{ width: 100, height: 100, mb: 1 }} /><Typography component="h1" variant="h3">
+                        <Box component="img" src={Logo} alt="Company Logo" sx={{ width: 100, height: 100, mb: 1 }} /><Typography component="h2" variant="h3">
                             Tools Management System
                         </Typography>
                         <Typography component="h4" variant="h4">

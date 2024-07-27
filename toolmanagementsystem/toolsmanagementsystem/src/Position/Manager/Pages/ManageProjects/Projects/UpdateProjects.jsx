@@ -54,18 +54,22 @@ export default function Updateprojects() {
   // Destructure project details from the state
   const { projectId, projectName, description, siteSupervisorID, siteSupervisorName, locationId, locationName, startDate, endDate } = projects;
 
-  // Handle input changes
-  const onInputChange = (e) => {
-    const { name, value } = e.target;
+ // Handle input changes
+ const onInputChange = (e) => {
+  const { name, value } = e.target;
 
-    // If the location ID is changed, update the location name
-    if (name === "locationId") {
-      const selectedLocation = locations.find(location => location.locationId === value);
-      setProjects({ ...projects, locationId: value, locationName: selectedLocation ? selectedLocation.locationName : "" });
+  // Validate projectId
+  if (name === "projectId") {
+    const projectIdPattern = /^P\d{3}$/;
+    if (!projectIdPattern.test(value)) {
+      setProjects({ ...projects, [name]: value }); // Allow non-matching values to be typed temporarily
     } else {
       setProjects({ ...projects, [name]: value });
     }
-  };
+  } else {
+    setProjects({ ...projects, [name]: value });
+    }
+  };
 
   // Handle form submission
   const onSubmit = async (e) => {
@@ -95,14 +99,16 @@ export default function Updateprojects() {
                   Edit Project Details
                 </Typography>
                 <form onSubmit={onSubmit}>
-                  <TextField
+                <TextField
                     fullWidth
                     label="Project Id"
                     name="projectId"
-                    value={projectId}
+                    value={projects.projectId}
                     onChange={onInputChange}
                     margin="normal"
                     variant="outlined"
+                    error={!/^P\d{3}$/.test(projects.projectId)} // Validate the format
+                    helperText={!/^P\d{3}$/.test(projects.projectId) ? "Project ID must be in the format P001" : ""}
                   />
                   <TextField
                     fullWidth

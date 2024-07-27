@@ -18,12 +18,28 @@ export default function UpdateLocation() {
     locationName: ""
   });
 
+  const [errors, setErrors] = useState({
+    locationId: "",
+    locationName: "",
+  });
+
   // Destructure state variables for easier access
   const { locationId, locationName } = locations;
 
   // Handle input changes
   const onInputChange = (e) => {
-    setLocation({ ...locations, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setLocation({ ...locations, [name]: value });
+
+    // Validate locationId
+    if (name === "locationId") {
+      const locationIdPattern = /^L\d{3}$/;
+      if (!locationIdPattern.test(value)) {
+        setErrors({ ...errors, locationId: "Location ID must be in the format 'L001'" });
+      } else {
+        setErrors({ ...errors, locationId: "" });
+      }
+    }
   };
 
   // Function to load location data based on the ID from URL
@@ -67,7 +83,7 @@ export default function UpdateLocation() {
                   Edit Location
                 </Typography>
                 <form onSubmit={(e) => onSubmit(e)}>
-                  <TextField
+                <TextField
                     fullWidth
                     label="Location Id"
                     name="locationId"
@@ -75,6 +91,8 @@ export default function UpdateLocation() {
                     onChange={(e) => onInputChange(e)}
                     margin="normal"
                     variant="outlined"
+                    error={!!errors.locationId}
+                    helperText={errors.locationId}
                   />
                   <TextField
                     fullWidth

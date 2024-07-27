@@ -68,8 +68,6 @@ const Toolbox = () => {
                   <TableRow>
                     <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white' }}>ToolBox ID</TableCell>
                     <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white' }}>Project ID</TableCell>
-                    <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white' }}>SiteSupervisor ID</TableCell>
-                    <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white' }}>Location ID</TableCell>
                     <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white' }}>Created Date</TableCell>
                     <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white' }}>Action</TableCell>
                   </TableRow>
@@ -79,8 +77,6 @@ const Toolbox = () => {
                     <TableRow key={tool.toolbox_id}>
                       <TableCell sx={{ textAlign: 'center' }}>{tool.toolbox_id}</TableCell>
                       <TableCell sx={{ textAlign: 'center' }}>{tool.project_id}</TableCell>
-                      <TableCell sx={{ textAlign: 'center' }}>{tool.site_supervisor_id}</TableCell>
-                      <TableCell sx={{ textAlign: 'center' }}>{tool.location_id}</TableCell>
                       <TableCell sx={{ textAlign: 'center' }}>{tool.createdDate}</TableCell>
                       <TableCell sx={{ textAlign: 'center' }}>
                         <Link to={`/editToolbox/${tool.toolbox_id}`}>
@@ -105,7 +101,8 @@ const Toolbox = () => {
               </Link>
               <Link to='/Stracktoolbox' style={{ textDecoration: 'none' }}>
                 <Button variant="contained" color="secondary" sx={{ fontSize: '1rem' }}>
-                  Track ToolBox
+                 View Tools of Toolbox
+
                 </Button>
               </Link>
             </Box>

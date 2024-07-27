@@ -1,56 +1,99 @@
-import { Link, useNavigate } from 'react-router-dom'; // Import React Router components for navigation
-import React, { useState } from 'react'; // Import React and useState hook
-import axios from 'axios'; // Import axios for making HTTP requests
-import ManagerSidebar from '../../../../../../Components/ManagerSidebar.jsx'; // Import Sidebar component
+import { Link, useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import axios from 'axios';
+import ManagerSidebar from '../../../../../../Components/ManagerSidebar.jsx';
 import ManagerNavbar from '../../../../../../Components/Navbar/ManagerNavbar.jsx';
-import { Grid, Container, Box, TextField, Button, Typography, Paper } from '@mui/material'; // Import Material-UI components
+import { Grid, Container, Box, TextField, Button, Typography, Paper } from '@mui/material';
 
-// Main function component for adding a new location
 export default function AddLocation() {
-  let navigate = useNavigate(); // Initialize navigation
+  let navigate = useNavigate();
 
-  // State to store form data for location
   const [locations, setLocation] = useState({
     locationId: "",
-    locationName: ""
+    locationName: "",
   });
 
-  // Destructure state variables for easier access
+  const [errors, setErrors] = useState({
+    locationId: "",
+    locationName: "",
+  });
+
   const { locationId, locationName } = locations;
 
-  // Handle input changes
   const onInputChange = (e) => {
-    setLocation({ ...locations, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setLocation({ ...locations, [name]: value });
+
+    // Validate locationId
+    if (name === "locationId") {
+      const locationIdPattern = /^L\d{3}$/;
+      if (!locationIdPattern.test(value)) {
+        setErrors({ ...errors, locationId: "Location ID must be in the format 'L001'" });
+      } else {
+        setErrors({ ...errors, locationId: "" });
+      }
+    }
+
+    // Validate locationName
+    if (name === "locationName") {
+      const locationNamePattern = /^[A-Za-z\s]+$/;
+      if (!locationNamePattern.test(value)) {
+        setErrors({ ...errors, locationName: "Location Name must only contain letters and spaces" });
+      } else {
+        setErrors({ ...errors, locationName: "" });
+      }
+    }
   };
 
-  // Handle form submission
   const onSubmit = async (e) => {
     e.preventDefault();
-    // Location Form validation
     if (!locationId || !locationName) {
       alert("Please fill in all fields.");
       return;
     }
 
-    // Send a POST request to add the new location
-    await axios.post("http://localhost:8080/location", locations);
-    // Reset the form fields
-    setLocation({
-      locationId: "",
-      locationName: ""
-    });
-    navigate("/locationHome"); // Navigate to ViewLocations page upon success
+    if (errors.locationId || errors.locationName) {
+      alert("Please correct the errors in the form.");
+      return;
+    }
+
+    try {
+      await axios.post("http://localhost:8080/location", locations, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      setLocation({
+        locationId: "",
+        locationName: "",
+      });
+      navigate("/locationHome");
+    } catch (error) {
+      if (error.response && error.response.status === 409) {
+        // Handle duplicate locationId or locationName
+        const errorMessage = error.response.data;
+        if (errorMessage.includes('Location ID')) {
+          setErrors({ ...errors, locationId: errorMessage });
+        } else if (errorMessage.includes('Location Name')) {
+          setErrors({ ...errors, locationName: errorMessage });
+        }
+      } else {
+        console.error("There was an error adding the location!", error);
+      }
+    }
   };
 
-  // Function to reset the form fields
   const resetForm = () => {
     setLocation({
       locationId: "",
-      locationName: ""
+      locationName: "",
+    });
+    setErrors({
+      locationId: "",
+      locationName: "",
     });
   };
 
-  // Render the form inside the Sidebar component
   return (
     <Grid container>
       <Grid item>
@@ -76,6 +119,8 @@ export default function AddLocation() {
                     onChange={(e) => onInputChange(e)}
                     margin="normal"
                     variant="outlined"
+                    error={!!errors.locationId}
+                    helperText={errors.locationId}
                   />
                   <TextField
                     fullWidth
@@ -85,8 +130,9 @@ export default function AddLocation() {
                     onChange={(e) => onInputChange(e)}
                     margin="normal"
                     variant="outlined"
+                    error={!!errors.locationName}
+                    helperText={errors.locationName}
                   />
-                  
                   <Box mt={2} display="flex" justifyContent="space-between">
                     <Button variant="outlined" color="secondary" component={Link} to="/locationHome">
                       Back to Location Details
