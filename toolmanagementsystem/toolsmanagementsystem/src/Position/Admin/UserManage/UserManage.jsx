@@ -76,12 +76,7 @@ const UserManage = () => {
                     <TableCell>{user.role}</TableCell>
                     <TableCell>{user.username}</TableCell>
                     <TableCell>
-                      <Link
-                        className="btn btn-primary mx-2"
-                        to={`/ViewUser/${user.userid}`}
-                      >
-                        View
-                      </Link>
+                     
                       <Link
                         className="btn btn-outline-primary mx-2"
                         to={`/UserEdit/${user.userid}`}
