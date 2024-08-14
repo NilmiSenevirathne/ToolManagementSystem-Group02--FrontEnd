@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Grid, CssBaseline, TextField, Button, Paper, Typography } from '@mui/material';
 import AdminSidebar from '../../../Components/Sidebar/AdminSidebar.jsx';
 import AdminNavbar from '../../../Components/Navbar/Adminnavbar.jsx';
+import axios from 'axios'; // Import axios
 
 const UserReg = () => {
   const [userDetails, setUserDetails] = useState({
@@ -44,6 +45,26 @@ const UserReg = () => {
       alert('An error occurred while registering the user.');
     }
   };
+
+  // Fetch the latest User ID
+  const fetchLatestUserId = async () => {
+    try {
+      const response = await axios.get("http://localhost:8080/authentication/getUsertoolbox");
+      const latestUser = response.data.reduce((maxId, user) => {
+        const currentId = parseInt(user.userid.substring(1)); // Assuming your ID format is like "U001", extract and convert to integer
+        return currentId > maxId ? currentId : maxId;
+      }, 0);
+      const newUserId = `U${(latestUser + 1).toString().padStart(3, '0')}`; // Increment and format to "UXXX"
+      setUserDetails((prev) => ({ ...prev, userid: newUserId }));
+    } catch (error) {
+      console.error("Error fetching latest User ID: ", error);
+    }
+  };
+
+  // Call fetchLatestUserId on component mount
+  useEffect(() => {
+    fetchLatestUserId();
+  }, []);
 
   return (
     <Grid container>
