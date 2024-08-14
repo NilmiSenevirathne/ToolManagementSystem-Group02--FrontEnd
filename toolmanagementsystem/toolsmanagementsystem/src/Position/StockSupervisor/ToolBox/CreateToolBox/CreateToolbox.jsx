@@ -29,6 +29,7 @@ function CreateToolbox() {
     fetchLocations();
     fetchUsers();
     fetchProjects();
+    fetchLatestToolboxId();
   }, []);
 
   const fetchProjects = async () => {
@@ -55,6 +56,20 @@ function CreateToolbox() {
       setUsers(response.data);
     } catch (error) {
       console.error("Error fetching users: ", error);
+    }
+  };
+
+  const fetchLatestToolboxId = async () => {
+    try {
+      const response = await axios.get("http://localhost:8080/toolbox/gettoolbox");
+      const latestToolbox = response.data.reduce((maxId, toolbox) => {
+        const currentId = parseInt(toolbox.toolbox_id.substring(2)); // Assuming your ID format is like "TB001", extract and convert to integer
+        return currentId > maxId ? currentId : maxId;
+      }, 0);
+      const newToolboxId = `TB${(latestToolbox + 1).toString().padStart(3, '0')}`; // Increment and format to "TBXXX"
+      setToolbox((prev) => ({ ...prev, toolbox_id: newToolboxId }));
+    } catch (error) {
+      console.error("Error fetching latest Toolbox ID: ", error);
     }
   };
 
