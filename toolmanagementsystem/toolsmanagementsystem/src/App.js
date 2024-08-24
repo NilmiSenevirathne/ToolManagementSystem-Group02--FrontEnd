@@ -1,14 +1,12 @@
 import React from 'react';
 import {Route, BrowserRouter as Router, Routes} from 'react-router-dom';
+
+//import Home from '../src/Components/Home.jsx';
 import LoginForm from '../src/LoginPage/LoginForm.jsx';
-
-
-
 
 import ManageStock from './Position/StockSupervisor/ManageStock/ManageStock.jsx';
 import Toolbox from './Position/StockSupervisor/ToolBox/Toolbox.jsx';
 import CreateToolbox from './Position/StockSupervisor/ToolBox/CreateToolBox/CreateToolbox.jsx';
-import STrackToolbox from './Position/StockSupervisor/ToolBox/TrackToolbox/STrackToolbox.jsx';
 import Reports from './Position/StockSupervisor/Reports/Reports.jsx';
 import AddTool from './Position/StockSupervisor/ManageStock/AddTool.jsx';
 import EditTool from './Position/StockSupervisor/ManageStock/EditTool.jsx';
@@ -46,6 +44,7 @@ import SiteSupervisorProfile from './Components/Profile/SiteSupervisorProfile.js
 import UserEdit from './Position/Admin/UserManage/UserEdit.jsx';
 
 
+
 function App() {
    return (
 
@@ -53,7 +52,7 @@ function App() {
          <Routes>
                    
 
-                    
+                   
                     <Route  path='/' element={<LoginForm/>}> </Route> 
 
                     <Route  path='/profile' element={<StockProfile/>}></Route>
@@ -90,7 +89,6 @@ function App() {
                     <Route  path='/editToolbox/:toolbox_id' element={<UpdateToolbox/>}/>
                     <Route  path = "/tool"  element={<Tool/>}/>
                     <Route  path='/cart' element={<Cart/>}/>
-                    <Route  path = "/Stracktoolbox"  element={<STrackToolbox/>}/>
                     <Route  path = "/reports"  element={<Reports/>}/>
                  
 

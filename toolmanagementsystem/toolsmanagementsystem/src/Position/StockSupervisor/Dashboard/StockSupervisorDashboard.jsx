@@ -35,7 +35,6 @@ const StockSupervisorDashboard = () => {
             <BarChart
               data={toolInventoryData}
               margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
-              barSize={50}
             >
               <CartesianGrid strokeDasharray="3 3" strokeOpacity={0.2} />
               <XAxis dataKey="toolName" />
@@ -47,17 +46,12 @@ const StockSupervisorDashboard = () => {
               <Legend wrapperStyle={{ color: 'white' }} />
               <Bar 
                 dataKey="quantity" 
-                fill="url(#colorUv)" 
+                fill="#38c4f4" 
+                barSize={40}
                 animationBegin={800} 
                 animationDuration={1200} 
                 isAnimationActive={true}
               />
-              <defs>
-                <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#38c4f4" stopOpacity={0.8} />
-                  <stop offset="95%" stopColor="#38c4f4" stopOpacity={0} />
-                </linearGradient>
-              </defs>
             </BarChart>
           </ResponsiveContainer>
         </Box>

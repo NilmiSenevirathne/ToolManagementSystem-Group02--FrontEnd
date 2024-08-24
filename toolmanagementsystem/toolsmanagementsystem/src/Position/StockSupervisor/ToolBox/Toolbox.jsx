@@ -102,12 +102,7 @@ const Toolbox = () => {
                   Create ToolBox
                 </Button>
               </Link>
-              <Link to='/Stracktoolbox' style={{ textDecoration: 'none' }}>
-                <Button variant="contained" color="secondary" sx={{ fontSize: '1rem' }}>
-                 View Tools of Toolbox
-
-                </Button>
-              </Link>
+              
             </Box>
           </div>
       </Grid>
