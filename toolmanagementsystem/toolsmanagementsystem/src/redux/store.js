@@ -2,7 +2,7 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import userLoginReducer from '../redux/userResducer'; // Adjust import based on file structure
+import userLoginReducer from '../redux/userReducer.js'; // Adjust import based on file structure
 
 const reducer = combineReducers({
   userLogin: userLoginReducer,
