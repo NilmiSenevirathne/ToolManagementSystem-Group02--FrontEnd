@@ -1,20 +1,19 @@
 import axios from 'axios';
 
-    
-// In src/actions/userActions.js
 export const loginUser = (username, password) => async (dispatch) => {
     try {
         const response = await axios.post('http://localhost:8080/authentication/login', { username, password });
-        const userInfo = response.data; // Ensure the response contains the expected data
-        console.log('User Info from API:', userInfo); // Debugging line
+        const userInfo = response.data; // Ensure this includes the role
 
         dispatch({
             type: 'USER_LOGIN_SUCCESS',
-            payload: userInfo, // Store complete user info in state
+            payload: userInfo,
         });
-        console.log('User login success, dispatching action with payload:', userInfo);
+
+        // Optionally, store user info in localStorage
+        localStorage.setItem('userInfo', JSON.stringify(userInfo));
+
     } catch (error) {
-        console.error('Error logging in:', error);
         dispatch({
             type: 'USER_LOGIN_FAIL',
             payload: error.message,
@@ -22,10 +21,8 @@ export const loginUser = (username, password) => async (dispatch) => {
     }
 };
 
-
-// Logout action
 export const logoutUser = () => (dispatch) => {
-    // Perform logout actions if necessary, e.g., clearing tokens from localStorage
+    localStorage.removeItem('userInfo');
     dispatch({
         type: 'USER_LOGOUT',
     });
