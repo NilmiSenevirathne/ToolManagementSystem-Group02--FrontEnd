@@ -74,7 +74,7 @@ const UserManage = () => {
                     <TableCell sx={{ textAlign: 'center' }}>{user.firstname}</TableCell>
                     <TableCell sx={{ textAlign: 'center' }}>{user.lastname}</TableCell>
                     <TableCell sx={{ textAlign: 'center' }}>{user.nic}</TableCell>
-                    <TableCell sx={{ textAlign: 'center' }}>{user.password}</TableCell>
+                    <TableCell sx={{ textAlign: 'center' }}>{'*'.repeat(user.password.length)}</TableCell>
                     <TableCell sx={{ textAlign: 'center' }}>{user.role}</TableCell>
                     <TableCell sx={{ textAlign: 'center' }}>{user.username}</TableCell>
              
