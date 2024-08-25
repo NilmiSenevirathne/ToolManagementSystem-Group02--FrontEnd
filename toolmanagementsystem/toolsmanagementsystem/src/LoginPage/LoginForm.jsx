@@ -48,8 +48,9 @@ function LoginForm() {
                     console.log('Login Success!!');
                     console.log('Role from server response:', text);
 
+                    // Assuming the response is role; you might need to adjust based on actual response format
                     // Store user info in localStorage
-                    const userInfo = { role: text }; // Assuming text is the role
+                    const userInfo = { role: text, firstname: values.username }; // Example with firstname from username
                     localStorage.setItem('userInfo', JSON.stringify(userInfo));
                     
                     // Navigate based on the role
