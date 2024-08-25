@@ -1,6 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
+import { 
+  CssBaseline, Container, Grid, TextField, Button, Typography, Paper, Box, IconButton 
+} from '@mui/material';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import AdminSidebar from '../../../Components/Sidebar/AdminSidebar.jsx';
+import NewNav from "../../../Components/Navbar/NewNav.jsx";
 
 const UserEdit = () => {
     const [user, setUser] = useState({
@@ -9,9 +16,13 @@ const UserEdit = () => {
         lastname: "",
         nic: "",
         password: "",
+        confirmPassword: "",
         role: "",
         username: ""
     });
+
+    const [showPassword, setShowPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
     const { id } = useParams();
     const navigate = useNavigate();
@@ -36,6 +47,10 @@ const UserEdit = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        if (user.password !== user.confirmPassword) {
+            alert("Passwords do not match!");
+            return;
+        }
         try {
             await axios.put(`http://localhost:8080/authentication/${id}`, user);
             alert("User updated successfully");
@@ -46,64 +61,156 @@ const UserEdit = () => {
     };
 
     return (
-        <div className="container">
-            <div className="row">
-                <div className="col-md-6 offset-md-3 border rounded p-4 mt-2 shadow">
-                    <h2 className='text-center m-4'>Edit User Details</h2>
-                    <form onSubmit={handleSubmit}>
-                        <div className='card'>
-                            <div className='card-header'>
-                                Details of user id: {id}
-                                <ul className='list-group list-group-flush'>
-                                    <li className='list-group-item'>
-                                        <b>First Name:</b>
-                                        <br />
-                                        <input type="text" name="firstname" value={user.firstname} onChange={handleInputChange}  />
-                                    </li>
-                                    <li className='list-group-item'>
-                                        <b>Last Name:</b>
-                                        <br />
-                                        <input type="text" name="lastname" value={user.lastname} onChange={handleInputChange} />
-                                    </li>
-                                    <li className='list-group-item'>
-                                        <b>Contact:</b>
-                                        <br />
-                                        <input type="text" name="contact" value={user.contact} onChange={handleInputChange} />
-                                    </li>
-                                    <li className='list-group-item'>
-                                        <b>NIC:</b>
-                                        <br />
-                                        <input type="text" name="nic" value={user.nic} onChange={handleInputChange} readOnly/>
-                                    </li>
-                                    <li className='list-group-item'>
-                                        <b>Password:</b>
-                                        <br />
-                                        <input type="password" name="password" value={user.password} onChange={handleInputChange} />
-                                    </li>
-                                    <li className='list-group-item'>
-                                        <b>Role:</b>
-                                        <br />
-                                        <input type="text" name="role" value={user.role} onChange={handleInputChange} readOnly/>
-                                    </li>
-                                    <li className='list-group-item'>
-                                        <b>Username:</b>
-                                        <br />
-                                        <input type="text" name="username" value={user.username} onChange={handleInputChange} />
-                                    </li>
-                                </ul>
-                                <button type="submit" className="btn btn-outline-primary">
-                                    Submit
-                                </button>
-                                <Link type="cancel" className="btn btn-outline-danger mx-2" to="/UserManage">
-                                    Cancel
-                                </Link>
-                            </div>
-                        </div>
-                    </form>
-                    <Link className="btn btn-primary my-2" to={"/UserManage"}>Back to Home</Link>
-                </div>
-            </div>
-        </div>
+        <Grid container>
+            <CssBaseline />
+             
+            <Grid item>
+                <AdminSidebar />
+            </Grid> 
+
+            <Grid item xs>
+                <NewNav />
+                <Container maxWidth="md" style={{ marginTop: '20px' }}>
+                    <Typography variant="h4" align="center" gutterBottom>
+                        Update User Details Form
+                    </Typography>
+
+                    <Paper elevation={3} style={{ padding: '60px' }}>
+                        <form onSubmit={handleSubmit}>
+                            <Grid container spacing={2}>
+                                <Grid item xs={12} sm={6}>
+                                    <TextField
+                                        fullWidth
+                                        label="First Name"
+                                        name="firstname"
+                                        value={user.firstname}
+                                        onChange={handleInputChange}
+                                        variant="outlined"
+                                    />
+                                </Grid>
+                                <Grid item xs={12} sm={6}>
+                                    <TextField
+                                        fullWidth
+                                        label="Last Name"
+                                        name="lastname"
+                                        value={user.lastname}
+                                        onChange={handleInputChange}
+                                        variant="outlined"
+                                    />
+                                </Grid>
+                                <Grid item xs={12} sm={6}>
+                                    <TextField
+                                        fullWidth
+                                        label="Contact"
+                                        name="contact"
+                                        value={user.contact}
+                                        onChange={handleInputChange}
+                                        variant="outlined"
+                                    />
+                                </Grid>
+                                <Grid item xs={12} sm={6}>
+                                    <TextField
+                                        fullWidth
+                                        label="NIC"
+                                        name="nic"
+                                        value={user.nic}
+                                        onChange={handleInputChange}
+                                        variant="outlined"
+                                        InputProps={{ readOnly: true }}
+                                    />
+                                </Grid>
+                                <Grid item xs={12} sm={6}>
+                                    <TextField
+                                        fullWidth
+                                        label="Password"
+                                        name="password"
+                                        type={showPassword ? 'text' : 'password'}
+                                        value={user.password}
+                                        onChange={handleInputChange}
+                                        variant="outlined"
+                                        InputProps={{
+                                            endAdornment: (
+                                                <IconButton 
+                                                    onClick={() => setShowPassword(!showPassword)} 
+                                                    edge="end"
+                                                >
+                                                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                                                </IconButton>
+                                            )
+                                        }}
+                                    />
+                                </Grid>
+                                <Grid item xs={12} sm={6}>
+                                    <TextField
+                                        fullWidth
+                                        label="Confirm Password"
+                                        name="confirmPassword"
+                                        type={showConfirmPassword ? 'text' : 'password'}
+                                        value={user.confirmPassword}
+                                        onChange={handleInputChange}
+                                        variant="outlined"
+                                        InputProps={{
+                                            endAdornment: (
+                                                <IconButton 
+                                                    onClick={() => setShowConfirmPassword(!showConfirmPassword)} 
+                                                    edge="end"
+                                                >
+                                                    {showConfirmPassword ? <VisibilityOff /> : <Visibility />}
+                                                </IconButton>
+                                            )
+                                        }}
+                                    />
+                                </Grid>
+                                <Grid item xs={12} sm={6}>
+                                    <TextField
+                                        fullWidth
+                                        label="Role"
+                                        name="role"
+                                        value={user.role}
+                                        onChange={handleInputChange}
+                                        variant="outlined"
+                                        InputProps={{ readOnly: true }}
+                                    />
+                                </Grid>
+                                <Grid item xs={12} sm={6}>
+                                    <TextField
+                                        fullWidth
+                                        label="Username"
+                                        name="username"
+                                        value={user.username}
+                                        onChange={handleInputChange}
+                                        variant="outlined"
+                                    />
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <Box mt={2} display="flex" justifyContent="center" gap={2}>
+                                        <Box flexGrow={1}>
+                                            <Button
+                                                variant="contained"
+                                                sx={{ bgcolor: 'green', width: '100%', fontSize: '1.25rem' }}
+                                                type="submit"
+                                            >
+                                                Update
+                                            </Button>
+                                        </Box>
+                                        <Box flexGrow={1}>
+                                            <Link to="/usernamage" style={{ textDecoration: 'none' }}>
+                                                <Button
+                                                    variant="contained"
+                                                    sx={{ bgcolor: 'red', width: '100%', fontSize: '1.25rem' }}
+                                                >
+                                                    Cancel
+                                                </Button>
+                                            </Link>
+                                        </Box>
+                                    </Box>
+                                </Grid>
+                            </Grid>
+                        </form>
+                    </Paper>
+                </Container>
+            </Grid>
+        </Grid>
     );
 };
 
