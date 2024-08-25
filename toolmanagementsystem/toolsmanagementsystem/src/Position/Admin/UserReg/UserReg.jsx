@@ -1,9 +1,9 @@
-import React, {useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Select, InputLabel, FormControl, Box, Link, Container, Grid, CssBaseline, TextField, Button, Paper, Typography, IconButton, MenuItem } from '@mui/material';
 import AdminSidebar from '../../../Components/Sidebar/AdminSidebar.jsx';
 import NewNav from '../../../Components/Navbar/NewNav.jsx';
-import axios from 'axios'; // Import axios
+import axios from 'axios';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
@@ -13,17 +13,17 @@ const UserReg = () => {
     userid: '',
     username: '',
     password: '',
-    confirmPassword: '', // Added for password confirmation
+    confirmPassword: '',
     firstname: '',
     lastname: '',
     nic: '',
     contact: '',
-    role: '',
-    // imageData: ''
+    role: ''
   });
 
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [errors, setErrors] = useState({});
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -33,12 +33,41 @@ const UserReg = () => {
     });
   };
 
+  const validateFields = () => {
+    const errors = {};
+    const { username, password, confirmPassword, firstname, lastname, nic, contact, role } = userDetails;
+
+    if (!username.trim()) errors.username = 'Username is required.';
+    if (username.length < 3) errors.username = 'Username must be at least 3 characters long.';
+
+    if (!password) errors.password = 'Password is required.';
+    if (password.length < 8) errors.password = 'Password must be at least 8 characters long.';
+    if (!/\d/.test(password)) errors.password = 'Password must contain at least one number.';
+    if (!/[!@#$%^&*()_+{}\[\]:;"\'<>,.?~`]/.test(password)) errors.password = 'Password must contain at least one special character.';
+
+    if (password !== confirmPassword) errors.confirmPassword = 'Passwords do not match.';
+
+    if (!firstname.trim()) errors.firstname = 'First name is required.';
+    if (!lastname.trim()) errors.lastname = 'Last name is required.';
+
+    // Assuming NIC should be exactly 10 characters, adjust as needed
+    if (!nic.trim()) errors.nic = 'NIC is required.';
+    if (nic.length !== 10) errors.nic = 'NIC must be exactly 10 characters long.';
+
+    // Simple phone number validation (adjust regex as needed)
+    if (!contact.trim()) errors.contact = 'Contact number is required.';
+    if (!/^\d{10}$/.test(contact)) errors.contact = 'Contact number must be exactly 10 digits long.';
+
+    if (!role) errors.role = 'Role is required.';
+
+    setErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (userDetails.password !== userDetails.confirmPassword) {
-      alert("Passwords do not match!");
-      return;
-    }
+    if (!validateFields()) return;
+
     try {
       const response = await fetch('http://localhost:8080/authentication/createUser', {
         method: 'POST',
@@ -49,7 +78,7 @@ const UserReg = () => {
       });
       if (response.ok) {
         alert('User registered successfully!');
-        navigate('/usernamage')
+        navigate('/usernamage');
       } else {
         alert('Failed to register user.');
       }
@@ -63,10 +92,10 @@ const UserReg = () => {
     try {
       const response = await axios.get("http://localhost:8080/authentication/getUsertoolbox");
       const latestUser = response.data.reduce((maxId, user) => {
-        const currentId = parseInt(user.userid.substring(1)); // Assuming your ID format is like "U001", extract and convert to integer
+        const currentId = parseInt(user.userid.substring(1));
         return currentId > maxId ? currentId : maxId;
       }, 0);
-      const newUserId = `U${(latestUser + 1).toString().padStart(3, '0')}`; // Increment and format to "UXXX"
+      const newUserId = `U${(latestUser + 1).toString().padStart(3, '0')}`;
       setUserDetails((prev) => ({ ...prev, userid: newUserId }));
     } catch (error) {
       console.error("Error fetching latest User ID: ", error);
@@ -101,6 +130,9 @@ const UserReg = () => {
                     fullWidth
                     value={userDetails.userid}
                     onChange={handleChange}
+                    InputProps={{
+                      readOnly: true
+                    }}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -110,6 +142,8 @@ const UserReg = () => {
                     fullWidth
                     value={userDetails.username}
                     onChange={handleChange}
+                    error={!!errors.username}
+                    helperText={errors.username}
                   />
                 </Grid>
 
@@ -122,10 +156,12 @@ const UserReg = () => {
                     value={userDetails.password}
                     onChange={handleChange}
                     variant="outlined"
+                    error={!!errors.password}
+                    helperText={errors.password}
                     InputProps={{
                       endAdornment: (
-                        <IconButton 
-                          onClick={() => setShowPassword(!showPassword)} 
+                        <IconButton
+                          onClick={() => setShowPassword(!showPassword)}
                           edge="end"
                         >
                           {showPassword ? <VisibilityOff /> : <Visibility />}
@@ -143,10 +179,12 @@ const UserReg = () => {
                     value={userDetails.confirmPassword}
                     onChange={handleChange}
                     variant="outlined"
+                    error={!!errors.confirmPassword}
+                    helperText={errors.confirmPassword}
                     InputProps={{
                       endAdornment: (
-                        <IconButton 
-                          onClick={() => setShowConfirmPassword(!showConfirmPassword)} 
+                        <IconButton
+                          onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                           edge="end"
                         >
                           {showConfirmPassword ? <VisibilityOff /> : <Visibility />}
@@ -163,6 +201,8 @@ const UserReg = () => {
                     fullWidth
                     value={userDetails.firstname}
                     onChange={handleChange}
+                    error={!!errors.firstname}
+                    helperText={errors.firstname}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -172,6 +212,8 @@ const UserReg = () => {
                     fullWidth
                     value={userDetails.lastname}
                     onChange={handleChange}
+                    error={!!errors.lastname}
+                    helperText={errors.lastname}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -181,6 +223,8 @@ const UserReg = () => {
                     fullWidth
                     value={userDetails.nic}
                     onChange={handleChange}
+                    error={!!errors.nic}
+                    helperText={errors.nic}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -191,11 +235,13 @@ const UserReg = () => {
                     fullWidth
                     value={userDetails.contact}
                     onChange={handleChange}
+                    error={!!errors.contact}
+                    helperText={errors.contact}
                   />
                 </Grid>
 
                 <Grid item xs={12} sm={6}>
-                  <FormControl fullWidth variant="outlined">
+                  <FormControl fullWidth variant="outlined" error={!!errors.role}>
                     <InputLabel>Role</InputLabel>
                     <Select
                       label="Role"
@@ -208,32 +254,9 @@ const UserReg = () => {
                       <MenuItem value="SiteSupervisor">Site Supervisor</MenuItem>
                       <MenuItem value="Manager">Manager</MenuItem>
                     </Select>
+                    {!!errors.role && <Typography color="error" variant="caption">{errors.role}</Typography>}
                   </FormControl>
                 </Grid>
-
-                {/* <Grid item xs={12} sm={6}>
-  <FormControl fullWidth variant="outlined">
-    <InputLabel>Image Data</InputLabel>
-    <input
-      type="file"
-      name="imageData"
-      accept="image/*"
-      onChange={(e) => {
-        const file = e.target.files[0];
-        if (file) {
-          const reader = new FileReader();
-          reader.onloadend = () => {
-            setUserDetails((prev) => ({
-              ...prev,
-              imageData: reader.result
-            }));
-          };
-          reader.readAsDataURL(file); // Convert image file to base64 string
-        }
-      }}
-    />
-  </FormControl>
-</Grid> */}
 
                 <Grid item xs={12}>
                   <Box mt={2} display="flex" justifyContent="center" gap={2}>
