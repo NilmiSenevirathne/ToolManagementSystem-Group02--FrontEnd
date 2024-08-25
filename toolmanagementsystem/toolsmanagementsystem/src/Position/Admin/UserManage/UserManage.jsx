@@ -16,7 +16,7 @@ import {
   Paper,
 } from "@mui/material";
 import AdminSidebar from "../../../Components/Sidebar/AdminSidebar.jsx";
-import AdminNavbar from "../../../Components/Navbar/Adminnavbar.jsx";
+import NewNav from "../../../Components/Navbar/NewNav.jsx";
 
 
 
@@ -44,7 +44,7 @@ const UserManage = () => {
         <AdminSidebar />
       </Grid>
       <Grid item xs>
-        <AdminNavbar />
+        <NewNav/>
         <Box sx={{ padding: 3 ,marginLeft:'300px'}}>
           <Typography variant="h4" gutterBottom>
             User Management
@@ -67,7 +67,7 @@ const UserManage = () => {
               <TableBody>
                 {users.map((user, index) => (
                   <TableRow key={user.userid}>
-                    <TableCell>{index + 1}</TableCell>
+                    <TableCell>{user.userid}</TableCell>
                     <TableCell>{user.contact}</TableCell>
                     <TableCell>{user.firstname}</TableCell>
                     <TableCell>{user.lastname}</TableCell>
@@ -75,6 +75,8 @@ const UserManage = () => {
                     <TableCell>{user.password}</TableCell>
                     <TableCell>{user.role}</TableCell>
                     <TableCell>{user.username}</TableCell>
+             
+                    
                     <TableCell>
                      
                       <Link

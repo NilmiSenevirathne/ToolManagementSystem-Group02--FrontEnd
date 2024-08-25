@@ -1,5 +1,5 @@
 import React from 'react';
-import { AppBar, Toolbar, Typography, Button } from '@mui/material';
+import { IconButton, Box, Avatar,AppBar, Toolbar, Typography, Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
@@ -19,8 +19,27 @@ const Navbar = () => {
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           Welcome, {userInfo.role || 'Guest'} !
         </Typography>
+
+        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+        
+
+          {/* Profile picture icon */}
+          <IconButton sx={{ ml: 2 }} onClick={() => navigate('/profile')}>
+            <Avatar
+              alt={userInfo.name || 'User'}
+              src={userInfo.userimagedata || '/static/images/avatar/1.jpg'} // Replace with your default profile picture path
+            />
+          </IconButton>
+
+          <Button 
+            onClick={handleLogout} 
+            sx={{ backgroundColor: 'red', color: 'white', '&:hover': { backgroundColor: 'darkred' } }}
+          >
+            Logout
+          </Button>
+        </Box>
        
-        <Button color="inherit" onClick={handleLogout}>Logout</Button>
+        
       </Toolbar>
     </AppBar>
   );
