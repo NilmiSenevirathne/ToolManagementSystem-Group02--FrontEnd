@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import StockSidebar from '../../../Components/Sidebar/StockSidebar.jsx';
-import StockSupervisorNavbar from '../../../Components/Navbar/StockSupervisorNavbar.jsx';
+import NewNav from '../../../Components/Navbar/NewNav.jsx';
 import axios from 'axios';
 import {Grid , Table, TableHead, TableRow, TableCell, TableBody, Container, Typography, Box} from '@mui/material';
 
@@ -31,7 +31,7 @@ const Reports = () => {
         </Grid>
 
         <Grid item xs>
-            <StockSupervisorNavbar/>
+            <NewNav/>
 
             <Container maxWidth="lg">
           <Box mt={4}>

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import StockSidebar from '../Sidebar/StockSidebar';
-import StockSupervisorNavbar from '../Navbar/StockSupervisorNavbar';
+import NewNav from '../Navbar/NewNav.jsx';
 import { Grid, Paper, Typography, TextField, Box, Button } from '@mui/material';
 
 const StockProfile = () => {
@@ -84,7 +84,7 @@ const StockProfile = () => {
         <StockSidebar />
       </Grid>
       <Grid item xs>
-        <StockSupervisorNavbar />
+        <NewNav />
         <Grid container justifyContent="center">
           <Grid item xs={10} md={8} lg={6} component={Paper} elevation={3} sx={{ p: 4, mt: 4 }}>
             <Typography variant="h6" gutterBottom align="center" sx={{ fontSize: '2.5rem' }}>

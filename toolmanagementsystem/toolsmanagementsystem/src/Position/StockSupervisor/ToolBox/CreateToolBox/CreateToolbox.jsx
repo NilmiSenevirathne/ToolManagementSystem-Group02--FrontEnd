@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import StockSidebar from '../../../../Components/Sidebar/StockSidebar.jsx';
-import StockSupervisorNavbar from '../../../../Components/Navbar/StockSupervisorNavbar.jsx';
+import NewNav from '../../../../Components/Navbar/NewNav.jsx';
 import { Grid, Container, Box, Typography, TextField, MenuItem, Button } from "@mui/material";
 import axios from "axios";
 
@@ -170,7 +170,7 @@ function CreateToolbox() {
         <StockSidebar />
       </Grid>
       <Grid item xs>
-        <StockSupervisorNavbar />
+        <NewNav />
         <Container maxWidth="md">
           <Box mt={4}>
             <Box p={4} border={1} borderRadius={8} borderColor="grey.300" boxShadow={3}>

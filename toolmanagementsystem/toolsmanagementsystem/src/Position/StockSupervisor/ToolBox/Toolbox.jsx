@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import StockSidebar from '../../../Components/Sidebar/StockSidebar.jsx';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
-import StockSuperviorNavbar from '../../../Components/Navbar/StockSupervisorNavbar.jsx';
+import NewNav from '../../../Components/Navbar/NewNav.jsx';
 import { Grid, Box, Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, Container } from '@mui/material';
 
 const Toolbox = () => {
@@ -55,7 +55,7 @@ const Toolbox = () => {
       </Grid>
 
       <Grid item xs>
-        <StockSuperviorNavbar />
+        <NewNav />
 
         <div style={{margin:'20px'}}>
             <Typography variant="h4" gutterBottom>Welcome to ToolBox Details Section!</Typography>

@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import StockSidebar from "../../../../Components/Sidebar/StockSidebar";
-import StockSupervisorNavbar from "../../../../Components/Navbar/StockSupervisorNavbar";
+import NewNav from "../../../../Components/Navbar/NewNav.jsx";
 import { CssBaseline, Grid, Box, Typography, TextField, Button, Container } from "@mui/material";
 
 export default function UpdateToolbox() {
@@ -69,7 +69,7 @@ export default function UpdateToolbox() {
       </Grid>
 
       <Grid item xs>
-        <StockSupervisorNavbar />
+        <NewNav />
 
         <Container maxWidth="sm">
           <Box mt={4}>

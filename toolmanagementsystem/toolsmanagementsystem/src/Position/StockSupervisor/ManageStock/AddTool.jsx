@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import StockSidebar from "../../../Components/Sidebar/StockSidebar";
-import StockSuperviorNavbar from "../../../Components/Navbar/StockSupervisorNavbar.jsx";
+import NewNav from "../../../Components/Navbar/NewNav.jsx";
 import { CssBaseline, Grid, Box, Typography, TextField, Button, Container } from "@mui/material";
 
 export default function AddTool() {
@@ -102,7 +102,7 @@ export default function AddTool() {
         <StockSidebar />
       </Grid>
       <Grid item xs>
-        <StockSuperviorNavbar />
+        <NewNav />
         <Container maxWidth="sm">
           <Box mt={4}>
             <Box 
