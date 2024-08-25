@@ -10,14 +10,14 @@ const Navbar = () => {
     // Dispatch logout action and redirect to login page
     localStorage.removeItem('userInfo');
     // Replace with your logout action if needed
-    navigate('/login');
+    navigate('/');
   };
 
   return (
     <AppBar position="static">
       <Toolbar>
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          Welcome, {userInfo.role || 'Guest'}
+          Welcome, {userInfo.role || 'Guest'} !
         </Typography>
        
         <Button color="inherit" onClick={handleLogout}>Logout</Button>
