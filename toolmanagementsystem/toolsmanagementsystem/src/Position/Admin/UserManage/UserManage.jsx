@@ -45,51 +45,53 @@ const UserManage = () => {
       </Grid>
       <Grid item xs>
         <NewNav/>
-        <Box sx={{ padding: 3 ,marginLeft:'300px'}}>
+        
+        <div style={{ margin: '20px' }}>
           <Typography variant="h4" gutterBottom>
-            User Management
+            Welcome to User Details Section !
           </Typography>
-          <TableContainer component={Paper}>
-            <Table>
+
+          <TableContainer component={Paper} style={{ maxHeight: 400 }}>
+            <Table stickyHeader aria-label="User Details Table" sx={{ borderCollapse: 'separate', borderSpacing: 0 ,'& .MuiTableCell-root':{border:'1px solid rgba(224,224,224,1)',} ,}}>
               <TableHead>
                 <TableRow>
-                  <TableCell>User Id</TableCell>
-                  <TableCell>Contact</TableCell>
-                  <TableCell>First Name</TableCell>
-                  <TableCell>Last Name</TableCell>
-                  <TableCell>NIC</TableCell>
-                  <TableCell>Password</TableCell>
-                  <TableCell>Role</TableCell>
-                  <TableCell>Username</TableCell>
-                  <TableCell>Action</TableCell>
+                  <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white'   }}>User Id</TableCell>
+                  <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white'   }}>Contact</TableCell>
+                  <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white'   }}>First Name</TableCell>
+                  <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white'   }}>Last Name</TableCell>
+                  <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white'   }}>NIC</TableCell>
+                  <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white'   }}>Password</TableCell>
+                  <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white'   }}>Role</TableCell>
+                  <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white'   }}>Username</TableCell>
+                  <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white'   }}>Action</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
                 {users.map((user, index) => (
                   <TableRow key={user.userid}>
-                    <TableCell>{user.userid}</TableCell>
-                    <TableCell>{user.contact}</TableCell>
-                    <TableCell>{user.firstname}</TableCell>
-                    <TableCell>{user.lastname}</TableCell>
-                    <TableCell>{user.nic}</TableCell>
-                    <TableCell>{user.password}</TableCell>
-                    <TableCell>{user.role}</TableCell>
-                    <TableCell>{user.username}</TableCell>
+                    <TableCell sx={{ textAlign: 'center' }}>{user.userid}</TableCell>
+                    <TableCell sx={{ textAlign: 'center' }}>{user.contact}</TableCell>
+                    <TableCell sx={{ textAlign: 'center' }}>{user.firstname}</TableCell>
+                    <TableCell sx={{ textAlign: 'center' }}>{user.lastname}</TableCell>
+                    <TableCell sx={{ textAlign: 'center' }}>{user.nic}</TableCell>
+                    <TableCell sx={{ textAlign: 'center' }}>{user.password}</TableCell>
+                    <TableCell sx={{ textAlign: 'center' }}>{user.role}</TableCell>
+                    <TableCell sx={{ textAlign: 'center' }}>{user.username}</TableCell>
              
                     
                     <TableCell>
                      
-                      <Link
-                        className="btn btn-outline-primary mx-2"
-                        to={`/UserEdit/${user.userid}`}
-                      >
-                        Edit
+                      <Link to={`/UserEdit/${user.userid}`}>
+                        <Button variant="contained"
+                        sx={{ bgcolor: 'purple', size:"small" }} style={{ marginRight: '10px' }}>
+                         Edit
+                        </Button>
                       </Link>
                       <Button
                         variant="contained"
                         color="secondary"
                         onClick={() => deleteUser(user.userid)}
-                        sx={{ mx: 2 }}
+                        sx={{ bgcolor: 'red', size:"small" }}
                       >
                         Delete
                       </Button>
@@ -99,7 +101,7 @@ const UserManage = () => {
               </TableBody>
             </Table>
           </TableContainer>
-        </Box>
+          </div>
       </Grid>
     </Grid>
   );
