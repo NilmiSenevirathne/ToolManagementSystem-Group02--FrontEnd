@@ -13,7 +13,20 @@ const DashBoard = () => {
   useEffect(() => {
     axios.get('http://localhost:8080/authentication/getUsertoolbox')
       .then(response => {
-        setUserData(response.data);
+        // Transform the data to count users per role
+        const roleCounts = response.data.reduce((acc, user) => {
+          const role = user.role;
+          acc[role] = (acc[role] || 0) + 1;
+          return acc;
+        }, {});
+
+        // Convert roleCounts object into an array suitable for the BarChart
+        const chartData = Object.entries(roleCounts).map(([role, count]) => ({
+          role,
+          count,
+        }));
+
+        setUserData(chartData);
       })
       .catch(error => {
         console.error('Error fetching user data:', error);
@@ -28,25 +41,25 @@ const DashBoard = () => {
       </Grid>
 
       <Grid item xs>
-        <NewNav/>
+        <NewNav />
         <Box className="dboard-chartContainer">
-          <Typography variant="h4" className="dboard-chartTitle">Users</Typography>
+          <Typography variant="h4" className="dboard-chartTitle">Users Distribution</Typography>
           <ResponsiveContainer width="100%" height={400}>
             <BarChart
-              data={userData} // Use the state variable here
+              data={userData} // Use the transformed chart data here
               margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
               barSize={50}
             >
               <CartesianGrid strokeDasharray="3 3" strokeOpacity={0.2} />
-              <XAxis dataKey="user" />
-              <YAxis />
+              <XAxis dataKey="role" label={{ value: 'Role', position: 'insideBottomRight', offset: -5 }} />
+              <YAxis label={{ value: 'Count', angle: -90, position: 'insideLeft' }} />
               <Tooltip
                 contentStyle={{ backgroundColor: '#333', border: 'none' }}
                 itemStyle={{ color: '#fff' }}
               />
               <Legend wrapperStyle={{ color: 'white' }} />
               <Bar
-                dataKey="quantity"
+                dataKey="count" // Change this to 'count' to display the number of users per role
                 fill="url(#colorUv)"
                 animationBegin={800}
                 animationDuration={1200}
