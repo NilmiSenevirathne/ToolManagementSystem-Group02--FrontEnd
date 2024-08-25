@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { CssBaseline, Grid, Box, Typography } from '@mui/material';
 import axios from 'axios';
 import StockSidebar from '../../../Components/Sidebar/StockSidebar';
-import StockSupervisorNavbar from '../../../Components/Navbar/StockSupervisorNavbar.jsx';
+// import StockSupervisorNavbar from '../../../Components/Navbar/StockSupervisorNavbar.jsx';
+import NewNav from '../../../Components/Navbar/NewNav.jsx';
 import {
   BarChart, Bar, XAxis, YAxis, Tooltip, Legend, CartesianGrid, ResponsiveContainer
 } from 'recharts';
@@ -28,7 +29,7 @@ const StockSupervisorDashboard = () => {
         <StockSidebar />
       </Grid>
       <Grid item xs>
-        <StockSupervisorNavbar />
+        <NewNav />
         <Box className="dboard-chartContainer">
           <Typography variant="h4" className="dboard-chartTitle">Tool Inventory</Typography>
           <ResponsiveContainer width="100%" height={400}>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { CssBaseline, Grid, Box, Typography } from '@mui/material';
 import axios from 'axios';
-import ManagerNavbar from '../../../Components/Navbar/ManagerNavbar.jsx';
+import NewNav from '../../../Components/Navbar/NewNav.jsx';
 import ManagerSidebar from '../../../Components/ManagerSidebar.jsx';
 
 import {
@@ -29,7 +29,7 @@ const StockSupervisorDashboard = () => {
         <ManagerSidebar />
       </Grid>
       <Grid item xs>
-        <ManagerNavbar />
+        <NewNav />
         <Box className="dboard-chartContainer">
           <Typography variant="h4" className="dboard-chartTitle">Tool Inventory</Typography>
           <ResponsiveContainer width="100%" height={400}>

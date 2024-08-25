@@ -3,6 +3,7 @@ import axios from 'axios';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css'; // Import Leaflet CSS
 import Sbar from "../../../Components/Sbar";
+import NewNav from '../../../Components/Navbar/NewNav.jsx';
 import {
   BarChart, Bar, XAxis, YAxis, Tooltip, Legend, CartesianGrid, ResponsiveContainer
 } from 'recharts';
@@ -64,7 +65,7 @@ const Dboard = () => {
     : [];
   return (
     <div>
-      <Navbr />
+      <NewNav/>
       <Box display="flex" className='dboard-container'>
         <Sbar />
         <Box flexGrow={1} className='dboard-homeContainer'>

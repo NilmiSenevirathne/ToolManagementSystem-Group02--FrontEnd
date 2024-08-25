@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { CssBaseline, Grid, Box, Typography } from '@mui/material';
 import AdminSidebar from '../../../Components/Sidebar/AdminSidebar.jsx';
-import AdminNavbar from '../../../Components/Navbar/Adminnavbar.jsx';
+import NewNav from '../../../Components/Navbar/NewNav.jsx';
 import axios from 'axios';
 import {
   BarChart, Bar, XAxis, YAxis, Tooltip, Legend, CartesianGrid, ResponsiveContainer
@@ -28,8 +28,7 @@ const DashBoard = () => {
       </Grid>
 
       <Grid item xs>
-        <AdminNavbar />
-
+        <NewNav/>
         <Box className="dboard-chartContainer">
           <Typography variant="h4" className="dboard-chartTitle">Users</Typography>
           <ResponsiveContainer width="100%" height={400}>
