@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { Drawer, List, ListItem, ListItemText, ListItemIcon, Typography, Box, IconButton } from '@mui/material';
 import { FaTh, FaCartPlus, FaBriefcase, FaNewspaper } from 'react-icons/fa';
 import { RiLogoutCircleRLine } from 'react-icons/ri';
@@ -9,14 +9,15 @@ import axios from 'axios';
 
 const StockSidebar = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [collapsed, setCollapsed] = useState(false);
 
-  //handle the toggle button
+  // Handle the toggle button
   const handleToggleSidebar = () => {
     setCollapsed(!collapsed);
   };
 
-  //logout function
+  // Logout function
   const handleLogout = () => {
     axios.post('/authentication/logout')
       .then(response => {
@@ -29,7 +30,13 @@ const StockSidebar = () => {
       });
   };
 
-
+  const menuItems = [
+    { text: 'Dashboard', icon: <FaTh />, path: '/stocksupervisordashboard' },
+    { text: 'Manage Stock', icon: <FaCartPlus />, path: '/managestock' },
+    { text: 'ToolBox', icon: <FaBriefcase />, path: '/maintoolbox' },
+    { text: 'Reports', icon: <FaNewspaper />, path: '/reports' },
+    { text: 'Logout', icon: <RiLogoutCircleRLine />, action: handleLogout, path: '/' },
+  ];
 
   return (
     <Box sx={{ display: 'flex', position: 'relative' }}>
@@ -58,22 +65,28 @@ const StockSidebar = () => {
         </Box>
 
         <List>
-          {[
-            { text: 'Dashboard', icon: <FaTh />, path: '/stocksupervisordashboard' },
-            { text: 'Manage Stock', icon: <FaCartPlus />, path: '/managestock' },
-            { text: 'ToolBox', icon: <FaBriefcase />, path: '/maintoolbox' },
-            { text: 'Reports', icon: <FaNewspaper />, path: '/reports' },
-            { text: 'Logout', icon: <RiLogoutCircleRLine />, action:handleLogout , path:'/'},
-          ].map((item, index) => (
-            <ListItem button key={index} onClick={() => navigate(item.path)} sx={{ 
-              my: 1, 
-              mx: 2, 
-              borderRadius: 1, 
-              '&:hover': { backgroundColor: 'rgb(38, 196, 244)' }, 
-              transition: 'background-color 0.3s ease-in-out',
-              flexDirection: collapsed ? 'column' : 'row', // Change flex direction based on collapsed state
-              alignItems: 'center', // Center items vertically
-              }}>
+          {menuItems.map((item, index) => (
+            <ListItem
+              button
+              key={index}
+              onClick={() => {
+                if (item.action) {
+                  item.action();
+                } else {
+                  navigate(item.path);
+                }
+              }}
+              sx={{
+                my: 1,
+                mx: 2,
+                borderRadius: 1,
+                '&:hover': { backgroundColor: 'rgb(38, 196, 244)' },
+                transition: 'background-color 0.3s ease-in-out',
+                flexDirection: collapsed ? 'column' : 'row',
+                alignItems: 'center',
+                backgroundColor: location.pathname === item.path ? 'rgba(38, 196, 244, 0.2)' : 'transparent', // Highlight active tab
+              }}
+            >
               <ListItemIcon sx={{ color: 'white' }}>{item.icon}</ListItemIcon>
               {!collapsed && (
                 <ListItemText primary={item.text} sx={{ color: 'white' }} />
@@ -91,9 +104,9 @@ const StockSidebar = () => {
         sx={{
           position: 'absolute',
           top: 16,
-          left: collapsed ? 16 : 256, 
+          left: collapsed ? 16 : 256,
           transition: 'left 0.3s',
-          zIndex: 1300 
+          zIndex: 1300
         }}
       >
         <MenuIcon />
