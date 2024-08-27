@@ -3,11 +3,14 @@ import axios from 'axios';
 import { Link, useParams } from 'react-router-dom';
 import ManagerSidebar from '../../../../../../Components/ManagerSidebar.jsx';
 import './LocationHome.css';
-import { Grid, Container, Box, Typography, Button } from '@mui/material';
+import { Grid, Container, Box, Typography, Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, TextField, InputAdornment } from '@mui/material';
 import ManagerNavbar from '../../../../../../Components/Navbar/ManagerNavbar.jsx';
+import SearchIcon from '@mui/icons-material/Search'; // Import SearchIcon from Material-UI
 
 export default function LocationHome() {
   const [locations, setLocations] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [filteredLocations, setFilteredLocations] = useState([]);
 
   useEffect(() => {
     loadLocations();
@@ -19,16 +22,36 @@ export default function LocationHome() {
     try {
       const response = await axios.get("http://localhost:8080/locations");
       setLocations(response.data);
+      setFilteredLocations(response.data); // Initialize filtered locations with all locations
     } catch (error) {
       console.error('Error fetching data:', error);
     }
   };
 
-  const deleteLocations = async (locationId) => {
+  const deleteLocation = async (locationId) => {
     const confirmDelete = window.confirm("Are you sure you want to delete this location?");
     if (confirmDelete) {
       await axios.delete(`http://localhost:8080/location/${locationId}`);
       loadLocations(); // Refresh the locations list after deletion
+    }
+  };
+
+  // Function to handle search input change
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
+    filterLocations(e.target.value);
+  };
+
+  // Function to filter locations based on search query
+  const filterLocations = (query) => {
+    if (query.trim() === '') {
+      setFilteredLocations(locations); // Reset to all locations if query is empty
+    } else {
+      const filtered = locations.filter(location =>
+        location.locationId.toLowerCase().includes(query.toLowerCase()) ||
+        location.locationName.toLowerCase().includes(query.toLowerCase())
+      );
+      setFilteredLocations(filtered);
     }
   };
 
@@ -42,30 +65,69 @@ export default function LocationHome() {
         <ManagerNavbar />
         <Container maxWidth="lg">
           <Box mt={4}>
-            <Link className="btn" style={{ backgroundColor: 'navy', color: 'white' }} to="/AddLocation">Add Locations</Link>
-            <table className="table border shadow">
-              <thead style={{ top: 0, zIndex: 1, background: '#fff' }}>
-                <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">Location Id</th>
-                  <th scope="col">Location Name</th> 
-                  <th scope="col">Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {locations.map((location, index) => (
-                  <tr key={index}>
-                    <th scope="row">{index + 1}</th> 
-                    <td>{location.locationId}</td>
-                    <td>{location.locationName}</td>
-                    <td>
-                      <Link className='btn btn-outline-primary mx-2' to={`/UpdateLocation/${location.locationId}`}>Edit</Link>
-                      <button className='btn btn-danger mx-2' onClick={() => deleteLocations(location.locationId)}>Delete</button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+            <Button
+              variant="contained"
+              color="primary"
+              component={Link}
+              to="/AddLocation"
+              style={{ marginBottom: '20px' }}
+            >
+              Add Locations
+            </Button>
+            <TextField
+              fullWidth
+              label="Search"
+              variant="outlined"
+              margin="normal"
+              value={searchQuery}
+              onChange={handleSearchChange}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <SearchIcon />
+                  </InputAdornment>
+                ),
+              }}
+            />
+            <TableContainer component={Paper}>
+              <Table stickyHeader aria-label="sticky table">
+                <TableHead>
+                  <TableRow>
+                    <TableCell>#</TableCell>
+                    <TableCell>Location Id</TableCell>
+                    <TableCell>Location Name</TableCell>
+                    <TableCell>Actions</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {filteredLocations.map((location, index) => (
+                    <TableRow key={index}>
+                      <TableCell>{index + 1}</TableCell>
+                      <TableCell>{location.locationId}</TableCell>
+                      <TableCell>{location.locationName}</TableCell>
+                      <TableCell>
+                        <Button
+                          variant="outlined"
+                          color="primary"
+                          component={Link}
+                          to={`/UpdateLocation/${location.locationId}`}
+                          style={{ marginRight: '10px' }}
+                        >
+                          Edit
+                        </Button>
+                        <Button
+                          variant="contained"
+                          color="secondary"
+                          onClick={() => deleteLocation(location.locationId)}
+                        >
+                          Delete
+                        </Button>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
           </Box>
         </Container>
       </Grid>

@@ -1,9 +1,9 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import StockSidebar from "../../../Components/Sidebar/StockSidebar";
-import StockSuperviorNavbar from "../../../Components/Navbar/StockSupervisorNavbar.jsx";
-import { CssBaseline , Grid, Box, Typography, TextField, Button,Container} from "@mui/material";
+import NewNav from "../../../Components/Navbar/NewNav.jsx";
+import { CssBaseline, Grid, Box, Typography, TextField, Button, Container } from "@mui/material";
 
 export default function AddTool() {
   let navigate = useNavigate();
@@ -13,13 +13,16 @@ export default function AddTool() {
     toolName: "",
     description: "",
     quantity: 0,
-    
   });
 
   const [errors, setErrors] = useState({});
   const [duplicateError, setDuplicateError] = useState("");
 
   const { toolId, toolName, description, quantity } = tool;
+
+  useEffect(() => {
+    fetchLatestToolId();
+  }, []);
 
   const onInputChange = (e) => {
     setTool({ ...tool, [e.target.name]: e.target.value });
@@ -44,7 +47,7 @@ export default function AddTool() {
         console.error("Error occurred while adding tool:", error);
         if (error.response) {
           console.error("Server responded with:", error.response.data);
-          alert("Unsuccessfully Added NewTool!");
+          alert("Unsuccessfully Added New Tool!");
         }
       }
     }
@@ -78,16 +81,28 @@ export default function AddTool() {
     return isValid;
   };
 
+  const fetchLatestToolId = async () => {
+    try {
+      const response = await axios.get("http://localhost:8080/tool/gettools");
+      const latestTool = response.data.reduce((maxId, tool) => {
+        const currentId = parseInt(tool.toolId.substring(1)); // Assuming your ID format is like "T001", extract and convert to integer
+        return currentId > maxId ? currentId : maxId;
+      }, 0);
+      const newToolId = `T${(latestTool + 1).toString().padStart(3, '0')}`; // Increment and format to "TXXX"
+      setTool((prev) => ({ ...prev, toolId: newToolId }));
+    } catch (error) {
+      console.error("Error fetching latest Tool ID: ", error);
+    }
+  };
+
   return (
-  
-   <Grid container>
-      <CssBaseline/>
+    <Grid container>
+      <CssBaseline />
       <Grid item>
-        <StockSidebar/>
+        <StockSidebar />
       </Grid>
       <Grid item xs>
-        <StockSuperviorNavbar/>
-
+        <NewNav />
         <Container maxWidth="sm">
           <Box mt={4}>
             <Box 
@@ -97,60 +112,58 @@ export default function AddTool() {
               borderColor="grey.300"
               boxShadow={3}
             >
-
-            <Typography variant="h4" align="center" gutterBottom>
-              New Tool Details Form
-            </Typography>
-            <form onSubmit={onSubmit}>
-              <TextField
-                variant="outlined"
-                fullWidth
-                label="Tool ID"
-                name="toolId"
-                value={toolId}
-                onChange={onInputChange}
-                error={!!errors.toolId || !!duplicateError}
-                helperText={errors.toolId || duplicateError}
-                margin="normal"
-              />
-              <TextField
-                variant="outlined"
-                fullWidth
-                label="Tool Name"
-                name="toolName"
-                value={toolName}
-                onChange={onInputChange}
-                error={!!errors.toolName}
-                helperText={errors.toolName}
-                margin="normal"
-              />
-              <TextField
-                variant="outlined"
-                fullWidth
-                label="Description"
-                name="description"
-                value={description}
-                onChange={onInputChange}
-                error={!!errors.description}
-                helperText={errors.description}
-                margin="normal"
-              />
-              <TextField
-                variant="outlined"
-                fullWidth
-                type="number"
-                label="Quantity"
-                name="quantity"
-                value={quantity}
-                onChange={onInputChange}
-                error={!!errors.quantity}
-                helperText={errors.quantity}
-                margin="normal"
-              />
-             
-              
-              {/* submit button */}
-              <Box mt={2} display="flex" justifyContent="center" gap={2}>
+              <Typography variant="h4" align="center" gutterBottom>
+                New Tool Details Form
+              </Typography>
+              <form onSubmit={onSubmit}>
+                <TextField
+                  variant="outlined"
+                  fullWidth
+                  label="Tool ID"
+                  name="toolId"
+                  value={toolId}
+                  onChange={onInputChange}
+                  error={!!errors.toolId || !!duplicateError}
+                  helperText={errors.toolId || duplicateError}
+                  margin="normal"
+                  disabled
+                />
+                <TextField
+                  variant="outlined"
+                  fullWidth
+                  label="Tool Name"
+                  name="toolName"
+                  value={toolName}
+                  onChange={onInputChange}
+                  error={!!errors.toolName}
+                  helperText={errors.toolName}
+                  margin="normal"
+                />
+                <TextField
+                  variant="outlined"
+                  fullWidth
+                  label="Description"
+                  name="description"
+                  value={description}
+                  onChange={onInputChange}
+                  error={!!errors.description}
+                  helperText={errors.description}
+                  margin="normal"
+                />
+                <TextField
+                  variant="outlined"
+                  fullWidth
+                  type="number"
+                  label="Quantity"
+                  name="quantity"
+                  value={quantity}
+                  onChange={onInputChange}
+                  error={!!errors.quantity}
+                  helperText={errors.quantity}
+                  margin="normal"
+                />
+                {/* submit button */}
+                <Box mt={2} display="flex" justifyContent="center" gap={2}>
                   <Box flexGrow={1}>
                     <Button
                       variant="contained"
@@ -160,8 +173,7 @@ export default function AddTool() {
                       Submit
                     </Button>
                   </Box>
-
-                {/* cancel button */}
+                  {/* cancel button */}
                   <Box flexGrow={1}>
                     <Link to="/managestock" style={{ textDecoration: 'none' }}>
                       <Button
@@ -173,13 +185,11 @@ export default function AddTool() {
                     </Link>
                   </Box>
                 </Box>
-
-            </form>
+              </form>
             </Box>
           </Box>
         </Container>
-
       </Grid>
-   </Grid>
+    </Grid>
   );
 }

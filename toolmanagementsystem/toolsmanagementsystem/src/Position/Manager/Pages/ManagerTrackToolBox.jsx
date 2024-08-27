@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import StockSidebar from '../../../../Components/Sidebar/StockSidebar.jsx';
+import ManagerSidebar from '../../../Components/ManagerSidebar.jsx';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import StockSuperviorNavbar from '../../../../Components/Navbar/StockSupervisorNavbar.jsx';
+import ManagerNavbar from '../../../Components/Navbar/ManagerNavbar.jsx';
 import { Grid, Container, Box, Typography, Button, Paper, Table, TableHead, TableRow, TableCell, TableBody, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
@@ -57,10 +57,10 @@ const STrackToolbox = () => {
   return (
     <Grid container>
       <Grid item>
-        <StockSidebar />
+      <ManagerSidebar />
       </Grid>
       <Grid item xs>
-        <StockSuperviorNavbar />
+      <ManagerNavbar />
         <Container maxWidth="md">
           <Box mt={4}>
             <Typography variant="h4" align="center" gutterBottom>

@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Validation from '../../src/LoginPage/Validation.js';
 import { useNavigate } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
@@ -8,8 +7,9 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
-import backgroundImage from '../images/back7.png';
-import Logo from '../../src/images/user1.jpg';
+import backgroundImage from '../images/backnew.jpg';
+import Logo from '../images/BMKLogo.jpg'; // Adjusted path
+import Validation from '../LoginPage/Validation';
 
 const defaultTheme = createTheme();
 
@@ -41,37 +41,42 @@ function LoginForm() {
                 },
                 body: JSON.stringify(values),
             })
-            .then(response => {
+            .then(async response => {
                 if (response.ok) {
-                    return response.text();
+                    // Check if the response is text
+                    const text = await response.text();
+                    console.log('Login Success!!');
+                    console.log('Role from server response:', text);
+
+                    // Assuming the response is role; you might need to adjust based on actual response format
+                    // Store user info in localStorage
+                    const userInfo = { role: text, firstname: values.username }; // Example with firstname from username
+                    localStorage.setItem('userInfo', JSON.stringify(userInfo));
+                    
+                    // Navigate based on the role
+                    switch (text.toLowerCase()) {
+                        case 'admin':
+                            navigate('/admindashboard');
+                            break;
+                        case 'manager':
+                            navigate('/managerdashboard');
+                            break;
+                        case 'stocksupervisor':
+                            navigate('/stocksupervisordashboard');
+                            break;
+                        case 'sitesupervisor':
+                            navigate('/sitesupervisor');
+                            break;
+                        default:
+                            throw new Error('Unknown role');
+                    }
                 } else {
-                    return response.text().then(errorMessage => {
-                        throw new Error(errorMessage);
-                    });
-                }
-            })
-            .then(role => {
-                console.log("Login Success!!");
-                switch (role.toLowerCase()) {
-                    case 'admin':
-                        navigate("/admindashboard");
-                        break;
-                    case 'manager':
-                        navigate("/managerdashboard");
-                        break;
-                    case 'stocksupervisor':
-                        navigate("/stocksupervisordashboard");
-                        break;
-                    case 'sitesupervisor':
-                        navigate("/sitesupervisor");
-                        break;
-                    default:
-                        throw new Error('Unknown role');
+                    const errorMessage = await response.text();
+                    throw new Error(errorMessage);
                 }
             })
             .catch(error => {
                 console.error('Error during login:', error);
-                // Handle login error, maybe show a message to the user
             });
         } else {
             console.error('Form validation errors:', validationErrors);
@@ -106,7 +111,10 @@ function LoginForm() {
                         }}
                     >
                         <Box component="img" src={Logo} alt="Company Logo" sx={{ width: 100, height: 100, mb: 1 }} />
-                        <Typography component="h1" variant="h3">
+                        <Typography component="h2" variant="h3">
+                            Tools Management System
+                        </Typography>
+                        <Typography component="h4" variant="h4">
                             Login
                         </Typography>
                         <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>

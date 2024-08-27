@@ -1,62 +1,57 @@
-import React, { useState } from 'react';
-import { AppBar, Toolbar, Typography, Avatar, IconButton, Menu, MenuItem, Box } from '@mui/material';
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import profile from '../../images/profile.jpg';
-import { useNavigate } from 'react-router-dom';
+// import React, { useState, useEffect } from 'react';
+// import { AppBar, Toolbar, Typography, Avatar, IconButton, Menu, MenuItem } from '@mui/material';
+// import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+// import profile from '../../images/profile.jpg';
+// import { useNavigate } from 'react-router-dom';
+// import { useSelector, useDispatch } from 'react-redux';
+// import { logoutUser } from '../../actions/userActions';
 
-const StockSupervisorNavbar = () => {
-  const [anchorEl, setAnchorEl] = useState(null);
-  const navigate = useNavigate();
+// const Adminnavbar = () => {
+//   const userLogin = useSelector((state) => state.userLogin);
+//   const { userInfo } = userLogin || {};
+//   const dispatch = useDispatch();
+//   const navigate = useNavigate();
+//   const [anchorEl, setAnchorEl] = useState(null);
 
-  const user = {
-    firstname: 'Isuru',
-    lastname: 'Hasalaka',
-    avatar: profile
-  };
+//   useEffect(() => {
+//     console.log('User Info from Redux:', userInfo);
+//   }, [userInfo]);
 
-  const handleMenuOpen = (event) => {
-    setAnchorEl(event.currentTarget);
-    
-  };
+//   const handleMenuOpen = (event) => {
+//     setAnchorEl(event.currentTarget);
+//   };
 
-  const handleMenuClose = () => {
-    setAnchorEl(null);
-  };
+//   const handleMenuClose = () => {
+//     setAnchorEl(null);
+//   };
 
-  const handleProfileClick = () => {
-    navigate('/profile');
-    handleMenuClose();
-  };
+//   const handleProfileClick = () => {
+//     navigate('/profile');
+//     handleMenuClose();
+//   };
 
-  return (
-    <AppBar position="static">
-      <Toolbar>
-        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          Admin
-        </Typography>
-        
-        {user.firstname && (
-          <Box display="flex" alignItems="center">
-            <Typography variant="body1" component="span" sx={{ marginRight: 1 }}>
-              {user.firstname}
-            </Typography>
-            <IconButton color="inherit" onClick={handleMenuOpen}>
-              <Avatar alt="Profile Image" src={user.avatar} />
-              <ArrowDropDownIcon />
-            </IconButton>
-            <Menu
-              anchorEl={anchorEl}
-              open={Boolean(anchorEl)}
-              onClose={handleMenuClose}
-            >
-              <MenuItem onClick={handleProfileClick}>Profile</MenuItem>
-              <MenuItem onClick={handleMenuClose}>Settings</MenuItem>
-            </Menu>
-          </Box>
-        )}
-      </Toolbar>
-    </AppBar>
-  );
-};
+//   const handleLogout = () => {
+//     dispatch(logoutUser()); // Call logoutUser action
+//     navigate('/login');
+//   };
 
-export default StockSupervisorNavbar;
+//   return (
+//     <AppBar position="static">
+//       <Toolbar>
+//         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+//           Welcome, {userInfo }!
+//         </Typography>
+//         <IconButton onClick={handleMenuOpen}>
+//           <Avatar alt="Profile Picture" src={userInfo?.profilePictureUrl || profile} />
+//           <ArrowDropDownIcon />
+//         </IconButton>
+//         <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleMenuClose}>
+//           <MenuItem onClick={handleProfileClick}>Profile</MenuItem>
+//           <MenuItem onClick={handleLogout}>Logout</MenuItem>
+//         </Menu>
+//       </Toolbar>
+//     </AppBar>
+//   );
+// };
+
+// export default Adminnavbar;

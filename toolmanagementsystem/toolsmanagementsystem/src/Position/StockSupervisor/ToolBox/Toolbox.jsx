@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import StockSidebar from '../../../Components/Sidebar/StockSidebar.jsx';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
-import StockSuperviorNavbar from '../../../Components/Navbar/StockSupervisorNavbar.jsx';
+import NewNav from '../../../Components/Navbar/NewNav.jsx';
 import { Grid, Box, Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, Container } from '@mui/material';
 
 const Toolbox = () => {
@@ -55,22 +55,20 @@ const Toolbox = () => {
       </Grid>
 
       <Grid item xs>
-        <StockSuperviorNavbar />
+        <NewNav />
 
-        <Container maxWidth="md">
-          <Box mt={4}>
-            <Typography variant="h4" align="center" gutterBottom>
-              Welcome to ToolBox Details Section!
-            </Typography>
-            <TableContainer component={Paper} style={{ maxHeight: 400 }}>
-              <Table stickyHeader aria-label="Toolbox Table" sx={{ borderCollapse: 'separate', borderSpacing: 0, '& .MuiTableCell-root': { border: '1px solid rgba(224,224,224,1)' }, }}>
+        <div style={{margin:'20px'}}>
+            <Typography variant="h4" gutterBottom>Welcome to ToolBox Details Section!</Typography>
+            <TableContainer component={Paper} style={{ maxHeight: 400, width: '100%' }}>
+              <Table stickyHeader aria-label="Toolbox Table" sx={{borderCollapse: 'separate', borderSpacing: 0, '& .MuiTableCell-root': { border: '1px solid rgba(224,224,224,1)' }, }}>
                 <TableHead>
                   <TableRow>
                     <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white' }}>ToolBox ID</TableCell>
                     <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white' }}>Project ID</TableCell>
-                    <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white' }}>SiteSupervisor ID</TableCell>
-                    <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white' }}>Location ID</TableCell>
+                    <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white' }}>Site Supervisor</TableCell>
                     <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white' }}>Created Date</TableCell>
+                    <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white' }}>Location</TableCell>
+                    <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white' }}>Selected Tools</TableCell>
                     <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white' }}>Action</TableCell>
                   </TableRow>
                 </TableHead>
@@ -80,15 +78,16 @@ const Toolbox = () => {
                       <TableCell sx={{ textAlign: 'center' }}>{tool.toolbox_id}</TableCell>
                       <TableCell sx={{ textAlign: 'center' }}>{tool.project_id}</TableCell>
                       <TableCell sx={{ textAlign: 'center' }}>{tool.site_supervisor_id}</TableCell>
-                      <TableCell sx={{ textAlign: 'center' }}>{tool.location_id}</TableCell>
                       <TableCell sx={{ textAlign: 'center' }}>{tool.createdDate}</TableCell>
+                      <TableCell sx={{ textAlign: 'center' }}>{tool.location_id}</TableCell>
+                      <TableCell sx={{ textAlign: 'center' }}>{tool.selectedTools.join(', ')}</TableCell>
                       <TableCell sx={{ textAlign: 'center' }}>
                         <Link to={`/editToolbox/${tool.toolbox_id}`}>
-                          <Button variant="contained" sx={{ bgcolor: 'purple', size: 'small' }} style={{ marginRight: '10px' }}>
+                          <Button variant="contained" sx={{ padding: '2px 6px', bgcolor: 'purple', size: 'small' }} style={{ marginRight: '10px' }}>
                             Update
                           </Button>
                         </Link>
-                        <Button variant="contained" sx={{ bgcolor: 'red', size: 'small' }} onClick={() => deleteTool(tool.toolbox_id)}>
+                        <Button variant="contained" sx={{ padding: '2px 6px', bgcolor: 'red', size: 'small' }} onClick={() => deleteTool(tool.toolbox_id)}>
                           Delete
                         </Button>
                       </TableCell>
@@ -103,14 +102,9 @@ const Toolbox = () => {
                   Create ToolBox
                 </Button>
               </Link>
-              <Link to='/Stracktoolbox' style={{ textDecoration: 'none' }}>
-                <Button variant="contained" color="secondary" sx={{ fontSize: '1rem' }}>
-                  Track ToolBox
-                </Button>
-              </Link>
+              
             </Box>
-          </Box>
-        </Container>
+          </div>
       </Grid>
     </Grid>
   );

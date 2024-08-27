@@ -1,38 +1,26 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { CssBaseline, Grid, Box, Typography } from '@mui/material';
-import { Pie, Line } from 'react-chartjs-2';
+import axios from 'axios';
 import StockSidebar from '../../../Components/Sidebar/StockSidebar';
-import StockSupervisorNavbar from '../../../Components/Navbar/StockSupervisorNavbar.jsx';
-import { Chart as ChartJS, ArcElement, Tooltip, Legend, CategoryScale, LinearScale, PointElement, LineElement, Title } from 'chart.js';
-
-ChartJS.register(ArcElement, Tooltip, Legend, CategoryScale, LinearScale, PointElement, LineElement, Title);
+// import StockSupervisorNavbar from '../../../Components/Navbar/StockSupervisorNavbar.jsx';
+import NewNav from '../../../Components/Navbar/NewNav.jsx';
+import {
+  BarChart, Bar, XAxis, YAxis, Tooltip, Legend, CartesianGrid, ResponsiveContainer
+} from 'recharts';
 
 const StockSupervisorDashboard = () => {
-  const pieData = {
-    labels: ['Allocated_Tools', 'Available_Tools'],
-    datasets: [
-      {
-        label: '',
-        data: [100, 67,],
-        backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)'],
-        borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)'],
-        borderWidth: 1,
-      },
-    ],
-  };
-
-  const lineData = {
-    labels: ['January', 'February', 'March', 'April', 'May', 'June'],
-    datasets: [
-      {
-        label: 'Tools',
-        data: [65, 59, 80, 81, 56, 55, 40],
-        fill: false,
-        backgroundColor: 'rgba(75, 192, 192, 0.2)',
-        borderColor: 'rgba(75, 192, 192, 1)',
-      },
-    ],
-  };
+  
+  const [toolInventoryData, setToolInventoryData] = useState([]);
+  
+  useEffect(() => {
+    axios.get('http://localhost:8080/tool/toolInventory')
+      .then(response => {
+        setToolInventoryData(response.data);
+      })
+      .catch(error => {
+        console.error('Error fetching tool inventory data:', error);
+      });
+  }, []);
 
   return (
     <Grid container>
@@ -41,28 +29,32 @@ const StockSupervisorDashboard = () => {
         <StockSidebar />
       </Grid>
       <Grid item xs>
-        <StockSupervisorNavbar />
-        <Box sx={{ p: 3 }}>
-          
-          {/* Pie chart */}
-          <Grid container spacing={3}>
-            <Grid item xs={12} md={6}>
-              <Box sx={{ p: 3, border: '1px solid #ccc', borderRadius: '8px' }}>
-                
-                <Pie data={pieData} />
-              </Box>
-            </Grid>
-
-            {/* Line chart */}
-            <Grid item xs={12} md={6}>
-              <Box sx={{ p: 3, border: '1px solid #ccc', borderRadius: '8px' }}>
-                <Typography variant="h6" gutterBottom>
-                  Tools Variation of the Year
-                </Typography>
-                <Line data={lineData} />
-              </Box>
-            </Grid>
-          </Grid>
+        <NewNav />
+        <Box className="dboard-chartContainer">
+          <Typography variant="h4" className="dboard-chartTitle">Tool Inventory</Typography>
+          <ResponsiveContainer width="100%" height={400}>
+            <BarChart
+              data={toolInventoryData}
+              margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
+            >
+              <CartesianGrid strokeDasharray="3 3" strokeOpacity={0.2} />
+              <XAxis dataKey="toolName" />
+              <YAxis />
+              <Tooltip 
+                contentStyle={{ backgroundColor: '#333', border: 'none' }} 
+                itemStyle={{ color: '#fff' }} 
+              />
+              <Legend wrapperStyle={{ color: 'white' }} />
+              <Bar 
+                dataKey="quantity" 
+                fill="#38c4f4" 
+                barSize={40}
+                animationBegin={800} 
+                animationDuration={1200} 
+                isAnimationActive={true}
+              />
+            </BarChart>
+          </ResponsiveContainer>
         </Box>
       </Grid>
     </Grid>

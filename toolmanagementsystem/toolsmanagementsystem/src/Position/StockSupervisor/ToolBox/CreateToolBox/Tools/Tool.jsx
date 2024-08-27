@@ -4,7 +4,7 @@ import axios from 'axios';
 import StockSidebar from '../../../../../Components/Sidebar/StockSidebar.jsx';
 import { FaCartArrowDown } from 'react-icons/fa';
 import { useNavigate, useLocation } from 'react-router-dom';
-import StockSuperviorNavbar from '../../../../../Components/Navbar/StockSupervisorNavbar.jsx';
+import NewNav from '../../../../../Components/Navbar/NewNav.jsx';
 
 
 const Tool = () => {
@@ -90,7 +90,7 @@ const Tool = () => {
         </Grid>
 
         <Grid item xs>
-            <StockSuperviorNavbar/>
+            <NewNav/>
 
         <Container maxWidth="lg">
           <Box mt={4}>

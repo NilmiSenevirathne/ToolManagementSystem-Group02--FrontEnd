@@ -28,23 +28,23 @@
 }
 
 .pagination a {
-  color: navy;
+  color: rgb(67, 67, 149);
   padding: 10px 15px;
   text-decoration: none;
   border-radius: 5px;
-  border: 1px solid navy;
+  border: 1px solid #2b2b9c;
   transition: background-color 0.3s, color 0.3s;
 }
 
 .pagination a:hover {
-  background-color: navy;
+  background-color:  #2b2b9c;
   color: white;
 }
 
 .paginationActive a {
-  background-color: navy;
+  background-color: #2b2b9c;
   color: white;
-  border: 1px solid navy;
+  border: 1px solid #2b2b9c;
 }
 
 .paginationDisabled a {

@@ -3,6 +3,7 @@ import axios from 'axios';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css'; // Import Leaflet CSS
 import Sbar from "../../../Components/Sbar";
+import NewNav from '../../../Components/Navbar/NewNav.jsx';
 import {
   BarChart, Bar, XAxis, YAxis, Tooltip, Legend, CartesianGrid, ResponsiveContainer
 } from 'recharts';
@@ -18,14 +19,18 @@ import {
   TableRow,
   Paper,
   Modal,
+  TextField
 } from '@mui/material';
 import './dboard.css';
 import Navbr from '../../../Components/Navbar/Navbr';
+import { margin } from '@mui/system';
 
 const Dboard = () => {
   const [toolInventoryData, setToolInventoryData] = useState([]);
   const [selectedToolLocations, setSelectedToolLocations] = useState([]);
   const [open, setOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [tools, setTools] = useState([]);
 
   useEffect(() => {
     axios.get('http://localhost:8080/tool/toolInventory')
@@ -52,9 +57,15 @@ const Dboard = () => {
     setOpen(false);
   };
 
+  const filteredTools = Array.isArray(tools)
+    ? tools.filter((tool) =>
+        tool.toolId.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        tool.toolName.toLowerCase().includes(searchQuery.toLowerCase())
+      )
+    : [];
   return (
     <div>
-      <Navbr />
+      <NewNav/>
       <Box display="flex" className='dboard-container'>
         <Sbar />
         <Box flexGrow={1} className='dboard-homeContainer'>
@@ -131,10 +142,21 @@ const Dboard = () => {
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
         >
+          
           <Box className="modal-style">
             <Typography id="modal-modal-title" variant="h6" component="h2">
               Tool Locations
+           
             </Typography>
+            <TextField
+            label="Search tools using tool id or tool name"
+            variant="outlined"
+            fullWidth
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            sx={{ ml: 1 }}
+          />
+            
             <TableContainer component={Paper}>
               <Table>
                 <TableHead>
@@ -156,7 +178,7 @@ const Dboard = () => {
               </Table>
             </TableContainer>
 
-            <Box style={{ height: "400px", width: "100%", marginTop: '20px' }}>
+            <Box style={{ height: "400px", width: "50%", margin: '100px' }}>
               <MapContainer
                 center={[selectedToolLocations[0]?.latitude || 0, selectedToolLocations[0]?.longitude || 0]}
                 zoom={13}

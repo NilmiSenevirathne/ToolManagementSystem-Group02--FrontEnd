@@ -2,18 +2,18 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import StockSidebar from "../../../../Components/Sidebar/StockSidebar";
-import StockSupervisorNavbar from "../../../../Components/Navbar/StockSupervisorNavbar";
+import NewNav from "../../../../Components/Navbar/NewNav.jsx";
 import { CssBaseline, Grid, Box, Typography, TextField, Button, Container } from "@mui/material";
 
 export default function UpdateToolbox() {
   const navigate = useNavigate();
   const { toolbox_id } = useParams();
-
   const [values, setToolbox] = useState({
     toolbox_id: toolbox_id,
     project_id: "",
     site_supervisor_id: "",
     location_id: "",
+    selectedTools: [], // Ensure this is initialized as an array
   });
 
   useEffect(() => {
@@ -24,8 +24,14 @@ export default function UpdateToolbox() {
       }
       try {
         const response = await axios.get(`http://localhost:8080/toolbox/search/${toolbox_id}`);
-        const { project_id, site_supervisor_id, location_id } = response.data;
-        setToolbox({ ...values, project_id, site_supervisor_id, location_id });
+        const { project_id, site_supervisor_id, location_id, selectedTools } = response.data;
+        setToolbox({ 
+          toolbox_id, // Keep the toolbox_id unchanged
+          project_id: project_id || "", // Ensure values are set correctly
+          site_supervisor_id: site_supervisor_id || "",
+          location_id: location_id || "",
+          selectedTools: selectedTools || [], // Default to empty array
+        });
       } catch (error) {
         console.error("Error fetching toolbox:", error);
       }
@@ -63,7 +69,7 @@ export default function UpdateToolbox() {
       </Grid>
 
       <Grid item xs>
-        <StockSupervisorNavbar />
+        <NewNav />
 
         <Container maxWidth="sm">
           <Box mt={4}>
@@ -102,6 +108,7 @@ export default function UpdateToolbox() {
                   onChange={onInputChange}
                   margin="normal"
                 />
+
                 <TextField
                   variant="outlined"
                   fullWidth
@@ -111,6 +118,20 @@ export default function UpdateToolbox() {
                   onChange={onInputChange}
                   margin="normal"
                 />
+
+                <TextField
+                  variant="outlined"
+                  fullWidth
+                  label="Selected Tools"
+                  name="selectedTools"
+                  value={values.selectedTools.join(', ')} // This will work now as selectedTools is initialized as an array
+                  onChange={onInputChange}
+                  margin="normal"
+                  InputProps={{
+                    readOnly: true,
+                  }}
+                />
+
                 <Box mt={2} display="flex" justifyContent="center" gap={2}>
                   <Box flexGrow={1}>
                     <Button
