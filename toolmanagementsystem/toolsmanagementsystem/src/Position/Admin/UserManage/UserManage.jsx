@@ -35,6 +35,12 @@ const UserManage = () => {
   };
 
   const deleteUser = async (id) => {
+    
+    const isConfirmed = window.confirm("Are you sure you want to delete this User ?");
+    if(!isConfirmed){
+      return;
+    }
+
     try {
       // Fetch the user details to check the role
       const response = await axios.get(`http://localhost:8080/authentication/${id}`);
@@ -69,6 +75,7 @@ const UserManage = () => {
             Welcome to User Details Section!
           </Typography>
 
+          
           <TableContainer component={Paper} style={{ maxHeight: 400 }}>
             <Table stickyHeader aria-label="User Details Table" sx={{ borderCollapse: 'separate', borderSpacing: 0, '& .MuiTableCell-root': { border: '1px solid rgba(224,224,224,1)' } }}>
               <TableHead>

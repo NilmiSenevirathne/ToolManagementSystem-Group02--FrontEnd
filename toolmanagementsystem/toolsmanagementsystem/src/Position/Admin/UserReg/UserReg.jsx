@@ -50,9 +50,12 @@ const UserReg = () => {
     if (!firstname.trim()) errors.firstname = 'First name is required.';
     if (!lastname.trim()) errors.lastname = 'Last name is required.';
 
-    // Assuming NIC should be exactly 10 characters, adjust as needed
-    if (!nic.trim()) errors.nic = 'NIC is required.';
-    if (nic.length !== 10) errors.nic = 'NIC must be exactly 10 characters long.';
+    // Assuming NIC should be exactly 10 with V or 12  characters, adjust as needed
+    if (!nic.trim()) {
+      errors.nic = 'NIC is required.';
+    } else if (!/^\d{9} V$/.test(nic) && !/^\d{12}$/.test(nic)) {
+      errors.nic = 'NIC must be in the format xxxxxxxxxx V or 12 digits.';
+    }
 
     // Simple phone number validation (adjust regex as needed)
     if (!contact.trim()) errors.contact = 'Contact number is required.';
@@ -269,16 +272,19 @@ const UserReg = () => {
                         Submit
                       </Button>
                     </Box>
-                    <Box flexGrow={1}>
-                      <Link to="/usernamage" style={{ textDecoration: 'none' }}>
-                        <Button
-                          variant="contained"
-                          sx={{ bgcolor: 'red', width: '100%', fontSize: '1.25rem' }}
-                        >
-                          Cancel
-                        </Button>
-                      </Link>
-                    </Box>
+                   
+                   <Box flexGrow={1}>
+                        <Link to="/usernamage" style={{ textDecoration: 'none' }}>
+                          <Button
+                              variant="contained"
+                              sx={{ bgcolor: 'red', width: '100%', fontSize: '1.25rem' }}
+                          >
+                            Cancel
+                          </Button>
+                          </Link>
+                      </Box>
+
+
                   </Box>
                 </Grid>
               </Grid>

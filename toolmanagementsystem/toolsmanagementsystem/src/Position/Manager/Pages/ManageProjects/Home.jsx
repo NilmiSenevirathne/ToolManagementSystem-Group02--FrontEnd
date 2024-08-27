@@ -66,7 +66,7 @@ export default function Home() {
     .slice(pagesVisited, pagesVisited + projectsPerPage) // Get the projects for the current page
     .map((project, index) => (
       <TableRow key={index}>
-        <TableCell>{pagesVisited + index + 1}</TableCell>
+        <TableCell >{pagesVisited + index + 1}</TableCell>
         <TableCell>{project.projectId}</TableCell>
         <TableCell>{project.projectName}</TableCell>
         <TableCell>{project.description}</TableCell>
