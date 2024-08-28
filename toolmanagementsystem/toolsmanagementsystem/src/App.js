@@ -34,7 +34,7 @@ import Tool from './Position/StockSupervisor/ToolBox/CreateToolBox/Tools/Tool.js
 import Cart from './Position/StockSupervisor/ToolBox/CreateToolBox/Tools/Cart.jsx';
 import DashBoard from './Position/Admin/Dashboard/DashBoard.jsx';
 import UpdateLocation from './Position/Manager/Pages/ManageProjects/Projects/Location/UpdateLocation.jsx';
-import StockProfile from './Components/Profile/StockProfile.jsx';
+import Profile from './Components/Profile/Profile.jsx';
 import ManagerProfile from './Components/Profile/ManagerProfile.jsx';
 import UpdateToolbox from './Position/StockSupervisor/ToolBox/UpdateToolbox/UpdateToolbox.jsx';
 import TrackToolboxes from './Position/Sitesupervisor/TrackToolBoxes.jsx';
@@ -55,7 +55,7 @@ function App() {
                    
                     <Route  path='/' element={<LoginForm/>}> </Route> 
 
-                    <Route  path='/profile' element={<StockProfile/>}></Route>
+                    <Route  path='/profile' element={<Profile/>}></Route>
                                      
                     {/* Admin pages  */}
                     <Route path="/admindashboard" element={<DashBoard/>} />

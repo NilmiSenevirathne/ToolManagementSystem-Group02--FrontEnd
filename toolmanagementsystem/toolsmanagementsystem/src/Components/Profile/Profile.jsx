@@ -1,37 +1,31 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
-import StockSidebar from '../Sidebar/StockSidebar';
+import StockSidebar from '../Sidebar/StockSidebar.jsx';
 import NewNav from '../Navbar/NewNav.jsx';
 import { Grid, Paper, Typography, TextField, Box, Button } from '@mui/material';
 
-const StockProfile = () => {
-   const {userid} = useParams();
-   const navigate  = useNavigate();
+const Profile = () => {
+  const { username } = useParams();
+  const navigate = useNavigate();
 
-   const role = 'Stock Supervisor';
-   
-   const [values, setValues] = useState({
-       userid:userid,
-       profileimage:'',
-       firstName:'',
-       lastName:'',
-       username:'',
-       password:'',
-       nic: '',
-       contact:'',
-       role:role,
-   });
+  const [values, setValues] = useState({
+    profileimage: '',
+    firstName: '',
+    lastName: '',
+    username: '',
+    password: '',
+    nic: '',
+    contact: '',
+    role: ''
+  });
 
-   //get userdetils from the database
-   const getUserDetails = async () => {
+  // Get user details from the database
+  const getUserDetails = async () => {
     try {
-      const response = await axios.get(`http://localhost:8080/authentication/getUserDetails/${userid}`);
+      const response = await axios.get(`http://localhost:8080/authentication/getUserDetails/${username}`);
       const userDetails = response.data;
-      console.log('userid :', userid);
       setValues({
-        ...values,
-        userid: userDetails.userid || '',
         profileimage: userDetails.profileimage || '',
         firstName: userDetails.firstName || '',
         lastName: userDetails.lastName || '',
@@ -39,7 +33,7 @@ const StockProfile = () => {
         password: userDetails.password || '',
         nic: userDetails.nic || '',
         contact: userDetails.contact || '',
-        // role: userDetails.role || '',
+        role: userDetails.role || ''
       });
     } catch (error) {
       console.error('Error fetching user details:', error);
@@ -48,36 +42,33 @@ const StockProfile = () => {
 
   useEffect(() => {
     getUserDetails();
-  }, [userid]);
+  }, [username]);
 
-    
   const onInputChange = (e) => {
     const { name, value } = e.target;
     setValues({
       ...values,
-      [name]: value,
+      [name]: value
     });
   };
 
-  //update user details  function
+  // Update user details function
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
-        const response = await axios.put(`http://localhost:8080/updateUserProfile/${userid}`, values);
-        alert('User details updated successfully:', response.data);
-        navigate('/stocksupervisordashboard');
+      const response = await axios.put(`http://localhost:8080/authentication/updateUserDetails/${username}`, values);
+      alert('User details updated successfully:', response.data);
+      navigate('/stocksupervisordashboard');
     } catch (error) {
       console.error('Error updating user details:', error);
     }
   };
 
-   // Function to handle cancel button click
-   const onCancel = () => {
+  // Function to handle cancel button click
+  const onCancel = () => {
     navigate('/stocksupervisordashboard');
-  }; 
+  };
 
-  
-   
   return (
     <Grid container>
       <Grid item>
@@ -92,26 +83,7 @@ const StockProfile = () => {
             </Typography>
             <form onSubmit={onSubmit}>
               <Grid container spacing={2}>
-                <Grid item xs={6}>
-                  <TextField
-                    label="UserId"
-                    variant="outlined"
-                    fullWidth
-                    value={userid}
-                    onChange={onInputChange}
-                    disabled
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    type="file"
-                    label="Profile Picture"
-                    variant="outlined"
-                    fullWidth
-                    value={values.profileimage}
-                    onChange={onInputChange}
-                  />
-                </Grid>
+                
                 <Grid item xs={6}>
                   <TextField
                     label="First Name"
@@ -119,6 +91,7 @@ const StockProfile = () => {
                     fullWidth
                     value={values.firstName}
                     onChange={onInputChange}
+                    name="firstName"
                   />
                 </Grid>
                 <Grid item xs={6}>
@@ -128,6 +101,7 @@ const StockProfile = () => {
                     fullWidth
                     value={values.lastName}
                     onChange={onInputChange}
+                    name="lastName"
                   />
                 </Grid>
                 <Grid item xs={6}>
@@ -137,6 +111,7 @@ const StockProfile = () => {
                     fullWidth
                     value={values.username}
                     onChange={onInputChange}
+                    name="username"
                   />
                 </Grid>
                 <Grid item xs={6}>
@@ -147,6 +122,7 @@ const StockProfile = () => {
                     type="password"
                     value={values.password}
                     onChange={onInputChange}
+                    name="password"
                   />
                 </Grid>
                 <Grid item xs={6}>
@@ -156,6 +132,7 @@ const StockProfile = () => {
                     fullWidth
                     value={values.nic}
                     onChange={onInputChange}
+                    name="nic"
                   />
                 </Grid>
                 <Grid item xs={6}>
@@ -165,6 +142,7 @@ const StockProfile = () => {
                     fullWidth
                     value={values.contact}
                     onChange={onInputChange}
+                    name="contact"
                   />
                 </Grid>
                 <Grid item xs={6}>
@@ -174,6 +152,7 @@ const StockProfile = () => {
                     fullWidth
                     value={values.role}
                     onChange={onInputChange}
+                    name="role"
                     disabled
                   />
                 </Grid>
@@ -189,14 +168,13 @@ const StockProfile = () => {
                   </Button>
                 </Box>
                 <Box flexGrow={1}>
-                  <Link to="/stocksupervisordashboard" style={{ textDecoration: 'none' }}>
-                    <Button
-                      variant="contained"
-                      sx={{ bgcolor: 'red', width: '100%', fontSize: '1.25rem' }}
-                    >
-                      Cancel
-                    </Button>
-                  </Link>
+                  <Button
+                    variant="contained"
+                    sx={{ bgcolor: 'red', width: '100%', fontSize: '1.25rem' }}
+                    onClick={onCancel}
+                  >
+                    Cancel
+                  </Button>
                 </Box>
               </Box>
             </form>
@@ -207,4 +185,4 @@ const StockProfile = () => {
   );
 };
 
-export default StockProfile;
+export default Profile;
