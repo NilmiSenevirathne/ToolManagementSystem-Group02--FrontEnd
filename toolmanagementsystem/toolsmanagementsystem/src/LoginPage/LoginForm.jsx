@@ -43,18 +43,16 @@ function LoginForm() {
             })
             .then(async response => {
                 if (response.ok) {
-                    // Check if the response is text
-                    const text = await response.text();
+                    const role = await response.text();
                     console.log('Login Success!!');
-                    console.log('Role from server response:', text);
+                    console.log('Role from server response:', role);
 
-                    // Assuming the response is role; you might need to adjust based on actual response format
-                    // Store user info in localStorage
-                    const userInfo = { role: text, firstname: values.username }; // Example with firstname from username
+                    // Store both the role and username in localStorage
+                    const userInfo = { role, firstname: values.username }; // Adjust to use firstname if needed
                     localStorage.setItem('userInfo', JSON.stringify(userInfo));
                     
                     // Navigate based on the role
-                    switch (text.toLowerCase()) {
+                    switch (role.toLowerCase()) {
                         case 'admin':
                             navigate('/admindashboard');
                             break;
@@ -65,7 +63,7 @@ function LoginForm() {
                             navigate('/stocksupervisordashboard');
                             break;
                         case 'sitesupervisor':
-                            navigate('/sitesupervisor');
+                            navigate('/sitesupervisordashboard'); // Corrected this line to point to the right dashboard
                             break;
                         default:
                             throw new Error('Unknown role');
