@@ -48,7 +48,7 @@ function LoginForm() {
                     console.log('Role from server response:', role);
 
                     // Store both the role and username in localStorage
-                    const userInfo = { role, firstname: values.username }; // Adjust to use firstname if needed
+                    const userInfo = { role, firstname: values.username }; 
                     localStorage.setItem('userInfo', JSON.stringify(userInfo));
                     
                     // Navigate based on the role
