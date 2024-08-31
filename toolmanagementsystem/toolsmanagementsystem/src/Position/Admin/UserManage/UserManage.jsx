@@ -35,9 +35,8 @@ const UserManage = () => {
   };
 
   const deleteUser = async (id) => {
-    
-    const isConfirmed = window.confirm("Are you sure you want to delete this User ?");
-    if(!isConfirmed){
+    const isConfirmed = window.confirm("Are you sure you want to delete this User?");
+    if (!isConfirmed) {
       return;
     }
 
@@ -55,7 +54,7 @@ const UserManage = () => {
       // Proceed with deletion if the user is not an Admin
       await axios.delete(`http://localhost:8080/authentication/${id}`);
       alert("User deleted successfully.");
-      loadUsers(); // Function to refresh user list after deletion
+      loadUsers(); // Refresh the user list after deletion
     } catch (error) {
       console.error("Error deleting user:", error);
       alert("Failed to delete user. Please try again.");
@@ -71,37 +70,39 @@ const UserManage = () => {
       <Grid item xs>
         <NewNav />
         <div style={{ margin: '20px' }}>
-          <Typography variant="h4" gutterBottom>
+          <Typography variant="h4" gutterBottom padding={"20px"}>
             Welcome to User Details Section!
           </Typography>
-
-          
           <TableContainer component={Paper} style={{ maxHeight: 400 }}>
             <Table stickyHeader aria-label="User Details Table" sx={{ borderCollapse: 'separate', borderSpacing: 0, '& .MuiTableCell-root': { border: '1px solid rgba(224,224,224,1)' } }}>
               <TableHead>
                 <TableRow>
+                  <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white' }}>User Image</TableCell>
                   <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white' }}>User Id</TableCell>
-                  <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white' }}>Contact</TableCell>
                   <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white' }}>First Name</TableCell>
                   <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white' }}>Last Name</TableCell>
                   <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white' }}>NIC</TableCell>
-                  <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white' }}>Password</TableCell>
-                  <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white' }}>Role</TableCell>
                   <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white' }}>Username</TableCell>
+                  <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white' }}>Password</TableCell>
+                  <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white' }}>Contact</TableCell>
+                  <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white' }}>Role</TableCell>
                   <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white' }}>Action</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
                 {users.map((user) => (
                   <TableRow key={user.userid}>
+                    <TableCell sx={{ textAlign: 'center' }}>
+                      <img src={`data:image/jpeg;base64,${user.userimageData}`} alt="User" style={{ maxWidth: '50px', maxHeight: '50px' }} />
+                    </TableCell>
                     <TableCell sx={{ textAlign: 'center' }}>{user.userid}</TableCell>
-                    <TableCell sx={{ textAlign: 'center' }}>{user.contact}</TableCell>
                     <TableCell sx={{ textAlign: 'center' }}>{user.firstname}</TableCell>
                     <TableCell sx={{ textAlign: 'center' }}>{user.lastname}</TableCell>
                     <TableCell sx={{ textAlign: 'center' }}>{user.nic}</TableCell>
-                    <TableCell sx={{ textAlign: 'center' }}>{'*'.repeat(user.password.length)}</TableCell>
-                    <TableCell sx={{ textAlign: 'center' }}>{user.role}</TableCell>
                     <TableCell sx={{ textAlign: 'center' }}>{user.username}</TableCell>
+                    <TableCell sx={{ textAlign: 'center' }}>{'*'.repeat(user.password.length)}</TableCell>
+                    <TableCell sx={{ textAlign: 'center' }}>{user.contact}</TableCell>
+                    <TableCell sx={{ textAlign: 'center' }}>{user.role}</TableCell>
                     <TableCell>
                       <Link to={`/UserEdit/${user.userid}`}>
                         <Button variant="contained" sx={{ bgcolor: 'purple', size: "small" }} style={{ marginRight: '10px' }}>
