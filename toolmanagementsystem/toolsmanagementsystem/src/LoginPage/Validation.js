@@ -3,11 +3,12 @@ const Validation = (values) => {
     let errors = {};
 
     if (!values.username) {
-        errors.username = "Email Required";
+        errors.username = "Username is required";
     } else {
-        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailPattern.test(values.username)) {
-            errors.username = "Invalid email format";
+        // Optional: You can add additional checks, like minimum length or allowed characters
+        const usernamePattern = /^[a-zA-Z0-9_]{3,20}$/; // Example pattern: alphanumeric with underscores, 3-20 characters long
+        if (!usernamePattern.test(values.username)) {
+            errors.username = "Invalid username format. Only alphanumeric characters and underscores are allowed, and must be 3-20 characters long.";
         }
     }
 
