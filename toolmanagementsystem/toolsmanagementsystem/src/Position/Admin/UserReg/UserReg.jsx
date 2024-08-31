@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Select, InputLabel, FormControl, Box, Link, Container, Grid, CssBaseline, TextField, Button, Paper, Typography, IconButton, MenuItem } from '@mui/material';
+import { useNavigate, Link } from 'react-router-dom';
+import {
+  Select, InputLabel, FormControl, Box, Container, Grid, CssBaseline,
+  TextField, Button, Paper, Typography, IconButton, MenuItem
+} from '@mui/material';
 import AdminSidebar from '../../../Components/Sidebar/AdminSidebar.jsx';
 import NewNav from '../../../Components/Navbar/NewNav.jsx';
 import axios from 'axios';
@@ -10,12 +13,14 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 const UserReg = () => {
   const navigate = useNavigate();
   const [userDetails, setUserDetails] = useState({
+  
     userid: '',
     username: '',
     password: '',
     confirmPassword: '',
     firstname: '',
     lastname: '',
+    gender: '',
     nic: '',
     contact: '',
     role: ''
@@ -24,6 +29,7 @@ const UserReg = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [errors, setErrors] = useState({});
+  const [imagePreview, setImagePreview] = useState(null); // State for image preview
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -32,6 +38,8 @@ const UserReg = () => {
       [name]: value
     });
   };
+
+  
 
   const validateFields = () => {
     const errors = {};
@@ -50,14 +58,12 @@ const UserReg = () => {
     if (!firstname.trim()) errors.firstname = 'First name is required.';
     if (!lastname.trim()) errors.lastname = 'Last name is required.';
 
-    // Assuming NIC should be exactly 10 with V or 12  characters, adjust as needed
     if (!nic.trim()) {
       errors.nic = 'NIC is required.';
     } else if (!/^\d{9} V$/.test(nic) && !/^\d{12}$/.test(nic)) {
       errors.nic = 'NIC must be in the format xxxxxxxxxx V or 12 digits.';
     }
 
-    // Simple phone number validation (adjust regex as needed)
     if (!contact.trim()) errors.contact = 'Contact number is required.';
     if (!/^\d{10}$/.test(contact)) errors.contact = 'Contact number must be exactly 10 digits long.';
 
@@ -71,13 +77,22 @@ const UserReg = () => {
     e.preventDefault();
     if (!validateFields()) return;
 
+    const formData = new FormData();
+    
+    formData.append('userid', userDetails.userid);
+    formData.append('username', userDetails.username);
+    formData.append('password', userDetails.password);
+    formData.append('firstname', userDetails.firstname);
+    formData.append('lastname', userDetails.lastname);
+    formData.append('gender', userDetails.gender);
+    formData.append('nic', userDetails.nic);
+    formData.append('contact', userDetails.contact);
+    formData.append('role', userDetails.role);
+
     try {
       const response = await fetch('http://localhost:8080/authentication/createUser', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(userDetails)
+        body: formData
       });
       if (response.ok) {
         alert('User registered successfully!');
@@ -123,9 +138,10 @@ const UserReg = () => {
             New User Register Form
           </Typography>
 
-          <Paper elevation={3} style={{ padding: '60px' }}>
+          <Paper elevation={3} style={{ padding: '40px' }}>
             <form onSubmit={handleSubmit}>
               <Grid container spacing={2}>
+
                 <Grid item xs={12} sm={6}>
                   <TextField
                     name="userid"
@@ -219,6 +235,26 @@ const UserReg = () => {
                     helperText={errors.lastname}
                   />
                 </Grid>
+
+                {/* Gender Field */}
+                <Grid item xs={12} sm={6}>
+                  <FormControl fullWidth variant="outlined" error={!!errors.gender}>
+                    <InputLabel>Gender</InputLabel>
+                    <Select
+                      label="Gender"
+                      name="gender"
+                      value={userDetails.gender}
+                      onChange={handleChange}
+                    >
+                      <MenuItem value="Male">Male</MenuItem>
+                      <MenuItem value="Female">Female</MenuItem>
+                    </Select>
+                  </FormControl>
+                </Grid>
+
+                
+
+                {/* NIC Field */}
                 <Grid item xs={12} sm={6}>
                   <TextField
                     name="nic"
@@ -230,11 +266,12 @@ const UserReg = () => {
                     helperText={errors.nic}
                   />
                 </Grid>
+
+                {/* Contact Field */}
                 <Grid item xs={12} sm={6}>
                   <TextField
                     name="contact"
-                    label="Contact"
-                    type="tel"
+                    label="Contact Number"
                     fullWidth
                     value={userDetails.contact}
                     onChange={handleChange}
@@ -243,6 +280,7 @@ const UserReg = () => {
                   />
                 </Grid>
 
+                {/* Role Field */}
                 <Grid item xs={12} sm={6}>
                   <FormControl fullWidth variant="outlined" error={!!errors.role}>
                     <InputLabel>Role</InputLabel>
@@ -257,7 +295,6 @@ const UserReg = () => {
                       <MenuItem value="SiteSupervisor">Site Supervisor</MenuItem>
                       <MenuItem value="Manager">Manager</MenuItem>
                     </Select>
-                    {!!errors.role && <Typography color="error" variant="caption">{errors.role}</Typography>}
                   </FormControl>
                 </Grid>
 
@@ -272,19 +309,17 @@ const UserReg = () => {
                         Submit
                       </Button>
                     </Box>
-                   
-                   <Box flexGrow={1}>
-                        <Link to="/usernamage" style={{ textDecoration: 'none' }}>
-                          <Button
-                              variant="contained"
-                              sx={{ bgcolor: 'red', width: '100%', fontSize: '1.25rem' }}
-                          >
-                            Cancel
-                          </Button>
-                          </Link>
-                      </Box>
 
-
+                    <Box flexGrow={1}>
+                      <Link to="/usernamage" style={{ textDecoration: 'none' }}>
+                        <Button
+                          variant="contained"
+                          sx={{ bgcolor: 'red', width: '100%', fontSize: '1.25rem' }}
+                        >
+                          Cancel
+                        </Button>
+                      </Link>
+                    </Box>
                   </Box>
                 </Grid>
               </Grid>
