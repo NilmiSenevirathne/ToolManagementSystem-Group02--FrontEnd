@@ -2,15 +2,14 @@
 const Validation = (values) => {
     let errors = {};
 
-    if (!values.username) {
-        errors.username = "Username is required";
-    } else {
-        // Optional: You can add additional checks, like minimum length or allowed characters
-        const usernamePattern = /^[a-zA-Z0-9_]{3,20}$/; // Example pattern: alphanumeric with underscores, 3-20 characters long
-        if (!usernamePattern.test(values.username)) {
-            errors.username = "Invalid username format. Only alphanumeric characters and underscores are allowed, and must be 3-20 characters long.";
-        }
-    }
+    // if (!values.username) {
+    //     errors.username = "Username is required";
+    // } else if (values.username.length < 3) {
+    //     errors.username = "Username must be at least 3 characters long";
+    // } else if (values.username.length > 20) {
+    //     errors.username = "Username must not exceed 20 characters";
+    // }
+    
 
     if (!values.password) {
         errors.password = "Password Required";
