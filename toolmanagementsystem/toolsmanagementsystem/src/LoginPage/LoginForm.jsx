@@ -53,7 +53,7 @@ function LoginForm() {
                     const userInfo = { role, firstname: values.username }; 
                     localStorage.setItem('userInfo', JSON.stringify(userInfo));
                     
-                    alert("Login Successfully!");
+                    
 
                     // Navigate based on the role
                     switch (role.toLowerCase()) {
