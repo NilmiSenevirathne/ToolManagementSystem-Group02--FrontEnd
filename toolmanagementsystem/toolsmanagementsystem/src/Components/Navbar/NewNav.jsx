@@ -47,7 +47,7 @@ const Navbar = () => {
 
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
           <IconButton sx={{ ml: 2 }} onClick={() => navigate('/profile')}>
-            <Avatar src={userInfo.userimagedata || ''} />
+            <Avatar src={userInfo.userimageData || ''} />
           </IconButton>
 
           <Typography
@@ -64,11 +64,8 @@ const Navbar = () => {
             open={open}
             onClose={handleMenuClose}
           >
-            <MenuItem onClick={() => { navigate('/profile'); handleMenuClose(); }}>
+            <MenuItem onClick={() => { navigate(`/profile/${userInfo.firstname}`); handleMenuClose(); }}>
               Profile
-            </MenuItem>
-            <MenuItem onClick={() => { navigate('/settings'); handleMenuClose(); }}>
-              Settings
             </MenuItem>
           </Menu>
 
