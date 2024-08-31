@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import {
+    CssBaseline,
+    Grid,
     Box,
     Table,
     TableBody,
@@ -21,6 +23,7 @@ import {
 } from '@mui/material';
 import { Search as SearchIcon, Delete as DeleteIcon, Visibility as VisibilityIcon } from '@mui/icons-material';
 import Sbar from '../../../Components/Sbar';
+import NewNav from '../../../Components/Navbar/NewNav.jsx';
 
 const ViewToolStatusReports = () => {
     const [reports, setReports] = useState([]);
@@ -72,10 +75,16 @@ const ViewToolStatusReports = () => {
     };
 
     return (
-        <div>
-            <Sbar/>
+    <Grid container>
+        <CssBaseline />
+        <Grid item>
+            <Sbar/></Grid>
+        <Grid item xs>
+          <NewNav />
+
         <Box sx={{ padding: 2 ,marginLeft: '350px'}}>
             <Typography variant="h4" sx={{ marginBottom: 2 }}>View Tool Status Reports</Typography>
+            
             <Box sx={{ display: 'flex', alignItems: 'center', marginBottom: 2 }}>
                 <SearchIcon sx={{ marginRight: 1 }} />
                 <TextField
@@ -86,8 +95,8 @@ const ViewToolStatusReports = () => {
                     fullWidth
                 />
             </Box>
-            <TableContainer component={Paper}>
-                <Table>
+            <TableContainer component={Paper} style={{ maxHeight: 400 }}>
+                <Table stickyHeader aria-label="View Tool Reports Table" sx={{ borderCollapse: 'separate', borderSpacing: 0 ,'& .MuiTableCell-root':{border:'1px solid rgba(224,224,224,1)',} ,}}>
                     <TableHead>
                         <TableRow>
                             <TableCell>Report Id</TableCell>
@@ -149,7 +158,9 @@ const ViewToolStatusReports = () => {
                 </DialogActions>
             </Dialog>
         </Box>
-        </div>
+        </Grid>
+        
+        </Grid>
     );
 };
 
