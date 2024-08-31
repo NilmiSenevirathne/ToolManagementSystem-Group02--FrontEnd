@@ -11,6 +11,8 @@ import backgroundImage from '../images/backnew.jpg';
 import Logo from '../images/BMKLogo.jpg'; // Adjusted path
 import Validation from '../LoginPage/Validation';
 
+
+
 const defaultTheme = createTheme();
 
 function LoginForm() {
@@ -51,10 +53,13 @@ function LoginForm() {
                     const userInfo = { role, firstname: values.username }; 
                     localStorage.setItem('userInfo', JSON.stringify(userInfo));
                     
+                    alert("Login Successfully!");
+
                     // Navigate based on the role
                     switch (role.toLowerCase()) {
                         case 'admin':
                             navigate('/admindashboard');
+                            alert(" Successfully Login ")
                             break;
                         case 'manager':
                             navigate('/managerdashboard');
@@ -63,7 +68,7 @@ function LoginForm() {
                             navigate('/stocksupervisordashboard');
                             break;
                         case 'sitesupervisor':
-                            navigate('/sitesupervisordashboard'); // Corrected this line to point to the right dashboard
+                            navigate('/sitesupervisor'); // Corrected this line to point to the right dashboard
                             break;
                         default:
                             throw new Error('Unknown role');
@@ -152,6 +157,27 @@ function LoginForm() {
                             >
                                 Login
                             </Button>
+
+        <Box
+            sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                minHeight: '100px', 
+                backgroundColor: '#f8f9fa',
+                textAlign: 'center', 
+                padding: '20px', 
+                borderTop: '1px solid #ddd', 
+            }}
+        >
+            <Typography variant="body2" color="textSecondary">
+                Copyright © 2024 Dilum BMK Engineers (Pvt) Ltd. All rights reserved.
+            </Typography>
+            <Typography variant="body2" color="textSecondary">
+                Concept & Design by Department of ICT_UOR
+            </Typography>
+        </Box>
                         </Box>
                     </Box>
                 </Grid>
