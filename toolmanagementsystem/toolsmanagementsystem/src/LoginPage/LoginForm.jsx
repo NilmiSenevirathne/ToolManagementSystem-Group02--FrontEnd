@@ -175,7 +175,7 @@ function LoginForm() {
                 Copyright © 2024 Dilum BMK Engineers (Pvt) Ltd. All rights reserved.
             </Typography>
             <Typography variant="body2" color="textSecondary">
-                Concept & Design by Department of ICT_UOR
+                Concept & Design by Department of ICT_FOT_UOR
             </Typography>
         </Box>
                         </Box>

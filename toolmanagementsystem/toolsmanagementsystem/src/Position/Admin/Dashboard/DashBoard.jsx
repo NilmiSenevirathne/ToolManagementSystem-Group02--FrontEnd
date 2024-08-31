@@ -13,14 +13,12 @@ const DashBoard = () => {
   useEffect(() => {
     axios.get('http://localhost:8080/authentication/getUsertoolbox')
       .then(response => {
-        // Transform the data to count users per role
         const roleCounts = response.data.reduce((acc, user) => {
           const role = user.role;
           acc[role] = (acc[role] || 0) + 1;
           return acc;
         }, {});
 
-        // Convert roleCounts object into an array suitable for the BarChart
         const chartData = Object.entries(roleCounts).map(([role, count]) => ({
           role,
           count,
@@ -42,11 +40,13 @@ const DashBoard = () => {
 
       <Grid item xs>
         <NewNav />
-        <Box className="dboard-chartContainer">
-          <Typography variant="h4" className="dboard-chartTitle">Users Distribution</Typography>
+        
+          <Typography variant="h4" sx={{ color: 'white', mb: 2 }}>
+            Users Distribution
+          </Typography>
           <ResponsiveContainer width="100%" height={400}>
             <BarChart
-              data={userData} // Use the transformed chart data here
+              data={userData}
               margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
               barSize={50}
             >
@@ -59,7 +59,7 @@ const DashBoard = () => {
               />
               <Legend wrapperStyle={{ color: 'white' }} />
               <Bar
-                dataKey="count" // Change this to 'count' to display the number of users per role
+                dataKey="count"
                 fill="url(#colorUv)"
                 animationBegin={800}
                 animationDuration={1200}
@@ -73,7 +73,7 @@ const DashBoard = () => {
               </defs>
             </BarChart>
           </ResponsiveContainer>
-        </Box>
+     
       </Grid>
     </Grid>
   );

@@ -2,13 +2,13 @@
 const Validation = (values) => {
     let errors = {};
 
-    // if (!values.username) {
-    //     errors.username = "Username is required";
+    if (!values.username) {
+        errors.username = "Username is required";
     // } else if (values.username.length < 3) {
     //     errors.username = "Username must be at least 3 characters long";
     // } else if (values.username.length > 20) {
     //     errors.username = "Username must not exceed 20 characters";
-    // }
+    }
     
 
     if (!values.password) {
