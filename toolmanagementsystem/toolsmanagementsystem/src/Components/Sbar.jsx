@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { Drawer, List, ListItem, ListItemText, ListItemIcon, Typography, Box, IconButton } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import DashboardIcon from '@mui/icons-material/Dashboard';
@@ -13,6 +13,7 @@ import Profile from "../images/logo.jpg";
 const Sbar = () => {
 
   const navigate = useNavigate();
+    const location = useLocation();
   const [collapsed, setCollapsed] = useState(false);
 
   const handleToggleSidebar = () => {
@@ -28,7 +29,7 @@ const Sbar = () => {
           flexShrink: 0,
           whiteSpace: 'nowrap',
           '& .MuiDrawer-paper': {
-            width: collapsed ? 60 : 320,
+            width: collapsed ? 60 : 250,
             transition: 'width 0.3s',
             backgroundColor: "#131842",
             boxSizing: 'border-box',
@@ -74,6 +75,8 @@ const Sbar = () => {
                 transition: 'background-color 0.3s ease-in-out',
                 flexDirection: collapsed ? 'column' : 'row', 
                 alignItems: 'center',
+                backgroundColor: location.pathname === item.path ? 'rgba(38, 196, 244, 0.2)' : 'transparent', // Highlight active tab
+
               }}
             >
               <ListItemIcon sx={{ color: 'white' }}>
@@ -95,7 +98,7 @@ const Sbar = () => {
         sx={{
           position: 'absolute',
           top: 16,
-          left: collapsed ? 20: 25,
+          left: collapsed ? 16: 256,
           transition: 'left 0.3s',
           zIndex: 1300,
         }}
