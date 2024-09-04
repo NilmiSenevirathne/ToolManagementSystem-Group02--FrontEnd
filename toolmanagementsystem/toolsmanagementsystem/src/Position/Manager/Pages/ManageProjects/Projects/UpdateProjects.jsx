@@ -215,11 +215,11 @@ export default function UpdateProjects() {
                   <Box mt={2} display="flex" justifyContent="center" gap={2}>
                     <Box flexGrow={1}>
                       <Button variant="contained" sx={{ bgcolor: 'green', width: '100%', fontSize: '1.25rem' }} type="submit">
-                        Submit
+                        Update
                       </Button>
                     </Box>
                     <Box flexGrow={1}>
-                      <Link to="/manageprojects" style={{ textDecoration: 'none' }}>
+                      <Link to='/manageprojects' style={{ textDecoration: 'none' }}>
                         <Button variant="contained" sx={{ bgcolor: 'red', width: '100%', fontSize: '1.25rem' }} >
                           Cancel
                         </Button>

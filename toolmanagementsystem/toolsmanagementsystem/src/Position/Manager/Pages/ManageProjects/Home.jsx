@@ -79,7 +79,7 @@ export default function Home() {
         <TableCell sx={{ textAlign: 'center' }}>{project.endDate}</TableCell>
         <TableCell>
           <Button variant="contained" sx={{ bgcolor: 'purple', size:"small" }} component={Link} to={`/UpdateProjects/${project.projectId}`}>
-            Edit
+            Update
           </Button>
         </TableCell>
         <TableCell>
