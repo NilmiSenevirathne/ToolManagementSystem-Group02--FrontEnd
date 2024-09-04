@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import {
+  Grid, CssBaseline,
   Box,
   Typography,
   TextField,
@@ -15,6 +16,8 @@ import {
 } from "@mui/material";
 import SearchIcon from '@mui/icons-material/Search';
 import Sbar from "../../Components/Sbar";
+import NewNav from '../../Components/Navbar/NewNav.jsx';
+
 
 const ViewProjects = () => {
   const [projects, setProjects] = useState([]);
@@ -39,12 +42,23 @@ const ViewProjects = () => {
   );
 
   return (
-    <div>
+
+    <Grid container>
+      <CssBaseline />
+    
+      <Grid item>
       <Sbar/>
-    <Box sx={{ padding: 2, marginLeft: '330px' }}> {/* Added marginLeft */}
+      </Grid>
+
+      <Grid item xs>
+      <NewNav />
+
+    <div style={{ margin: '20px' }}>
+    <Box sx={{ padding: 2, marginLeft: '200px' }}> {/* Added marginLeft */}
       <Typography variant="h4" sx={{ marginBottom: 2 }}>
         View Projects Details
       </Typography>
+    
       <Box sx={{ display: 'flex', alignItems: 'center', marginBottom: 2 }}>
         <IconButton sx={{ marginRight: 1 }}>
           <SearchIcon />
@@ -57,27 +71,28 @@ const ViewProjects = () => {
           onChange={(e) => setSearchQuery(e.target.value)}
         />
       </Box>
-      <TableContainer component={Paper}>
-        <Table>
+
+      <TableContainer component={Paper} style={{ maxHeight: 400 }}>
+        <Table stickyHeader aria-label="Tools Table" sx={{ borderCollapse: 'separate', borderSpacing: 0 ,'& .MuiTableCell-root':{border:'1px solid rgba(224,224,224,1)',} ,}}>
           <TableHead>
             <TableRow>
-              <TableCell>Project ID</TableCell>
-              <TableCell>Project Name</TableCell>
-              <TableCell>Description</TableCell>
-              <TableCell>Site Supervisor ID</TableCell>
-              <TableCell>Site Supervisor Name</TableCell>
-              <TableCell>Location ID</TableCell>
+              <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white'   }}>Project ID</TableCell>
+              <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white'   }}>Project Name</TableCell>
+              <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white'   }}>Description</TableCell>
+              <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white'   }}>Site Supervisor ID</TableCell>
+              <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white'   }}>Site Supervisor Name</TableCell>
+              <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white'   }}>Location ID</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {filteredProjects.map((project) => (
               <TableRow key={project.projectId}>
-                <TableCell>{project.projectId}</TableCell>
-                <TableCell>{project.projectName}</TableCell>
-                <TableCell>{project.description}</TableCell>
-                <TableCell>{project.siteSupervisorID}</TableCell>
-                <TableCell>{project.siteSupervisorName}</TableCell>
-                <TableCell>{project.locationId}</TableCell>
+                <TableCell sx={{ textAlign: 'center' }}>{project.projectId}</TableCell>
+                <TableCell sx={{ textAlign: 'center' }}>{project.projectName}</TableCell>
+                <TableCell sx={{ textAlign: 'center' }}>{project.description}</TableCell>
+                <TableCell sx={{ textAlign: 'center' }}>{project.siteSupervisorID}</TableCell>
+                <TableCell sx={{ textAlign: 'center' }}>{project.siteSupervisorName}</TableCell>
+                <TableCell sx={{ textAlign: 'center' }}>{project.locationId}</TableCell>
               </TableRow>
             ))}
           </TableBody>
@@ -85,6 +100,8 @@ const ViewProjects = () => {
       </TableContainer>
     </Box>
     </div>
+    </Grid>
+    </Grid>
   );
 }
 

@@ -35,7 +35,7 @@ const StockSidebar = () => {
     { text: 'Manage Stock', icon: <FaCartPlus />, path: '/managestock' },
     { text: 'ToolBox', icon: <FaBriefcase />, path: '/maintoolbox' },
     { text: 'Reports', icon: <FaNewspaper />, path: '/reports' },
-    { text: 'Logout', icon: <RiLogoutCircleRLine />, action: handleLogout, path: '/' },
+    { text: 'Logout', icon: <RiLogoutCircleRLine />, path: '/' },
   ];
 
   return (
@@ -52,6 +52,7 @@ const StockSidebar = () => {
             backgroundColor: "#131842",
             boxSizing: 'border-box',
             overflowX: 'hidden', // Ensure contents don't overflow when collapsed
+            boxShadow: '0px 6px 15px rgb(39, 39, 159)',
           },
         }}
       >

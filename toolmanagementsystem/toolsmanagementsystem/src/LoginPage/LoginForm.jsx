@@ -10,6 +10,9 @@ import CssBaseline from '@mui/material/CssBaseline';
 import backgroundImage from '../images/backnew.jpg';
 import Logo from '../images/BMKLogo.jpg'; // Adjusted path
 import Validation from '../LoginPage/Validation';
+import IconButton from '@mui/material/IconButton';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 
 
@@ -24,6 +27,7 @@ function LoginForm() {
     });
 
     const [errors, setErrors] = useState({});
+    const [showPassword, setShowPassword] = useState(false);
 
     function handleChange(e) {
         setValues({ ...values, [e.target.name]: e.target.value });
@@ -137,7 +141,7 @@ function LoginForm() {
                             <TextField
                                 id="outlined-password-input"
                                 label="Password"
-                                type="password"
+                                type={showPassword ? 'text' : 'password'} // Toggle password visibility
                                 value={values.password}
                                 name='password'
                                 onChange={handleChange}
@@ -146,6 +150,16 @@ function LoginForm() {
                                 margin="normal"
                                 error={!!errors.password}
                                 helperText={errors.password}
+                                InputProps={{
+                                    endAdornment: (
+                                        <IconButton
+                                            onClick={() => setShowPassword(!showPassword)}
+                                            edge="end"
+                                        >
+                                            {showPassword ? <VisibilityOff /> : <Visibility />}
+                                        </IconButton>
+                                    )
+                                }}
                             />
                             <Button
                                 type='submit'

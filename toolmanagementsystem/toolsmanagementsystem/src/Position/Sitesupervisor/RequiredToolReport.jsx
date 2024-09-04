@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import jsPDF from "jspdf";
 import {
+  Grid, CssBaseline,
   Box,
   Typography,
   TextField,
@@ -22,6 +23,7 @@ import {
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import Sbar from "../../Components/Sbar";
+import NewNav from '../../Components/Navbar/NewNav.jsx';
 
 const RequiredToolReport = () => {
   const [tools, setTools] = useState([]);
@@ -131,9 +133,17 @@ const RequiredToolReport = () => {
     : [];
 
   return (
-    <div>
-      <Sbar />
-      <Box sx={{ padding: 3, marginLeft: '310px' }}>
+    <Grid container>
+      <CssBaseline />
+
+      <Grid item>
+      <Sbar /></Grid>
+      
+      <Grid item xs>
+      <NewNav />
+
+     <div style={{ margin: '20px' }}>
+      <Box sx={{ padding: 3, marginLeft: '200px' }}>
         <Typography variant="h4" gutterBottom>
           Required Tool Reports
         </Typography>
@@ -152,28 +162,28 @@ const RequiredToolReport = () => {
           />
         </Box>
 
-        <TableContainer component={Paper} sx={{ mb: 2 }}>
-          <Table>
+        <TableContainer component={Paper} sx={{ mb: 2 }} style={{ maxHeight: 400 }}>
+          <Table  stickyHeader aria-label="RequiredToolReport Table" sx={{ borderCollapse: 'separate', borderSpacing: 0 ,'& .MuiTableCell-root':{border:'1px solid rgba(224,224,224,1)',} ,}}>
             <TableHead>
               <TableRow>
-                <TableCell>Tool Id</TableCell>
-                <TableCell>Tool Name</TableCell>
-                <TableCell>Description</TableCell>
-                <TableCell>Quantity</TableCell>
-                <TableCell>Allocate Tool</TableCell>
-                <TableCell>Available Tool</TableCell>
-                <TableCell>Select</TableCell>
+                <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white'   }}>Tool Id</TableCell>
+                <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white'   }}>Tool Name</TableCell>
+                <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white'   }}>Description</TableCell>
+                <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white'   }}>Quantity</TableCell>
+                <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white'   }}>Allocate Tool</TableCell>
+                <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white'   }}>Available Tool</TableCell>
+                <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white'   }}>Select</TableCell>
               </TableRow>
             </TableHead>
             <TableBody sx={{ maxHeight: 230, overflowY: 'auto' }}>
               {filteredTools.map((tool) => (
                 <TableRow key={tool.toolId}>
-                  <TableCell>{tool.toolId}</TableCell>
-                  <TableCell>{tool.toolName}</TableCell>
-                  <TableCell>{tool.description}</TableCell>
-                  <TableCell>{tool.quantity}</TableCell>
-                  <TableCell>{tool.allocatedTool}</TableCell>
-                  <TableCell>{tool.availableTool}</TableCell>
+                  <TableCell sx={{ textAlign: 'center' }}>{tool.toolId}</TableCell>
+                  <TableCell sx={{ textAlign: 'center' }}>{tool.toolName}</TableCell>
+                  <TableCell sx={{ textAlign: 'center' }}>{tool.description}</TableCell>
+                  <TableCell sx={{ textAlign: 'center' }}>{tool.quantity}</TableCell>
+                  <TableCell sx={{ textAlign: 'center' }}>{tool.allocatedTool}</TableCell>
+                  <TableCell sx={{ textAlign: 'center' }}>{tool.availableTool}</TableCell>
                   <TableCell>
                     <Checkbox
                       checked={selectedTools.includes(tool)}
@@ -213,21 +223,21 @@ const RequiredToolReport = () => {
           <Typography variant="h6" gutterBottom>
             Report Table
           </Typography>
-          <TableContainer component={Paper}>
-            <Table>
+          <TableContainer component={Paper} >
+            <Table stickyHeader aria-label="Tools Table" sx={{ borderCollapse: 'separate', borderSpacing: 0 ,'& .MuiTableCell-root':{border:'1px solid rgba(224,224,224,1)',} ,}}>
               <TableHead>
                 <TableRow>
-                  <TableCell>Date and Time</TableCell>
-                  <TableCell>Project Name</TableCell>
-                  <TableCell>Report</TableCell>
+                  <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white'   }}>Date and Time</TableCell>
+                  <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white'   }}>Project Name</TableCell>
+                  <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white'   }}>Report</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
                 {reportData.map((report, index) => (
                   <TableRow key={index}>
-                    <TableCell>{report.date}</TableCell>
-                    <TableCell>{report.projectName}</TableCell>
-                    <TableCell>
+                    <TableCell sx={{ textAlign: 'center' }}>{report.date}</TableCell>
+                    <TableCell sx={{ textAlign: 'center' }}>{report.projectName}</TableCell>
+                    <TableCell sx={{ textAlign: 'center' }}>
                       <Button
                         variant="contained"
                         color="primary"
@@ -245,6 +255,8 @@ const RequiredToolReport = () => {
         </Box>
       </Box>
     </div>
+    </Grid>
+    </Grid>
   );
 };
 

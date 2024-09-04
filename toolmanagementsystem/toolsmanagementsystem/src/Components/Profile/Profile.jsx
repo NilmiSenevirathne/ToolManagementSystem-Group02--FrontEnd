@@ -56,9 +56,9 @@ const Profile = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.put(`http://localhost:8080/authentication/updateUserDetails/${username}`, values);
+      const response = await axios.put(`http://localhost:8080/authentication/updateUserProfile/${username}`, values);
       alert('User details updated successfully:', response.data);
-      navigate('/stocksupervisordashboard');
+      // navigate('/stocksupervisordashboard');
     } catch (error) {
       console.error('Error updating user details:', error);
     }
@@ -66,7 +66,7 @@ const Profile = () => {
 
   // Function to handle cancel button click
   const onCancel = () => {
-    navigate('/stocksupervisordashboard');
+    // navigate('');
   };
 
   return (

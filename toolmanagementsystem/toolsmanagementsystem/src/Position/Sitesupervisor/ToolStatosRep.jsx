@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import jsPDF from "jspdf";
 import {
+  CssBaseline,
   Box,
   Typography,
   TextField,
@@ -27,6 +28,8 @@ import {
 } from "@mui/material";
 import { ArrowDownward as ArrowDownwardIcon } from "@mui/icons-material";
 import Sbar from "../../Components/Sbar";
+import NewNav from '../../Components/Navbar/NewNav.jsx';
+
 
 const ToolStatosRep = () => {
   const [toolboxtool, setTools] = useState([]);
@@ -146,9 +149,16 @@ const ToolStatosRep = () => {
   };
 
   return (
-    <div>
-      <Sbar />
-      <Box sx={{ padding: 3, marginLeft: "310px" }}>
+    <Grid container>
+      <CssBaseline />
+
+      <Grid item>  <Sbar /></Grid>
+
+      <Grid item xs>
+        <NewNav />  
+
+      <div style={{ margin: '20px' }}>
+      <Box sx={{ padding: 3, marginLeft: "200px" }}>
         <Typography variant="h4" gutterBottom>
           Tool Status Report
         </Typography>
@@ -175,17 +185,17 @@ const ToolStatosRep = () => {
           <Typography variant="h6" gutterBottom>
             Tool List
           </Typography>
-          <TableContainer component={Paper}>
-            <Table>
+          <TableContainer component={Paper} style={{ maxHeight: 400 }}>
+            <Table tickyHeader aria-label="Tools Table" sx={{ borderCollapse: 'separate', borderSpacing: 0 ,'& .MuiTableCell-root':{border:'1px solid rgba(224,224,224,1)',} ,}}>
               <TableHead>
                 <TableRow>
-                  <TableCell>Select</TableCell>
-                  <TableCell>Tool Box Id</TableCell>
-                  <TableCell>Project Id</TableCell>
-                  <TableCell>Site Supervisor Id</TableCell>
-                  <TableCell>Location Id</TableCell>
-                  <TableCell>Created Date</TableCell>
-                  <TableCell>Selected Tools</TableCell>
+                  <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white'   }}>Select</TableCell>
+                  <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white'   }}>Tool Box Id</TableCell>
+                  <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white'   }}>Project Id</TableCell>
+                  <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white'   }}>Site Supervisor Id</TableCell>
+                  <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white'   }}>Location Id</TableCell>
+                  <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white'   }}>Created Date</TableCell>
+                  <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white'   }}>Selected Tools</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -338,6 +348,8 @@ const ToolStatosRep = () => {
         </Grid>
       </Box>
     </div>
+    </Grid>
+    </Grid>
   );
 };
 

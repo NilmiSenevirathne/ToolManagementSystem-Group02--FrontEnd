@@ -55,7 +55,7 @@ function App() {
                    
                     <Route  path='/' element={<LoginForm/>}> </Route> 
 
-                    <Route  path='/profile' element={<Profile/>}></Route>
+                    <Route  path='/profile/:firstname' element={<Profile/>}></Route>
                                      
                     {/* Admin pages  */}
                     <Route path="/admindashboard" element={<DashBoard/>} />
