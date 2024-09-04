@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { Drawer, List, ListItem, ListItemText, ListItemIcon, Typography, Box, IconButton } from '@mui/material';
 import { FaTh, FaCartPlus, FaBriefcase, FaNewspaper } from 'react-icons/fa';
 import { RiLogoutCircleRLine } from 'react-icons/ri';
@@ -8,6 +8,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 
 const StockSidebar = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [collapsed, setCollapsed] = useState(false);
 
   const handleToggleSidebar = () => {
@@ -48,14 +49,28 @@ const StockSidebar = () => {
             { text: 'Tools Stock Details', icon: <FaNewspaper />, path: '/Toolstockdetails' },
             { text: 'Tool Box', icon: <FaNewspaper />, path: '/ViewToolBoxDetails' },
             { text: 'Logout', icon: <RiLogoutCircleRLine />, path: '/' },
-          ].map((item, index) => (
-            <ListItem button key={index} onClick={() => navigate(item.path)} sx={{ my: 2 }}>
-              <ListItemIcon sx={{ color: 'white' }}>{item.icon}</ListItemIcon>
-              {!collapsed && (
-                <ListItemText primary={item.text} sx={{ color: 'white' }} />
-              )}
-            </ListItem>
-          ))}
+          ].map((item, index) => {
+            const isActive = location.pathname === item.path;
+            return (
+              <ListItem
+                button
+                key={index}
+                onClick={() => navigate(item.path)}
+                sx={{
+                  my: 2,
+                  backgroundColor: isActive ? '#1E88E5' : 'transparent', // Active background color
+                  '&:hover': {
+                    backgroundColor: isActive ? '#1565C0' : '#1A237E', // Hover color
+                  },
+                }}
+              >
+                <ListItemIcon sx={{ color: 'white' }}>{item.icon}</ListItemIcon>
+                {!collapsed && (
+                  <ListItemText primary={item.text} sx={{ color: 'white' }} />
+                )}
+              </ListItem>
+            );
+          })}
         </List>
       </Drawer>
 
