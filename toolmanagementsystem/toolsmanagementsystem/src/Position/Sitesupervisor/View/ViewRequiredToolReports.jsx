@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import {
+    Grid,
+    CssBaseline,
     Box,
     Table,
     TableBody,
@@ -21,6 +23,8 @@ import {
 } from '@mui/material';
 import { Search as SearchIcon, Delete as DeleteIcon, Visibility as VisibilityIcon } from '@mui/icons-material';
 import Sbar from '../../../Components/Sbar';
+import NewNav from '../../../Components/Navbar/NewNav.jsx';
+
 
 const ViewRequiredToolReports = () => {
     const [reports, setReports] = useState([]);
@@ -81,11 +85,19 @@ const ViewRequiredToolReports = () => {
     };
 
     return (
-        <div>
-            
-        <Sbar/>
+      
+        <Grid container>   
+           <CssBaseline />  
+
+        <Grid item>
+           <Sbar/> </Grid>
         
-        <Box sx={{ padding: 2  ,marginLeft: '350px'}}>
+        <Grid item xs>
+        <NewNav />
+
+        <div style={{ margin: '20px' }}>
+        
+        <Box sx={{ padding: 2  ,marginLeft: '200px'}}>
             <Typography variant="h4" sx={{ marginBottom: 2 }}>View Required Tool Reports</Typography>
             <Box sx={{ display: 'flex', alignItems: 'center', marginBottom: 2 }}>
                 <SearchIcon sx={{ marginRight: 1 }} />
@@ -97,15 +109,15 @@ const ViewRequiredToolReports = () => {
                     fullWidth
                 />
             </Box>
-            <TableContainer component={Paper}>
-                <Table>
+            <TableContainer component={Paper}  style={{ maxHeight: 400 }}>
+                <Table stickyHeader aria-label="View Required ToolsReports Table" sx={{ borderCollapse: 'separate', borderSpacing: 0 ,'& .MuiTableCell-root':{border:'1px solid rgba(224,224,224,1)',} ,}}>
                     <TableHead>
                         <TableRow>
-                            <TableCell>Report Id</TableCell>
-                            <TableCell>Created At</TableCell>
-                            <TableCell>Project Name</TableCell>
-                            <TableCell>Report Data</TableCell>
-                            <TableCell>Actions</TableCell>
+                            <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white'   }}>Report Id</TableCell>
+                            <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white'   }}>Created At</TableCell>
+                            <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white'   }}>Project Name</TableCell>
+                            <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white'   }}>Report Data</TableCell>
+                            <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white'   }}>Actions</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -171,6 +183,10 @@ const ViewRequiredToolReports = () => {
             </Dialog>
         </Box>
         </div>
+        </Grid>
+    
+    </Grid>
+       
     );
 };
 
