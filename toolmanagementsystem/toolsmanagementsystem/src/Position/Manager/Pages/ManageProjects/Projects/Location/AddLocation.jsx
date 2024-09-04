@@ -2,7 +2,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import React, { useState } from 'react';
 import axios from 'axios';
 import ManagerSidebar from '../../../../../../Components/ManagerSidebar.jsx';
-import ManagerNavbar from '../../../../../../Components/Navbar/ManagerNavbar.jsx';
+import NewNav from '../../../../../../Components/Navbar/NewNav.jsx';
 import { Grid, Container, Box, TextField, Button, Typography, Paper } from '@mui/material';
 
 export default function AddLocation() {
@@ -101,13 +101,13 @@ export default function AddLocation() {
       </Grid>
 
       <Grid item xs>
-        <ManagerNavbar />
+        <NewNav />
 
-        <Container maxWidth="md">
+        <Container maxWidth="sm">
           <Box mt={4}>
-            <Paper elevation={3}>
-              <Box p={4}>
-                <Typography variant="h6" gutterBottom>
+            <Paper elevation={6}>
+              <Box p={4} >
+                <Typography variant="h4" align="center" gutterBottom>
                   Add New Location
                 </Typography>
                 <form onSubmit={(e) => onSubmit(e)}>
@@ -133,16 +133,20 @@ export default function AddLocation() {
                     error={!!errors.locationName}
                     helperText={errors.locationName}
                   />
-                  <Box mt={2} display="flex" justifyContent="space-between">
+                  <Box mt={2} display="flex" justifyContent="center" gap={2} >
                     <Button variant="outlined" color="secondary" component={Link} to="/locationHome">
                       Back to Location Details
                     </Button>
+                    
                     <Box>
-                      <Button variant="outlined" color="secondary" onClick={resetForm} style={{ marginRight: '10px' }}>
-                        Clear
-                      </Button>
-                      <Button variant="contained" color="primary" type="submit">
+                      <Button variant="contained" sx={{ bgcolor: 'green', width: '100%', fontSize: '1.25rem' }} type="submit">
                         Submit
+                      </Button>
+                    </Box>
+
+                    <Box>
+                      <Button variant="contained" sx={{ bgcolor: 'red', width: '100%', fontSize: '1.25rem' }} onClick={resetForm} style={{ marginRight: '10px' }}>
+                        Clear
                       </Button>
                     </Box>
                   </Box>

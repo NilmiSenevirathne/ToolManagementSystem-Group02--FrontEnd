@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ManagerSidebar from '../../../Components/ManagerSidebar.jsx';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import ManagerNavbar from '../../../Components/Navbar/ManagerNavbar.jsx';
+import NewNav from '../../../Components/Navbar/NewNav.jsx';
 import { Grid, Container, Box, Typography, Button, Paper, Table, TableHead, TableRow, TableCell, TableBody, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
@@ -60,7 +60,7 @@ const STrackToolbox = () => {
       <ManagerSidebar />
       </Grid>
       <Grid item xs>
-      <ManagerNavbar />
+      <NewNav />
         <Container maxWidth="md">
           <Box mt={4}>
             <Typography variant="h4" align="center" gutterBottom>
