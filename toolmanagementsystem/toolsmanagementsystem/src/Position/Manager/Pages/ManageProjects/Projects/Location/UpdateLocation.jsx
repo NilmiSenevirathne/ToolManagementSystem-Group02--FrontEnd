@@ -2,7 +2,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom'; // Import React
 import React, { useEffect, useState } from 'react'; // Import React and hooks
 import axios from 'axios'; // Import axios for making HTTP requests
 import ManagerSidebar from '../../../../../../Components/ManagerSidebar.jsx'; // Import Sidebar component
-import ManagerNavbar from '../../../../../../Components/Navbar/ManagerNavbar.jsx';
+import NewNav from '../../../../../../Components/Navbar/NewNav.jsx';
 import { Grid, Container, Box, TextField, Button, Typography, Paper } from '@mui/material'; // Import Material-UI components
 
 // Main function component for updating a location
@@ -73,14 +73,14 @@ export default function UpdateLocation() {
       </Grid>
 
       <Grid item xs>
-        <ManagerNavbar />
+        <NewNav />
 
-        <Container maxWidth="md">
+        <Container maxWidth="sm" >
           <Box mt={4}>
             <Paper elevation={3}>
               <Box p={4}>
-                <Typography variant="h6" gutterBottom>
-                  Edit Location
+                <Typography variant="h4"  align= "center" gutterBottom>
+                  Edit Location Details
                 </Typography>
                 <form onSubmit={(e) => onSubmit(e)}>
                 <TextField
@@ -103,13 +103,17 @@ export default function UpdateLocation() {
                     margin="normal"
                     variant="outlined"
                   />
-                  <Box mt={2} display="flex" justifyContent="space-between">
+                  <Box mt={2} display="flex" justifyContent="center" gap={2}>
+                    <Box flexGrow={1}>
                     <Button variant="outlined" color="secondary" component={Link} to="/locationHome">
                       Back
                     </Button>
-                    <Button variant="contained" color="primary" type="submit">
-                      Submit
+                    </Box>
+                    <Box>
+                    <Button variant="contained" sx={{ bgcolor: 'green', width: '100%', fontSize: '1.25rem' }} type="submit">
+                       Update
                     </Button>
+                    </Box>
                   </Box>
                 </form>
               </Box>
