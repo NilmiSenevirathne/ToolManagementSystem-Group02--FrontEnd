@@ -3,6 +3,8 @@ import axios from 'axios';
 import backgroundImage from '../../images/new.webp'; 
 import { Link } from 'react-router-dom';
 import {
+  Grid,
+  CssBaseline,
   Box,
   Typography,
   Button,
@@ -12,11 +14,11 @@ import {
   FormHelperText,
   Paper,
   Container,
-  Grid,
   Select,
   MenuItem
 } from '@mui/material';
 import Sbar from '../../Components/Sbar';
+import NewNav from '../../Components/Navbar/NewNav.jsx';
 
 const AddReportDetails = () => {
   const [projects, setProjects] = useState([]); // State to store fetched projects
@@ -82,8 +84,17 @@ const AddReportDetails = () => {
   };
 
   return (
-    <div>
-      <Sbar />
+
+    <Grid container>
+      <CssBaseline />
+   
+      <Grid item>
+      <Sbar /></Grid>
+
+      <Grid item xs>
+        <NewNav />
+
+      <div>
       <Box sx={{ marginLeft: '300px', backgroundSize: 'cover', minHeight: '100vh', padding: 3 }}>
         <Container component={Paper} sx={{ padding: 4, maxWidth: 600, mx: 'auto', backgroundColor: 'white' }}>
           <Typography variant="h4" gutterBottom>
@@ -143,6 +154,8 @@ const AddReportDetails = () => {
         </Container>
       </Box>
     </div>
+    </Grid>
+    </Grid>
   );
 };
 
