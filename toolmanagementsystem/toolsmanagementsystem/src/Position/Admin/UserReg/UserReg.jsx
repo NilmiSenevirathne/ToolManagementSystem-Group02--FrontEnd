@@ -91,24 +91,27 @@ const UserReg = () => {
     formData.append('nic', userDetails.nic);
     formData.append('contact', userDetails.contact);
     formData.append('role', userDetails.role);
-    formData.append('userimageData', userDetails.userimageData);
+    if (userDetails.userimageData) {
+        formData.append('userimageData', userDetails.userimageData);
+    }
 
     try {
-      const response = await fetch('http://localhost:8080/authentication/createUser', {
-        method: 'POST',
-        body: formData
-      });
-      if (response.ok) {
-        alert('User registered successfully!');
-        navigate('/usermanage'); // Corrected URL
-      } else {
-        alert('Failed to register user.');
-      }
+        const response = await fetch('http://localhost:8080/authentication/createUser', {
+            method: 'POST',
+            body: formData
+        });
+        if (response.ok) {
+            alert('User registered successfully!');
+            navigate('/usermanage'); // Corrected URL
+        } else {
+            alert('Failed to register user.');
+        }
     } catch (error) {
-      console.error('Error:', error);
-      alert('An error occurred while registering the user.');
+        console.error('Error:', error);
+        alert('An error occurred while registering the user.');
     }
-  };
+};
+
 
   const fetchLatestUserId = async () => {
     try {
