@@ -4,7 +4,8 @@ import { Link, useParams } from 'react-router-dom';
 import ManagerSidebar from '../../../../Components/ManagerSidebar.jsx';
 import ReactPaginate from 'react-paginate'; // Import React Paginate
 import './Home.css';
-import ManagerNavbar from '../../../../Components/Navbar/ManagerNavbar.jsx';
+import NewNav from '../../../../Components/Navbar/NewNav.jsx';
+
 import { Grid, Container, Typography, Box, TextField, Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
 
 export default function Home() {
@@ -67,22 +68,22 @@ export default function Home() {
     .map((project, index) => (
       <TableRow key={index}>
         <TableCell >{pagesVisited + index + 1}</TableCell>
-        <TableCell>{project.projectId}</TableCell>
-        <TableCell>{project.projectName}</TableCell>
-        <TableCell>{project.description}</TableCell>
-        <TableCell>{project.siteSupervisorID}</TableCell>
-        <TableCell>{project.siteSupervisorName}</TableCell>
-        <TableCell>{project.locationId}</TableCell>
-        <TableCell>{project.locationName}</TableCell>
-        <TableCell>{project.startDate}</TableCell>
-        <TableCell>{project.endDate}</TableCell>
+        <TableCell sx={{ textAlign: 'center' }}>{project.projectId}</TableCell>
+        <TableCell sx={{ textAlign: 'center' }}>{project.projectName}</TableCell>
+        <TableCell sx={{ textAlign: 'center' }}>{project.description}</TableCell>
+        <TableCell sx={{ textAlign: 'center' }}>{project.siteSupervisorID}</TableCell>
+        <TableCell sx={{ textAlign: 'center' }}>{project.siteSupervisorName}</TableCell>
+        <TableCell sx={{ textAlign: 'center' }}>{project.locationId}</TableCell>
+        <TableCell sx={{ textAlign: 'center' }}>{project.locationName}</TableCell>
+        <TableCell sx={{ textAlign: 'center' }}>{project.startDate}</TableCell>
+        <TableCell sx={{ textAlign: 'center' }}>{project.endDate}</TableCell>
         <TableCell>
-          <Button variant="contained" color="primary" component={Link} to={`/UpdateProjects/${project.projectId}`}>
+          <Button variant="contained" sx={{ bgcolor: 'purple', size:"small" }} component={Link} to={`/UpdateProjects/${project.projectId}`}>
             Edit
           </Button>
         </TableCell>
         <TableCell>
-          <Button variant="contained" color="secondary" onClick={() => deleteProject(project.projectId)}>
+          <Button variant="contained" sx={{ bgcolor: 'red', size:"small" }} onClick={() => deleteProject(project.projectId)}>
             Delete
           </Button>
         </TableCell>
@@ -101,7 +102,7 @@ export default function Home() {
         <ManagerSidebar />
       </Grid>
       <Grid item xs>
-        <ManagerNavbar />
+        <NewNav />
         <Container maxWidth="lg">
           <Box mt={4}>
             <Typography variant="h4" align="center" gutterBottom>
@@ -117,30 +118,32 @@ export default function Home() {
               />
               <Button
                 variant="contained"
-                color="primary"
+               
                 component={Link}
                 to="/addprojects"
+                sx={{ bgcolor: 'green', width: '100%', maxWidth: '100px', fontSize: '1.25rem' }}
                 style={{ marginLeft: '20px' }}
               >
                 Add Projects
               </Button>
             </Box>
-            <TableContainer component={Paper}>
-              <Table stickyHeader aria-label="sticky table">
+
+            <TableContainer component={Paper} style={{ maxHeight: 400 }}>
+              <Table stickyHeader aria-label="sticky table" sx={{ borderCollapse: 'separate', borderSpacing: 0 ,'& .MuiTableCell-root':{border:'1px solid rgba(224,224,224,1)',} ,}}>
                 <TableHead>
                   <TableRow>
-                    <TableCell>#</TableCell>
-                    <TableCell>Project ID</TableCell>
-                    <TableCell>Project Name</TableCell>
-                    <TableCell>Description</TableCell>
-                    <TableCell>Site Supervisor ID</TableCell>
-                    <TableCell>Site Supervisor Name</TableCell>
-                    <TableCell>Location ID</TableCell>
-                    <TableCell>Location Name</TableCell>
-                    <TableCell>Start Date</TableCell>
-                    <TableCell>End Date</TableCell>
-                    <TableCell>Action</TableCell>
-                    <TableCell>Action</TableCell>
+                    <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white'   }}>#</TableCell>
+                    <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white'   }}>Project ID</TableCell>
+                    <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white'   }}>Project Name</TableCell>
+                    <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white'   }}>Description</TableCell>
+                    <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white'   }}>Site Supervisor ID</TableCell>
+                    <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white'   }}>Site Supervisor Name</TableCell>
+                    <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white'   }}>Location ID</TableCell>
+                    <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white'   }}>Location Name</TableCell>
+                    <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white'   }}>Start Date</TableCell>
+                    <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white'   }}>End Date</TableCell>
+                    <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white'   }}>Action</TableCell>
+                    <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white'   }}>Action</TableCell>
                     
                   </TableRow>
                 </TableHead>
