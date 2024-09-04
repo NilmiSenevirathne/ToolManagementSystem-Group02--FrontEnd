@@ -1,12 +1,12 @@
+// Profile.jsx
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
-import StockSidebar from '../Sidebar/StockSidebar.jsx';
-import NewNav from '../Navbar/NewNav.jsx';
 import { Grid, Paper, Typography, TextField, Box, Button } from '@mui/material';
+import NewNav from '../Navbar/NewNav.jsx';
 
 const Profile = () => {
-  const { username } = useParams();
+  const { username } = useParams();  // Extract username from URL params
   const navigate = useNavigate();
 
   const [values, setValues] = useState({
@@ -19,24 +19,27 @@ const Profile = () => {
     contact: '',
     role: ''
   });
+  const [error, setError] = useState('');
 
-  // Get user details from the database
+  // Fetch user details from the API
   const getUserDetails = async () => {
     try {
       const response = await axios.get(`http://localhost:8080/authentication/getUserDetails/${username}`);
       const userDetails = response.data;
       setValues({
-        profileimage: userDetails.profileimage || '',
-        firstName: userDetails.firstName || '',
-        lastName: userDetails.lastName || '',
+        profileimage: userDetails.userimageData || '', // Ensure your backend provides this field
+        firstName: userDetails.firstname || '',
+        lastName: userDetails.lastname || '',
         username: userDetails.username || '',
         password: userDetails.password || '',
         nic: userDetails.nic || '',
         contact: userDetails.contact || '',
         role: userDetails.role || ''
       });
+      setError('');
     } catch (error) {
       console.error('Error fetching user details:', error);
+      setError('Error fetching user details. Please check the username and try again.');
     }
   };
 
@@ -44,6 +47,7 @@ const Profile = () => {
     getUserDetails();
   }, [username]);
 
+  // Handle input changes
   const onInputChange = (e) => {
     const { name, value } = e.target;
     setValues({
@@ -52,28 +56,21 @@ const Profile = () => {
     });
   };
 
-  // Update user details function
+  // Handle form submission to update user details
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
       const response = await axios.put(`http://localhost:8080/authentication/updateUserProfile/${username}`, values);
       alert('User details updated successfully:', response.data);
-      // navigate('/stocksupervisordashboard');
+      navigate('/stocksupervisordashboard');
     } catch (error) {
       console.error('Error updating user details:', error);
+      alert('Error updating user details. Please try again.');
     }
-  };
-
-  // Function to handle cancel button click
-  const onCancel = () => {
-    // navigate('');
   };
 
   return (
     <Grid container>
-      <Grid item>
-        <StockSidebar />
-      </Grid>
       <Grid item xs>
         <NewNav />
         <Grid container justifyContent="center">
@@ -81,9 +78,9 @@ const Profile = () => {
             <Typography variant="h6" gutterBottom align="center" sx={{ fontSize: '2.5rem' }}>
               Update Profile Form
             </Typography>
+            {error && <Typography color="error" align="center">{error}</Typography>}
             <form onSubmit={onSubmit}>
               <Grid container spacing={2}>
-                
                 <Grid item xs={6}>
                   <TextField
                     label="First Name"
@@ -112,6 +109,7 @@ const Profile = () => {
                     value={values.username}
                     onChange={onInputChange}
                     name="username"
+                    disabled
                   />
                 </Grid>
                 <Grid item xs={6}>
@@ -161,19 +159,10 @@ const Profile = () => {
                 <Box flexGrow={1}>
                   <Button
                     variant="contained"
-                    sx={{ bgcolor: 'green', width: '100%', fontSize: '1.25rem' }}
+                    sx={{ bgcolor: 'green', width: '100%', fontSize: '1.25rem', maxWidth: "200px" }}
                     type="submit"
                   >
                     Update
-                  </Button>
-                </Box>
-                <Box flexGrow={1}>
-                  <Button
-                    variant="contained"
-                    sx={{ bgcolor: 'red', width: '100%', fontSize: '1.25rem' }}
-                    onClick={onCancel}
-                  >
-                    Cancel
                   </Button>
                 </Box>
               </Box>

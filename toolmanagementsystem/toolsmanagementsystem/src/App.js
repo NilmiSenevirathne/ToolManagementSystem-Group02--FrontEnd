@@ -40,7 +40,6 @@ import UpdateToolbox from './Position/StockSupervisor/ToolBox/UpdateToolbox/Upda
 import TrackToolboxes from './Position/Sitesupervisor/TrackToolBoxes.jsx';
 import UserManage from '../src/Position/Admin/UserManage/UserManage.jsx'
 import UserReg from '../src/Position/Admin/UserReg/UserReg.jsx'
-import SiteSupervisorProfile from './Components/Profile/SiteSupervisorProfile.jsx';
 import UserEdit from './Position/Admin/UserManage/UserEdit.jsx';
 
 
@@ -55,7 +54,7 @@ function App() {
                    
                     <Route  path='/' element={<LoginForm/>}> </Route> 
 
-                    <Route  path='/profile/:firstname' element={<Profile/>}></Route>
+                    <Route  path='/profile/:username' element={<Profile/>}></Route>
                                      
                     {/* Admin pages  */}
                     <Route path="/admindashboard" element={<DashBoard/>} />
@@ -95,7 +94,6 @@ function App() {
                     {/* SiteSupervisor pages */}
 
                    
-                  <Route path="/sitesupervisorprofile" element={<SiteSupervisorProfile />} />
                   <Route path='/sitesupervisor' element={<Dboard/>}> </Route>
                   <Route path="/ToolStatosRep" element={<ToolStatosRep/>}/>
                    <Route path="/RequiredToolReport" element={<RequiredToolReport/>}/>

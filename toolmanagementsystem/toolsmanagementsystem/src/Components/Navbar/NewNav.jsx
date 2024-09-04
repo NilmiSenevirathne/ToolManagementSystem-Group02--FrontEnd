@@ -59,6 +59,7 @@ const Navbar = () => {
             Mr. {userInfo.firstname || 'Guest'}
           </Typography>
 
+
           <Menu
             anchorEl={anchorEl}
             open={open}
