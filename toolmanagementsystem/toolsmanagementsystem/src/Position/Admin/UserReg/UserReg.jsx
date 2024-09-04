@@ -102,7 +102,7 @@ const UserReg = () => {
         });
         if (response.ok) {
             alert('User registered successfully!');
-            navigate('/usermanage'); // Corrected URL
+            navigate('/usernamage'); // Corrected URL
         } else {
             alert('Failed to register user.');
         }
@@ -321,8 +321,8 @@ const UserReg = () => {
     
     <Grid item xs={12}>
       <Box mt={2} display="flex" justifyContent="center" gap={2}>
-    <Box flexGrow={1}>
-      
+    
+    <Box flexGrow={1}> 
       <Button
         variant="contained"
         sx={{ bgcolor: 'green', width: '100%', fontSize: '1.25rem' }}
