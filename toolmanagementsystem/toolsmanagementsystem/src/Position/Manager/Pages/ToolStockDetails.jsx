@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from "axios";
 import { Link, useParams } from 'react-router-dom';
 import ManagerSidebar from '../../../Components/ManagerSidebar.jsx';
-import ManagerNavbar from '../../../Components/Navbar/ManagerNavbar.jsx';
+import NewNav from '../../../Components/Navbar/NewNav.jsx';
 import { CssBaseline, Grid, TextField, Button, Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Box } from '@mui/material';
 
 const ManageStock = () => {
@@ -50,7 +50,7 @@ const ManageStock = () => {
       </Grid>
 
       <Grid item xs>
-      <ManagerNavbar />
+      <NewNav />
 
         <div style={{ margin: '20px' }}>
           <Typography variant="h4" gutterBottom>Welcome to Tool Details Section!</Typography>
