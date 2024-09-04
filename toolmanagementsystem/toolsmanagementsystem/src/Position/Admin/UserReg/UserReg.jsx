@@ -13,7 +13,6 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 const UserReg = () => {
   const navigate = useNavigate();
   const [userDetails, setUserDetails] = useState({
-  
     userid: '',
     username: '',
     password: '',
@@ -23,13 +22,13 @@ const UserReg = () => {
     gender: '',
     nic: '',
     contact: '',
-    role: ''
+    role: '',
+    userimageData: null // State for image data
   });
 
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [errors, setErrors] = useState({});
-  const [imagePreview, setImagePreview] = useState(null); // State for image preview
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -39,7 +38,12 @@ const UserReg = () => {
     });
   };
 
-  
+  const handleFileChange = (e) => {
+    setUserDetails({
+      ...userDetails,
+      userimageData: e.target.files[0]
+    });
+  };
 
   const validateFields = () => {
     const errors = {};
@@ -78,7 +82,6 @@ const UserReg = () => {
     if (!validateFields()) return;
 
     const formData = new FormData();
-    
     formData.append('userid', userDetails.userid);
     formData.append('username', userDetails.username);
     formData.append('password', userDetails.password);
@@ -88,6 +91,7 @@ const UserReg = () => {
     formData.append('nic', userDetails.nic);
     formData.append('contact', userDetails.contact);
     formData.append('role', userDetails.role);
+    formData.append('userimageData', userDetails.userimageData);
 
     try {
       const response = await fetch('http://localhost:8080/authentication/createUser', {
@@ -96,7 +100,7 @@ const UserReg = () => {
       });
       if (response.ok) {
         alert('User registered successfully!');
-        navigate('/usernamage');
+        navigate('/usermanage'); // Corrected URL
       } else {
         alert('Failed to register user.');
       }
@@ -141,7 +145,6 @@ const UserReg = () => {
           <Paper elevation={3} style={{ padding: '40px' }}>
             <form onSubmit={handleSubmit}>
               <Grid container spacing={2}>
-
                 <Grid item xs={12} sm={6}>
                   <TextField
                     name="userid"
@@ -236,7 +239,6 @@ const UserReg = () => {
                   />
                 </Grid>
 
-                {/* Gender Field */}
                 <Grid item xs={12} sm={6}>
                   <FormControl fullWidth variant="outlined" error={!!errors.gender}>
                     <InputLabel>Gender</InputLabel>
@@ -252,9 +254,6 @@ const UserReg = () => {
                   </FormControl>
                 </Grid>
 
-                
-
-                {/* NIC Field */}
                 <Grid item xs={12} sm={6}>
                   <TextField
                     name="nic"
@@ -267,7 +266,6 @@ const UserReg = () => {
                   />
                 </Grid>
 
-                {/* Contact Field */}
                 <Grid item xs={12} sm={6}>
                   <TextField
                     name="contact"
@@ -280,7 +278,6 @@ const UserReg = () => {
                   />
                 </Grid>
 
-                {/* Role Field */}
                 <Grid item xs={12} sm={6}>
                   <FormControl fullWidth variant="outlined" error={!!errors.role}>
                     <InputLabel>Role</InputLabel>
@@ -298,30 +295,57 @@ const UserReg = () => {
                   </FormControl>
                 </Grid>
 
-                <Grid item xs={12}>
-                  <Box mt={2} display="flex" justifyContent="center" gap={2}>
-                    <Box flexGrow={1}>
-                      <Button
-                        variant="contained"
-                        sx={{ bgcolor: 'green', width: '100%', fontSize: '1.25rem' }}
-                        type="submit"
-                      >
-                        Submit
-                      </Button>
-                    </Box>
-
-                    <Box flexGrow={1}>
-                      <Link to="/usernamage" style={{ textDecoration: 'none' }}>
-                        <Button
-                          variant="contained"
-                          sx={{ bgcolor: 'red', width: '100%', fontSize: '1.25rem' }}
-                        >
-                          Cancel
-                        </Button>
-                      </Link>
-                    </Box>
-                  </Box>
+                <Grid item xs={12} sm={12} container justifyContent="center">
+                  <Button
+                    variant="contained"
+                    component="label"
+                    sx={{ bgcolor: 'blue', width: '80%', fontSize: '1.2rem', maxWidth: "150px" }}
+                  >
+                    Upload Image
+                    <input
+                      type="file"
+                      accept="image/*"
+                      hidden
+                      onChange={handleFileChange}
+                    />
+                  </Button>
+                  {userDetails.userimageData && (
+                    <Typography variant="body2" style={{ marginTop: '10px' }}>
+                      Selected file: {userDetails.userimageData.name}
+                    </Typography>
+                  )}
                 </Grid>
+    
+    <Grid item xs={12}>
+      <Box mt={2} display="flex" justifyContent="center" gap={2}>
+    <Box flexGrow={1}>
+      
+      <Button
+        variant="contained"
+        sx={{ bgcolor: 'green', width: '100%', fontSize: '1.25rem' }}
+        type="submit"
+      >
+        Submit
+      </Button>
+    </Box>
+    {/* cancel button */}
+    <Box flexGrow={1}>
+      <Link to="/usernamage" style={{ textDecoration: 'none' }}>
+        <Button
+          variant="contained"
+          sx={{ bgcolor: 'red', width: '100%', fontSize: '1.25rem' }}
+        >
+          Cancel
+        </Button>
+      </Link>
+    </Box>
+  </Box> 
+</Grid>
+
+               
+               
+
+               
               </Grid>
             </form>
           </Paper>
