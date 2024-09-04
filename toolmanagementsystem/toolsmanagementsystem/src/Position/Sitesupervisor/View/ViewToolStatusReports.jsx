@@ -82,7 +82,7 @@ const ViewToolStatusReports = () => {
         <Grid item xs>
           <NewNav />
 
-        <Box sx={{ padding: 2 ,marginLeft: '350px'}}>
+        <Box sx={{ padding: 2 ,marginLeft: '200px'}}>
             <Typography variant="h4" sx={{ marginBottom: 2 }}>View Tool Status Reports</Typography>
             
             <Box sx={{ display: 'flex', alignItems: 'center', marginBottom: 2 }}>
@@ -99,11 +99,11 @@ const ViewToolStatusReports = () => {
                 <Table stickyHeader aria-label="View Tool Reports Table" sx={{ borderCollapse: 'separate', borderSpacing: 0 ,'& .MuiTableCell-root':{border:'1px solid rgba(224,224,224,1)',} ,}}>
                     <TableHead>
                         <TableRow>
-                            <TableCell>Report Id</TableCell>
-                            <TableCell>Created At</TableCell>
-                            <TableCell>Project Name</TableCell>
-                            <TableCell>Report Data</TableCell>
-                            <TableCell>Actions</TableCell>
+                            <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white'   }}>Report Id</TableCell>
+                            <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white'   }}>Created At</TableCell>
+                            <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white'   }}>Project Name</TableCell>
+                            <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white'   }}>Report Data</TableCell>
+                            <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white'   }}>Actions</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
