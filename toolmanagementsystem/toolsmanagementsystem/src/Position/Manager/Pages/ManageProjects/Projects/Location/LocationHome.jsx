@@ -4,7 +4,7 @@ import { Link, useParams } from 'react-router-dom';
 import ManagerSidebar from '../../../../../../Components/ManagerSidebar.jsx';
 import './LocationHome.css';
 import { Grid, Container, Box, Typography, Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, TextField, InputAdornment } from '@mui/material';
-import ManagerNavbar from '../../../../../../Components/Navbar/ManagerNavbar.jsx';
+import NewNav from '../../../../../../Components/Navbar/NewNav.jsx';
 import SearchIcon from '@mui/icons-material/Search'; // Import SearchIcon from Material-UI
 
 export default function LocationHome() {
@@ -62,12 +62,12 @@ export default function LocationHome() {
       </Grid>
 
       <Grid item xs>
-        <ManagerNavbar />
+        <NewNav />
         <Container maxWidth="lg">
           <Box mt={4}>
             <Button
               variant="contained"
-              color="primary"
+              sx={{ bgcolor: 'green', width: '100%', maxWidth: '250px', fontSize: '1.25rem' }}
               component={Link}
               to="/AddLocation"
               style={{ marginBottom: '20px' }}
@@ -89,26 +89,26 @@ export default function LocationHome() {
                 ),
               }}
             />
-            <TableContainer component={Paper}>
-              <Table stickyHeader aria-label="sticky table">
+            <TableContainer component={Paper} style={{ maxHeight: 400 }}>
+              <Table stickyHeader aria-label="sticky table"  sx={{ borderCollapse: 'separate', borderSpacing: 0 ,'& .MuiTableCell-root':{border:'1px solid rgba(224,224,224,1)',} ,}}>
                 <TableHead>
                   <TableRow>
-                    <TableCell>#</TableCell>
-                    <TableCell>Location Id</TableCell>
-                    <TableCell>Location Name</TableCell>
-                    <TableCell>Actions</TableCell>
+                    <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white'   }}>#</TableCell>
+                    <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white'   }}>Location Id</TableCell>
+                    <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white'   }}>Location Name</TableCell>
+                    <TableCell sx={{ fontWeight: 'bold', textAlign: 'center', backgroundColor: 'grey', color: 'white'   }}>Actions</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
                   {filteredLocations.map((location, index) => (
                     <TableRow key={index}>
-                      <TableCell>{index + 1}</TableCell>
-                      <TableCell>{location.locationId}</TableCell>
-                      <TableCell>{location.locationName}</TableCell>
-                      <TableCell>
+                      <TableCell sx={{ textAlign: 'center' }}>{index + 1}</TableCell>
+                      <TableCell sx={{ textAlign: 'center' }}>{location.locationId}</TableCell>
+                      <TableCell sx={{ textAlign: 'center' }}>{location.locationName}</TableCell>
+                      <TableCell sx={{ textAlign: 'center' }}>
                         <Button
-                          variant="outlined"
-                          color="primary"
+                          variant="contained"
+                          sx={{ bgcolor: 'purple', size:"small" }}
                           component={Link}
                           to={`/UpdateLocation/${location.locationId}`}
                           style={{ marginRight: '10px' }}
@@ -117,7 +117,7 @@ export default function LocationHome() {
                         </Button>
                         <Button
                           variant="contained"
-                          color="secondary"
+                          sx={{ bgcolor: 'red', size:"small" }}
                           onClick={() => deleteLocation(location.locationId)}
                         >
                           Delete
