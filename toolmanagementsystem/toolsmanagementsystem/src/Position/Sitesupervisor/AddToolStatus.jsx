@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import {
-  Container,
+  CssBaseline,
   TextField,
   Button,
   Typography,
@@ -14,6 +14,7 @@ import {
   MenuItem
 } from '@mui/material';
 import Sbar from '../../Components/Sbar';
+import NewNav from '../../Components/Navbar/NewNav.jsx';
 
 const AddToolStatus = () => {
   const [projects, setProjects] = useState([]);
@@ -80,8 +81,16 @@ const AddToolStatus = () => {
   };
 
   return (
-    <Container>
-      <Sbar />
+
+    <Grid container>
+       <CssBaseline />
+       
+       <Grid item>
+      <Sbar /> </Grid>
+
+      <Grid item xs>
+        <NewNav />
+
       <Paper
         style={{
           marginLeft: '300px',
@@ -139,7 +148,9 @@ const AddToolStatus = () => {
           </Button>
         </Link>
       </Paper>
-    </Container>
+      </Grid>
+      </Grid>
+   
   );
 };
 
