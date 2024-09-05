@@ -122,7 +122,7 @@ const UserEdit = () => {
                         <form onSubmit={handleSubmit}>
                             <Grid container spacing={2}>
                                 {/* Display user image */}
-                                <Grid item xs={12} sm={6} container justifyContent="center" alignItems="center">
+                                <Grid item xs={12} container justifyContent="center" >
                                     <Avatar
                                         src={imagePreview || `data:image/jpeg;base64,${user.userimageData}`}
                                         alt="User Image"
@@ -264,14 +264,15 @@ const UserEdit = () => {
                                             </Button>
                                         </Box>
                                         <Box flexGrow={1}>
-                                            <Link to="/usernamage" style={{ textDecoration: 'none' }}>
+                                            
                                                 <Button
+                                                    onClick={() => navigate(-1)}
                                                     variant="contained"
                                                     sx={{ bgcolor: 'red', width: '100%', fontSize: '1.25rem' }}
                                                 >
                                                     Cancel
                                                 </Button>
-                                            </Link>
+                                            
                                         </Box>
                                     </Box>
                                 </Grid>

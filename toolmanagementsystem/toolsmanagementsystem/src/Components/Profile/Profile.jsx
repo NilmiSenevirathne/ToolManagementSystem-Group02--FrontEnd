@@ -107,16 +107,16 @@ const Profile = () => {
       <Grid item xs>
         <NewNav />
         <Grid container justifyContent="center">
-          <Grid item xs={10} md={8} lg={6}  elevation={3} sx={{ p: 4, mt: 4 }}>
-  
-            <Paper elevation={3} style={{ padding: '40px' }}>
+          <Grid item xs={10} md={8} lg={6} component={Paper} elevation={3} sx={{ p: 4, mt: 4 }}>
             <Typography variant="h6" gutterBottom align="center" sx={{ fontSize: '2.5rem' }}>
               Update Profile Form
             </Typography>
+            
+            <Paper elevation={3} style={{ padding: '60px' }}>
               <form onSubmit={handleSubmit}>
                 <Grid container spacing={2}>
                   {/* Display user image */}
-                  <Grid item xs={12} container justifyContent="center" >
+                  <Grid item xs={12} sm={6} container justifyContent="center" alignItems="center">
                     <Avatar
                       src={imagePreview || `data:image/jpeg;base64,${user.userimageData}`}
                       alt="User Image"

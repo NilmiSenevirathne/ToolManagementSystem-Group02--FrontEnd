@@ -333,14 +333,15 @@ const UserReg = () => {
     </Box>
     {/* cancel button */}
     <Box flexGrow={1}>
-      <Link to="/usernamage" style={{ textDecoration: 'none' }}>
+    
         <Button
+          onClick={() => navigate(-1)}
           variant="contained"
           sx={{ bgcolor: 'red', width: '100%', fontSize: '1.25rem' }}
         >
           Cancel
         </Button>
-      </Link>
+   
     </Box>
   </Box> 
 </Grid>
