@@ -1,79 +1,109 @@
+// Profile.jsx
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, Link } from 'react-router-dom';
 import axios from 'axios';
-import StockSidebar from '../Sidebar/StockSidebar.jsx';
+import {
+  Avatar, IconButton, Grid, Paper, Typography, TextField, Box, Button, InputLabel, Select, MenuItem
+} from '@mui/material';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
 import NewNav from '../Navbar/NewNav.jsx';
-import { Grid, Paper, Typography, TextField, Box, Button } from '@mui/material';
 
 const Profile = () => {
-  const { username } = useParams();
+  const { username } = useParams();  // Extract username from URL params
   const navigate = useNavigate();
 
-  const [values, setValues] = useState({
-    profileimage: '',
-    firstName: '',
-    lastName: '',
-    username: '',
-    password: '',
-    nic: '',
-    contact: '',
-    role: ''
+  const [user, setUser] = useState({
+    contact: "",
+    firstname: "",
+    lastname: "",
+    gender: "",
+    nic: "",
+    password: "",
+    confirmPassword: "",
+    role: "",
+    username: "",
+    userimageData: "" // Base64 string or URL for image
   });
 
-  // Get user details from the database
-  const getUserDetails = async () => {
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [imageFile, setImageFile] = useState(null); // State for the new image file
+  const [imagePreview, setImagePreview] = useState(""); // State for image preview
+
+  // Fetch user details from the API
+  const loadUser = async () => {
     try {
-      const response = await axios.get(`http://localhost:8080/authentication/getUserDetails/${username}`);
-      const userDetails = response.data;
-      setValues({
-        profileimage: userDetails.profileimage || '',
-        firstName: userDetails.firstName || '',
-        lastName: userDetails.lastName || '',
-        username: userDetails.username || '',
-        password: userDetails.password || '',
-        nic: userDetails.nic || '',
-        contact: userDetails.contact || '',
-        role: userDetails.role || ''
-      });
+      const result = await axios.get(`http://localhost:8080/authentication/getUserInfo/${username}`);
+      setUser(result.data);
+
+      // Set user image if it exists in the response
+      if (result.data.userimageData) {
+        setImagePreview(`data:image/jpeg;base64,${result.data.userimageData}`);
+      }
     } catch (error) {
-      console.error('Error fetching user details:', error);
+      console.error("Error occurred:", error);
     }
   };
 
   useEffect(() => {
-    getUserDetails();
+    loadUser();
   }, [username]);
 
-  const onInputChange = (e) => {
-    const { name, value } = e.target;
-    setValues({
-      ...values,
-      [name]: value
-    });
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setUser(prevUser => ({ ...prevUser, [name]: value }));
   };
 
-  // Update user details function
-  const onSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await axios.put(`http://localhost:8080/authentication/updateUserProfile/${username}`, values);
-      alert('User details updated successfully:', response.data);
-      // navigate('/stocksupervisordashboard');
-    } catch (error) {
-      console.error('Error updating user details:', error);
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    setImageFile(file);
+
+    // Preview the image
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result);
+      };
+      reader.readAsDataURL(file);
     }
   };
 
-  // Function to handle cancel button click
-  const onCancel = () => {
-    // navigate('');
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    if (user.password !== user.confirmPassword) {
+      alert("Passwords do not match!");
+      return;
+    }
+
+    try {
+      // Prepare form data for submission
+      const formData = new FormData();
+      formData.append('contact', user.contact);
+      formData.append('firstname', user.firstname);
+      formData.append('lastname', user.lastname);
+      formData.append('gender', user.gender);
+      formData.append('nic', user.nic);
+      formData.append('password', user.password);
+      formData.append('confirmPassword', user.confirmPassword);
+      formData.append('role', user.role);
+      formData.append('username', user.username);
+      if (imageFile) formData.append('userimageData', imageFile); // Changed field name to 'userimageData'
+
+      await axios.put(`http://localhost:8080/authentication/updateUserProfile/${username}`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
+      alert("Successfully updated user details!");
+
+    } catch (error) {
+      console.error("Error occurred:", error);
+      alert("Unsuccessful!");
+    }
   };
 
   return (
     <Grid container>
-      <Grid item>
-        <StockSidebar />
-      </Grid>
       <Grid item xs>
         <NewNav />
         <Grid container justifyContent="center">
@@ -81,103 +111,166 @@ const Profile = () => {
             <Typography variant="h6" gutterBottom align="center" sx={{ fontSize: '2.5rem' }}>
               Update Profile Form
             </Typography>
-            <form onSubmit={onSubmit}>
-              <Grid container spacing={2}>
-                
-                <Grid item xs={6}>
-                  <TextField
-                    label="First Name"
-                    variant="outlined"
-                    fullWidth
-                    value={values.firstName}
-                    onChange={onInputChange}
-                    name="firstName"
-                  />
+            
+            <Paper elevation={3} style={{ padding: '60px' }}>
+              <form onSubmit={handleSubmit}>
+                <Grid container spacing={2}>
+                  {/* Display user image */}
+                  <Grid item xs={12} sm={6} container justifyContent="center" alignItems="center">
+                    <Avatar
+                      src={imagePreview || `data:image/jpeg;base64,${user.userimageData}`}
+                      alt="User Image"
+                      sx={{ width: 100, height: 100, mb: 2 }}
+                    />
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={handleFileChange}
+                      style={{ marginTop: '10px' }}
+                    />
+                  </Grid>
+                  <Grid item xs={12} sm={6}>
+                    <TextField
+                      fullWidth
+                      label="First Name"
+                      name="firstname"
+                      value={user.firstname}
+                      onChange={handleInputChange}
+                      variant="outlined"
+                    />
+                  </Grid>
+                  <Grid item xs={12} sm={6}>
+                    <TextField
+                      fullWidth
+                      label="Last Name"
+                      name="lastname"
+                      value={user.lastname}
+                      onChange={handleInputChange}
+                      variant="outlined"
+                    />
+                  </Grid>
+                  <Grid item xs={12} sm={6}>
+                    <InputLabel>Gender</InputLabel>
+                    <Select
+                      fullWidth
+                      name="gender"
+                      value={user.gender}
+                      onChange={handleInputChange}
+                    >
+                      <MenuItem value="Male">Male</MenuItem>
+                      <MenuItem value="Female">Female</MenuItem>
+                    </Select>
+                  </Grid>
+                  <Grid item xs={12} sm={6}>
+                    <TextField
+                      fullWidth
+                      label="Contact"
+                      name="contact"
+                      value={user.contact}
+                      onChange={handleInputChange}
+                      variant="outlined"
+                    />
+                  </Grid>
+                  <Grid item xs={12} sm={6}>
+                    <TextField
+                      fullWidth
+                      label="NIC"
+                      name="nic"
+                      value={user.nic}
+                      variant="outlined"
+                      InputProps={{ readOnly: true }}
+                    />
+                  </Grid>
+                  <Grid item xs={12} sm={6}>
+                    <TextField
+                      fullWidth
+                      label="Password"
+                      name="password"
+                      type={showPassword ? 'text' : 'password'}
+                      value={user.password}
+                      onChange={handleInputChange}
+                      variant="outlined"
+                      InputProps={{
+                        endAdornment: (
+                          <IconButton 
+                            onClick={() => setShowPassword(!showPassword)} 
+                            edge="end"
+                          >
+                            {showPassword ? <VisibilityOff /> : <Visibility />}
+                          </IconButton>
+                        )
+                      }}
+                    />
+                  </Grid>
+                  <Grid item xs={12} sm={6}>
+                    <TextField
+                      fullWidth
+                      label="Confirm Password"
+                      name="confirmPassword"
+                      type={showConfirmPassword ? 'text' : 'password'}
+                      value={user.confirmPassword}
+                      onChange={handleInputChange}
+                      variant="outlined"
+                      InputProps={{
+                        endAdornment: (
+                          <IconButton 
+                            onClick={() => setShowConfirmPassword(!showConfirmPassword)} 
+                            edge="end"
+                          >
+                            {showConfirmPassword ? <VisibilityOff /> : <Visibility />}
+                          </IconButton>
+                        )
+                      }}
+                    />
+                  </Grid>
+                  <Grid item xs={12} sm={6}>
+                    <TextField
+                      fullWidth
+                      label="Role"
+                      name="role"
+                      value={user.role}
+                      onChange={handleInputChange}
+                      variant="outlined"
+                      InputProps={{ readOnly: true }}
+                    />
+                  </Grid>
+                  <Grid item xs={12} sm={6}>
+                    <TextField
+                      fullWidth
+                      label="Username"
+                      name="username"
+                      value={user.username}
+                      onChange={handleInputChange}
+                      variant="outlined"
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <Box mt={2} display="flex" justifyContent="center" gap={2}>
+                      <Box flexGrow={1}>
+                        <Button
+                          variant="contained"
+                          sx={{ bgcolor: 'green', width: '100%', fontSize: '1.25rem' }}
+                          type="submit"
+                        >
+                          Update
+                        </Button>
+                      </Box>
+                      <Box flexGrow={1}>
+                       
+                          <Button
+                            onClick={() => navigate(-1)} // Go back to the previous page
+                            variant="contained"
+                            sx={{ bgcolor: 'red', width: '100%', fontSize: '1.25rem' }}
+                          >
+                            Cancel
+                          </Button>
+                      
+                      </Box>
+                    </Box>
+                  </Grid>
                 </Grid>
-                <Grid item xs={6}>
-                  <TextField
-                    label="Last Name"
-                    variant="outlined"
-                    fullWidth
-                    value={values.lastName}
-                    onChange={onInputChange}
-                    name="lastName"
-                  />
-                </Grid>
-                <Grid item xs={6}>
-                  <TextField
-                    label="Username"
-                    variant="outlined"
-                    fullWidth
-                    value={values.username}
-                    onChange={onInputChange}
-                    name="username"
-                  />
-                </Grid>
-                <Grid item xs={6}>
-                  <TextField
-                    label="Password"
-                    variant="outlined"
-                    fullWidth
-                    type="password"
-                    value={values.password}
-                    onChange={onInputChange}
-                    name="password"
-                  />
-                </Grid>
-                <Grid item xs={6}>
-                  <TextField
-                    label="NIC"
-                    variant="outlined"
-                    fullWidth
-                    value={values.nic}
-                    onChange={onInputChange}
-                    name="nic"
-                  />
-                </Grid>
-                <Grid item xs={6}>
-                  <TextField
-                    label="Contact"
-                    variant="outlined"
-                    fullWidth
-                    value={values.contact}
-                    onChange={onInputChange}
-                    name="contact"
-                  />
-                </Grid>
-                <Grid item xs={6}>
-                  <TextField
-                    label="Role"
-                    variant="outlined"
-                    fullWidth
-                    value={values.role}
-                    onChange={onInputChange}
-                    name="role"
-                    disabled
-                  />
-                </Grid>
-              </Grid>
-              <Box mt={2} display="flex" justifyContent="center" gap={2}>
-                <Box flexGrow={1}>
-                  <Button
-                    variant="contained"
-                    sx={{ bgcolor: 'green', width: '100%', fontSize: '1.25rem' }}
-                    type="submit"
-                  >
-                    Update
-                  </Button>
-                </Box>
-                <Box flexGrow={1}>
-                  <Button
-                    variant="contained"
-                    sx={{ bgcolor: 'red', width: '100%', fontSize: '1.25rem' }}
-                    onClick={onCancel}
-                  >
-                    Cancel
-                  </Button>
-                </Box>
-              </Box>
-            </form>
+              </form>
+            </Paper>
           </Grid>
         </Grid>
       </Grid>

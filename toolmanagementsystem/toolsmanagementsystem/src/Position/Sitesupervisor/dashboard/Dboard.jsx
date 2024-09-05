@@ -22,7 +22,6 @@ import {
   TextField
 } from '@mui/material';
 import './dboard.css';
-import Navbr from '../../../Components/Navbar/Navbr';
 import { margin } from '@mui/system';
 
 const Dboard = () => {

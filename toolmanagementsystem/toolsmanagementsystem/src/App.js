@@ -35,12 +35,10 @@ import Cart from './Position/StockSupervisor/ToolBox/CreateToolBox/Tools/Cart.js
 import DashBoard from './Position/Admin/Dashboard/DashBoard.jsx';
 import UpdateLocation from './Position/Manager/Pages/ManageProjects/Projects/Location/UpdateLocation.jsx';
 import Profile from './Components/Profile/Profile.jsx';
-import ManagerProfile from './Components/Profile/ManagerProfile.jsx';
 import UpdateToolbox from './Position/StockSupervisor/ToolBox/UpdateToolbox/UpdateToolbox.jsx';
 import TrackToolboxes from './Position/Sitesupervisor/TrackToolBoxes.jsx';
 import UserManage from '../src/Position/Admin/UserManage/UserManage.jsx'
 import UserReg from '../src/Position/Admin/UserReg/UserReg.jsx'
-import SiteSupervisorProfile from './Components/Profile/SiteSupervisorProfile.jsx';
 import UserEdit from './Position/Admin/UserManage/UserEdit.jsx';
 
 
@@ -55,7 +53,7 @@ function App() {
                    
                     <Route  path='/' element={<LoginForm/>}> </Route> 
 
-                    <Route  path='/profile/:firstname' element={<Profile/>}></Route>
+                    <Route  path='/profile/:username' element={<Profile/>}></Route>
                                      
                     {/* Admin pages  */}
                     <Route path="/admindashboard" element={<DashBoard/>} />
@@ -72,7 +70,6 @@ function App() {
                     <Route path="/UpdateProjects/:project_id" element={<UpdateProjects />} />
                     <Route path="/AddLocation" element={<AddLocation />} />
                     <Route path="/locationHome" element={<LocationHome />} />
-                    <Route path="/ManagerProfile" element={<ManagerProfile />} />
                     <Route path="/UpdateLocation/:locationId" element={<UpdateLocation />} />
                     <Route path="/ManagerTrackToolBox" element={<ManagerTrackToolBox />} />
 
@@ -95,7 +92,6 @@ function App() {
                     {/* SiteSupervisor pages */}
 
                    
-                  <Route path="/sitesupervisorprofile" element={<SiteSupervisorProfile />} />
                   <Route path='/sitesupervisor' element={<Dboard/>}> </Route>
                   <Route path="/ToolStatosRep" element={<ToolStatosRep/>}/>
                    <Route path="/RequiredToolReport" element={<RequiredToolReport/>}/>
