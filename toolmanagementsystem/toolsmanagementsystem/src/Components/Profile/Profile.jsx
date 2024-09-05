@@ -1,6 +1,5 @@
-// Profile.jsx
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useParams, Link } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import {
   Avatar, IconButton, Grid, Paper, Typography, TextField, Box, Button, InputLabel, Select, MenuItem
@@ -9,8 +8,8 @@ import { Visibility, VisibilityOff } from '@mui/icons-material';
 import NewNav from '../Navbar/NewNav.jsx';
 
 const Profile = () => {
-  const { username } = useParams();  // Extract username from URL params
   const navigate = useNavigate();
+  const { username } = useParams(); 
 
   const [user, setUser] = useState({
     contact: "",
@@ -87,7 +86,7 @@ const Profile = () => {
       formData.append('confirmPassword', user.confirmPassword);
       formData.append('role', user.role);
       formData.append('username', user.username);
-      if (imageFile) formData.append('userimageData', imageFile); // Changed field name to 'userimageData'
+      if (imageFile) formData.append('userimageData', imageFile);
 
       await axios.put(`http://localhost:8080/authentication/updateUserProfile/${username}`, formData, {
         headers: {
@@ -95,10 +94,10 @@ const Profile = () => {
         }
       });
       alert("Successfully updated user details!");
-
+      navigate(-1);
     } catch (error) {
       console.error("Error occurred:", error);
-      alert("Unsuccessful!");
+      alert("Unsuccessfully!");
     }
   };
 
@@ -109,14 +108,13 @@ const Profile = () => {
         <Grid container justifyContent="center">
           <Grid item xs={10} md={8} lg={6} component={Paper} elevation={3} sx={{ p: 4, mt: 4 }}>
             <Typography variant="h6" gutterBottom align="center" sx={{ fontSize: '2.5rem' }}>
-              Update Profile Form
+              Update Profile Details Form
             </Typography>
-            
             <Paper elevation={3} style={{ padding: '60px' }}>
               <form onSubmit={handleSubmit}>
                 <Grid container spacing={2}>
                   {/* Display user image */}
-                  <Grid item xs={12} sm={6} container justifyContent="center" alignItems="center">
+                  <Grid item xs={12} container justifyContent="center">
                     <Avatar
                       src={imagePreview || `data:image/jpeg;base64,${user.userimageData}`}
                       alt="User Image"
@@ -178,7 +176,7 @@ const Profile = () => {
                       name="nic"
                       value={user.nic}
                       variant="outlined"
-                      InputProps={{ readOnly: true }}
+                      
                     />
                   </Grid>
                   <Grid item xs={12} sm={6}>
@@ -242,6 +240,7 @@ const Profile = () => {
                       value={user.username}
                       onChange={handleInputChange}
                       variant="outlined"
+                      InputProps={{ readOnly: true }}
                     />
                   </Grid>
                   <Grid item xs={12}>
@@ -256,15 +255,13 @@ const Profile = () => {
                         </Button>
                       </Box>
                       <Box flexGrow={1}>
-                       
-                          <Button
-                            onClick={() => navigate(-1)} // Go back to the previous page
-                            variant="contained"
-                            sx={{ bgcolor: 'red', width: '100%', fontSize: '1.25rem' }}
-                          >
-                            Cancel
-                          </Button>
-                      
+                        <Button
+                          onClick={() => navigate(-1)} // Go back to the previous page
+                          variant="contained"
+                          sx={{ bgcolor: 'red', width: '100%', fontSize: '1.25rem' }}
+                        >
+                          Cancel
+                        </Button>
                       </Box>
                     </Box>
                   </Grid>
