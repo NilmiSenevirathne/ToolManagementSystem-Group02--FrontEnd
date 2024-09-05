@@ -24,7 +24,7 @@ const Profile = () => {
   // Fetch user details from the API
   const getUserDetails = async () => {
     try {
-      const response = await axios.get(`http://localhost:8080/authentication/getUserDetails/${username}`);
+      const response = await axios.get(`http://localhost:8080/authentication/getUserInfo/${username}`);
       const userDetails = response.data;
       setValues({
         profileimage: userDetails.userimageData || '', // Ensure your backend provides this field
