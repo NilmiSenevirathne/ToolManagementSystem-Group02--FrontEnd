@@ -35,7 +35,6 @@ import Cart from './Position/StockSupervisor/ToolBox/CreateToolBox/Tools/Cart.js
 import DashBoard from './Position/Admin/Dashboard/DashBoard.jsx';
 import UpdateLocation from './Position/Manager/Pages/ManageProjects/Projects/Location/UpdateLocation.jsx';
 import Profile from './Components/Profile/Profile.jsx';
-import ManagerProfile from './Components/Profile/ManagerProfile.jsx';
 import UpdateToolbox from './Position/StockSupervisor/ToolBox/UpdateToolbox/UpdateToolbox.jsx';
 import TrackToolboxes from './Position/Sitesupervisor/TrackToolBoxes.jsx';
 import UserManage from '../src/Position/Admin/UserManage/UserManage.jsx'
@@ -71,7 +70,6 @@ function App() {
                     <Route path="/UpdateProjects/:project_id" element={<UpdateProjects />} />
                     <Route path="/AddLocation" element={<AddLocation />} />
                     <Route path="/locationHome" element={<LocationHome />} />
-                    <Route path="/ManagerProfile" element={<ManagerProfile />} />
                     <Route path="/UpdateLocation/:locationId" element={<UpdateLocation />} />
                     <Route path="/ManagerTrackToolBox" element={<ManagerTrackToolBox />} />
 

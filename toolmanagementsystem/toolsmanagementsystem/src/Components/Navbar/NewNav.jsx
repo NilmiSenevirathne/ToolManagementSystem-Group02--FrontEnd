@@ -45,10 +45,10 @@ const Navbar = () => {
           Welcome, {userInfo.role || 'Guest'}!
         </Typography>
 
-        <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          <IconButton sx={{ ml: 2 }} onClick={() => navigate('/profile')}>
-            <Avatar src={userInfo.userimageData || ''} />
-          </IconButton>
+        <Avatar src={userInfo.userimageData || ''} />
+         
+        <Box sx={{ display: 'flex', alignItems: 'center' }} gap={2}>
+          
 
           <Typography
             variant="h6"
@@ -56,7 +56,7 @@ const Navbar = () => {
             sx={{ ml: 2, cursor: 'pointer' }}
             onClick={handleMenuOpen}
           >
-            Mr. {userInfo.firstname || 'Guest'}
+            {userInfo.firstname || 'Guest'}
           </Typography>
 
 
