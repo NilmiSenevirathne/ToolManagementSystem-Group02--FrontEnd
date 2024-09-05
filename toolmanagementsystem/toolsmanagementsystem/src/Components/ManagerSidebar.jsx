@@ -43,7 +43,7 @@ const StockSidebar = () => {
 
         <List>
           {[
-            { text: 'Managerdashboard', icon: <FaTh />, path: '/ManagerDashboard' },
+            { text: 'Manager Dashboard', icon: <FaTh />, path: '/ManagerDashboard' },
             { text: 'Manage Projects', icon: <FaCartPlus />, path: '/ManageProjects' },
             { text: 'Location Details', icon: <FaBriefcase />, path: '/locationHome' },
             { text: 'Tools Stock Details', icon: <FaNewspaper />, path: '/Toolstockdetails' },

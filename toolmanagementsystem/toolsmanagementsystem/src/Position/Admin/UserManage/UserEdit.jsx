@@ -159,7 +159,6 @@ const UserEdit = () => {
                                     <InputLabel>Gender</InputLabel>
                                     <Select
                                         fullWidth
-                                        label="Gender"
                                         name="gender"
                                         value={user.gender}
                                         onChange={handleInputChange}
